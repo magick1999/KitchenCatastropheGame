@@ -1,6 +1,6 @@
 package group44.entities;
 
-abstract class MoveableObject {
+abstract class MoveableObject extends LevelObject {
     private int velocityX;
     private int velocityY;
 

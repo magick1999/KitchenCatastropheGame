@@ -1,6 +1,6 @@
 package group44.entities;
 
-public abstract class CollectibleObject {
+public abstract class CollectibleObject extends LevelObject{
     private int xPos;
     private int yPos;
     private boolean collected; //if obj iscollected == true -> add to inventory.
