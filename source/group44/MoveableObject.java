@@ -20,5 +20,5 @@ abstract class MoveableObject {
         this.velocityY = velocityY;
     }
 
-    public abstract void move();
+    public abstract void move(int dx, int dy);
 }
