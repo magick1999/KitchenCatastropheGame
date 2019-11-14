@@ -1,9 +1,11 @@
 package group44;
 
+import javafx.scene.paint.Color;
+
 public abstract class Cell {
     private int xPos;
     private int yPos;
-    private int[] color = new int[3]; //RGB stored in array
+    private Color color;
 
     public int getxPos() {
         return xPos;
@@ -21,13 +23,11 @@ public abstract class Cell {
         this.yPos = yPos;
     }
 
-    public int[] getColor() {
+    public Color getColor() {
         return color;
     }
 
-    public void setColor(int red, int green, int blue) {
-        this.color[0] = red;
-        this.color[1] = green;
-        this.color[2] = blue;
+    public void setColor(Color newColor) {
+        this.color = newColor;
     }
 }
