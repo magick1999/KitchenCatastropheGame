@@ -1,4 +1,4 @@
-package group44;
+package group44.entities;
 
 abstract class MoveableObject {
     private int velocityX;
