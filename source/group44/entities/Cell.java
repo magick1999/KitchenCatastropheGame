@@ -1,33 +1,23 @@
 package group44.entities;
 
-import javafx.scene.paint.Color;
+public abstract class Cell extends LevelObject {
+    private int positionX;
+    private int positionY;
 
-public abstract class Cell {
-    private int xPos;
-    private int yPos;
-    private Color color;
-
-    public int getxPos() {
-        return xPos;
+    public int getPositionX() {
+        return positionX;
     }
 
-    public void setxPos(int xPos) {
-        this.xPos = xPos;
+    public void setPositionX(int positionX) {
+        this.positionX = positionX;
     }
 
-    public int getyPos() {
-        return yPos;
+    public int getPositionY() {
+        return positionY;
     }
 
     public void setYPos(int yPos) {
-        this.yPos = yPos;
+        this.positionY = yPos;
     }
 
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color newColor) {
-        this.color = newColor;
-    }
 }
