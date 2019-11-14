@@ -27,11 +27,11 @@ public class Main extends Application {
 		launch(args);
 	}
 
-	double getWidth() {
+	public static double getWidth() {
 		return width;
 	}
 
-	double getHeight() {
+	public static double getHeight() {
 		return height;
 	}
 }

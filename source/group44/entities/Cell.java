@@ -1,4 +1,4 @@
-package group44;
+package group44.entities;
 
 import javafx.scene.paint.Color;
 
