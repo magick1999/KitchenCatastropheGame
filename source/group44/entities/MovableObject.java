@@ -5,7 +5,7 @@ package group44.entities;
  * 
  * @author Tomas Svejnoha, Rowan Aldean
  */
-public abstract class MoveableObject extends LevelObject {
+public abstract class MovableObject extends LevelObject {
     private int velocityX;
     private int velocityY;
 
