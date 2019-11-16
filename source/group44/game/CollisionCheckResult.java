@@ -6,6 +6,7 @@ import group44.entities.LevelObject;
  * Class containg results from collision check.
  * 
  * @author Tomas Svejnoha
+ * @version 1.0
  */
 public class CollisionCheckResult {
     private LevelObject collidingObject;
