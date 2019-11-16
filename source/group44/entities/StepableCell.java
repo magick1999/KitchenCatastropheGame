@@ -7,7 +7,7 @@ package group44.entities;
  * @version 1.0
  */
 public abstract class StepableCell {
-    private MovableObject movableObject;
+    private MovableObject movableObject; // MovableObject standing on the cell
 
     /**
      * Places object on the {@link StepableCell}
