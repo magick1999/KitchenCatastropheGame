@@ -5,7 +5,7 @@ abstract class MoveableObject extends LevelObject {
     private int velocityY;
 
     public int getVelocityX() {
-        return velocityX;
+        return this.velocityX;
     }
 
     public void setVelocityX(int velocityX) {
@@ -13,12 +13,12 @@ abstract class MoveableObject extends LevelObject {
     }
 
     public int getVelocityY() {
-        return velocityY;
+        return this.velocityY;
     }
 
     public void setVelocityY(int velocityY) {
         this.velocityY = velocityY;
     }
 
-    public abstract void move(int dx, int dy);
+    public abstract void move();
 }
