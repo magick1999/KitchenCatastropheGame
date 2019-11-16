@@ -18,6 +18,7 @@ public abstract class LevelObject {
     private Level level; // The object needs to move itself in the array. Queue in the Level maintaining
                          // movements or direct modification of the 2D array?
 
+    // TODO: Add comment
     public LevelObject() {
         // TODO: Set default colours
     }
