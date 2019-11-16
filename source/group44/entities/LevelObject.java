@@ -3,7 +3,7 @@ package group44.entities;
 import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
 
-public class LevelObject {
+public abstract class LevelObject {
     private Color backgroundColor;
     private Color foregroundColor;
     private Image image;
@@ -17,10 +17,20 @@ public class LevelObject {
         // Set default colours
     }
 
+    /**
+     * Returns the color of an object.
+     * 
+     * @return Color
+     */
     public Color getBackgroundColor() {
         return this.backgroundColor;
     }
 
+    /**
+     * Sets a color of an object.
+     * 
+     * @param color - background color
+     */
     public void setBackgroundColor(Color color) {
         this.backgroundColor = color;
     }
@@ -64,6 +74,8 @@ public class LevelObject {
      * @param y - Y coordinate
      */
     public void setPosition(int x, int y) {
+        // TODO: Check for collisions
+
         this.positionX = x;
         this.positionY = y;
     }
