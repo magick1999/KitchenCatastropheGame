@@ -14,7 +14,7 @@ public class LevelObject {
                          // movements or direct modification of the 2D array?
 
     public LevelObject() {
-
+        // Set default colours
     }
 
     public Color getBackgroundColor() {
@@ -53,15 +53,18 @@ public class LevelObject {
         return this.positionX;
     }
 
-    public void setPositionX(int x) {
-        this.positionX = x;
-    }
-
     public int getPositionY() {
-        return positionY;
+        return this.positionY;
     }
 
-    public void setPositionY(int y) {
+    /**
+     * Sets object position to x and y.
+     * 
+     * @param x - X coordinate
+     * @param y - Y coordinate
+     */
+    public void setPosition(int x, int y) {
+        this.positionX = x;
         this.positionY = y;
     }
 }
