@@ -3,31 +3,36 @@ package group44.entities;
 import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
 
+/**
+ * Abstract class from which all other classes in the game inherit.
+ * 
+ * @author Tomas Svejnoha
+ */
 public abstract class LevelObject {
     private Color backgroundColor;
     private Color foregroundColor;
     private Image image;
     private int size; // Size 'a' of the "grid" cell.
-    private int positionX; // Do we need that?
+    private int positionX;
     private int positionY;
     private Level level; // The object needs to move itself in the array. Queue in the Level maintaining
                          // movements or direct modification of the 2D array?
 
     public LevelObject() {
-        // Set default colours
+        // TODO: Set default colours
     }
 
     /**
-     * Returns the color of an object.
+     * Returns the background color of the object.
      * 
-     * @return Color
+     * @return the background color of the object
      */
     public Color getBackgroundColor() {
         return this.backgroundColor;
     }
 
     /**
-     * Sets a color of an object.
+     * Sets a background color of an object.
      * 
      * @param color - background color
      */
@@ -35,34 +40,74 @@ public abstract class LevelObject {
         this.backgroundColor = color;
     }
 
+    /**
+     * Returns the foreground color of the object.
+     * 
+     * @return the foreground color of the object
+     */
     public Color getForegroundColor() {
         return this.foregroundColor;
     }
 
+    /**
+     * Sets the foreground color of the object.
+     * 
+     * @param color - foreground color
+     */
     public void setForegroundColor(Color color) {
         this.foregroundColor = color;
     }
 
+    /**
+     * Returns an image of the object.
+     * 
+     * @return the image of the object.
+     */
     public Image getImage() {
         return this.image;
     }
 
+    /**
+     * Sets an image of the object.
+     * 
+     * @param image - the image
+     */
     public void setImage(Image image) {
         this.image = image;
     }
 
+    /**
+     * Returns a size of the object.
+     * 
+     * @return a size of the object.
+     */
     public int getSize() {
         return this.size;
     }
 
+    /**
+     * Sets the size of the object.
+     * 
+     * @param size - size of the object.
+     */
     public void setSize(int size) {
         this.size = size;
     }
 
+    /**
+     * Returns the X coordinate of an object.
+     * 
+     * @return the x coordinate of an object.
+     */
     public int getPositionX() {
         return this.positionX;
     }
 
+    /**
+     * Returns the y coordinate of an object.
+     * 
+     * @return the y coordinate of an object.
+     */
     public int getPositionY() {
         return this.positionY;
     }
@@ -79,4 +124,9 @@ public abstract class LevelObject {
         this.positionX = x;
         this.positionY = y;
     }
+
+    /**
+     * Draws the object.
+     */
+    public abstract void Draw();
 }
