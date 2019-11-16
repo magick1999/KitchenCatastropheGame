@@ -1,24 +1,52 @@
 package group44.entities;
 
-abstract class MoveableObject extends LevelObject {
+/**
+ * Abstract classes from which inherits all objects able to move.
+ * 
+ * @author Tomas Svejnoha, Rowan Aldean
+ */
+public abstract class MoveableObject extends LevelObject {
     private int velocityX;
     private int velocityY;
 
+    /**
+     * Returns the velocity of the object on the X axis.
+     * 
+     * @return velocity X
+     */
     public int getVelocityX() {
         return this.velocityX;
     }
 
-    public void setVelocityX(int velocityX) {
-        this.velocityX = velocityX;
+    /**
+     * Sets the velocity on the X axis.
+     * 
+     * @param vx - velocity X
+     */
+    public void setVelocityX(int vx) {
+        this.velocityX = vx;
     }
 
+    /**
+     * Returns the velocity of the object on the Y axis.
+     * 
+     * @return velocity Y
+     */
     public int getVelocityY() {
         return this.velocityY;
     }
 
-    public void setVelocityY(int velocityY) {
-        this.velocityY = velocityY;
+    /**
+     * Sets the velocity on the Y axis.
+     * 
+     * @param vy - velocity Y
+     */
+    public void setVelocityY(int vy) {
+        this.velocityY = vy;
     }
 
+    /**
+     * Moves the object.
+     */
     public abstract void move();
 }

@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 /**
  * Abstract class from which all other classes in the game inherit.
  * 
- * @author Tomas Svejnoha
+ * @author Tomas Svejnoha, Rowan Aldean
  */
 public abstract class LevelObject {
     private Color backgroundColor;
