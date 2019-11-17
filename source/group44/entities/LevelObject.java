@@ -16,12 +16,13 @@ public abstract class LevelObject {
     private int size; // Size 'a' of the "grid" cell.
     private int positionX;
     private int positionY;
-    private Level level; // The object needs to move itself in the array. Queue in the Level maintaining
-                         // movements or direct modification of the 2D array?
 
-    // TODO: Add comment
+    /**
+     * Creates a new instance of LevelObject
+     */
     public LevelObject() {
-        // TODO: Set default colours
+        this.setBackgroundColor(Color.RED);
+        this.setBackgroundColor(Color.BLACK);
     }
 
     /**
