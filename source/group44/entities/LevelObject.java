@@ -22,7 +22,7 @@ public abstract class LevelObject {
      */
     public LevelObject() {
         this.setBackgroundColor(Color.RED);
-        this.setBackgroundColor(Color.BLACK);
+        this.setForegroundColor(Color.BLACK);
     }
 
     /**
