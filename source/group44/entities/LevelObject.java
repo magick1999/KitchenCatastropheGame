@@ -131,5 +131,5 @@ public abstract class LevelObject {
     /**
      * Draws the object.
      */
-    public abstract void Draw();
+    public abstract void draw();
 }
