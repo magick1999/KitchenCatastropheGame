@@ -1,5 +1,6 @@
 package group44.entities;
 
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
 
@@ -131,5 +132,5 @@ public abstract class LevelObject {
     /**
      * Draws the object.
      */
-    public abstract void draw();
+    public abstract void draw(GraphicsContext gc);
 }
