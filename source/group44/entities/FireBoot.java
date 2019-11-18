@@ -7,7 +7,7 @@ public class FireBoot extends CollectibleItem {
 
     public FireBoot(){
         String bootPath = "https://www.clipartroo.com/images/93/firefighter-boots-clipart-93602.png";
-        Image boot = new Image(bootPath);
+        Image boot = new Image(bootPath, 10, 10, true, true);
         this.setImage(boot);
     }
 
