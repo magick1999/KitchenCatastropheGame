@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
  * @author Tomas Svejnoha, Rowan Aldean
  * @version 1.0
  */
-public class CollectibleItem extends LevelObject {
+public abstract class CollectibleItem extends LevelObject {
 
     /**
      * Constructs a basic collectible object and sets image to a basic star icon.
