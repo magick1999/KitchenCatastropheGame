@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
  * @version 1.0
  */
 public abstract class LevelObject {
+    protected String title;
     private Color backgroundColor;
     private Color foregroundColor;
     private Image image;
@@ -24,6 +25,10 @@ public abstract class LevelObject {
     public LevelObject() {
         this.setBackgroundColor(Color.RED);
         this.setForegroundColor(Color.BLACK);
+        //default constructor of some level object.
+        String basicPath = "https://p1.hiclipart.com/preview/180/349/86/super-mario-icons-super-mario-star-illustration.jpg";
+        Image basic = new Image(basicPath, 10, 10, true, true);
+        this.setImage(basic); //Sets the image of the collectible to a default star.
     }
 
     /**
@@ -60,6 +65,24 @@ public abstract class LevelObject {
      */
     public void setForegroundColor(Color color) {
         this.foregroundColor = color;
+    }
+
+    /**
+     * Gets the title of an object.
+     *
+     * @return the title of the object
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * Sets the title of an object.
+     *
+     * @param title - the title to set
+     */
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     /**
