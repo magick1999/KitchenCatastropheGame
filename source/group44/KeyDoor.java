@@ -1,4 +1,4 @@
-
+import javafx.scene.paint.Color;
 /**
  * This class is for the key doors where the player needs a certain coloured 
  * key is needed to be able to open the door. 
@@ -8,7 +8,7 @@
  * 
  */
 public class KeyDoor extends Door {
-	private String colourKeyNeeded;
+	private Color colourKeyNeeded;
 	//might want colour if they're not images.
 	//private Color doorColour;
 	
@@ -17,7 +17,7 @@ public class KeyDoor extends Door {
 	 * created - once the details have been read in from the textfile.
 	 * @param colourKeyNeeded
 	 */
-	public KeyDoor (String colourKeyNeeded) {
+	public KeyDoor (Color colourKeyNeeded) {
 		this.colourKeyNeeded = colourKeyNeeded;
 		this.isOpen = false;
 	}
