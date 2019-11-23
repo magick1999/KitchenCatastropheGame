@@ -20,7 +20,7 @@ public abstract class LevelObject {
     private int positionY;
 
     /**
-     * Creates a new instance of {@link LevelObject} with default colors.
+     * Creates a new {@link LevelObject} with default colors.
      * 
      * @param title     - Title of the object
      * @param positionX - Position X in the game
@@ -37,7 +37,7 @@ public abstract class LevelObject {
     }
 
     /**
-     * Creates a new instance of {@link LevelObject}.
+     * Creates a new {@link LevelObject}.
      * 
      * @param title     - Title of the object
      * @param positionX - Position X in the game
@@ -51,7 +51,7 @@ public abstract class LevelObject {
     }
 
     /**
-     * Creates a new instance of {@link LevelObject}.
+     * Creates a new {@link LevelObject}.
      * 
      * @param title           - Title of the object
      * @param positionX       - Position X in the game
