@@ -15,9 +15,9 @@ public class TokenDoor extends Door {
 	 * created - once the details have been read in from the textfile.
 	 * @param locked
 	 */
-	public TokenDoor (boolean isOpen, int tokensNeeded) {
+	public TokenDoor (int tokensNeeded) {
 		this.tokensNeeded = tokensNeeded;
-		this.isOpen = isOpen;
+		this.isOpen = false;
 	}
 
 	
