@@ -17,8 +17,8 @@ public class KeyDoor extends Door {
 	 * created - once the details have been read in from the textfile.
 	 * @param locked
 	 */
-	public KeyDoor (boolean isOpen, String colourKeyNeeded) {
+	public KeyDoor (String colourKeyNeeded) {
 		this.colourKeyNeeded = colourKeyNeeded;
-		this.isOpen = isOpen;
+		this.isOpen = false;
 	}
 }
