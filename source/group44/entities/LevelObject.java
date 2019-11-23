@@ -182,8 +182,6 @@ public abstract class LevelObject {
      * @param y - Y coordinate
      */
     public void setPosition(int x, int y) {
-        // TODO: Check for collisions?
-
         this.positionX = x;
         this.positionY = y;
     }
