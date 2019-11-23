@@ -1,6 +1,5 @@
 package group44.entities;
 
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 /**
@@ -38,24 +37,16 @@ public class Key extends CollectibleItem {
         switch (keyColorID) {
             case 1:
                 this.keyColor = Color.RED;
-                keyPath = "http://pixelartmaker.com/art/da230f59bea5069.png";
-                break;
             case 2:
                 this.keyColor = Color.GREEN;
-                keyPath = "http://pixelartmaker.com/art/75afa0a33c68872.png";
-                break;
             case 3:
                 this.keyColor = Color.BLUE;
-                keyPath = "http://pixelartmaker.com/art/df24dc0ad11402a.png";
-                break;
             default:
                 System.out.println("Default gold key object created");
                 this.keyColor = Color.GOLD;
-                keyPath = "http://pixelartmaker.com/art/72369a5aede8489.png";
+
         }
         this.setTitle(keyColor.toString() + " key");
-        Image key = new Image(keyPath, 10, 10, true, true);
-        this.setImage(key);
     }
 
     /**

@@ -25,10 +25,15 @@ public abstract class LevelObject {
     public LevelObject() {
         this.setBackgroundColor(Color.RED);
         this.setForegroundColor(Color.BLACK);
-        //default constructor of some level object.
-        String basicPath = "https://p1.hiclipart.com/preview/180/349/86/super-mario-icons-super-mario-star-illustration.jpg";
-        Image basic = new Image(basicPath, 10, 10, true, true);
-        this.setImage(basic); //Sets the image of the collectible to a default star.
+    }
+
+    /**
+     * Creates a new instance of LevelObject with a corresponding image.
+     */
+    public LevelObject(Image img) {
+        this.setBackgroundColor(Color.RED);
+        this.setForegroundColor(Color.BLACK);
+        this.setImage(img); //Sets the image of the collectible to a default star.
     }
 
     /**
