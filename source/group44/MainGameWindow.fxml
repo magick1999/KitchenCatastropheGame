@@ -11,7 +11,7 @@
    <children>
       <Canvas fx:id="canvas" height="550.0" width="725.0" />
       <Pane fx:id="movableObjects" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="725.0" />
-      <VBox id="menuBox" fx:id="menuBox" alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="200.0" spacing="10" stylesheets="@resources/application.css" StackPane.alignment="CENTER">
+      <VBox id="menuBox" fx:id="menuBox" alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="200.0" spacing="10" stylesheets="@application.css" StackPane.alignment="CENTER">
          <children>
             <Button id="button" fx:id="homeButton" mnemonicParsing="false" prefHeight="50" prefWidth="90" text="Home" wrapText="false" />
             <Button id="button" fx:id="restartButton" mnemonicParsing="false" prefHeight="50" prefWidth="90" text="Restart" wrapText="false" />
