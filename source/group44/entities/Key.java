@@ -53,7 +53,7 @@ public class Key extends CollectibleItem {
                 this.keyColor = Color.GOLD;
                 keyPath = "http://pixelartmaker.com/art/72369a5aede8489.png";
         }
-        this.title = keyColor.toString() + " key";
+        this.setTitle(keyColor.toString() + " key");
         Image key = new Image(keyPath, 10, 10, true, true);
         this.setImage(key);
     }

@@ -13,7 +13,7 @@ public class Flippers extends CollectibleItem {
      * Constructs Flippers object and sets image to a flipper icon and sets name.
      */
     public Flippers(){
-        this.name = "Flippers";
+        this.setTitle("flippers");
         String flipperPath = "http://icons.iconarchive.com/icons/visualpharm/vacation/256/flippers-icon.png";
         Image flipper = new Image(flipperPath, 10, 10, true, true);
         this.setImage(flipper);
