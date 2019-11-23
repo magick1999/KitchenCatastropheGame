@@ -9,7 +9,7 @@ package group44.entities;
 public abstract class Cell extends LevelObject {
 
     /**
-     * Creates a {@link Cell}.
+     * Creates a new {@link Cell}.
      * 
      * @param title     - Title of the object
      * @param positionX - Position X in the game
