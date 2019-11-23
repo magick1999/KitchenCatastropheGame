@@ -9,4 +9,12 @@ public class Water {
 	
 	public Water () {  }
 	
+	public void setStepable (boolean stepable) {
+		this.stepable = stepable;
+	}
+	
+	public boolean getStepable () {
+		return stepable;
+	}
+	
 }
