@@ -9,4 +9,12 @@ public class Fire {
 	
 	public void Fire() {  }
 	
+	public void setStepable (boolean stepable) {
+		this.stepable = stepable;
+	}
+	
+	public boolean getStepable () {
+		return stepable;
+	}
+	
 }
