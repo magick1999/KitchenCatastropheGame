@@ -22,7 +22,7 @@ public abstract class LevelObject {
     /**
      * Creates a new instance of {@link LevelObject} with default colors.
      * 
-     * @param title     - Title
+     * @param title     - Title of the object
      * @param positionX - Position X in the game
      * @param positionY - Position Y in the game
      * @param size      - Size of the cell on the screen
@@ -39,7 +39,7 @@ public abstract class LevelObject {
     /**
      * Creates a new instance of {@link LevelObject}.
      * 
-     * @param title     - Title
+     * @param title     - Title of the object
      * @param positionX - Position X in the game
      * @param positionY - Position Y in the game
      * @param size      - Size of the cell on the screen
@@ -53,7 +53,7 @@ public abstract class LevelObject {
     /**
      * Creates a new instance of {@link LevelObject}.
      * 
-     * @param title           - Title
+     * @param title           - Title of the object
      * @param positionX       - Position X in the game
      * @param positionY       - Position Y in the game
      * @param size            - Size of the cell on the screen
