@@ -15,7 +15,7 @@ public class KeyDoor extends Door {
 	/**
 	 * This is the Door constructor, which can be called whenever the object needs to be
 	 * created - once the details have been read in from the textfile.
-	 * @param locked
+	 * @param colourKeyNeeded
 	 */
 	public KeyDoor (String colourKeyNeeded) {
 		this.colourKeyNeeded = colourKeyNeeded;
