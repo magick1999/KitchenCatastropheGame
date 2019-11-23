@@ -31,7 +31,7 @@ public class MainGameWindowController {
         homeButton.setText("Home");
         restartButton.setText("Restart");
         resumeButton.setText("Resume");
-        Font.loadFont(Main.class.getResource("bloody.ttf").toExternalForm(), 40);
+        Font.loadFont(Main.class.getResource("resources/bloody.ttf").toExternalForm(), 40);
         menuBox.setVisible(false);
     }
 
