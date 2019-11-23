@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
  * @version 1.0
  */
 public abstract class LevelObject {
-    protected String title;
+    private String title;
     private Color backgroundColor;
     private Color foregroundColor;
     private Image image;
@@ -20,20 +20,69 @@ public abstract class LevelObject {
     private int positionY;
 
     /**
-     * Creates a new instance of LevelObject
+     * Creates a new instance of {@link LevelObject} with default colors.
+     * 
+     * @param title     - Title
+     * @param positionX - Position X in the game
+     * @param positionY - Position Y in the game
+     * @param size      - Size of the cell on the screen
      */
-    public LevelObject() {
+    public LevelObject(String title, int positionX, int positionY, int size) {
+        this.setTitle(title);
+        this.setPosition(positionX, positionY);
+        this.setSize(size);
+        // Default colors
         this.setBackgroundColor(Color.RED);
         this.setForegroundColor(Color.BLACK);
     }
 
     /**
-     * Creates a new instance of LevelObject with a corresponding image.
+     * Creates a new instance of {@link LevelObject}.
+     * 
+     * @param title     - Title
+     * @param positionX - Position X in the game
+     * @param positionY - Position Y in the game
+     * @param size      - Size of the cell on the screen
+     * @param imagePath - Image path of the instance
      */
-    public LevelObject(Image img) {
-        this.setBackgroundColor(Color.RED);
-        this.setForegroundColor(Color.BLACK);
-        this.setImage(img); //Sets the image of the collectible to a default star.
+    public LevelObject(String title, int positionX, int positionY, int size, String imagePath) {
+        this(title, positionX, positionY, size);
+        this.setImage(new Image(imagePath, size, size, true, true));
+    }
+
+    /**
+     * Creates a new instance of {@link LevelObject}.
+     * 
+     * @param title           - Title
+     * @param positionX       - Position X in the game
+     * @param positionY       - Position Y in the game
+     * @param size            - Size of the cell on the screen
+     * @param foregroundColor - Foreground color
+     * @param backgroundColor - Background color
+     */
+    public LevelObject(String title, int positionX, int positionY, int size, Color foregroundColor,
+            Color backgroundColor) {
+        this(title, positionX, positionY, size);
+        this.setForegroundColor(foregroundColor);
+        this.setBackgroundColor(backgroundColor);
+    }
+
+    /**
+     * Gets the title of an object.
+     *
+     * @return the title of the object
+     */
+    public String getTitle() {
+        return this.title;
+    }
+
+    /**
+     * Sets the title of an object.
+     *
+     * @param title - the title to set
+     */
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     /**
@@ -70,24 +119,6 @@ public abstract class LevelObject {
      */
     public void setForegroundColor(Color color) {
         this.foregroundColor = color;
-    }
-
-    /**
-     * Gets the title of an object.
-     *
-     * @return the title of the object
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * Sets the title of an object.
-     *
-     * @param title - the title to set
-     */
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     /**
@@ -151,7 +182,7 @@ public abstract class LevelObject {
      * @param y - Y coordinate
      */
     public void setPosition(int x, int y) {
-        // TODO: Check for collisions
+        // TODO: Check for collisions?
 
         this.positionX = x;
         this.positionY = y;
@@ -159,6 +190,8 @@ public abstract class LevelObject {
 
     /**
      * Draws the object.
+     * 
+     * @param gc - {@link GraphicsContext} used to draw the object
      */
     public abstract void draw(GraphicsContext gc);
 }
