@@ -48,7 +48,7 @@ public class Main extends Application {
         setCanvas(myController.getCanvas());
         //Setting the stage and adding my custom style to it
         primaryStage.setTitle("Hello World");
-        root.getStylesheets().add("group44/style.css");
+        root.getStylesheets().add("group44/application.css");
         root.setId("pane");
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
         scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> processKeyEvent(event));
