@@ -26,9 +26,9 @@ public class Main extends Application {
     private Canvas canvas;
 
     // Loaded images
-    Image player = new Image("group44/player.png");
-    Image floor = new Image("group44/floor.png");
-    Image wall = new Image("group44/default_silver_sand.png");
+    Image player = new Image("group44/resources/player.png");
+    Image floor = new Image("group44/resources/floor.png");
+    Image wall = new Image("group44/resources/default_silver_sand.png");
 
     // X and Y coordinate of player
     int playerX = 25;
@@ -59,8 +59,8 @@ public class Main extends Application {
         setController(tempController);
         setCanvas(myController.getCanvas());
         //Setting the stage and adding my custom style to it
-        primaryStage.setTitle("Hello World");
-        root.getStylesheets().add("group44/application.css");
+        primaryStage.setTitle("KitchenCatastropheGame");
+        root.getStylesheets().add("group44/resources/application.css");
         root.setId("pane");
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
         scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> processKeyEvent(event));

@@ -4,10 +4,30 @@ package group44.entities;
  * Abstract classes from which inherits all objects able to move.
  * 
  * @author Tomas Svejnoha, Rowan Aldean
+ * @version 1.0
  */
 public abstract class MovableObject extends LevelObject {
     private int velocityX;
     private int velocityY;
+
+    /**
+     * Creates a new {@link MovableObject}.
+     * 
+     * @param title     - Title of the object
+     * @param positionX - Position X in the game
+     * @param positionY - Position Y in the game
+     * @param velocityX - Velocity X of the instance
+     * @param velocityY - Velocity Y of the instance
+     * @param size      - Size of the cell on the screen
+     * @param imagePath - Image path of the instance
+     */
+    public MovableObject(String title, int positionX, int positionY, int velocityX, int velocityY, int size,
+            String imagePath) {
+        super(title, positionX, positionY, size, imagePath);
+
+        this.setVelocityX(velocityX);
+        this.setVelocityY(velocityY);
+    }
 
     /**
      * Returns the velocity of the object on the X axis.
