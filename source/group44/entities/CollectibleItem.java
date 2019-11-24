@@ -22,14 +22,4 @@ public abstract class CollectibleItem extends LevelObject {
     public CollectibleItem(String title, int positionX, int positionY, int size, String imagePath) {
         super(title, positionX, positionY, size, imagePath);
     }
-
-    /**
-     * Draws collectible using drawImage.
-     * 
-     * @param gc The graphics context that is being drawn to.
-     */
-    @Override
-    public void draw(GraphicsContext gc) {
-        gc.drawImage(this.getImage(), this.getPositionX(), this.getPositionY());
-    }
 }
