@@ -8,17 +8,17 @@ import javafx.scene.paint.Color;
  * 
  */
 public class KeyDoor extends Door {
-	private Color colourKeyNeeded;
+	private Key.KeyType unlockingKey;
 	//might want colour if they're not images.
 	//private Color doorColour;
 	
 	/**
 	 * This is the Door constructor, which can be called whenever the object needs to be
 	 * created - once the details have been read in from the textfile.
-	 * @param colourKeyNeeded
+	 * @param unlockingKey
 	 */
-	public KeyDoor (Color colourKeyNeeded) {
-		this.colourKeyNeeded = colourKeyNeeded;
+	public KeyDoor (Key.KeyType unlockingKey) {
+		this.unlockingKey = unlockingKey;
 		this.isOpen = false;
 	}
 }
