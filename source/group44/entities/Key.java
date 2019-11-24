@@ -38,7 +38,6 @@ public class Key extends CollectibleItem {
      * KeyCode and image path.
      */
     public enum KeyType {
-        // TODO: Add image paths
         RED(1, "Red key", "group44/resources/keys/red.png"), BLUE(2, "Blue key", "group44/resources/keys/blue.png"),
         GREEN(3, "Green key", "group44/resources/keys/green.png"),
         GOLD(4, "Gold key", "group44/resources/keys/yellow.png");
