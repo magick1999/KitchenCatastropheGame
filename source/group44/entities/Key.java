@@ -39,7 +39,9 @@ public class Key extends CollectibleItem {
      */
     public enum KeyType {
         // TODO: Add image paths
-        RED(1, "Red key", ""), BLUE(2, "Blue key", ""), GREEN(3, "Green key", ""), GOLD(4, "Gold key", "");
+        RED(1, "Red key", "group44/resources/keys/red.png"), BLUE(2, "Blue key", "group44/resources/keys/blue.png"),
+        GREEN(3, "Green key", "group44/resources/keys/green.png"),
+        GOLD(4, "Gold key", "group44/resources/keys/yellow.png");
 
         private int code; // used to unlock the door (binary operation)
         private String title;
