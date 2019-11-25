@@ -28,8 +28,8 @@ public abstract class StepableCell extends Cell {
      * @param object - {@link MovableObject} that steps on the cell.
      */
     public void stepOn(MovableObject object) {
-        if (this.movableObject == null) {
-            this.movableObject = object;
+        if (this.getMovableObject() == null) {
+            this.setMovableObject(object);
         } else {
             // TODO: Implement
             throw new UnsupportedOperationException("Not implemented exception");
@@ -40,7 +40,7 @@ public abstract class StepableCell extends Cell {
      * Removes {@link MovableObject} from the {@link StepableCell}.
      */
     public void stepOff() {
-        this.movableObject = null;
+        this.setMovableObject(null);
     }
 
     /**
@@ -49,6 +49,15 @@ public abstract class StepableCell extends Cell {
      * @return true if there is some movable object on the cell, otherwise false.
      */
     public Boolean isSteppedOn() {
-        return this.movableObject != null;
+        return this.getMovableObject() != null;
     }
+
+	public MovableObject getMovableObject() {
+		return movableObject;
+	}
+
+	public void setMovableObject(MovableObject movableObject) {
+		this.movableObject = movableObject;
+	}
+    
 }
