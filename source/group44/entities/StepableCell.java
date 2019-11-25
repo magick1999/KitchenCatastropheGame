@@ -53,7 +53,7 @@ public abstract class StepableCell extends Cell {
     }
 
 	public MovableObject getMovableObject() {
-		return movableObject;
+		return this.movableObject;
 	}
 
 	public void setMovableObject(MovableObject movableObject) {
