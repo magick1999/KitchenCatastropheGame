@@ -3,7 +3,7 @@ package group44.entities;
 /**
  * An abstract class for cells on which can {@link MovableObject} step.
  * 
- * @author Tomas Svejnoha, Jordan Price
+ * @author Tomas Svejnoha
  * @version 1.1
  */
 public abstract class StepableCell extends Cell {
