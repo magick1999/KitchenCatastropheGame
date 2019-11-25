@@ -95,7 +95,9 @@ public class Level implements ILevel {
      */
     @Override
     public void keyDown(KeyEvent event) {
-        ((IKeyReactive) this.grid[this.playerPositionX][this.playerPositionY]).keyDown(event);
+        if (this.grid[this.playerPositionX][this.playerPositionY] instanceof IKeyReactive) {
+            ((IKeyReactive) this.grid[this.playerPositionX][this.playerPositionY]).keyDown(event);
+        }
     }
 
     /**
@@ -108,7 +110,9 @@ public class Level implements ILevel {
 
         for (int x = activeArea.getX1(); x < activeArea.getX2(); x++) {
             for (int y = activeArea.getY1(); y < activeArea.getY2(); y++) {
-                ((ITimeReactive) this.grid[x][y]).timeTick();
+                if (this.grid[x][y] instanceof ITimeReactive) {
+                    ((ITimeReactive) this.grid[x][y]).timeTick();
+                }
             }
         }
     }
