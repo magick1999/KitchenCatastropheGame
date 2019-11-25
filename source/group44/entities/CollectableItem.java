@@ -19,6 +19,6 @@ public abstract class CollectableItem extends LevelObject {
      * @param imagePath - Image path of the instance
      */
     public CollectableItem(String title, int positionX, int positionY, int size, String imagePath) {
-        super(title, positionX, positionY, size, imagePath);
+        super(title, positionX, positionY, imagePath);
     }
 }
