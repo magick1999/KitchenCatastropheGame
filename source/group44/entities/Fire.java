@@ -1,26 +1,33 @@
 package group44.entities;
 
-import javafx.scene.canvas.GraphicsContext;
-
 /**
  * Class for the Fire Cell
  * 
- * @author Jordan Price
- * @version 1.0
+ * @author Ami Mason, Jordan Price
+ * @version 1.1
  */
 
 public class Fire extends StepableCell {
 	
-	public Fire(String title, int positionX, int positionY, int size, String imagePath) {
-		super(title, positionX, positionY, size, imagePath);
-	}
-
 	/**
-    	* Checks if object {@link MovableObject} is able to walk on the fire.
-     	* 
-     	* @param object - {@link MovableObject} that steps on the cell.
-     	*/
-	private boolean isWalkable(MovableObject object) {
+     * Creates a new {@link Fire}.
+     * @param positionX - Position X in the game
+     * @param positionY - Position Y in the game
+     * @param size      - Size of the cell on the screen
+     * @param imagePath - Image path of the instance
+     */
+	
+	public Fire(int positionX, int positionY, int size, String imagePath) {
+		super("Fire", positionX, positionY, size, imagePath);
+	}
+	
+	/**
+     * Checks if object {@link MovableObject} is has fire boots.
+     * 
+     * @param object - {@link MovableObject} that steps on the cell.
+     */
+
+	private boolean hasBoots(MovableObject object) {
         boolean result = false;
 		try {
 			result = object.getFireBoots();
@@ -39,22 +46,18 @@ public class Fire extends StepableCell {
      */
 	@Override 
 	public void stepOn(MovableObject object) {
-            if (isWalkable(object)) { //Checks if fire is walkable with boots.
-            	if (this.getMovableObject() == null) {
-                    this.setMovableObject(object);//Sets the moveable object onto this object
-            	} else {
-                    throw new UnsupportedOperationException("Not implemented exception");
-                }
-            } else {
-            	object.kill();//maybe?
+		if (this.getMovableObject() == null) {
+            this.setMovableObject(object);//Sets the moveable object onto this object
+            if (!hasBoots(object)) { //Checks if moveable object has boots.
+            	try {
+            		object.kill();//Kills object
+        		} catch (Exception e) {
+        			//Incase object doesn't have a way to be killed.
+        		}
             }
             
-        
-    }
-	
-	@Override
-    public void draw(GraphicsContext gc) {
-        gc.drawImage(this.getImage(), this.getPositionX(), this.getPositionY());
-    }
-
+		} else {
+                    throw new UnsupportedOperationException("Not implemented exception");
+                }	
+    }       
 }
