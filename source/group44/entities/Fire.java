@@ -15,7 +15,11 @@ public class Fire extends StepableCell {
 		super(title, positionX, positionY, size, imagePath);
 	}
 
-
+	/**
+    	* Checks if object {@link MovableObject} is able to walk on the fire.
+     	* 
+     	* @param object - {@link MovableObject} that steps on the cell.
+     	*/
 	private boolean isWalkable(MovableObject object) {
         boolean result = false;
 		try {
