@@ -13,8 +13,7 @@ public class TokenDoor extends Door {
 	private int tokensNeeded; 
 
 	/**
-	 * This is the Token Door constructor, which can be called whenever the object needs to be
-	 * created - once the details have been read in from the textfile.
+	 * This creates a new {@link KeyDoor} and associates a unlocking {@link Key.KeyType} with it. 
 	 * @param tokensNeeded - number of tokens needed to open the door.
 	 * @param title - title of the object.
 	 * @param positionX - position x in the game.
@@ -29,9 +28,9 @@ public class TokenDoor extends Door {
 
 	
 	@Override
-	public void open() {
+	public void open(CollectibleItem item) {
 		// TODO Auto-generated method stub
-		
 	}
+	
 
 }

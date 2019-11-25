@@ -13,8 +13,8 @@ public class KeyDoor extends Door {
 	private Key.KeyType unlockingKey;
 
 	/**
-	 * This is the Key Door constructor, which can be called whenever the object needs to be
-	 * created - once the details have been read in from the textfile.
+	 * This creates a new instance of {@link KeyDoor} and associates it with 
+	 * an unlocking {@link KeyType}.
 	 * @param unlockingKey - key used to unlock the door
 	 * @param title - title of the object
 	 * @param positionX - position x in the game
@@ -28,9 +28,8 @@ public class KeyDoor extends Door {
 	}
 
 	@Override
-	public void open() {
+	public void open(CollectibleItem item) {
 		// TODO Auto-generated method stub
-		
 	}
 
 }
