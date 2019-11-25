@@ -6,7 +6,7 @@ package group44.entities;
  * @author Tomas Svejnoha, Rowan Aldean
  * @version 1.0
  */
-public class Flippers extends CollectibleItem {
+public class Flippers extends CollectableItem {
     /**
      * Creates a new instance of {@link Flippers} with position, size, and image.
      * 
