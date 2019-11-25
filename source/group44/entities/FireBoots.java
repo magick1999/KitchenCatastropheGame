@@ -8,14 +8,13 @@ package group44.entities;
  */
 public class FireBoots extends CollectibleItem {
     /**
-     * Creates a new instance of {@link FireBoots} with position, size, and image.
+     * Creates a new instance of {@link FireBoots} with position, and image.
      * 
      * @param positionX - Position X in the game
      * @param positionY - Position Y in the game
-     * @param size      - Size of the cell on the screen
      * @param imagePath - Image path of the instance
      */
-    public FireBoots(int positionX, int positionY, int size, String imagePath) {
-        super("Fireboots", positionX, positionY, size, imagePath);
+    public FireBoots(int positionX, int positionY, String imagePath) {
+        super("Fireboots", positionX, positionY, imagePath);
     }
 }
