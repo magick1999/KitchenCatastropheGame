@@ -34,7 +34,7 @@ public class Water extends StepableCell {
 		} catch (Exception e) {
 		}
 		return result;
-        /*Calls the moveable object and checks if it has fire boots
+        /*Calls the moveable object and checks if it has flippers
          (Needs to be implemented in player class I guess)*/
     }
 	
