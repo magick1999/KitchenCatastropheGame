@@ -1,6 +1,7 @@
 
 /**
- * This class gets, decodes and returns a special message of the day.
+ * The class for getting the Message of the day.
+ * 
  * @author Jordan Price
  * @version 1.0
  *
@@ -9,9 +10,6 @@
 import java.io.*;
 import java.net.*;
 
-/**
- * The Class MOTD.
- */
 public class MOTDParser {
 
 	/**
@@ -19,7 +17,7 @@ public class MOTDParser {
 	 *
 	 * @return message The decoded message of the day
 	 */
-	public static String getMOTD() {
+	public String getMOTD() {
 		String code = getHtml("http://cswebcat.swan.ac.uk/puzzle");//Passes url to getHTML
 		String decoded = decode(code);//decodes the code given from the URL
 		String message = getHtml("http://cswebcat.swan.ac.uk/message?solution=" + decoded);//passes the url and the decoded code to the checker website.
@@ -28,12 +26,13 @@ public class MOTDParser {
 	}
 
 	/**
-	 * Gets the output from the html.
-	 *
-	 * @param website 
-	 * @return output the output that the website gives you.
+	 * Gets a string from the inputed website and returns it.
+	 * 
+	 * @param website - the url of the website to be read. 
+	 * @return output - the output that the BurfferedReader has given.
+	 * 
 	 */
-	private static String getHtml(String website) {
+	private String getHtml(String website) {
 		String output = null; //Creates a default output
 		try {
 			StringBuilder result = new StringBuilder();
@@ -56,12 +55,12 @@ public class MOTDParser {
 	}
 
 	/**
-	 * Decode.
-	 *
-	 * @param message The coded message.
-	 * @return message The decoded message
+	 * Performs the algorithm to decrypt the code.
+	 * 
+	 * @param message - The code collected from the website.
+	 * @return message - The updated and decoded code after performing the algorithm.
 	 */
-	private static String decode(String message) {
+	private String decode(String message) {
 		char[] messageChars = message.toCharArray(); //Converts string to a character array
 
 		for (int i = 0; i < message.length(); i++) { //Iterates through the character array
