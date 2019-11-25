@@ -191,5 +191,7 @@ public abstract class LevelObject {
      * 
      * @param gc - {@link GraphicsContext} used to draw the object
      */
-    public abstract void draw(GraphicsContext gc);
+    public void draw(GraphicsContext gc) {
+        gc.drawImage(this.getImage(), this.getPositionX(), this.getPositionY());
+    }
 }
