@@ -28,7 +28,7 @@ public class TokenDoor extends Door {
 
 	
 	@Override
-	public void open(CollectibleItem item) {
+	public void open(CollectableItem item) {
 		// TODO Auto-generated method stub
 	}
 	

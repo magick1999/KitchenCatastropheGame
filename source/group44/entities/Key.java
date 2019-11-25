@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
  * @author Tomas Svejnoha, Rowan Aldean
  * @version 1.0
  */
-public class Key extends CollectibleItem {
+public class Key extends CollectableItem {
     private KeyType keyType;
 
     /**

@@ -6,7 +6,7 @@ package group44.entities;
  * @author Tomas Svejnoha, Rowan Aldean
  * @version 1.0
  */
-public class Token extends CollectibleItem {
+public class Token extends CollectableItem {
     /**
      * Creates a new instance of {@link Token} with position, size, and image.
      * 

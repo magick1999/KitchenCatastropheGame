@@ -3,15 +3,15 @@ package group44.entities;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
- * Abstract class for all collectible items in the game.
+ * Abstract class for all collectable items in the game.
  * 
  * @author Tomas Svejnoha, Rowan Aldean
  * @version 1.0
  */
-public abstract class CollectibleItem extends LevelObject {
+public abstract class CollectableItem extends LevelObject {
 
     /**
-     * Creates a new {@link CollectibleItem}.
+     * Creates a new {@link CollectableItem}.
      * 
      * @param title     - Title of the object
      * @param positionX - Position X in the game
@@ -19,7 +19,7 @@ public abstract class CollectibleItem extends LevelObject {
      * @param size      - Size of the cell on the screen
      * @param imagePath - Image path of the instance
      */
-    public CollectibleItem(String title, int positionX, int positionY, int size, String imagePath) {
+    public CollectableItem(String title, int positionX, int positionY, int size, String imagePath) {
         super(title, positionX, positionY, size, imagePath);
     }
 }

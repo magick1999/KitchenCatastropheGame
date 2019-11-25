@@ -25,7 +25,7 @@ public abstract class Door extends StepableCell {
     /**
      * Opens the door.
      */
-    public abstract void open(CollectibleItem item);
+    public abstract void open(CollectableItem item);
     	// TODO: Takes Key ;
 
     /**
