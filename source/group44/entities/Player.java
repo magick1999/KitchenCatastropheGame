@@ -75,6 +75,8 @@ public class Player extends MovableObject implements IKeyReactive {
      */
     @Override
     protected void onCellStepped(StepableCell cell) {
+        this.setPosition(cell.getPositionX(), cell.getPositionY());
+
         /*
          * If cell is Ground => Try to collect collectable item
          */

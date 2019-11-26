@@ -26,4 +26,9 @@ public abstract class Enemy extends MovableObject {
             String imagePath) {
         super(level, title, positionX, positionY, velocityX, velocityY, imagePath);
     }
+
+    /**
+     * Computes the velocity of {@link Enemy}.
+     */
+    protected abstract void computeVelocity();
 }

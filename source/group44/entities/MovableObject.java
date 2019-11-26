@@ -83,7 +83,7 @@ public abstract class MovableObject extends LevelObject {
     /**
      * Method that kills the {@link MovableObject}.
      */
-    protected void die() {
+    public void die() {
         this.isAlive = false;
     }
 
