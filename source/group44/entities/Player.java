@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import group44.game.CollisionCheckResult;
 import group44.game.Level;
+import group44.game.interfaces.IKeyReactive;
+import group44.game.interfaces.KeyEvent;
 
 /**
  * Represents a player in the game.
@@ -11,7 +13,7 @@ import group44.game.Level;
  * @author Tomas Svejnoha
  * @version 1.0
  */
-public class Player extends MovableObject {
+public class Player extends MovableObject implements IKeyReactive {
     private ArrayList<CollectableItem> itinerary;
 
     /**
@@ -79,5 +81,30 @@ public class Player extends MovableObject {
 
         throw new UnsupportedOperationException(
                 this.getClass().getSimpleName() + ".onCellStepped(StepableCell cell) not implemented.");
+    }
+
+    @Override
+    public void keyDown(KeyEvent event) {
+        switch (event.getCode()) {
+        case LEFT: {
+            this.setVelocityX(-1);
+            this.setVelocityY(0);
+            break;
+        }
+        case RIGHT: {
+            this.setVelocityX(1);
+            this.setVelocityY(0);
+            break;
+        }
+        case UP: {
+            this.setVelocityX(0);
+            this.setVelocityY(-1);
+            break;
+        }
+        case DOWN: {
+            this.setVelocityX(0);
+            this.setVelocityY(1);
+            break;
+        }
     }
 }
