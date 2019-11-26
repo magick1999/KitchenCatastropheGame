@@ -100,4 +100,62 @@ public abstract class MovableObject extends LevelObject {
      * Moves the object.
      */
     public abstract void move();
+
+    /**
+     * Returns the {@link StepableCell} on which the {@link MovableObject} is
+     * located.
+     * 
+     * @param object - the {@link MovableObject}
+     * @return if found, the {@link StepableCell} where the object is located,
+     *         otherwise null
+     */
+    protected StepableCell getStepableCellAtMovableObjectPosition(MovableObject object) {
+        LevelObject[][] grid = this.getLevel().getGrid();
+        if (grid[object.getPositionX()][object.getPositionY()] instanceof StepableCell) {
+            return (StepableCell) grid[object.getPositionX()][object.getPositionY()];
+        }
+        return null;
+    }
+
+    /**
+     * Returns the next {@link StepableCell} the {@link MovableObject} will step on.
+     * 
+     * @param object    - The instance of {@link MovableObject}
+     * @param velocityX - velocity X of the object
+     * @param velocityY - velocity Y of the object
+     * @return the next {@link StepableCell} the {@link MovableObject} will step on;
+     *         null if out of range
+     */
+    protected StepableCell getNextStepableCellInVelocity(MovableObject object, int velocityX, int velocityY) {
+        LevelObject[][] grid = this.getLevel().getGrid();
+        StepableCell cell = this.getStepableCellAtMovableObjectPosition(object);
+
+        // Next position based on current position and velocity
+        int nextCellIndexX = cell.getPositionX() + velocityX;
+        int nextCellIndexY = cell.getPositionY() + velocityY;
+
+        // Return StepableCell if the next step is in the boundaries of the grid;
+        // otherwise null
+        if (0 <= nextCellIndexX && nextCellIndexX < grid[cell.getPositionY()].length && 0 <= nextCellIndexY
+                && nextCellIndexY < grid.length && grid[nextCellIndexX][nextCellIndexY] instanceof StepableCell) {
+            return (StepableCell) grid[nextCellIndexX][nextCellIndexY];
+        }
+        return null;
+    }
+
+    /**
+     * Method invoked after the {@link MovableObject} collided with another
+     * {@link MovableObject}.
+     * 
+     * @param object - the colliding {@link MovableObject}
+     */
+    protected abstract void onCollided(MovableObject object);
+
+    /**
+     * Method invoked after the {@link MovableObject} stepped on
+     * {@link StepableCell}.
+     * 
+     * @param cell - {@link StepableCell} the {@link MovableObject} stepped on
+     */
+    protected abstract void onCellStepped(StepableCell cell);
 }
