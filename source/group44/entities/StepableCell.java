@@ -1,5 +1,7 @@
 package group44.entities;
 
+import group44.game.CollisionCheckResult;
+
 /**
  * An abstract class for cells on which can {@link MovableObject} step.
  * 
@@ -22,16 +24,22 @@ public abstract class StepableCell extends Cell {
     }
 
     /**
-     * Places object on the {@link StepableCell}
+     * Places object on the {@link StepableCell} if it's free and returns empty
+     * {@link CollisionCheckResult}. If there is already some {@link MovableObject}
+     * on the {@link StepableCell}, a {@link CollisionCheckResult} with colliding
+     * object is returned.
      * 
-     * @param object - {@link MovableObject} that steps on the cell.
+     * @param object - {@link MovableObject} that steps on the cell
+     * 
+     * @return the {@link CollisionCheckResult} with the colliding
+     *         {@link MovableObject}
      */
-    public void stepOn(MovableObject object) {
+    public CollisionCheckResult stepOn(MovableObject object) {
         if (this.movableObject == null) {
             this.movableObject = object;
+            return new CollisionCheckResult(null);
         } else {
-            // TODO: Implement
-            throw new UnsupportedOperationException("Not implemented exception");
+            return new CollisionCheckResult(this.movableObject);
         }
     }
 
