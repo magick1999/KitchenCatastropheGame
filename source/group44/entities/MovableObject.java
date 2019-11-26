@@ -143,19 +143,7 @@ public abstract class MovableObject extends LevelObject {
         return null;
     }
 
-    /**
-     * Method invoked after the {@link MovableObject} collided with another
-     * {@link MovableObject}.
-     * 
-     * @param object - the colliding {@link MovableObject}
-     */
     protected abstract void onCollided(MovableObject object);
 
-    /**
-     * Method invoked after the {@link MovableObject} stepped on
-     * {@link StepableCell}.
-     * 
-     * @param cell - {@link StepableCell} the {@link MovableObject} stepped on
-     */
     protected abstract void onCellStepped(StepableCell cell);
 }
