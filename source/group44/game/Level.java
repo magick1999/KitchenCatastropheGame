@@ -3,6 +3,7 @@ package group44.game;
 import group44.entities.LevelObject;
 import group44.game.interfaces.IKeyReactive;
 import group44.game.interfaces.ILevel;
+import group44.game.interfaces.ITimeReactive;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 
@@ -94,7 +95,26 @@ public class Level implements ILevel {
      */
     @Override
     public void keyDown(KeyEvent event) {
-        ((IKeyReactive) this.grid[this.playerPositionX][this.playerPositionY]).keyDown(event);
+        if (this.grid[this.playerPositionX][this.playerPositionY] instanceof IKeyReactive) {
+            ((IKeyReactive) this.grid[this.playerPositionX][this.playerPositionY]).keyDown(event);
+        }
+    }
+
+    /**
+     * Invokes timeTick method on all {@link LevelObject}s in the active game area
+     * implementing {@link group44.game.interfaces.ITimeReactive}.
+     */
+    @Override
+    public void timeTick() {
+        Area activeArea = this.getActiveArea(this.playerPositionX, this.playerPositionY);
+
+        for (int x = activeArea.getX1(); x < activeArea.getX2(); x++) {
+            for (int y = activeArea.getY1(); y < activeArea.getY2(); y++) {
+                if (this.grid[x][y] instanceof ITimeReactive) {
+                    ((ITimeReactive) this.grid[x][y]).timeTick();
+                }
+            }
+        }
     }
 
     /**

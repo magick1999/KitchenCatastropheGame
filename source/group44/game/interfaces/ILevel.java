@@ -15,12 +15,17 @@ public interface ILevel {
      * 
      * @param gc - {@link GraphicsContext} to which the game is drawn
      */
-    public void draw(GraphicsContext gc);
+    void draw(GraphicsContext gc);
 
     /**
      * Handles the KeyDown event
      * 
      * @param event - the {@link KeyEvent}
      */
-    public void keyDown(KeyEvent event);
+    void keyDown(KeyEvent event);
+
+    /**
+     * Method executed on every time tick.
+     */
+    void timeTick();
 }
