@@ -17,10 +17,9 @@ public class Key extends CollectableItem {
      * @param type      - Color type of the {@link Key}
      * @param positionX - Position X in the game
      * @param positionY - Position Y in the game
-     * @param size      - Size of the cell on the screen
      */
-    public Key(KeyType type, int positionX, int positionY, int size) {
-        super(type.getTitle(), positionX, positionY, size, type.getImagePath());
+    public Key(KeyType type, int positionX, int positionY) {
+        super(type.getTitle(), positionX, positionY, type.getImagePath());
         this.keyType = type;
     }
 

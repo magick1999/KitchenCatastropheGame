@@ -15,9 +15,8 @@ public abstract class LevelObject {
     private Color backgroundColor;
     private Color foregroundColor;
     private Image image;
-    private int size; // Size 'a' of the "grid" cell.
-    private int positionX;
-    private int positionY;
+    private int positionX; // Position X in the game array
+    private int positionY; // Position Y in the game array
 
     /**
      * Creates a new {@link LevelObject} with default colors.
@@ -25,12 +24,10 @@ public abstract class LevelObject {
      * @param title     - Title of the object
      * @param positionX - Position X in the game
      * @param positionY - Position Y in the game
-     * @param size      - Size of the cell on the screen
      */
-    public LevelObject(String title, int positionX, int positionY, int size) {
+    public LevelObject(String title, int positionX, int positionY) {
         this.setTitle(title);
         this.setPosition(positionX, positionY);
-        this.setSize(size);
         // Default colors
         this.setBackgroundColor(Color.RED);
         this.setForegroundColor(Color.BLACK);
@@ -42,12 +39,11 @@ public abstract class LevelObject {
      * @param title     - Title of the object
      * @param positionX - Position X in the game
      * @param positionY - Position Y in the game
-     * @param size      - Size of the cell on the screen
      * @param imagePath - Image path of the instance
      */
-    public LevelObject(String title, int positionX, int positionY, int size, String imagePath) {
-        this(title, positionX, positionY, size);
-        this.setImage(new Image(imagePath, size, size, true, true));
+    public LevelObject(String title, int positionX, int positionY, String imagePath) {
+        this(title, positionX, positionY);
+        this.setImage(new Image(imagePath, true));
     }
 
     /**
@@ -56,13 +52,11 @@ public abstract class LevelObject {
      * @param title           - Title of the object
      * @param positionX       - Position X in the game
      * @param positionY       - Position Y in the game
-     * @param size            - Size of the cell on the screen
      * @param foregroundColor - Foreground color
      * @param backgroundColor - Background color
      */
-    public LevelObject(String title, int positionX, int positionY, int size, Color foregroundColor,
-            Color backgroundColor) {
-        this(title, positionX, positionY, size);
+    public LevelObject(String title, int positionX, int positionY, Color foregroundColor, Color backgroundColor) {
+        this(title, positionX, positionY);
         this.setForegroundColor(foregroundColor);
         this.setBackgroundColor(backgroundColor);
     }
@@ -140,24 +134,6 @@ public abstract class LevelObject {
     }
 
     /**
-     * Returns a size of the object.
-     * 
-     * @return a size of the object.
-     */
-    public int getSize() {
-        return this.size;
-    }
-
-    /**
-     * Sets the size of the object.
-     * 
-     * @param size - size of the object.
-     */
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    /**
      * Returns the X coordinate of an object.
      * 
      * @return the x coordinate of an object.
@@ -187,11 +163,19 @@ public abstract class LevelObject {
     }
 
     /**
-     * Draws the object.
+     * Draws the object in {@link GraphicsContext}.
      * 
-     * @param gc - {@link GraphicsContext} used to draw the object
+     * @param gc     - {@link GraphicsContext} used to draw the object
+     * @param x      - The X coordinate in the {@link GraphicsContext} where to draw
+     *               the {@link LevelObject}
+     * @param y      - The Y coordinate in the {@link GraphicsContext} where to draw
+     *               the {@link LevelObject}
+     * @param width  - The width of the {@link LevelObject} in the
+     *               {@link GraphicsContext}
+     * @param height - The height of the {@link LevelObject} in the
+     *               {@link GraphicsContext}
      */
-    public void draw(GraphicsContext gc) {
-        gc.drawImage(this.getImage(), this.getPositionX(), this.getPositionY());
+    public void draw(GraphicsContext gc, double x, double y, double width, double height) {
+        gc.drawImage(this.getImage(), x, y, width, height);
     }
 }

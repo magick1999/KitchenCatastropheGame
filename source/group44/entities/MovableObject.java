@@ -18,12 +18,10 @@ public abstract class MovableObject extends LevelObject {
      * @param positionY - Position Y in the game
      * @param velocityX - Velocity X of the instance
      * @param velocityY - Velocity Y of the instance
-     * @param size      - Size of the cell on the screen
      * @param imagePath - Image path of the instance
      */
-    public MovableObject(String title, int positionX, int positionY, int velocityX, int velocityY, int size,
-            String imagePath) {
-        super(title, positionX, positionY, size, imagePath);
+    public MovableObject(String title, int positionX, int positionY, int velocityX, int velocityY, String imagePath) {
+        super(title, positionX, positionY, imagePath);
 
         this.setVelocityX(velocityX);
         this.setVelocityY(velocityY);
