@@ -1,6 +1,9 @@
 package group44.game;
 
 import group44.entities.LevelObject;
+import group44.entities.MovableObject;
+import group44.entities.Player;
+import group44.entities.StepableCell;
 import group44.game.interfaces.IKeyReactive;
 import group44.game.interfaces.ILevel;
 import group44.game.interfaces.ITimeReactive;
@@ -18,31 +21,25 @@ public class Level implements ILevel {
 
     private LevelObject[][] grid; // The 2D game array
     private int displaySize; // The size of the grid displayed
-
-    // TODO: Replace with reference to the Player
-    private int playerPositionX;
-    private int playerPositionY;
+    private Player player;
 
     /**
      * Creates a new instance of {@link Level}.
      * 
-     * @param grid            - 2D array containing all game objects
-     * @param displaySize     - size of the grid displayed on screen
-     * @param playerPositionX - X index of the {@link Player} in the array
-     * @param playerPositionY - Y index of the {@link Player} in the array
+     * @param grid        - 2D array containing all game objects
+     * @param displaySize - size of the grid displayed on screen
+     * @param player      - The instance of {@link Player}
      * @throws IllegalArgumentException If the display size is less than 3, is not
      *                                  odd, or exceeds a size of a grid.
      */
-    public Level(LevelObject[][] grid, int displaySize, int playerPositionX, int playerPositionY) {
+    public Level(LevelObject[][] grid, int displaySize, Player player) {
         this.grid = grid;
         if (displaySize < 3 || displaySize > grid[0].length || displaySize > grid[0].length || displaySize % 2 != 1) {
             throw new IllegalArgumentException(Level.ERROR_DISPLAY_SIZE_ILLEGAL_ARGUMENT_EXCEPTION);
         } else {
             this.displaySize = displaySize;
         }
-        // TODO: Check legality of values
-        this.playerPositionX = playerPositionX;
-        this.playerPositionY = playerPositionY;
+        this.player = player;
     }
 
     /**
@@ -70,6 +67,20 @@ public class Level implements ILevel {
     }
 
     /**
+     * Returns a 2D array with all {@link LevelObject} in the {@link Level}.
+     * 
+     * @return 2D array of {@link LevelObject}s
+     */
+    public LevelObject[][] getGrid() {
+        /*
+         * The only class we will possibly use this method is the SmartTargetingEnemy.
+         * Using some kind of repository does not make sence as the SmartTargetingEnemy
+         * should decide on its own.
+         */
+        return this.grid;
+    }
+
+    /**
      * Draws the cell in the active game area.
      * 
      * @param gc - {@link GraphicsContext} to which the game is drawn
@@ -80,7 +91,7 @@ public class Level implements ILevel {
         double cellHeight = gc.getCanvas().getHeight() / this.displaySize;
         double cellSize = Math.min(cellWidth, cellHeight);
 
-        Area activeArea = this.getActiveArea(this.playerPositionX, this.playerPositionY);
+        Area activeArea = this.getActiveArea();
 
         for (int x = activeArea.getX1(); x <= activeArea.getX2(); x++) {
             for (int y = activeArea.getY1(); y <= activeArea.getY2(); y++) {
@@ -96,8 +107,8 @@ public class Level implements ILevel {
      */
     @Override
     public void keyDown(KeyEvent event) {
-        if (this.grid[this.playerPositionX][this.playerPositionY] instanceof IKeyReactive) {
-            ((IKeyReactive) this.grid[this.playerPositionX][this.playerPositionY]).keyDown(event);
+        if (this.grid[this.player.getPositionX()][this.player.getPositionY()] instanceof IKeyReactive) {
+            ((IKeyReactive) this.grid[this.player.getPositionX()][this.player.getPositionY()]).keyDown(event);
         }
     }
 
@@ -107,7 +118,7 @@ public class Level implements ILevel {
      */
     @Override
     public void timeTick() {
-        Area activeArea = this.getActiveArea(this.playerPositionX, this.playerPositionY);
+        Area activeArea = this.getActiveArea();
 
         for (int x = activeArea.getX1(); x < activeArea.getX2(); x++) {
             for (int y = activeArea.getY1(); y < activeArea.getY2(); y++) {
@@ -121,13 +132,11 @@ public class Level implements ILevel {
     /**
      * Returns the active {@link Area} of the game.
      * 
-     * @param playerPositionX - the position X of the {@link Player}
-     * @param playerPositionY - the position Y of the {@link Player}
      * @return the active area of the game
      */
-    private Area getActiveArea(int playerPositionX, int playerPositionY) {
-        int centerX = this.playerPositionX;
-        int centerY = this.playerPositionY;
+    private Area getActiveArea() {
+        int centerX = this.player.getPositionX();
+        int centerY = this.player.getPositionY();
 
         if (centerX < this.displaySize / 2) {
             centerX = this.displaySize / 2;
