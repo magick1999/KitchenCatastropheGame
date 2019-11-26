@@ -12,6 +12,7 @@ public abstract class MovableObject extends LevelObject {
     private int velocityX;
     private int velocityY;
     private Level level;
+    private Boolean isAlive;
 
     /**
      * Creates a new {@link MovableObject}.
@@ -31,6 +32,7 @@ public abstract class MovableObject extends LevelObject {
         this.level = level;
         this.setVelocityX(velocityX);
         this.setVelocityY(velocityY);
+        this.isAlive = true;
     }
 
     /**
@@ -76,6 +78,22 @@ public abstract class MovableObject extends LevelObject {
      */
     protected Level getLevel() {
         return this.level;
+    }
+
+    /**
+     * Method that kills the {@link MovableObject}.
+     */
+    protected void die() {
+        this.isAlive = false;
+    }
+
+    /**
+     * Indicates whether the object is alive or not.
+     * 
+     * @return true if the {@link MovableObject} is alive, false otherwise
+     */
+    public Boolean isAlive() {
+        return this.isAlive;
     }
 
     /**
