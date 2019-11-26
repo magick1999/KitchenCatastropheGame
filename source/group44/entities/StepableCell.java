@@ -51,7 +51,7 @@ public abstract class StepableCell extends Cell {
     }
 
     /**
-     * Indecates whether something currently stands on the cell.
+     * Indicates whether something currently stands on the cell.
      * 
      * @return true if there is some movable object on the cell, otherwise false.
      */

@@ -30,11 +30,12 @@ public class Level implements ILevel {
      * @param displaySize     - size of the grid displayed on screen
      * @param playerPositionX - X index of the {@link Player} in the array
      * @param playerPositionY - Y index of the {@link Player} in the array
+     * @throws IllegalArgumentException If the display size is less than 3, is not
+     *                                  odd, or exceeds a size of a grid.
      */
     public Level(LevelObject[][] grid, int displaySize, int playerPositionX, int playerPositionY) {
         this.grid = grid;
         if (displaySize < 3 || displaySize > grid[0].length || displaySize > grid[0].length || displaySize % 2 != 1) {
-            // TODO: Document this exception in Javadoc
             throw new IllegalArgumentException(Level.ERROR_DISPLAY_SIZE_ILLEGAL_ARGUMENT_EXCEPTION);
         } else {
             this.displaySize = displaySize;
