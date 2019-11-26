@@ -1,5 +1,7 @@
 package group44.entities;
 
+import group44.game.Level;
+
 /**
  * Abstract classes from which inherits all objects able to move.
  * 
@@ -9,10 +11,12 @@ package group44.entities;
 public abstract class MovableObject extends LevelObject {
     private int velocityX;
     private int velocityY;
+    private Level level;
 
     /**
      * Creates a new {@link MovableObject}.
      * 
+     * @param level     - The {@link Level} where the object is located
      * @param title     - Title of the object
      * @param positionX - Position X in the game
      * @param positionY - Position Y in the game
@@ -20,9 +24,11 @@ public abstract class MovableObject extends LevelObject {
      * @param velocityY - Velocity Y of the instance
      * @param imagePath - Image path of the instance
      */
-    public MovableObject(String title, int positionX, int positionY, int velocityX, int velocityY, String imagePath) {
+    public MovableObject(Level level, String title, int positionX, int positionY, int velocityX, int velocityY,
+            String imagePath) {
         super(title, positionX, positionY, imagePath);
 
+        this.level = level;
         this.setVelocityX(velocityX);
         this.setVelocityY(velocityY);
     }
@@ -61,6 +67,15 @@ public abstract class MovableObject extends LevelObject {
      */
     public void setVelocityY(int vy) {
         this.velocityY = vy;
+    }
+
+    /**
+     * Returns the {@link Level} in which the {@link MovableObject} is located.
+     * 
+     * @return the {@link Level}
+     */
+    protected Level getLevel() {
+        return this.level;
     }
 
     /**
