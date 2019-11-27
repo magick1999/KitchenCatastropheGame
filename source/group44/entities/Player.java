@@ -51,6 +51,7 @@ public class Player extends MovableObject implements IKeyReactive {
             } else {
                 // Not colliding; stepOn was successful
                 currentCell.stepOff();
+                this.setPosition(nextCell.getPositionX(), nextCell.getPositionY());
                 this.onCellStepped(nextCell);
             }
         }
@@ -75,8 +76,6 @@ public class Player extends MovableObject implements IKeyReactive {
      */
     @Override
     protected void onCellStepped(StepableCell cell) {
-        this.setPosition(cell.getPositionX(), cell.getPositionY());
-
         /*
          * If cell is Ground => Try to collect collectable item
          */
