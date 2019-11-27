@@ -37,7 +37,7 @@ public class Main extends Application {
     //An array containing the map textures.
     ImageView[][] mapTextures = new ImageView[40][40];
     
-    //The controller asociated with the specific fxml file.
+    //The controller associated with the specific fxml file.
     MainGameWindowController myController;
    
     //Might be redundant, does the same as above, will remove in a future commit.
