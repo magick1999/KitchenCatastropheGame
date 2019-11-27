@@ -1,11 +1,8 @@
 package group44.entities;
 
-<<<<<<< HEAD
-=======
 import group44.game.Level;
 import javafx.scene.paint.Color;
 
->>>>>>> origin/svejnohatomas-MovableObjects
 /**
  * Represents a colored {@link Key} in the game.
  *
