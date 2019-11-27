@@ -24,7 +24,7 @@ public class Fire extends StepableCell {
     }
 
     /**
-     * Method which interacts with {@link MovableObject} which stepped on the cell.
+     * Interacts with {@link MovableObject} which stepped on the cell.
      * 
      * @param object - The {@link MovableObject} which stepped in the {@link Fire}
      */
