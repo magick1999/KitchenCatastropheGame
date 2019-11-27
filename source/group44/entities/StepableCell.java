@@ -1,6 +1,7 @@
 package group44.entities;
 
 import group44.game.CollisionCheckResult;
+import group44.game.Level;
 
 /**
  * An abstract class for cells on which can {@link MovableObject} step.
@@ -14,13 +15,14 @@ public abstract class StepableCell extends Cell {
     /**
      * Creates a new {@link StepableCell}.
      * 
+     * @param level     - The {@link Level} where the object is located
      * @param title     - Title of the object
      * @param positionX - Position X in the game
      * @param positionY - Position Y in the game
      * @param imagePath - Image path of the instance
      */
-    public StepableCell(String title, int positionX, int positionY, String imagePath) {
-        super(title, positionX, positionY, imagePath);
+    public StepableCell(Level level, String title, int positionX, int positionY, String imagePath) {
+        super(level, title, positionX, positionY, imagePath);
     }
 
     /**
@@ -37,6 +39,7 @@ public abstract class StepableCell extends Cell {
     public CollisionCheckResult stepOn(MovableObject object) {
         if (this.movableObject == null) {
             this.movableObject = object;
+            this.onStepped(object);
             return new CollisionCheckResult(null);
         } else {
             return new CollisionCheckResult(this.movableObject);
@@ -58,4 +61,11 @@ public abstract class StepableCell extends Cell {
     public Boolean isSteppedOn() {
         return this.movableObject != null;
     }
+
+    /**
+     * Interacts with {@link MovableObject} that stepped on the cell.
+     * 
+     * @param object - The {@link MovableObject} that stepped on cell.
+     */
+    protected abstract void onStepped(MovableObject object);
 }
