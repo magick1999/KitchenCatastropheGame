@@ -22,6 +22,7 @@ public class Level implements ILevel {
     private LevelObject[][] grid; // The 2D game array
     private int displaySize; // The size of the grid displayed
     private Player player;
+    private Boolean isWon; // TODO: Add Observer pattern
 
     /**
      * Creates a new instance of {@link Level}.
@@ -153,5 +154,10 @@ public class Level implements ILevel {
 
         return new Area(centerX - this.displaySize / 2, centerY - this.displaySize / 2, centerX + this.displaySize / 2,
                 centerY + this.displaySize / 2);
+    }
+
+    public void finish() {
+        this.isWon = true;
+        // TODO: Notify observers
     }
 }
