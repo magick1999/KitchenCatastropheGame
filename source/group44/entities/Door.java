@@ -3,7 +3,7 @@ package group44.entities;
 import group44.game.Level;
 
 /**
- * Super class for all Door lasses.
+ * Super class for all Door classes.
  * 
  * @author Tomas Svejnoha
  * @version 1.0
