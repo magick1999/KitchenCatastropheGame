@@ -87,25 +87,21 @@ public class Player extends MovableObject implements IKeyReactive {
     @Override
     public void keyDown(KeyEvent event) {
         switch (event.getCode()) {
-        case LEFT: {
+        case LEFT:
             this.setVelocityX(-1);
             this.setVelocityY(0);
             break;
-        }
-        case RIGHT: {
+        case RIGHT:
             this.setVelocityX(1);
             this.setVelocityY(0);
             break;
-        }
-        case UP: {
+        case UP:
             this.setVelocityX(0);
             this.setVelocityY(-1);
             break;
-        }
-        case DOWN: {
+        case DOWN:
             this.setVelocityX(0);
             this.setVelocityY(1);
             break;
-        }
     }
 }
