@@ -32,5 +32,4 @@ public class Water extends StepableCell {
     protected void onStepped(MovableObject object) {
         throw new UnsupportedOperationException();
     }
-
 }
