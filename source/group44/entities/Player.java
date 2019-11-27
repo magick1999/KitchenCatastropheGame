@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import group44.game.CollisionCheckResult;
 import group44.game.Level;
 import group44.game.interfaces.IKeyReactive;
-import group44.game.interfaces.KeyEvent;
+import javafx.scene.input.KeyEvent;
+
+
 
 /**
  * Represents a player in the game.
@@ -19,7 +21,7 @@ public class Player extends MovableObject implements IKeyReactive {
     /**
      * Creates a new instance of {@link Player} at specific position in a specific
      * {@link Level}.
-     * 
+     *
      * @param level     - The {@link Level} where the {@link Player} is located.
      * @param name      - The name of the {@link Player}.
      * @param positionX - Position X of the {@link Player}.
@@ -30,7 +32,7 @@ public class Player extends MovableObject implements IKeyReactive {
      *                  screen.
      */
     public Player(Level level, String name, int positionX, int positionY, int velocityX, int velocityY,
-            String imagePath) {
+                  String imagePath) {
         super(level, name, positionX, positionY, velocityX, velocityY, imagePath);
     }
 
@@ -60,7 +62,7 @@ public class Player extends MovableObject implements IKeyReactive {
     /**
      * Method invoked after the {@link Player} collided with another
      * {@link MovableObject}.
-     * 
+     *
      * @param object - the colliding {@link MovableObject}
      */
     @Override
@@ -71,7 +73,7 @@ public class Player extends MovableObject implements IKeyReactive {
 
     /**
      * Method invoked after the {@link Player} stepped on {@link StepableCell}.
-     * 
+     *
      * @param cell - {@link StepableCell} the {@link Player} stepped on
      */
     @Override
@@ -87,21 +89,22 @@ public class Player extends MovableObject implements IKeyReactive {
     @Override
     public void keyDown(KeyEvent event) {
         switch (event.getCode()) {
-        case LEFT:
-            this.setVelocityX(-1);
-            this.setVelocityY(0);
-            break;
-        case RIGHT:
-            this.setVelocityX(1);
-            this.setVelocityY(0);
-            break;
-        case UP:
-            this.setVelocityX(0);
-            this.setVelocityY(-1);
-            break;
-        case DOWN:
-            this.setVelocityX(0);
-            this.setVelocityY(1);
-            break;
+            case LEFT:
+                this.setVelocityX(-1);
+                this.setVelocityY(0);
+                break;
+            case RIGHT:
+                this.setVelocityX(1);
+                this.setVelocityY(0);
+                break;
+            case UP:
+                this.setVelocityX(0);
+                this.setVelocityY(-1);
+                break;
+            case DOWN:
+                this.setVelocityX(0);
+                this.setVelocityY(1);
+                break;
+        }
     }
 }
