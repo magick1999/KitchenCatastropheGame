@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
  * @author Tomas Svejnoha, Rowan Aldean
  * @version 1.0
  */
-public class Key extends CollectibleItem {
+public class Key extends CollectableItem {
     private KeyType keyType;
 
     /**
@@ -17,10 +17,9 @@ public class Key extends CollectibleItem {
      * @param type      - Color type of the {@link Key}
      * @param positionX - Position X in the game
      * @param positionY - Position Y in the game
-     * @param size      - Size of the cell on the screen
      */
-    public Key(KeyType type, int positionX, int positionY, int size) {
-        super(type.getTitle(), positionX, positionY, size, type.getImagePath());
+    public Key(KeyType type, int positionX, int positionY) {
+        super(type.getTitle(), positionX, positionY, type.getImagePath());
         this.keyType = type;
     }
 

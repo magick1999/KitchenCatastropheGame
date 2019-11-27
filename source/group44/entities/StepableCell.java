@@ -6,8 +6,20 @@ package group44.entities;
  * @author Tomas Svejnoha
  * @version 1.0
  */
-public abstract class StepableCell {
+public abstract class StepableCell extends Cell {
     private MovableObject movableObject; // MovableObject standing on the cell
+
+    /**
+     * Creates a new {@link StepableCell}.
+     * 
+     * @param title     - Title of the object
+     * @param positionX - Position X in the game
+     * @param positionY - Position Y in the game
+     * @param imagePath - Image path of the instance
+     */
+    public StepableCell(String title, int positionX, int positionY, String imagePath) {
+        super(title, positionX, positionY, imagePath);
+    }
 
     /**
      * Places object on the {@link StepableCell}
