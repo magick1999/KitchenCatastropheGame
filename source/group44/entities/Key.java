@@ -1,7 +1,5 @@
 package group44.entities;
 
-import javafx.scene.paint.Color;
-
 /**
  * Represents a colored {@link Key} in the game.
  *
