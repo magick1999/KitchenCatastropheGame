@@ -1,5 +1,7 @@
 package group44.entities;
 
+import java.util.ArrayList;
+
 /**
  * Super class for all Door lasses.
  * 
@@ -24,10 +26,11 @@ public abstract class Door extends StepableCell {
 
     /**
      * Opens the door.
+     * 
+     * @param items - pass in every collectable item that the player has.
      */
-    public abstract void open(CollectibleItem item);
-    	// TODO: Takes Key ;
-
+    public abstract void open(ArrayList <CollectibleItem> items);
+    	
     /**
      * Returns open state of the door.
      * 

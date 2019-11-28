@@ -1,4 +1,6 @@
 package group44.entities;
+import java.util.ArrayList;
+
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 /**
@@ -28,14 +30,17 @@ public class KeyDoor extends Door {
 	}
 
 	@Override
-	public void open(CollectibleItem item) {
-		//check item is key and not token 
-		if(item instanceof Key) {
-			//casting item so that is thought of as a key and not a collectableItem
-			if (((Key) item).getKeyCode()==unlockingKey.getKeyCode()) {
-				this.setIsOpen(true);
-			}
+	public void open(ArrayList <CollectibleItem> items) {
+		if (items != null && !items.isEmpty()) {
+			for(CollectibleItem item : items) {
+				//check item is key and not token 
+				if(item instanceof Key) {
+					//casting item so that is thought of as a key and not a collectableItem
+					if (((Key) item).getKeyCode()==unlockingKey.getKeyCode()) {
+						this.setIsOpen(true);
+					}
+				}
+			}			
 		}
 	}
-
 }

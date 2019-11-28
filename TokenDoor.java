@@ -1,5 +1,7 @@
 package group44.entities;
 
+import java.util.ArrayList;
+
 import javafx.scene.canvas.GraphicsContext;
 
 /**
@@ -25,13 +27,20 @@ public class TokenDoor extends Door {
 		super(title, positionX, positionY, size, imagePath);
 		this.tokensNeeded = tokensNeeded;
 	}
-
 	
 	@Override
-	public void open(CollectibleItem item) {
-		// TODO Need to compare tokensNeeded with the tokens in the player's inventory
-		// could be either a player object or we should change how Token works
+	public void open(ArrayList<CollectibleItem> items) {
+		if (items != null && !items.isEmpty()) {
+			int tokenCount = 0;
+			for(CollectibleItem item : items) {
+				//check item is token and not key
+				if(item instanceof Token) {
+					tokenCount++;
+				}
+			}			
+			if(tokenCount>=tokensNeeded) {
+				this.setIsOpen(true);
+			}
+		}
 	}
-	
-
 }
