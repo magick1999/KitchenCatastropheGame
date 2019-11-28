@@ -26,7 +26,7 @@ public class Level implements ILevel {
 
     /**
      * Creates a new instance of {@link Level}.
-     * 
+     *
      * @param gridWidth   - width of the 2D array
      * @param gridHeight  - height of the 2D array
      * @param displaySize - size of the grid displayed on screen
@@ -44,9 +44,8 @@ public class Level implements ILevel {
 
     /**
      * Checks whether the object is colliding or not.
-     * 
+     *
      * @param obj - object for to check the collision.
-     * 
      * @return result of the collision check.
      */
     public CollisionCheckResult checkCollision(LevelObject obj) {
@@ -58,7 +57,7 @@ public class Level implements ILevel {
 
     /**
      * Checks whether the object is colliding or not.
-     * 
+     *
      * @param obj - object for which to check the collision.
      * @return true if the object is colliding, otherwise false
      */
@@ -68,7 +67,7 @@ public class Level implements ILevel {
 
     /**
      * Returns a 2D array with all {@link LevelObject} in the {@link Level}.
-     * 
+     *
      * @return 2D array of {@link LevelObject}s
      */
     public LevelObject[][] getGrid() {
@@ -82,7 +81,7 @@ public class Level implements ILevel {
 
     /**
      * Adds {@link LevelObject} in the grid to the specific location.
-     * 
+     *
      * @param x           - position X of the {@link LevelObject}
      * @param y           - position Y of the {@link LevelObject}
      * @param levelObject - the {@link LevelObject} to place in the grid
@@ -99,7 +98,7 @@ public class Level implements ILevel {
 
     /**
      * Returns a current position of the {@link Player}.
-     * 
+     *
      * @return the {@link Player}'s position
      */
     public Position getPlayerPosition() {
@@ -108,7 +107,7 @@ public class Level implements ILevel {
 
     /**
      * Draws the cell in the active game area.
-     * 
+     *
      * @param gc - {@link GraphicsContext} to which the game is drawn
      */
     @Override
@@ -128,7 +127,7 @@ public class Level implements ILevel {
 
     /**
      * Passes the {@link KeyEvent} to the {@link Player}.
-     * 
+     *
      * @param event - the {@link KeyEvent}
      */
     @Override
@@ -157,7 +156,7 @@ public class Level implements ILevel {
 
     /**
      * Returns the active {@link Area} of the game.
-     * 
+     *
      * @return the active area of the game
      */
     private Area getActiveArea() {
@@ -184,5 +183,16 @@ public class Level implements ILevel {
     public void finish() {
         this.isWon = true;
         // TODO: Notify observers
+    }
+
+    /**
+     * Adds {@link LevelObject} in the grid to the specific location.
+     *
+     * @param x           - position X of the {@link LevelObject}
+     * @param y           - position Y of the {@link LevelObject}
+     * @param levelObject - the {@link LevelObject} to place in the grid
+     */
+    public void addLevelObject(int x, int y, LevelObject levelObject) {
+        this.grid[x][y] = levelObject;
     }
 }
