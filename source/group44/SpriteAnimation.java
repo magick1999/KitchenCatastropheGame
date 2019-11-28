@@ -52,7 +52,7 @@ public class SpriteAnimation extends Transition {
         this.imageView = imageView;
         startingX = imageView.getX();
         startingY = imageView.getY();
-        this.count = images.size();
+        this.count = 5;
         this.byX = x;
         this.byY = y;
         //Stating of how long one cycle of this animation should last.
