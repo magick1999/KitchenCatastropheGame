@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import group44.game.CollisionCheckResult;
 import group44.game.Level;
 import group44.game.interfaces.IKeyReactive;
-import group44.game.interfaces.KeyEvent;
+import javafx.scene.input.KeyEvent;
 
 /**
  * Represents a player in the game.
