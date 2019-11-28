@@ -31,7 +31,7 @@ public class Leaderboard {
         Record record = null;
 
         for (Record item : this.records) {
-            if (item.profile.getId() == profile.getId() && item.getLevelId() == levelId) {
+            if (item.getProfile().getId() == profile.getId() && item.getLevelId() == levelId) {
                 record = item;
                 break;
             }
@@ -67,76 +67,5 @@ public class Leaderboard {
         }
 
         return top3;
-    }
-
-    /**
-     * Represents a Record in the {@link Leaderboard}.
-     * 
-     * @author Tomas Svejnoha, Rowan Aldean
-     * @version 1.0
-     */
-    public class Record implements Comparable<Record> {
-        private Profile profile;
-        private int levelId;
-        private long time;
-
-        /**
-         * Creates a new istance of {@link Record}.
-         * 
-         * @param profile - {@link Profile} linked to the record
-         * @param levelId - Id of the associated {@link Level}
-         * @param time    - time taken to finish the level
-         */
-        public Record(Profile profile, int levelId, long time) {
-            this.profile = profile;
-            this.levelId = levelId;
-            this.setTime(time);
-        }
-
-        /**
-         * Returns the associated {@link Profile}.
-         * 
-         * @return the associated profile
-         */
-        public Profile getProfile() {
-            return this.profile;
-        }
-
-        /**
-         * Returns Id of the associated {@link Level}.
-         * 
-         * @return the level id
-         */
-        public int getLevelId() {
-            return this.levelId;
-        }
-
-        /**
-         * Returns the time taken by the user to finish the {@link Level}.
-         * 
-         * @return the time taken
-         */
-        public long getTime() {
-            return this.time;
-        }
-
-        /**
-         * Updates the time taken to finish the {@link Level}.
-         * 
-         * @param time - the new time taken
-         */
-        public void setTime(long time) {
-            this.time = time;
-        }
-
-        /**
-         * Compares {@link Record}s based on the time taken to finish the level.
-         * 
-         * @param o - the {@link Record} to compare
-         */
-        @Override
-        public int compareTo(Record o) {
-            return Long.compare(this.getTime(), o.getTime()); // TODO: Test this
-        }
     }
 }
