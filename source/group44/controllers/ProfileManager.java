@@ -12,12 +12,14 @@ import group44.models.Profile;
  * @version 1.0
  */
 public class ProfileManager {
+    private static ProfileManager instance;
+
     private ArrayList<Profile> profiles;
 
     /**
      * Creates a new instance of {@link ProfileManager}.
      */
-    public ProfileManager() {
+    private ProfileManager() {
         this.profiles = new ArrayList<>();
     }
 
@@ -26,9 +28,36 @@ public class ProfileManager {
      * 
      * @param profiles - profiles to be stored in the {@link ProfileManager}
      */
-    public ProfileManager(ArrayList<Profile> profiles) {
+    private ProfileManager(ArrayList<Profile> profiles) {
         this();
         this.profiles = profiles;
+    }
+
+    /**
+     * Returns the singleton instance of {@link ProfileManager}. If the instance
+     * does not exit, it creates one.
+     * 
+     * @return the singleton instance of {@link ProfileManager}
+     */
+    public static ProfileManager getInstance() {
+        if (ProfileManager.instance == null) {
+            ProfileManager.instance = new ProfileManager();
+        }
+        return ProfileManager.instance;
+    }
+
+    /**
+     * Returns the singleton instance of {@link ProfileManager}. If the instance
+     * does not exit, it creates one with initial profiles.
+     * 
+     * @param profiles - the profiles to be stored
+     * @return the singleton instance of {@link ProfileManager}
+     */
+    public static ProfileManager getInstance(ArrayList<Profile> profiles) {
+        if (ProfileManager.instance == null) {
+            ProfileManager.instance = new ProfileManager(profiles);
+        }
+        return ProfileManager.instance;
     }
 
     /**
