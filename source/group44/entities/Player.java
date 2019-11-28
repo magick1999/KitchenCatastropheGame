@@ -45,7 +45,7 @@ public class Player extends MovableObject implements IKeyReactive {
         // Check if the move can be done; if not, do not move
         if (nextCell != null) {
             CollisionCheckResult collisionResult = nextCell.stepOn(this);
-            if (collisionResult.getIsColliding()) {
+            if (collisionResult.getIsColliding() && this.isAlive()) {
                 // Colliding; stepOn was NOT successful
                 this.onCollided((MovableObject) collisionResult.getCollidingObject());
             } else {
@@ -76,12 +76,12 @@ public class Player extends MovableObject implements IKeyReactive {
      */
     @Override
     protected void onCellStepped(StepableCell cell) {
-        /*
-         * If cell is Ground => Try to collect collectable item
-         */
-
-        throw new UnsupportedOperationException(
-                this.getClass().getSimpleName() + ".onCellStepped(StepableCell cell) not implemented.");
+        if (cell instanceof Ground) {
+            Ground ground = ((Ground) cell);
+            if (ground.hasCollectableItem()) {
+                this.itinerary.add(ground.collect());
+            }
+        }
     }
 
     @Override
