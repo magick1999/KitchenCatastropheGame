@@ -124,6 +124,17 @@ public class Main extends Application {
 
         //KEPT FOR REFERENCE
         /*
+        //Adding objects to map.
+        for (int x = 0; x <= 10; x++) {
+            for (int j = 0; j <= 10; j++) {
+                if (x == 0 || x == 10 || j == 0 || j == 10)
+                    map[x][j] = wall;
+                else
+                    map[x][j] = floor;
+            }
+        }
+
+
         //Drawing the map
         for (int i = 0; i <= 10; ++i) {
             for (int j = 0; j <= 10; ++j) {
