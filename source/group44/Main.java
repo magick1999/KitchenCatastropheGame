@@ -26,13 +26,13 @@ public class Main extends Application {
     private Canvas canvas;
 
     // Loaded images
-    Image player = new Image("group44/resources/player.png");
-    Image floor = new Image("group44/resources/floor.png");
-    Image wall = new Image("group44/resources/default_silver_sand.png");
+    Image player = new Image("group44/resources/player.png",GRID_CELL_HEIGHT,GRID_CELL_WIDTH,false,false);
+    Image floor = new Image("group44/resources/floorNew.png",GRID_CELL_HEIGHT,GRID_CELL_WIDTH,false,false);
+    Image wall = new Image("group44/resources/WallCounter.png",GRID_CELL_HEIGHT,GRID_CELL_WIDTH,false,false);
 
     // X and Y coordinate of player
-    int playerX = 25;
-    int playerY = 25;
+    int playerX = GRID_CELL_WIDTH;
+    int playerY = GRID_CELL_HEIGHT;
     
     //An array containing the map textures.
     ImageView[][] mapTextures = new ImageView[40][40];
@@ -45,6 +45,7 @@ public class Main extends Application {
     
     //The player data.
     ImageView playerView = new ImageView();
+    boolean canMove = true;
 
     /**
      * This is the main method that loads everything required to draw the scene.
@@ -105,17 +106,17 @@ public class Main extends Application {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
       //Create a map for testing
-        for (int x = 0; x <= 22; x++) {
-            for (int j = 0; j <= 29; j++) {
-                if (x == 0 || x == 21 || j == 0 || j == 28)
+        for (int x = 0; x <= 10; x++) {
+            for (int j = 0; j <= 10; j++) {
+                if (x == 0 || x == 10 || j == 0 || j == 10)
                     map[x][j] = wall;
                 else
                     map[x][j] = floor;
             }
         }
       //Drawing the map
-        for (int i = 0; i <= 22; ++i) {
-            for (int j = 0; j <= 29; ++j) {
+        for (int i = 0; i <= 10; ++i) {
+            for (int j = 0; j <= 10; ++j) {
                 gc.drawImage(map[i][j],j*GRID_CELL_WIDTH,i*GRID_CELL_HEIGHT);
             }
         }
@@ -142,22 +143,19 @@ public class Main extends Application {
      * @param yPos is the increment or decrement added to playerY.
      * @param xPos is the increment or decrement added to playerX.
      */
-    public void smoothTransition(float yPos,float xPos) {
-        TranslateTransition tt = new TranslateTransition(Duration.millis(300), playerView);
-        tt.setByX(xPos);
-        tt.setByY(yPos);
-        tt.setCycleCount(0);
-        tt.setAutoReverse(false);
-        //This method will modifiy the x and y position accordingly.
-        tt.setOnFinished(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                playerX= (int) (playerX+xPos);
-                playerY= (int) (playerY+yPos);
-            }
-        });
-        tt.play();
-    }
+    public void smoothTransition(double yPos, double xPos) {
+      final Animation animation = new SpriteAnimation(playerView,Duration.millis(200),xPos,yPos);
+      animation.setCycleCount(1);
+      animation.setOnFinished(new EventHandler<ActionEvent>() {
+          @Override
+          public void handle(ActionEvent event) {
+              canMove = true;
+              playerY = (int)(playerY+yPos);
+              playerX = (int)(playerX+xPos);
+          }
+      });
+      animation.play();
+  }
 
     /**
      * This method handles the keyboard input.
@@ -173,29 +171,33 @@ public class Main extends Application {
             }
             case LEFT: {
                 // Left key was pressed. So move the player right by one cell.
-                if ((playerX - 25) < (28*25) && (playerX - 25) > 0) {
-                    smoothTransition(0,  -25);
+                if ((playerX - GRID_CELL_WIDTH) < (10*GRID_CELL_WIDTH) && (playerX - GRID_CELL_WIDTH) > 0 && canMove) {
+                	canMove=false;
+                    smoothTransition(0,  -GRID_CELL_WIDTH);
                 }
                 break;
             }
             case RIGHT: {
                 // Right key was pressed. So move the player right by one cell.
-                if ((playerX + 25) < (28*25) && (playerX + 25) > 0){
-                    smoothTransition(0,  25);
+                if ((playerX + GRID_CELL_WIDTH) < (10*GRID_CELL_WIDTH) && (playerX + GRID_CELL_WIDTH) > 0 && canMove){
+                	canMove=false;
+                    smoothTransition(0,  GRID_CELL_WIDTH);
                 }
                 break;
             }
             case UP: {
                 //Up key was pressed. So move the player down by one cell.
-                if ((playerY - 25) < (21*25) && (playerY - 25) > 0){
-                    smoothTransition(-25, 0 );
+                if ((playerY - GRID_CELL_HEIGHT) < (10*GRID_CELL_HEIGHT) && (playerY - GRID_CELL_HEIGHT) > 0 && canMove){
+                	canMove=false;
+                    smoothTransition(-GRID_CELL_HEIGHT, 0 );
                 }
                 break;
             }
             case DOWN: {
                 //Down key was pressed. So move the player down by one cell.
-                if ((playerY + 25) < (21*25) && (playerY + 25) > 0){
-                    smoothTransition(25,0);
+                if ((playerY + GRID_CELL_HEIGHT) < (10*GRID_CELL_HEIGHT) && (playerY + GRID_CELL_HEIGHT) > 0 && canMove){
+                	canMove=false;
+                    smoothTransition(GRID_CELL_HEIGHT,0);
                 }
                 break;
             }
