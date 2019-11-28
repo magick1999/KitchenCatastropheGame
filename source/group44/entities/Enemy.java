@@ -1,5 +1,6 @@
 package group44.entities;
 
+import group44.game.CollisionCheckResult;
 import group44.game.Level;
 
 /**
@@ -33,10 +34,26 @@ public abstract class Enemy extends MovableObject {
     protected abstract void computeVelocity();
 
     /**
-     * Turns the enemy around.
+     * Moves the {@link Enemy} in the velocity direction.
      */
-    protected void turnAround() {
-        this.setVelocityX(this.getVelocityX() * -1);
-        this.setVelocityY(this.getVelocityY() * -1);
+    @Override
+    public void move() {
+        this.computeVelocity();
+
+        StepableCell currentCell = this.getStepableCellAtMovableObjectPosition(this);
+        StepableCell nextCell = this.getNextStepableCellInVelocity(this, this.getVelocityX(), this.getVelocityY());
+
+        if (nextCell != null) {
+            CollisionCheckResult collisionResult = nextCell.stepOn(this);
+            if (collisionResult.getIsColliding() && this.isAlive()) {
+                // Colliding; stepOn was NOT successful
+                this.onCollided((MovableObject) collisionResult.getCollidingObject());
+            } else {
+                // Not colliding; stepOn was successful
+                currentCell.stepOff();
+                this.setPosition(nextCell.getPositionX(), nextCell.getPositionY());
+                this.onCellStepped(nextCell);
+            }
+        }
     }
 }
