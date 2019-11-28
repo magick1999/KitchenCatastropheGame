@@ -26,10 +26,6 @@ public class Level implements ILevel {
     /**
      * Creates a new instance of {@link Level}.
      * 
-     * @param grid            - 2D array containing all game objects
-     * @param displaySize     - size of the grid displayed on screen
-     * @param playerPositionX - X index of the {@link Player} in the array
-     * @param playerPositionY - Y index of the {@link Player} in the array
      * @param gridWidth   - width of the 2D array
      * @param gridHeight  - height of the 2D array
      * @param displaySize - size of the grid displayed on screen
