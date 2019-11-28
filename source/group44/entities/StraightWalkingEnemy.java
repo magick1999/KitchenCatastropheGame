@@ -36,8 +36,7 @@ public class StraightWalkingEnemy extends Enemy {
     protected void computeVelocity() {
         StepableCell stepableCell = this.getNextStepableCellInVelocity(this, this.getVelocityX(), this.getVelocityY());
         if ((stepableCell instanceof Ground) == false) {
-            this.setVelocityX(this.getVelocityX() * -1);
-            this.setVelocityY(this.getVelocityY() * -1);
+            this.turnAround();
         }
     }
 
@@ -74,6 +73,8 @@ public class StraightWalkingEnemy extends Enemy {
     protected void onCollided(MovableObject object) {
         if (object instanceof Player) {
             object.die();
+        } else {
+            this.turnAround();
         }
     }
 
@@ -86,5 +87,13 @@ public class StraightWalkingEnemy extends Enemy {
     @Override
     protected void onCellStepped(StepableCell cell) {
         System.out.println(this.getTitle() + " stepped on " + cell.getTitle());
+    }
+
+    /**
+     * Turns the enemy around.
+     */
+    private void turnAround() {
+        this.setVelocityX(this.getVelocityX() * -1);
+        this.setVelocityY(this.getVelocityY() * -1);
     }
 }
