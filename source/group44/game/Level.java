@@ -98,6 +98,15 @@ public class Level implements ILevel {
     }
 
     /**
+     * Returns a current position of the {@link Player}.
+     * 
+     * @return the {@link Player}'s position
+     */
+    public Position getPlayerPosition() {
+        return new Position(this.player.getPositionX(), this.player.getPositionY());
+    }
+
+    /**
      * Draws the cell in the active game area.
      * 
      * @param gc - {@link GraphicsContext} to which the game is drawn
