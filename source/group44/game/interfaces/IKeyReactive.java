@@ -1,5 +1,3 @@
-package group44.game.interfaces;
-
 import javafx.scene.input.KeyEvent;
 
 /**
