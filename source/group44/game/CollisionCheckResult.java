@@ -23,7 +23,7 @@ public class CollisionCheckResult {
     /**
      * Returns a boolean indicating whether the object is colliding or not.
      * 
-     * @return Is colliding?
+     * @return true if the object is colliding; false otherwise
      */
     public Boolean getIsColliding() {
         return this.collidingObject != null;
