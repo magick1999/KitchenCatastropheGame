@@ -30,18 +30,19 @@ public class Level implements ILevel {
      * @param displaySize     - size of the grid displayed on screen
      * @param playerPositionX - X index of the {@link Player} in the array
      * @param playerPositionY - Y index of the {@link Player} in the array
+     * @param gridWidth   - width of the 2D array
+     * @param gridHeight  - height of the 2D array
+     * @param displaySize - size of the grid displayed on screen
+     * @throws IllegalArgumentException If the display size is less than 3, is not
+     *                                  odd, or exceeds a size of a grid.
      */
-    public Level(LevelObject[][] grid, int displaySize, int playerPositionX, int playerPositionY) {
-        this.grid = grid;
+    public Level(int gridWidth, int gridHeight, int displaySize) {
+        this.grid = new LevelObject[gridWidth][gridHeight];
         if (displaySize < 3 || displaySize > grid[0].length || displaySize > grid[0].length || displaySize % 2 != 1) {
-            // TODO: Document this exception in Javadoc
             throw new IllegalArgumentException(Level.ERROR_DISPLAY_SIZE_ILLEGAL_ARGUMENT_EXCEPTION);
         } else {
             this.displaySize = displaySize;
         }
-        // TODO: Check legality of values
-        this.playerPositionX = playerPositionX;
-        this.playerPositionY = playerPositionY;
     }
 
     /**
@@ -143,5 +144,16 @@ public class Level implements ILevel {
 
         return new Area(centerX - this.displaySize / 2, centerY - this.displaySize / 2, centerX + this.displaySize / 2,
                 centerY + this.displaySize / 2);
+    }
+
+    /**
+     * Adds {@link LevelObject} in the grid to the specific location.
+     * 
+     * @param x           - position X of the {@link LevelObject}
+     * @param y           - position Y of the {@link LevelObject}
+     * @param levelObject - the {@link LevelObject} to place in the grid
+     */
+    public void addLevelObject(int x, int y, LevelObject levelObject) {
+        this.grid[x][y] = levelObject;
     }
 }
