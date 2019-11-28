@@ -41,27 +41,11 @@ public class StraightWalkingEnemy extends Enemy {
     }
 
     /**
-     * Moves the {@link StraightWalkingEnemy} in the velocity direction.
+     * Turns the {@link StraightWalkingEnemy} around.
      */
-    @Override
-    public void move() {
-        this.computeVelocity();
-
-        StepableCell currentCell = this.getStepableCellAtMovableObjectPosition(this);
-        StepableCell nextCell = this.getNextStepableCellInVelocity(this, this.getVelocityX(), this.getVelocityY());
-
-        if (nextCell != null) {
-            CollisionCheckResult collisionResult = nextCell.stepOn(this);
-            if (collisionResult.getIsColliding() && this.isAlive()) {
-                // Colliding; stepOn was NOT successful
-                this.onCollided((MovableObject) collisionResult.getCollidingObject());
-            } else {
-                // Not colliding; stepOn was successful
-                currentCell.stepOff();
-                this.setPosition(nextCell.getPositionX(), nextCell.getPositionY());
-                this.onCellStepped(nextCell);
-            }
-        }
+    protected void turnAround() {
+        this.setVelocityX(this.getVelocityX() * -1);
+        this.setVelocityY(this.getVelocityY() * -1);
     }
 
     /**
@@ -87,13 +71,5 @@ public class StraightWalkingEnemy extends Enemy {
     @Override
     protected void onCellStepped(StepableCell cell) {
         System.out.println(this.getTitle() + " stepped on " + cell.getTitle());
-    }
-
-    /**
-     * Turns the enemy around.
-     */
-    private void turnAround() {
-        this.setVelocityX(this.getVelocityX() * -1);
-        this.setVelocityY(this.getVelocityY() * -1);
     }
 }
