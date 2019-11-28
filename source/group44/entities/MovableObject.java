@@ -75,6 +75,8 @@ public abstract class MovableObject extends LevelObject {
      * Method that kills the {@link MovableObject}.
      */
     public void die() {
+        // Remove MovableObject from the grid
+        ((StepableCell) this.getLevel().getGrid()[this.getPositionX()][this.getPositionY()]).stepOff();
         this.isAlive = false;
     }
 
