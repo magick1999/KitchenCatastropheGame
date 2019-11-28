@@ -31,4 +31,12 @@ public abstract class Enemy extends MovableObject {
      * Computes the velocity of {@link Enemy}.
      */
     protected abstract void computeVelocity();
+
+    /**
+     * Turns the enemy around.
+     */
+    protected void turnAround() {
+        this.setVelocityX(this.getVelocityX() * -1);
+        this.setVelocityY(this.getVelocityY() * -1);
+    }
 }

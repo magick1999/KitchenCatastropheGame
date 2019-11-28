@@ -88,12 +88,4 @@ public class StraightWalkingEnemy extends Enemy {
     protected void onCellStepped(StepableCell cell) {
         System.out.println(this.getTitle() + " stepped on " + cell.getTitle());
     }
-
-    /**
-     * Turns the enemy around.
-     */
-    private void turnAround() {
-        this.setVelocityX(this.getVelocityX() * -1);
-        this.setVelocityY(this.getVelocityY() * -1);
-    }
 }
