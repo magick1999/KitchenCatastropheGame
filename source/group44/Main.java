@@ -34,17 +34,15 @@ public class Main extends Application {
     int playerX = GRID_CELL_WIDTH;
     int playerY = GRID_CELL_HEIGHT;
     
-    //An array containing the map textures.
-    ImageView[][] mapTextures = new ImageView[40][40];
-    
     //The controller asociated with the specific fxml file.
     MainGameWindowController myController;
    
-    //Might be redundant, does the same as above, will remove in a future commit.
+  //An array containing the map textures.
     Image[][] map = new Image[40][40];
     
     //The player data.
     ImageView playerView = new ImageView();
+    //This variable allows for the player to move only after the previous animation has finished.
     boolean canMove = true;
 
     /**
@@ -71,11 +69,14 @@ public class Main extends Application {
         primaryStage.show();
    }
     
-    //This method will have to be rewritten.
-    public void restartGame(int startX, int startY) {
-        // We just move the player to cell (2, 2)
-        playerX = startX;
-        playerY = startY;
+    /**
+     * This method resets the game to the original state.
+     * It will have to be changed once collectible items and enemies will be implemented.
+     */
+    public void restartGame() {
+        // We just move the player to the starting position.
+        playerView.setX(playerX);
+        playerView.setY(playerY);
         drawGame();
     }
 
@@ -134,12 +135,11 @@ public class Main extends Application {
         playerView.setX(playerX);
         //Add the movable objects onto the pane destined for them.
         myController.getMovableObjects().getChildren().add(playerView);
-
-
     }
     
     /**
      * This method smoothly translates the player position from playerY and playerX to playerY+yPos and playerX+xPos.
+     * It also animates the player as he moves.
      * @param yPos is the increment or decrement added to playerY.
      * @param xPos is the increment or decrement added to playerX.
      */
@@ -150,8 +150,6 @@ public class Main extends Application {
           @Override
           public void handle(ActionEvent event) {
               canMove = true;
-              playerY = (int)(playerY+yPos);
-              playerX = (int)(playerX+xPos);
           }
       });
       animation.play();
@@ -171,7 +169,7 @@ public class Main extends Application {
             }
             case LEFT: {
                 // Left key was pressed. So move the player right by one cell.
-                if ((playerX - GRID_CELL_WIDTH) < (10*GRID_CELL_WIDTH) && (playerX - GRID_CELL_WIDTH) > 0 && canMove) {
+                if ((playerView.getX() - GRID_CELL_WIDTH) < (10*GRID_CELL_WIDTH) && (playerView.getX() - GRID_CELL_WIDTH) > 0 && canMove) {
                 	canMove=false;
                     smoothTransition(0,  -GRID_CELL_WIDTH);
                 }
@@ -179,7 +177,7 @@ public class Main extends Application {
             }
             case RIGHT: {
                 // Right key was pressed. So move the player right by one cell.
-                if ((playerX + GRID_CELL_WIDTH) < (10*GRID_CELL_WIDTH) && (playerX + GRID_CELL_WIDTH) > 0 && canMove){
+                if ((playerView.getX() + GRID_CELL_WIDTH) < (10*GRID_CELL_WIDTH) && (playerView.getX() + GRID_CELL_WIDTH) > 0 && canMove){
                 	canMove=false;
                     smoothTransition(0,  GRID_CELL_WIDTH);
                 }
@@ -187,7 +185,7 @@ public class Main extends Application {
             }
             case UP: {
                 //Up key was pressed. So move the player down by one cell.
-                if ((playerY - GRID_CELL_HEIGHT) < (10*GRID_CELL_HEIGHT) && (playerY - GRID_CELL_HEIGHT) > 0 && canMove){
+                if ((playerView.getY() - GRID_CELL_HEIGHT) < (10*GRID_CELL_HEIGHT) && (playerView.getY() - GRID_CELL_HEIGHT) > 0 && canMove){
                 	canMove=false;
                     smoothTransition(-GRID_CELL_HEIGHT, 0 );
                 }
@@ -195,7 +193,7 @@ public class Main extends Application {
             }
             case DOWN: {
                 //Down key was pressed. So move the player down by one cell.
-                if ((playerY + GRID_CELL_HEIGHT) < (10*GRID_CELL_HEIGHT) && (playerY + GRID_CELL_HEIGHT) > 0 && canMove){
+                if ((playerView.getY() + GRID_CELL_HEIGHT) < (10*GRID_CELL_HEIGHT) && (playerView.getY() + GRID_CELL_HEIGHT) > 0 && canMove){
                 	canMove=false;
                     smoothTransition(GRID_CELL_HEIGHT,0);
                 }
