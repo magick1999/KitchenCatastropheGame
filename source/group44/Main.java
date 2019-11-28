@@ -1,5 +1,7 @@
 package group44;
 
+import group44.entities.LevelObject;
+import group44.game.Level;
 import javafx.animation.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.event.*;
+
+import java.io.File;
 
 import static group44.Constants.*;
 
@@ -45,6 +49,11 @@ public class Main extends Application {
     //This variable allows for the player to move only after the previous animation has finished.
     boolean canMove = true;
 
+    //Testing with fileReader
+    Level testLevel = FileHandler.readLevelFile("level1.txt");
+
+
+
     /**
      * This is the main method that loads everything required to draw the scene.
      * @param primaryStage Can't really properly tell what this is, will clarify this in a future commit.
@@ -63,7 +72,7 @@ public class Main extends Application {
         root.setId("pane");
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
         scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> processKeyEvent(event));
-        drawGame();
+        drawGame(testLevel);
         drawMovableObjects();
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -77,7 +86,7 @@ public class Main extends Application {
         // We just move the player to the starting position.
         playerView.setX(playerX);
         playerView.setY(playerY);
-        drawGame();
+        drawGame(testLevel);
     }
 
     /**
@@ -99,28 +108,28 @@ public class Main extends Application {
     /**
      * This method draws every non movable object onto the screen.
      */
-    public void drawGame() {
+    public void drawGame(Level aLevel) {
         // Get the Graphic Context of the canvas. This is what we draw on.
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
         // Clear canvas
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-      //Create a map for testing
-        for (int x = 0; x <= 10; x++) {
-            for (int j = 0; j <= 10; j++) {
-                if (x == 0 || x == 10 || j == 0 || j == 10)
-                    map[x][j] = wall;
-                else
-                    map[x][j] = floor;
+        //TODO: Read each object from each row array in the grid map and draw themselves.
+        for(LevelObject[] row: aLevel.getGrid()){
+            for(LevelObject obj: row){
+                obj.draw(gc, obj.getPositionX(), obj.getPositionY(), GRID_CELL_WIDTH, GRID_CELL_HEIGHT);
             }
         }
-      //Drawing the map
+
+        //KEPT FOR REFERENCE
+        /*
+        //Drawing the map
         for (int i = 0; i <= 10; ++i) {
             for (int j = 0; j <= 10; ++j) {
                 gc.drawImage(map[i][j],j*GRID_CELL_WIDTH,i*GRID_CELL_HEIGHT);
             }
-        }
+        }*/
     }
     
     /**
@@ -205,7 +214,7 @@ public class Main extends Application {
         }
 
         // Redraw game as the player may have moved.
-        drawGame();
+        drawGame(testLevel);
 
         // Consume the event. This means we mark it as dealt with. This stops other GUI nodes (buttons etc) responding to it.
         event.consume();

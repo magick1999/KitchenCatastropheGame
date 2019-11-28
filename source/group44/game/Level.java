@@ -184,15 +184,4 @@ public class Level implements ILevel {
         this.isWon = true;
         // TODO: Notify observers
     }
-
-    /**
-     * Adds {@link LevelObject} in the grid to the specific location.
-     *
-     * @param x           - position X of the {@link LevelObject}
-     * @param y           - position Y of the {@link LevelObject}
-     * @param levelObject - the {@link LevelObject} to place in the grid
-     */
-    public void addLevelObject(int x, int y, LevelObject levelObject) {
-        this.grid[x][y] = levelObject;
-    }
 }

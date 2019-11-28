@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class FileHandler {
 
     public static Level readLevelFile(String filename) {
-        File inputFile = new File ("group44/levels/" + filename);
+        File inputFile = new File ("source/group44/levels/" + filename);
         Scanner in = null;
         try {
             in = new Scanner(inputFile);
@@ -26,23 +26,28 @@ public class FileHandler {
     private static Level readLevelFile(Scanner in) {
         int levelWidth = in.nextInt();
         int levelHeight = in.nextInt();
+        Level ourLevel = new Level(levelWidth, levelHeight, 5);
+
+        //FIXME: This is all trash. Rethink adding walls.
         String levelWalls = null;
         while(in.next() == "#" || in.next() == " "){
             levelWalls += in.next();
         }
-        LevelObject[][] gameGrid = FileHandler.createGrid(levelWidth,levelHeight,levelWalls);
+
+        //Ignore for the time being - read everything above properly first.
         int startRow = in.nextInt();
         int startCol = in.nextInt();
 
+        return ourLevel;
+
     }
 
-    private static LevelObject[][] createGrid(int width, int height, String level){
-
-        LevelObject[][] gameGrid = new LevelObject[width-1][height-1]; //Counting from 0 and our width/height does not.
-
-        for(int i = 0; i < level.length(); i++){
-            for(int x = 0; x < level.length(); x++){
-                if(level.charAt(x) == '#'){
+    private static Level addWalls(Level someLevel, String walls){
+        //FIXME: This is bad - rethink addingWalls
+        //Add walls to a level and return it.
+        for(int i = 0; i < walls.length(); i++){
+            for(int x = 0; x < walls.length(); x++){
+                if(walls.charAt(x) == '#'){
                     //TODO: Create wall variable, insert this to gameGrid[i,x]
                     //Cell wall = new Cell(...);
                     //gameGrid[i][x] = wall;
@@ -55,7 +60,7 @@ public class FileHandler {
             }
         }
 
-        return gameGrid;
+        return someLevel;
     }
 
 }
