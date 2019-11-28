@@ -1,4 +1,4 @@
-package group44.game.interfaces;
+import javafx.scene.input.KeyEvent;
 
 /**
  * An interface of methods {@link group44.entities.LevelObject}s need to
