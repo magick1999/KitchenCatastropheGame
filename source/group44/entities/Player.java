@@ -103,5 +103,6 @@ public class Player extends MovableObject implements IKeyReactive {
             this.setVelocityX(0);
             this.setVelocityY(1);
             break;
+        }
     }
 }
