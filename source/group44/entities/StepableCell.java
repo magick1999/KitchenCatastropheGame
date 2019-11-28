@@ -63,6 +63,15 @@ public abstract class StepableCell extends Cell {
     }
 
     /**
+     * Returns the {@link MovableObject} which stepped on the {@link StepableCell}.
+     * 
+     * @return the {@link MovableObject}
+     */
+    public MovableObject getMovableObject() {
+        return this.movableObject;
+    }
+
+    /**
      * Interacts with {@link MovableObject} that stepped on the cell.
      * 
      * @param object - The {@link MovableObject} that stepped on cell.

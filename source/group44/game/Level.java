@@ -89,6 +89,12 @@ public class Level implements ILevel {
      */
     public void addLevelObject(int x, int y, LevelObject levelObject) {
         this.grid[x][y] = levelObject;
+        if (levelObject instanceof StepableCell) {
+            MovableObject object = ((StepableCell) levelObject).getMovableObject();
+            if (object instanceof Player) {
+                this.player = (Player) object;
+            }
+        }
     }
 
     /**
