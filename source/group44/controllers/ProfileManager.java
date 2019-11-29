@@ -9,7 +9,7 @@ import group44.exceptions.UsernameTakenException;
 import group44.models.Profile;
 
 /**
- * Manages user profiles.
+ * Manages, loads, and saves user profiles.
  * 
  * @author Tomas Svejnoha
  * @version 1.0
