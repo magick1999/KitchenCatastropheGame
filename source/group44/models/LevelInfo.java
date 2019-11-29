@@ -1,5 +1,7 @@
 package group44.models;
 
+import java.io.File;
+
 import group44.game.Level;
 
 /**
@@ -12,6 +14,7 @@ public class LevelInfo {
     private int id;
     private int width;
     private int height;
+    private File file;
 
     /**
      * Creates a new instance of {@link LevelInfo}.
@@ -19,11 +22,13 @@ public class LevelInfo {
      * @param id     - id of the {@link Level}
      * @param width  - width of the {@link Level}
      * @param height - height of the {@link Level}
+     * @param file   - file containing the {@link Level} definition
      */
-    public LevelInfo(int id, int width, int height) {
+    public LevelInfo(int id, int width, int height, File file) {
         this.id = id;
         this.width = width;
         this.height = height;
+        this.file = file;
     }
 
     /**
@@ -51,5 +56,14 @@ public class LevelInfo {
      */
     public int getHeight() {
         return this.height;
+    }
+
+    /**
+     * Returns the file of the level.
+     * 
+     * @return the file containing the {@link Level} definition
+     */
+    public File getFile() {
+        return this.file;
     }
 }
