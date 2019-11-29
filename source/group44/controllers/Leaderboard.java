@@ -13,14 +13,7 @@ import group44.models.Record;
  * @version 1.0
  */
 public class Leaderboard {
-    private ArrayList<Record> records;
-
-    /**
-     * Creates a new instance of {@link Leaderboard}.
-     */
-    public Leaderboard() {
-        this.records = new ArrayList<>();
-    }
+    private static ArrayList<Record> records = new ArrayList<>();
 
     /**
      * Adds or updates a record in the {@link Leaderboard} if the time is better.
@@ -29,10 +22,10 @@ public class Leaderboard {
      * @param levelId - Id of the {@link Level} the user finished
      * @param time    - time taken to finish the {@link Level}
      */
-    public void addOrUpdate(Profile profile, int levelId, long time) {
+    public static void addOrUpdate(Profile profile, int levelId, long time) {
         Record record = null;
 
-        for (Record item : this.records) {
+        for (Record item : Leaderboard.records) {
             if (item.getProfile().getId() == profile.getId() && item.getLevelId() == levelId) {
                 record = item;
                 break;
@@ -40,7 +33,7 @@ public class Leaderboard {
         }
 
         if (record == null) {
-            this.records.add(new Record(profile, levelId, time));
+            Leaderboard.records.add(new Record(profile, levelId, time));
         } else if (record.getTime() > time) {
             record.setTime(time);
         }
@@ -52,10 +45,10 @@ public class Leaderboard {
      * @param levelId - id of the {@link Level} for which we want the records
      * @return array of up to 3 top records
      */
-    public Record[] getTopThreeRecords(int levelId) {
+    public static Record[] getTopThreeRecords(int levelId) {
         ArrayList<Record> levelRecords = new ArrayList<>();
 
-        for (Record item : this.records) {
+        for (Record item : Leaderboard.records) {
             if (item.getLevelId() == levelId) {
                 levelRecords.add(item);
             }
