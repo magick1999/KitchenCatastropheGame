@@ -15,32 +15,7 @@ import group44.models.Profile;
  * @version 1.0
  */
 public class ProfileManager {
-    private static final String PROFILE_FILE_PATH = ""; // TODO: Add path
-    private static ProfileManager instance;
-
-    private ArrayList<Profile> profiles;
-
-    /**
-     * Creates a new instance of {@link ProfileManager} and tries to load the stored
-     * {@link Profile}s.
-     */
-    private ProfileManager() {
-        this.profiles = this.load(ProfileManager.PROFILE_FILE_PATH);
-    }
-
-    /**
-     * Returns the singleton instance of {@link ProfileManager}. If the instance
-     * does not exit, it creates one. When creating the instance,
-     * {@link ProfileManager} also tries to load the stored {@link Profile}s.
-     * 
-     * @return the singleton instance of {@link ProfileManager}
-     */
-    public static ProfileManager getInstance() {
-        if (ProfileManager.instance == null) {
-            ProfileManager.instance = new ProfileManager();
-        }
-        return ProfileManager.instance;
-    }
+    private static ArrayList<Profile> profiles = new ArrayList<>();
 
     /**
      * Creates a new {@link Profile} with username, if the username is not already
@@ -50,13 +25,13 @@ public class ProfileManager {
      * @throws UsernameTakenException if the username is already taken
      * @return the created {@link Profile}
      */
-    public Profile register(String username) throws UsernameTakenException {
-        if (this.exists(username)) {
+    public static Profile register(String username) throws UsernameTakenException {
+        if (ProfileManager.exists(username)) {
             throw new UsernameTakenException(username);
         } else {
-            int max_id = this.getMaxId();
+            int max_id = ProfileManager.getMaxId();
             Profile profile = new Profile(++max_id, username, 0);
-            this.profiles.add(profile);
+            ProfileManager.profiles.add(profile);
             return profile;
         }
     }
@@ -67,8 +42,8 @@ public class ProfileManager {
      * @param username - the username to check
      * @return true if the username is already taken; otherwise false
      */
-    private Boolean exists(String username) {
-        for (Profile profile : this.profiles) {
+    private static Boolean exists(String username) {
+        for (Profile profile : ProfileManager.profiles) {
             if (profile.getUsername() == username) {
                 return true;
             }
@@ -81,10 +56,10 @@ public class ProfileManager {
      * 
      * @return the maximum id
      */
-    private int getMaxId() {
+    private static int getMaxId() {
         int maxId = 0;
 
-        for (Profile profile : this.profiles) {
+        for (Profile profile : ProfileManager.profiles) {
             if (maxId < profile.getId()) {
                 maxId = profile.getId();
             }
@@ -94,24 +69,26 @@ public class ProfileManager {
     }
 
     /**
-     * Loads the profiles from specified file.
+     * Loads profiles from specified file.
      * 
      * @param path - path where the file with profiles is located
      * @return a list of loaded {@link Profile}s
      */
-    private ArrayList<Profile> load(String path) {
+    public static void load(String path) {
+        ArrayList<Profile> loadedProfiles = null;
         Scanner fileScanner = null;
 
         try {
             fileScanner = new Scanner(path);
-            return this.load(fileScanner);
+            loadedProfiles = ProfileManager.load(fileScanner);
         } catch (Exception e) {
             System.out.println("File (" + path + ") with profiles not found!");
-            return new ArrayList<Profile>();
+            loadedProfiles = new ArrayList<Profile>();
         } finally {
             if (fileScanner != null) {
                 fileScanner.close();
             }
+            ProfileManager.profiles = loadedProfiles;
         }
     }
 
@@ -121,11 +98,11 @@ public class ProfileManager {
      * @param fileScanner - scanner of the file where the profiles are stored
      * @return a list of loaded {@link Profile}s
      */
-    private ArrayList<Profile> load(Scanner fileScanner) {
+    private static ArrayList<Profile> load(Scanner fileScanner) {
         ArrayList<Profile> loadedProfiles = new ArrayList<>();
 
         while (fileScanner.hasNextLine()) {
-            Profile p = this.parseProfile(new Scanner(fileScanner.nextLine()));
+            Profile p = ProfileManager.parseProfile(new Scanner(fileScanner.nextLine()));
             if (p != null) {
                 loadedProfiles.add(p);
             }
@@ -140,7 +117,7 @@ public class ProfileManager {
      * @param scanner - scanner with the serialised profile
      * @return {@link Profile} created from values in scanner
      */
-    private Profile parseProfile(Scanner scanner) {
+    private static Profile parseProfile(Scanner scanner) {
         Profile newProfile = null;
         scanner.useDelimiter(",");
 
@@ -159,13 +136,15 @@ public class ProfileManager {
 
     /**
      * Saves managed profiles.
+     * 
+     * @param path - path to the file where to save the profiles
      */
-    public void save() {
-        File file = new File(ProfileManager.PROFILE_FILE_PATH);
+    public static void save(String path) {
+        File file = new File(path);
 
         try {
             PrintWriter writer = new PrintWriter(file);
-            this.save(writer);
+            ProfileManager.save(writer);
         } catch (Exception e) {
             System.out.println("Unable to save profiles.\n" + e.getMessage());
         }
@@ -176,8 +155,8 @@ public class ProfileManager {
      * 
      * @param writer - {@link java.io.Writer} to use when saving profiles
      */
-    private void save(PrintWriter writer) {
-        for (Profile profile : this.profiles) {
+    private static void save(PrintWriter writer) {
+        for (Profile profile : ProfileManager.profiles) {
             writer.println(profile.toString());
         }
     }
