@@ -43,15 +43,6 @@ public class ProfileManager {
     }
 
     /**
-     * Returns the collection of {@link Profile}s
-     * 
-     * @return profiles
-     */
-    public ArrayList<Profile> getProfiles() {
-        return this.profiles;
-    }
-
-    /**
      * Creates a new {@link Profile} with username, if the username is not already
      * taken. The achieved level id for the new profile is 0.
      * 
@@ -65,7 +56,7 @@ public class ProfileManager {
         } else {
             int max_id = this.getMaxId();
             Profile profile = new Profile(++max_id, username, 0);
-            this.getProfiles().add(profile);
+            this.profiles.add(profile);
             return profile;
         }
     }
@@ -186,7 +177,7 @@ public class ProfileManager {
      * @param writer - {@link java.io.Writer} to use when saving profiles
      */
     private void save(PrintWriter writer) {
-        for (Profile profile : this.getProfiles()) {
+        for (Profile profile : this.profiles) {
             writer.println(profile.toString());
         }
     }
