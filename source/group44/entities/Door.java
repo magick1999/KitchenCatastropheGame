@@ -1,6 +1,6 @@
 package group44.entities;
-
 import java.util.ArrayList;
+import group44.game.Level;
 
 /**
  * Super class for all Door lasses.
@@ -20,8 +20,8 @@ public abstract class Door extends StepableCell {
      * @param size      - Size of the cell on the screen
      * @param imagePath - Image path of the instance
      */
-    public Door(String title, int positionX, int positionY, int size, String imagePath) {
-        super(title, positionX, positionY, size, imagePath);
+    public Door(Level level, String title, int positionX, int positionY, int size, String imagePath) {
+    	super(level, title, positionX, positionY, imagePath);
     }
 
     /**
@@ -29,7 +29,7 @@ public abstract class Door extends StepableCell {
      * 
      * @param items - pass in every collectable item that the player has.
      */
-    public abstract void open(ArrayList <CollectibleItem> items);
+    public abstract void open(ArrayList <CollectableItem> items);
     	
     /**
      * Returns open state of the door.
@@ -38,9 +38,5 @@ public abstract class Door extends StepableCell {
      */
     public boolean isOpen() {
         return this.isOpen;
-    }
-    
-    public void setIsOpen(boolean isOpen) {
-    	this.isOpen = isOpen;
     }
 }

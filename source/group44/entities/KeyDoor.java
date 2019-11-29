@@ -1,6 +1,7 @@
 package group44.entities;
 import java.util.ArrayList;
 
+import group44.game.Level;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 /**
@@ -13,6 +14,7 @@ import javafx.scene.paint.Color;
  */
 public class KeyDoor extends Door {
 	private Key.KeyType unlockingKey;
+	private boolean open;
 
 	/**
 	 * This creates a new instance of {@link KeyDoor} and associates it with 
@@ -24,23 +26,29 @@ public class KeyDoor extends Door {
 	 * @param size - size of the cell on screen
 	 * @param imagePath - Image path of the instance
 	 */
-	public KeyDoor (Key.KeyType unlockingKey, String title, int positionX, int positionY, int size, String imagePath) {
-		super(title, positionX, positionY, size, imagePath);
+	public KeyDoor (Level level, Key.KeyType unlockingKey, String title, int positionX, int positionY, int size, String imagePath) {
+		super(level, title, positionX, positionY, size, imagePath);
 		this.unlockingKey = unlockingKey;
 	}
 
 	@Override
-	public void open(ArrayList <CollectibleItem> items) {
+	public void open(ArrayList <CollectableItem> items) {
 		if (items != null && !items.isEmpty()) {
-			for(CollectibleItem item : items) {
+			for(CollectableItem item : items) {
 				//check item is key and not token 
 				if(item instanceof Key) {
 					//casting item so that is thought of as a key and not a collectableItem
 					if (((Key) item).getKeyCode()==unlockingKey.getKeyCode()) {
-						this.setIsOpen(true);
+						this.open = true;
 					}
 				}
 			}			
 		}
+	}
+
+	@Override
+	protected void onStepped(MovableObject object) {
+		// TODO Auto-generated method stub
+		
 	}
 }

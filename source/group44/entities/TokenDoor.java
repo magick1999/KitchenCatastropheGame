@@ -2,6 +2,7 @@ package group44.entities;
 
 import java.util.ArrayList;
 
+import group44.game.Level;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
@@ -12,7 +13,7 @@ import javafx.scene.canvas.GraphicsContext;
  * 
  */
 public class TokenDoor extends Door {
-	private int tokensNeeded; 
+	private int tokensNeeded;
 
 	/**
 	 * This creates a new {@link KeyDoor} and associates a unlocking {@link Key.KeyType} with it. 
@@ -23,23 +24,23 @@ public class TokenDoor extends Door {
 	 * @param size - size of the cell on screen.
 	 * @param imagePath - Image path of the instance
 	 */
-	public TokenDoor (int tokensNeeded, String title, int positionX, int positionY, int size, String imagePath) {
-		super(title, positionX, positionY, size, imagePath);
+	public TokenDoor (Level level, int tokensNeeded, String title, int positionX, int positionY, int size, String imagePath) {
+		super(level, title, positionX, positionY, size, imagePath);
 		this.tokensNeeded = tokensNeeded;
 	}
 	
 	@Override
-	public void open(ArrayList<CollectibleItem> items) {
+	public void open(ArrayList<CollectableItem> items) {
 		if (items != null && !items.isEmpty()) {
 			int tokenCount = 0;
-			for(CollectibleItem item : items) {
+			for(CollectableItem item : items) {
 				//check item is token and not key
 				if(item instanceof Token) {
 					tokenCount++;
 				}
 			}			
 			if(tokenCount>=tokensNeeded) {
-				this.setIsOpen(true);
+				this.isOpen = true;
 			}
 		}
 	}
