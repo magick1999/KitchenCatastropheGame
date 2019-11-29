@@ -69,4 +69,14 @@ public class Profile {
             this.achievedLevel = achievedLevel;
         }
     }
+
+    /**
+     * Returns a string representation of the profile.
+     * 
+     * @return {@link Profile} converted to {@link String}
+     */
+    @Override
+    public String toString() {
+        return this.getId() + "," + this.getUsername() + "," + this.getAchievedLevel();
+    }
 }
