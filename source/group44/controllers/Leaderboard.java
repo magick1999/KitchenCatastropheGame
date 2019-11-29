@@ -1,8 +1,10 @@
-package group44.models;
+package group44.controllers;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import group44.game.Level;
+import group44.models.Profile;
+import group44.models.Record;
 
 /**
  * Represents a leaderboard of the game.
