@@ -18,6 +18,24 @@ public class ProfileManager {
     private static ArrayList<Profile> profiles = new ArrayList<>();
 
     /**
+     * Returns a {@link Profile} with id.
+     * 
+     * @param id - id to find
+     * @return {@link Profile} if match was found; otherwise false
+     */
+    public static Profile getProfile(int id) {
+        Profile profile = null;
+
+        for (Profile item : ProfileManager.profiles) {
+            if (item.getId() == id) {
+                profile = item;
+            }
+        }
+
+        return profile;
+    }
+
+    /**
      * Creates a new {@link Profile} with username, if the username is not already
      * taken. The achieved level id for the new profile is 0.
      * 
