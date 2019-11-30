@@ -7,7 +7,7 @@ import group44.game.Level;
  * able to open the door.
  * 
  * @author Amy Mason, Tomas Svejnoha
- * @version 1.0 *
+ * @version 1.0
  */
 public class KeyDoor extends Door {
 	private Key.KeyType unlockingKey;
