@@ -156,7 +156,7 @@ public class ProfileManager {
     /**
      * Saves managed profiles.
      * 
-     * @param path - path to the file where to save the profiles
+     * @param path - path to the file where to store the profiles
      */
     public static void save(String path) {
         File file = new File(path);
