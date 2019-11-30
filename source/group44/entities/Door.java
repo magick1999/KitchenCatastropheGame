@@ -50,4 +50,14 @@ public abstract class Door extends StepableCell {
     protected void setIsOpen(boolean isOpen) {
         this.isOpen = isOpen;
     }
+
+    /**
+     * Interacts with {@link MovableObject} that stepped on the {@link Door}.
+     * 
+     * @param object - The {@link MovableObject} that stepped on cell.
+     */
+    @Override
+    protected void onStepped(MovableObject object) {
+        System.out.println("KeyDoor.onStepped(object).");
+    }
 }

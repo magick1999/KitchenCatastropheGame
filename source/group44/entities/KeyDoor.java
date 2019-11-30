@@ -47,14 +47,4 @@ public class KeyDoor extends Door {
 		}
 		return this.isOpen();
 	}
-
-	/**
-	 * Interacts with {@link MovableObject} that stepped on the cell.
-	 * 
-	 * @param object - The {@link MovableObject} that stepped on cell.
-	 */
-	@Override
-	protected void onStepped(MovableObject object) {
-		System.out.println("KeyDoor.onStepped(object).");
-	}
 }
