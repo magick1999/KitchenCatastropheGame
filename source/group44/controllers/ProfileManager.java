@@ -21,13 +21,31 @@ public class ProfileManager {
      * Returns a {@link Profile} with id.
      * 
      * @param id - id to find
-     * @return {@link Profile} if match was found; otherwise false
+     * @return {@link Profile} if match was found; otherwise null
      */
     public static Profile getProfile(int id) {
         Profile profile = null;
 
         for (Profile item : ProfileManager.profiles) {
             if (item.getId() == id) {
+                profile = item;
+            }
+        }
+
+        return profile;
+    }
+
+    /**
+     * Returns a {@link Profile} with username.
+     * 
+     * @param username - username to find
+     * @return {@link Profile} if match is found; otherwise null
+     */
+    public static Profile getProfile(String username) {
+        Profile profile = null;
+
+        for (Profile item : ProfileManager.profiles) {
+            if (item.getUsername() == username) {
                 profile = item;
             }
         }
