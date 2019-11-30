@@ -1,8 +1,6 @@
 package group44.entities;
 
 import group44.game.Level;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 
 /**
  * Represents a door for which the player needs a certain coloured key to be
