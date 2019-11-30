@@ -170,9 +170,9 @@ public class ProfileManager {
     }
 
     /**
-     * Saves profiles using provided scanner.
+     * Saves profiles using provided writer.
      * 
-     * @param writer - {@link java.io.Writer} to use when saving profiles
+     * @param writer - {@link PrintWriter} to use when saving profiles
      */
     private static void save(PrintWriter writer) {
         for (Profile profile : ProfileManager.profiles) {
