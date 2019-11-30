@@ -29,8 +29,9 @@ public abstract class Door extends StepableCell {
      * Opens the door.
      * 
      * @param item - The opening {@link CollectableItem}
+     * @return true if the door was opened; otherwise false.
      */
-    public abstract void open(CollectableItem item);
+    public abstract boolean open(CollectableItem item);
 
     /**
      * Returns open state of the door.
