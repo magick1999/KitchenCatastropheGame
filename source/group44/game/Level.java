@@ -19,7 +19,6 @@ import javafx.scene.input.KeyEvent;
 public class Level implements ILevel {
     private final static String ERROR_DISPLAY_SIZE_ILLEGAL_ARGUMENT_EXCEPTION = "The displaySize must be odd and >= 3.";
 
-    private int id;
     private LevelObject[][] grid; // The 2D game array
     private int displaySize; // The size of the grid displayed
     private Player player;
@@ -28,30 +27,19 @@ public class Level implements ILevel {
     /**
      * Creates a new instance of {@link Level}.
      * 
-     * @param id          - the Id of the level
      * @param gridWidth   - width of the 2D array
      * @param gridHeight  - height of the 2D array
      * @param displaySize - size of the grid displayed on screen
      * @throws IllegalArgumentException If the display size is less than 3, is not
      *                                  odd, or exceeds a size of a grid.
      */
-    public Level(int id, int gridWidth, int gridHeight, int displaySize) {
-        this.id = id;
+    public Level(int gridWidth, int gridHeight, int displaySize) {
         this.grid = new LevelObject[gridWidth][gridHeight];
         if (displaySize < 3 || displaySize > grid[0].length || displaySize > grid[0].length || displaySize % 2 != 1) {
             throw new IllegalArgumentException(Level.ERROR_DISPLAY_SIZE_ILLEGAL_ARGUMENT_EXCEPTION);
         } else {
             this.displaySize = displaySize;
         }
-    }
-
-    /**
-     * Returns the Id of the {@link Level}.
-     * 
-     * @return the level id
-     */
-    public int getId() {
-        return this.id;
     }
 
     /**
