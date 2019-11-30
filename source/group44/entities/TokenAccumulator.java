@@ -12,7 +12,7 @@ import javafx.scene.canvas.GraphicsContext;
  * @version 1.0
  */
 public class TokenAccumulator extends CollectableItem {
-    private static final String NOTENOUGHTOKENSEXCEPTION_MESSAGE = "User tried to use more tokens than were collected.";
+    private static final String EXCEPTION_NOT_ENOUGH_TOKENS_EXCEPTION_MESSAGE = "User tried to use more tokens than were collected.";
 
     private ArrayList<Token> accumulatedTokens;
 
@@ -77,7 +77,7 @@ public class TokenAccumulator extends CollectableItem {
      */
     public void use(int count) throws NotEnoughTokensException {
         if (this.getTokensCount() < count) {
-            throw new NotEnoughTokensException(TokenAccumulator.NOTENOUGHTOKENSEXCEPTION_MESSAGE);
+            throw new NotEnoughTokensException(TokenAccumulator.EXCEPTION_NOT_ENOUGH_TOKENS_EXCEPTION_MESSAGE);
         }
         for (int i = 0; i < count; i++) {
             this.accumulatedTokens.remove(0);
