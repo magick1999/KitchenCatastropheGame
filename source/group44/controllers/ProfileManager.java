@@ -133,7 +133,8 @@ public class ProfileManager {
      * Creates a new {@link Profile} from the scanner.
      * 
      * @param scanner - scanner with the serialised profile
-     * @return {@link Profile} created from values in scanner
+     * @return {@link Profile} created from values in scanner; null if there is some
+     *         exception
      */
     private static Profile parseProfile(Scanner scanner) {
         Profile newProfile = null;
