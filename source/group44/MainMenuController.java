@@ -8,21 +8,21 @@ import javafx.scene.layout.BorderPane;
 
 public class MainMenuController {
     @FXML
-    BorderPane root;
+    private BorderPane root;
     @FXML
-    Button profileSelection;
+    private Button profileSelection;
     @FXML
-    Button leaderboard;
+    private Button leaderboard;
     @FXML
-    Button profilesText;
+    private Button profilesText;
     @FXML
-    Button newProfile;
+    private Button newProfile;
     @FXML
-    ListView<?> profiles;
+    private ListView<?> profiles;
     @FXML
-    Button play;
+    private Button play;
     @FXML
-    Button quit;
+    private Button quit;
     public MainMenuController(){
 
     }

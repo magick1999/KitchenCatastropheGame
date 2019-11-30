@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.value.WritableValue;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
@@ -29,39 +31,37 @@ public class GameScene {
 
     // The canvas in the GUI. This needs to be a global variable
     // (in this setup) as we need to access it in different methods.
-    // We could use FXML to place code in the controller instead.
     private Canvas canvas;
 
     // Loaded images
-    Image player = new Image("group44/resources/player.png");
-    Image floor = new Image("group44/resources/floor.png");
-    Image wall = new Image("group44/resources/default_silver_sand.png");
+    private Image player = new Image("group44/resources/player.png");
+    private Image floor = new Image("group44/resources/floor.png");
+    private Image wall = new Image("group44/resources/default_silver_sand.png");
 
-    // X and Y coordinate of player
-    int playerX = GRID_CELL_WIDTH;
-    int playerY = GRID_CELL_HEIGHT;
     //An array containing the map textures.
-    ImageView[][] mapTextures = new ImageView[40][40];
+    private ImageView[][] mapTextures = new ImageView[40][40];
 
     //The controller asociated with the specific fxml file.
-    MainGameWindowController myController;
-    //Might be redundant, does the same as above, will remove in a future commit.
-    Image[][] map = new Image[40][40];
+    private MainGameWindowController myController;
+    
+    //Holds the map images
+    private Image[][] map = new Image[40][40];
+    
     //The player data.
-    ImageView playerView = new ImageView();
-
-
-    boolean canMove = true;
+    private ImageView playerView = new ImageView();
+    
+    private Scene scene;
+    
+    private Stage primaryStage;
+    //This boolean lets the player move only after it has finished the previous animation.
+    private boolean canMove = true;
     /**
      * This is the main method that loads everything required to draw the scene.
-     *
-     * @param primaryStage Can't really properly tell what this is, will clarify this in a future commit.
+     * @param primaryStage represents the window where the stages are displayed
      * @throws Exception
      */
-    private Stage stage;
-
     public GameScene(Stage primaryStage) {
-        this.stage = primaryStage;
+    	this.primaryStage = primaryStage;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/group44/MainGameWindow.fxml"));
         try {
             Parent root = fxmlLoader.load();
@@ -69,11 +69,14 @@ public class GameScene {
             root.getStylesheets().add("group44/resources/application.css");
             root.setId("pane");
             Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-            //Adding the key listener to the scene.
-            scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> processKeyEvent(event));
+            this.scene = scene;
+            //Loading the controller
             MainGameWindowController tempController = fxmlLoader.getController();
             setController(tempController);
+            //Setting the canvas
             setCanvas(myController.getCanvas());
+            //Adding the key listener to the scene.
+            scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> processKeyEvent(event));
             drawGame();
             drawMovableObjects();
             primaryStage.setScene(scene);
@@ -81,16 +84,46 @@ public class GameScene {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Kitchen Catastrophe");
     }
-
-    //This method will have to be rewritten.
-    public void restartGame(int startX, int startY) {
-        // We just move the player to cell (2, 2)
-        playerX = 25;
-        playerY = 25;
-        drawGame();
+    /**
+     * Adding the listeners to the menu buttons.
+     * It also makes the player unable to move while the menu is closed.
+     * Here the time of the player needs to be stopped aswell.
+     */
+    private void setUpMenu() {
+    	canMove = false;
+    	myController.getResumeButton().setOnMouseClicked(this::setUpResume);
+    	myController.getRestartButton().setOnMouseClicked(this::setUpRestart);
+    	myController.getHomeButton().setOnMouseClicked(this::setUpHome);
     }
+    /**
+     * Defining behaviour for the click on the resume button.Resumes the game state and the time.
+     * @param event This is the event for the click on the resume button.
+     */
+    private void setUpResume(MouseEvent event) {
+        myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
+    	canMove = true;
+    }
+    
+    /**
+     * Defining behaviour for the click on the restart button.Restarts the game and the time.
+     * @param event This is the event for the click on the restart button.
+     */
+    private void setUpRestart(MouseEvent event) {
+    	myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
+    	canMove = true;
+    	playerView.setX(GRID_CELL_WIDTH);
+    	playerView.setY(GRID_CELL_HEIGHT);
+    }
+    /**
+     * Defining behaviour for the click on the home button.Sends the player to the home screen.
+     * @param event This is the event for the click on the restart button.
+     */
+    private void setUpHome(MouseEvent event) {
+    	new MainMenuScene(primaryStage);
+    }
+    
 
 
     /**
@@ -98,7 +131,7 @@ public class GameScene {
      *
      * @param tempController The current controller.
      */
-    public void setController(MainGameWindowController tempController) {
+    private void setController(MainGameWindowController tempController) {
         myController = tempController;
     }
 
@@ -107,14 +140,14 @@ public class GameScene {
      *
      * @param canvas The current canvas.
      */
-    public void setCanvas(Canvas canvas) {
+    private void setCanvas(Canvas canvas) {
         this.canvas = canvas;
     }
 
     /**
      * This method draws every non movable object onto the screen.
      */
-    public void drawGame() {
+    private void drawGame() {
         // Get the Graphic Context of the canvas. This is what we draw on.
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -143,12 +176,12 @@ public class GameScene {
      * This method draws the movable objects onto a pane, above the canvas
      * so that the movement can be rendered smoothly.
      */
-    public void drawMovableObjects() {
+    private void drawMovableObjects() {
         playerView.setFitWidth(GRID_CELL_WIDTH);
         playerView.setFitHeight(GRID_CELL_HEIGHT);
         playerView.setImage(player);
-        playerView.setY(playerY);
-        playerView.setX(playerX);
+        playerView.setY(GRID_CELL_HEIGHT);
+        playerView.setX(GRID_CELL_WIDTH);
         //Add the movable objects to the pane destined for them.
         myController.getMovableObjects().getChildren().add(playerView);
     }
@@ -159,29 +192,19 @@ public class GameScene {
      * @param yPos is the increment or decrement added to playerY.
      * @param xPos is the increment or decrement added to playerX.
      */
-    public void smoothTransition(double yPos, double xPos) {
-//        TranslateTransition tt = new TranslateTransition(Duration.millis(200),playerView);
-//        tt.setByX(xPos);
-//        tt.setByY(yPos);
-//        tt.setOnFinished(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent event) {
-//                canMove = true;
-//                playerY = (int)(playerY+yPos);
-//                playerX = (int)(playerX+xPos);
-//            }
-//        });
-//        tt.play();
+    private void smoothTransition(double yPos, double xPos) {
+    	//Here is created an animation with the node to be moved being playerView, the duration and by how much to move it on the x and y axis.
         final Animation animation = new SpriteAnimation(playerView, Duration.millis(200), xPos, yPos);
+        //This sets the number of animation repetitions to 1 meaning that the animation is played only once.
         animation.setCycleCount(1);
+        //This allows the player to perform another move.
         animation.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 canMove = true;
-                playerY = (int) (playerY + yPos);
-                playerX = (int) (playerX + xPos);
             }
         });
+        //Start the animation
         animation.play();
     }
 
@@ -190,40 +213,43 @@ public class GameScene {
      *
      * @param event Passes in the events from the keyboard.
      */
-    public void processKeyEvent(KeyEvent event) {
+    private void processKeyEvent(KeyEvent event) {
         switch (event.getCode()) {
             case ESCAPE: {
+            	canMove = false;
                 //Escape key was pressed. So show the menu.
                 myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
+                //Setting up the menu controls.
+                setUpMenu();
                 break;
             }
             case LEFT: {
-                // Left key was pressed. So move the player right by one cell.
-                if ((playerX - GRID_CELL_HEIGHT) < (28 * GRID_CELL_HEIGHT) && (playerX - GRID_CELL_HEIGHT) > 0 && canMove) {
+                // Left key was pressed. So move the player right by one cell.The canMove variable is set to false until the end of the animation.
+                if ((playerView.getX() - GRID_CELL_HEIGHT) < (28 * GRID_CELL_HEIGHT) && (playerView.getX() - GRID_CELL_HEIGHT) > 0 && canMove) {
                     canMove = false;
                     smoothTransition(0, -GRID_CELL_HEIGHT);
                 }
                 break;
             }
             case RIGHT: {
-                // Right key was pressed. So move the player right by one cell.
-                if ((playerX + GRID_CELL_HEIGHT) < (28 * GRID_CELL_HEIGHT) && (playerX + GRID_CELL_HEIGHT) > 0 && canMove) {
+                // Right key was pressed. So move the player right by one cell.The canMove variable is set to false until the end of the animation.
+                if ((playerView.getX() + GRID_CELL_HEIGHT) < (28 * GRID_CELL_HEIGHT) && (playerView.getX() + GRID_CELL_HEIGHT) > 0 && canMove) {
                     canMove = false;
                     smoothTransition(0, GRID_CELL_HEIGHT);
                 }
                 break;
             }
             case UP: {
-                //Up key was pressed. So move the player down by one cell.
-                if ((playerY - GRID_CELL_HEIGHT) < (21 * GRID_CELL_HEIGHT) && (playerY - GRID_CELL_HEIGHT) > 0 && canMove) {
+                //Up key was pressed. So move the player down by one cell.The canMove variable is set to false until the end of the animation.
+                if ((playerView.getY() - GRID_CELL_HEIGHT) < (21 * GRID_CELL_HEIGHT) && (playerView.getY() - GRID_CELL_HEIGHT) > 0 && canMove) {
                     canMove = false;
                     smoothTransition(-GRID_CELL_HEIGHT, 0);
                 }
                 break;
             }
             case DOWN: {
-                //Down key was pressed. So move the player down by one cell.
-                if ((playerY + GRID_CELL_HEIGHT) < (21 * GRID_CELL_HEIGHT) && (playerY + GRID_CELL_HEIGHT) > 0 && canMove) {
+                //Down key was pressed. So move the player down by one cell.The canMove variable is set to false until the end of the animation.
+                if ((playerView.getY() + GRID_CELL_HEIGHT) < (21 * GRID_CELL_HEIGHT) && (playerView.getY() + GRID_CELL_HEIGHT) > 0 && canMove) {
                     canMove = false;
                     smoothTransition(GRID_CELL_HEIGHT, 0);
                 }

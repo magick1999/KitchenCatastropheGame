@@ -12,20 +12,20 @@ import javafx.scene.layout.GridPane;
 
 public class LevelSelectorController {
     @FXML
-    Button logo;
+    private Button logo;
     @FXML
-    GridPane levels;
+    private GridPane levels;
     @FXML
-    Button previous;
+    private Button previous;
     @FXML
-    Button next;
+    private Button next;
     public LevelSelectorController(){
 //        ObservableList<Node> children = getLevels().getChildren();
 //        for (Node node : children) {
 //            GridPane.setHalignment(node, HPos.CENTER);
 //            GridPane.setValignment(node, VPos.CENTER);
 //        }
-
+//This needs to work but is buggy for now.I just leave it commented.
     }
 
     public void setLogo(Button logo) {
