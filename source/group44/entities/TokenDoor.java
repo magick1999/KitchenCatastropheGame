@@ -1,7 +1,6 @@
 package group44.entities;
 
 import group44.game.Level;
-import javafx.scene.canvas.GraphicsContext;
 
 /**
  * This class is for the token doors where the player needs to have a certain
