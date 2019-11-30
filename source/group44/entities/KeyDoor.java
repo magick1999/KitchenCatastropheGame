@@ -1,6 +1,5 @@
 package group44.entities;
 
-import java.util.ArrayList;
 import group44.game.Level;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -42,7 +41,8 @@ public class KeyDoor extends Door {
 	 */
 	@Override
 	public boolean open(CollectableItem item) {
-		if (item instanceof Key && ((Key) item).getKeyCode() == this.unlockingKey.getKeyCode()) {
+		if (this.isOpen() == false && item instanceof Key
+				&& ((Key) item).getKeyCode() == this.unlockingKey.getKeyCode()) {
 			this.setIsOpen(true);
 		}
 		return this.isOpen();
