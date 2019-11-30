@@ -71,9 +71,9 @@ public class TokenAccumulator extends CollectableItem {
     /**
      * Uses certain number of tokens in the accumulator.
      * 
-     * @param count - the number of tokens to use
+     * @param count - the number of tokens to use.
      * @throws NotEnoughTokensException if user tried to use more tokens than were
-     *                                  collected
+     *                                  collected.
      */
     public void use(int count) throws NotEnoughTokensException {
         if (this.getTokensCount() < count) {
@@ -87,7 +87,7 @@ public class TokenAccumulator extends CollectableItem {
     /**
      * Returns a number of tokens in the accumulator.
      * 
-     * @return number of tokens
+     * @return number of tokens.
      */
     public int getTokensCount() {
         return this.accumulatedTokens.size();
