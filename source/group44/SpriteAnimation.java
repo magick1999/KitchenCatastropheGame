@@ -20,8 +20,8 @@ import java.util.Iterator;
  */
 public class SpriteAnimation extends Transition {
 	//Random resources loaded to test the animation
-    Image player = new Image("group44/resources/player.png");
-    Image wall = new Image("group44/resources/default_silver_sand.png");
+	private Image player = new Image("group44/resources/player.png");
+	private Image wall = new Image("group44/resources/default_silver_sand.png");
     //The object on which the animation will be performed.
     private final ImageView imageView;
     //The number of textures to be cycled through.
