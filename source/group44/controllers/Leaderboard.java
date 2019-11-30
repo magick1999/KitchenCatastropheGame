@@ -13,7 +13,7 @@ import group44.models.Record;
 /**
  * Represents a leaderboard of the game.
  * 
- * @author Tomas Svejnoha, Rowan Aldean
+ * @author Tomas Svejnoha
  * @version 1.0
  */
 public class Leaderboard {
