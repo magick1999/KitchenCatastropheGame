@@ -69,4 +69,14 @@ public class Record implements Comparable<Record> {
     public int compareTo(Record o) {
         return Long.compare(this.getTime(), o.getTime()); // TODO: Test this
     }
+
+    /**
+     * Returns a string representation of the record.
+     * 
+     * @return {@link Record} converted to {@link String}.
+     */
+    @Override
+    public String toString() {
+        return this.getProfile().getId() + "," + this.getLevelId() + "," + this.getTime();
+    }
 }

@@ -1,7 +1,11 @@
 package group44.controllers;
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
+
 import group44.game.Level;
 import group44.models.Profile;
 import group44.models.Record;
@@ -62,5 +66,103 @@ public class Leaderboard {
         }
 
         return top3;
+    }
+
+    /**
+     * Loads records from the file.
+     * 
+     * @param path - path to a file with records
+     */
+    public static void load(String path) {
+        ArrayList<Record> loadedRecords = null;
+        Scanner fileScanner = null;
+
+        try {
+            fileScanner = new Scanner(path);
+            loadedRecords = Leaderboard.load(fileScanner);
+        } catch (Exception e) {
+            System.out.println("Failed to load records from file (" + path + ").");
+            loadedRecords = new ArrayList<Record>();
+        } finally {
+            if (fileScanner != null) {
+                fileScanner.close();
+            }
+            Leaderboard.records = loadedRecords;
+        }
+    }
+
+    /**
+     * Loads stored records.
+     * 
+     * @param fileScanner - scanner of the file where the records are stored
+     * @return a list of loaded {@link Record}s
+     */
+    private static ArrayList<Record> load(Scanner fileScanner) {
+        ArrayList<Record> loadedRecords = new ArrayList<>();
+
+        while (fileScanner.hasNextLine()) {
+            Record r = Leaderboard.parseRecord(new Scanner(fileScanner.nextLine()));
+            if (r != null) {
+                loadedRecords.add(r);
+            }
+        }
+
+        return loadedRecords;
+    }
+
+    /**
+     * Creates a new {@link Record} from the Scanner.
+     * 
+     * @param scanner - scanner with the serialised record
+     * @return created {@link Record}; null if associated {@link Profile} was not
+     *         found
+     */
+    private static Record parseRecord(Scanner scanner) {
+        Record record = null;
+        scanner.useDelimiter(",");
+
+        try {
+            int profileId = scanner.nextInt();
+            int levelId = scanner.nextInt();
+            long time = scanner.nextLong();
+
+            Profile profile = ProfileManager.getProfile(profileId);
+            if (profile != null) {
+                record = new Record(profile, levelId, time);
+            } else {
+                System.out.println("Unable to parse a Record. Profile(id=" + profileId + ") not found!");
+            }
+        } catch (Exception e) {
+            System.out.println("Unable to parse a Profile.\n" + e.getMessage());
+        }
+
+        return record;
+    }
+
+    /**
+     * Saves all records in the {@link Leaderboard}.
+     * 
+     * @param path - path to the file where to store the profiles
+     */
+    public static void save(String path) {
+        File file = new File(path);
+
+        try {
+            PrintWriter writer = new PrintWriter(file);
+            Leaderboard.save(writer);
+        } catch (Exception e) {
+            System.out.println("Unable to save records.\n" + e.getMessage());
+        }
+    }
+
+    /**
+     * Saves records using provided writer.
+     * 
+     * @param writer - {@link PrintWriter} to use when saving r cords
+     */
+    public static void save(PrintWriter writer) {
+        for (Record record : Leaderboard.records) {
+            writer.println(record.toString());
+        }
     }
 }
