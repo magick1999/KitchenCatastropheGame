@@ -2,6 +2,7 @@ package group44.entities;
 
 import java.util.ArrayList;
 
+import group44.exceptions.NotEnoughTokensException;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
@@ -11,6 +12,8 @@ import javafx.scene.canvas.GraphicsContext;
  * @version 1.0
  */
 public class TokenAccumulator extends CollectableItem {
+    private static final String NOTENOUGHTOKENSEXCEPTION_MESSAGE = "User tried to use more tokens than were collected.";
+
     private ArrayList<Token> accumulatedTokens;
 
     /**
@@ -63,5 +66,30 @@ public class TokenAccumulator extends CollectableItem {
             }
         }
         return false;
+    }
+
+    /**
+     * Uses certain number of tokens in the accumulator.
+     * 
+     * @param count - the number of tokens to use
+     * @throws NotEnoughTokensException if user tried to use more tokens than were
+     *                                  collected
+     */
+    public void use(int count) throws NotEnoughTokensException {
+        if (this.getTokensCount() < count) {
+            throw new NotEnoughTokensException(TokenAccumulator.NOTENOUGHTOKENSEXCEPTION_MESSAGE);
+        }
+        for (int i = 0; i < count; i++) {
+            this.accumulatedTokens.remove(0);
+        }
+    }
+
+    /**
+     * Returns a number of tokens in the accumulator.
+     * 
+     * @return number of tokens
+     */
+    public int getTokensCount() {
+        return this.accumulatedTokens.size();
     }
 }
