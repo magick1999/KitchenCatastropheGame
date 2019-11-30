@@ -1,7 +1,5 @@
 package group44.entities;
 
-import java.util.ArrayList;
-
 import group44.game.Level;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -33,20 +31,26 @@ public class TokenDoor extends Door {
 		super(level, title, positionX, positionY, imagePath);
 		this.tokensNeeded = tokensNeeded;
 	}
-	
+
+	/**
+	 * Opens the door if a {@link TokenAccumulator} with the right amount of tokens
+	 * were used.
+	 * 
+	 * @param item - the TokenAccumulator to use.
+	 * @return true if the door was opened; otherwise false.
+	 */
 	@Override
-	public void open(ArrayList<CollectableItem> items) {
-		if (items != null && !items.isEmpty()) {
-			int tokenCount = 0;
-			for(CollectableItem item : items) {
-				//check item is token and not key
-				if(item instanceof Token) {
-					tokenCount++;
-				}
-			}			
-			if(tokenCount>=tokensNeeded) {
-				this.isOpen = true;
+	public boolean open(CollectableItem item) {
+		if (this.isOpen() == false && item instanceof TokenAccumulator
+				&& ((TokenAccumulator) item).getTokensCount() >= this.tokensNeeded) {
+			try {
+				((TokenAccumulator) item).use(this.tokensNeeded);
+				this.setIsOpen(true);
+			} catch (Exception e) {
+				// DO nothing
 			}
 		}
+
+		return this.isOpen();
 	}
 }
