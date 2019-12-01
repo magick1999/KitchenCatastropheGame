@@ -52,11 +52,11 @@ public class ProfileCreatorScene {
             root.getStylesheets().add("sample/style.css");
             root.setId("pane");
             Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-            //Adding the listeners for the buttons on the scene.
-            setUpControls();
             //Setting the globally available controller.
             ProfileCreatorController tempController = fxmlLoader.getController();
             setController(tempController);
+            //Adding the listeners for the buttons on the scene.
+            setUpControls();
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {

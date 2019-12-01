@@ -37,11 +37,11 @@ public class LevelSelectorScene {
             root.getStylesheets().add("group44/resources/application.css");
             root.setId("pane");
             Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-            //Adding the listeners for the buttons.
-            setUpButtons();
             //Instantiating the controller.
             LevelSelectorController tempController = fxmlLoader.getController();
             setController(tempController);
+            //Adding the listeners for the buttons.
+            setUpButtons();
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {

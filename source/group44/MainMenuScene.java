@@ -15,7 +15,7 @@ import static group44.Constants.WINDOW_WIDTH;
  * @author Mihai
  *
  */
-public class MainMenuScene extends Stage {
+public class MainMenuScene {
     //The controller associated with the specific FXML file.
 	private MainMenuController mainMenuController;
     //This is the stage where all the scenes are displayed.
@@ -36,10 +36,10 @@ public class MainMenuScene extends Stage {
             root.getStylesheets().add("group44/resources/application.css");
             root.setId("pane");
             Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-            //Adding the listeners for the buttons on the scene.
-            setUpButtons();
             MainMenuController tempController = fxmlLoader.getController();
             setController(tempController);
+            //Adding the listeners for the buttons on the scene.
+            setUpButtons();
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {
@@ -80,9 +80,13 @@ public class MainMenuScene extends Stage {
      * This method adds the listeners to the buttons on screen.
      * The quit button needs a listener, will add that in a future commit.
      */
+    private void closeGame(MouseEvent e) {
+    	primaryStage.close();
+    }
     private void setUpButtons(){
         mainMenuController.getPlay().setOnMouseClicked(this::pressPlay);
         mainMenuController.getNewProfile().setOnMouseClicked(this::newProfile);
         mainMenuController.getLeaderboard().setOnMouseClicked(this::showLeaderboard);
+        mainMenuController.getQuit().setOnMouseClicked(this::closeGame);
     }
 }
