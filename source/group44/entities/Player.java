@@ -30,8 +30,11 @@ public class Player extends MovableObject implements IKeyReactive {
      *                  screen.
      */
     public Player(Level level, String name, int positionX, int positionY, int velocityX, int velocityY,
-                  String imagePath) {
+            String imagePath) {
         super(level, name, positionX, positionY, velocityX, velocityY, imagePath);
+
+        this.itinerary = new ArrayList<>();
+        this.itinerary.add(new TokenAccumulator());
     }
 
     /**
@@ -70,20 +73,31 @@ public class Player extends MovableObject implements IKeyReactive {
     }
 
     /**
-     * Method invoked after the {@link Player} stepped on {@link StepableCell}.
+     * If the {@link StepableCell} is an instance of {@link Ground}, the
+     * {@link Player} will collect any {@link CollectableItem} on the cell.
      *
-     * @param cell - {@link StepableCell} the {@link Player} stepped on
+     * @param cell - {@link StepableCell} the {@link Player} stepped on.
      */
     @Override
     protected void onCellStepped(StepableCell cell) {
         if (cell instanceof Ground) {
             Ground ground = ((Ground) cell);
             if (ground.hasCollectableItem()) {
-                this.itinerary.add(ground.collect());
+                CollectableItem item = ground.collect(); // Collect the CollectableItem if the is any
+                if (item instanceof Token) {
+                    this.getTokenAccumulator().addToken((Token) item); // If token, add to TokenAccumulator
+                } else {
+                    this.itinerary.add(item); // else, add to itinerary
+                }
             }
         }
     }
 
+    /**
+     * Sets the velocity of the {@link Player} based on the arrow pressed.
+     * 
+     * @param event - the {@link KeyEvent}.
+     */
     @Override
     public void keyDown(KeyEvent event) {
         switch (event.getCode()) {
@@ -104,5 +118,24 @@ public class Player extends MovableObject implements IKeyReactive {
             this.setVelocityY(1);
             break;
         }
+    }
+
+    /**
+     * Returns a {@link TokenAccumulator} from the itinerary the {@link Player} has.
+     * The method creates one and adds it to the itinerary if {@link Player} does
+     * not have it.
+     * 
+     * @return the {@link TokenAccumulator}.
+     */
+    private TokenAccumulator getTokenAccumulator() {
+        for (CollectableItem item : this.itinerary) {
+            if (item instanceof TokenAccumulator) {
+                return (TokenAccumulator) item;
+            }
+        }
+
+        TokenAccumulator accumulator = new TokenAccumulator();
+        this.itinerary.add(accumulator);
+        return accumulator;
     }
 }

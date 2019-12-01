@@ -1,6 +1,5 @@
 package group44.entities;
 
-import group44.game.CollisionCheckResult;
 import group44.game.Level;
 
 /**

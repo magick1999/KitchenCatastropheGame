@@ -9,7 +9,7 @@ import group44.game.Level;
  * @version 1.0
  */
 public abstract class Door extends StepableCell {
-    private Boolean isOpen;
+    private boolean isOpen;
 
     /**
      * Creates a new {@link Door}.
@@ -29,8 +29,9 @@ public abstract class Door extends StepableCell {
      * Opens the door.
      * 
      * @param item - The opening {@link CollectableItem}
+     * @return true if the door was opened; otherwise false.
      */
-    public abstract void open(CollectableItem item);
+    public abstract boolean open(CollectableItem item);
 
     /**
      * Returns open state of the door.
@@ -39,5 +40,24 @@ public abstract class Door extends StepableCell {
      */
     public boolean isOpen() {
         return this.isOpen;
+    }
+
+    /**
+     * Changes the state of the door. Set true to open the door, set false to close.
+     * 
+     * @param isOpen - new state of the door.
+     */
+    protected void setIsOpen(boolean isOpen) {
+        this.isOpen = isOpen;
+    }
+
+    /**
+     * Interacts with {@link MovableObject} that stepped on the {@link Door}.
+     * 
+     * @param object - The {@link MovableObject} that stepped on cell.
+     */
+    @Override
+    protected void onStepped(MovableObject object) {
+        System.out.println("KeyDoor.onStepped(object).");
     }
 }
