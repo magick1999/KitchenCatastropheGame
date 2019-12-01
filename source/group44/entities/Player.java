@@ -73,25 +73,31 @@ public class Player extends MovableObject implements IKeyReactive {
     }
 
     /**
-     * Method invoked after the {@link Player} stepped on {@link StepableCell}.
+     * If the {@link StepableCell} is an instance of {@link Ground}, the
+     * {@link Player} will collect any {@link CollectableItem} on the cell.
      *
-     * @param cell - {@link StepableCell} the {@link Player} stepped on
+     * @param cell - {@link StepableCell} the {@link Player} stepped on.
      */
     @Override
     protected void onCellStepped(StepableCell cell) {
         if (cell instanceof Ground) {
             Ground ground = ((Ground) cell);
             if (ground.hasCollectableItem()) {
-                CollectableItem item = ground.collect();
+                CollectableItem item = ground.collect(); // Collect the CollectableItem if the is any
                 if (item instanceof Token) {
-                    this.getTokenAccumulator().addToken((Token) item);
+                    this.getTokenAccumulator().addToken((Token) item); // If token, add to TokenAccumulator
                 } else {
-                    this.itinerary.add(item);
+                    this.itinerary.add(item); // else, add to itinerary
                 }
             }
         }
     }
 
+    /**
+     * Sets the velocity of the {@link Player} based on the arrow pressed.
+     * 
+     * @param event - the {@link KeyEvent}.
+     */
     @Override
     public void keyDown(KeyEvent event) {
         switch (event.getCode()) {
