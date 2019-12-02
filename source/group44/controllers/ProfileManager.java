@@ -45,7 +45,7 @@ public class ProfileManager {
         Profile profile = null;
 
         for (Profile item : ProfileManager.profiles) {
-            if (item.getUsername() == username) {
+            if (item.getUsername().equals(username)) {
                 profile = item;
             }
         }
