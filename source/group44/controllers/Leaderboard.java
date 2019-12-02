@@ -161,7 +161,7 @@ public class Leaderboard {
      * 
      * @param writer - {@link PrintWriter} to use when saving r cords
      */
-    public static void save(PrintWriter writer) {
+    private static void save(PrintWriter writer) {
         for (Record record : Leaderboard.records) {
             writer.println(record.toString());
         }
