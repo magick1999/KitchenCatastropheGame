@@ -76,9 +76,10 @@ public class Leaderboard {
     public static void load(String path) {
         ArrayList<Record> loadedRecords = null;
         Scanner fileScanner = null;
+        File file = new File(path);
 
         try {
-            fileScanner = new Scanner(path);
+            fileScanner = new Scanner(file);
             loadedRecords = Leaderboard.load(fileScanner);
         } catch (Exception e) {
             System.out.println("Failed to load records from file (" + path + ").");
