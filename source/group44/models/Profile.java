@@ -19,7 +19,7 @@ public class Profile {
      */
     public Profile(int id, String username, int achievedLevel) {
         this.id = id;
-        this.setUsername(username);
+        this.username = username;
     }
 
     /**
@@ -38,15 +38,6 @@ public class Profile {
      */
     public String getUsername() {
         return this.username;
-    }
-
-    /**
-     * Sets the username of the {@link Profile}.
-     * 
-     * @param username - new username
-     */
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     /**
