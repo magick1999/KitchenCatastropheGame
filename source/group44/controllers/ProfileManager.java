@@ -113,9 +113,10 @@ public class ProfileManager {
     public static void load(String path) {
         ArrayList<Profile> loadedProfiles = null;
         Scanner fileScanner = null;
+        File file = new File(path);
 
         try {
-            fileScanner = new Scanner(path);
+            fileScanner = new Scanner(file);
             loadedProfiles = ProfileManager.load(fileScanner);
         } catch (Exception e) {
             System.out.println("File (" + path + ") with profiles not found!");
