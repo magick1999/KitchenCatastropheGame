@@ -62,7 +62,7 @@ public class DumbTargetingEnemy extends Enemy {
     @Override
     protected void onCollided(MovableObject object) {
         if (object instanceof Player) {
-            object.die();
+            object.die(this);
         }
     }
 
