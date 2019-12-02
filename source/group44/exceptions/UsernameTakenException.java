@@ -5,6 +5,9 @@ import group44.models.Profile;
 /**
  * Represents an exception raised when trying to register a new {@link Profile}
  * with already existing username.
+ * 
+ * @author Tomas Svejnoha
+ * @version 1.0
  */
 public class UsernameTakenException extends Exception {
     private static final long serialVersionUID = -2669174231705636936L;
