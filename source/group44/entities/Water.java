@@ -30,6 +30,6 @@ public class Water extends StepableCell {
      */
     @Override
     protected void onStepped(MovableObject object) {
-        throw new UnsupportedOperationException();
+        object.die(this);
     }
 }
