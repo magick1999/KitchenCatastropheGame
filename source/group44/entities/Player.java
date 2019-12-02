@@ -95,7 +95,7 @@ public class Player extends MovableObject implements IKeyReactive {
 
     /**
      * Method executed when some other {@link LevelObject} tries to kill the
-     * {@link Player}. The player will dies if he can't protect himself.
+     * {@link Player}. The player will die if he can't protect himself.
      * 
      * @param object - the {@link LevelObject} trying to kill the {@link Player}.
      */

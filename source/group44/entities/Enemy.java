@@ -56,4 +56,19 @@ public abstract class Enemy extends MovableObject {
             }
         }
     }
+
+    /**
+     * Method executed when some other {@link LevelObject} tries to kill the
+     * {@link Enemy}. The enemy will die if he can't protect himself.
+     * 
+     * @param object - the {@link LevelObject} trying to kill the {@link Player}.
+     */
+    @Override
+    public void die(LevelObject object) {
+        if (object instanceof Fire) {
+            super.die(object);
+        } else if (object instanceof Water) {
+            super.die(object);
+        }
+    }
 }
