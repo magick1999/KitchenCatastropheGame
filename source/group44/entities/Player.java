@@ -14,7 +14,7 @@ import javafx.scene.input.KeyEvent;
  * @version 1.0
  */
 public class Player extends MovableObject implements IKeyReactive {
-    private ArrayList<CollectableItem> itinerary;
+    private ArrayList<CollectableItem> inventory;
 
     /**
      * Creates a new instance of {@link Player} at specific position in a specific
@@ -33,8 +33,8 @@ public class Player extends MovableObject implements IKeyReactive {
             String imagePath) {
         super(level, name, positionX, positionY, velocityX, velocityY, imagePath);
 
-        this.itinerary = new ArrayList<>();
-        this.itinerary.add(new TokenAccumulator());
+        this.inventory = new ArrayList<>();
+        this.inventory.add(new TokenAccumulator());
     }
 
     /**
@@ -87,7 +87,7 @@ public class Player extends MovableObject implements IKeyReactive {
                 if (item instanceof Token) {
                     this.getTokenAccumulator().addToken((Token) item); // If token, add to TokenAccumulator
                 } else {
-                    this.itinerary.add(item); // else, add to itinerary
+                    this.inventory.add(item); // else, add to inventory
                 }
             }
         }
@@ -121,21 +121,21 @@ public class Player extends MovableObject implements IKeyReactive {
     }
 
     /**
-     * Returns a {@link TokenAccumulator} from the itinerary the {@link Player} has.
-     * The method creates one and adds it to the itinerary if {@link Player} does
+     * Returns a {@link TokenAccumulator} from the inventory the {@link Player} has.
+     * The method creates one and adds it to the inventory if {@link Player} does
      * not have it.
      * 
      * @return the {@link TokenAccumulator}.
      */
     private TokenAccumulator getTokenAccumulator() {
-        for (CollectableItem item : this.itinerary) {
+        for (CollectableItem item : this.inventory) {
             if (item instanceof TokenAccumulator) {
                 return (TokenAccumulator) item;
             }
         }
 
         TokenAccumulator accumulator = new TokenAccumulator();
-        this.itinerary.add(accumulator);
+        this.inventory.add(accumulator);
         return accumulator;
     }
 }
