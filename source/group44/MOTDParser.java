@@ -1,3 +1,4 @@
+package group44;
 
 /**
  * The class for getting the Message of the day.
@@ -17,7 +18,7 @@ public class MOTDParser {
 	 *
 	 * @return message The decoded message of the day
 	 */
-	public String getMOTD() {
+	public static String getMOTD() {
 		String code = getHtml("http://cswebcat.swan.ac.uk/puzzle");//Passes url to getHTML
 		String decoded = decode(code);//decodes the code given from the URL
 		String message = getHtml("http://cswebcat.swan.ac.uk/message?solution=" + decoded);//passes the url and the decoded code to the checker website.
@@ -32,7 +33,7 @@ public class MOTDParser {
 	 * @return output - the output that the BurfferedReader has given.
 	 * 
 	 */
-	private String getHtml(String website) {
+	private static String getHtml(String website) {
 		String output = null; //Creates a default output
 		try {
 			StringBuilder result = new StringBuilder();
@@ -60,7 +61,7 @@ public class MOTDParser {
 	 * @param message - The code collected from the website.
 	 * @return message - The updated and decoded code after performing the algorithm.
 	 */
-	private String decode(String message) {
+	private static String decode(String message) {
 		char[] messageChars = message.toCharArray(); //Converts string to a character array
 
 		for (int i = 0; i < message.length(); i++) { //Iterates through the character array
