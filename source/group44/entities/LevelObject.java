@@ -3,6 +3,7 @@ package group44.entities;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
+import group44.game.Level;
 
 /**
  * Abstract class from which all other classes in the game inherit.
@@ -15,22 +16,22 @@ public abstract class LevelObject {
     private Color backgroundColor;
     private Color foregroundColor;
     private Image image;
-    private int size; // Size 'a' of the "grid" cell.
-    private int positionX;
-    private int positionY;
+    private Level level;
+    private int positionX; // Position X in the game array
+    private int positionY; // Position Y in the game array
 
     /**
      * Creates a new {@link LevelObject} with default colors.
      * 
+     * @param level     - The {@link Level} in which the {@link LevelObject} exists
      * @param title     - Title of the object
      * @param positionX - Position X in the game
      * @param positionY - Position Y in the game
-     * @param size      - Size of the cell on the screen
      */
-    public LevelObject(String title, int positionX, int positionY, int size) {
+    public LevelObject(Level level, String title, int positionX, int positionY) {
+        this.level = level;
         this.setTitle(title);
         this.setPosition(positionX, positionY);
-        this.setSize(size);
         // Default colors
         this.setBackgroundColor(Color.RED);
         this.setForegroundColor(Color.BLACK);
@@ -39,30 +40,31 @@ public abstract class LevelObject {
     /**
      * Creates a new {@link LevelObject}.
      * 
+     * @param level     - The {@link Level} in which the {@link LevelObject} exists
      * @param title     - Title of the object
      * @param positionX - Position X in the game
      * @param positionY - Position Y in the game
-     * @param size      - Size of the cell on the screen
      * @param imagePath - Image path of the instance
      */
-    public LevelObject(String title, int positionX, int positionY, int size, String imagePath) {
-        this(title, positionX, positionY, size);
-        this.setImage(new Image(imagePath, size, size, true, true));
+    public LevelObject(Level level, String title, int positionX, int positionY, String imagePath) {
+        this(level, title, positionX, positionY);
+        this.setImage(new Image(imagePath, true));
     }
 
     /**
      * Creates a new {@link LevelObject}.
      * 
+     * @param level           - The {@link Level} in which the {@link LevelObject}
+     *                        exists
      * @param title           - Title of the object
      * @param positionX       - Position X in the game
      * @param positionY       - Position Y in the game
-     * @param size            - Size of the cell on the screen
      * @param foregroundColor - Foreground color
      * @param backgroundColor - Background color
      */
-    public LevelObject(String title, int positionX, int positionY, int size, Color foregroundColor,
+    public LevelObject(Level level, String title, int positionX, int positionY, Color foregroundColor,
             Color backgroundColor) {
-        this(title, positionX, positionY, size);
+        this(level, title, positionX, positionY);
         this.setForegroundColor(foregroundColor);
         this.setBackgroundColor(backgroundColor);
     }
@@ -139,22 +141,8 @@ public abstract class LevelObject {
         this.image = image;
     }
 
-    /**
-     * Returns a size of the object.
-     * 
-     * @return a size of the object.
-     */
-    public int getSize() {
-        return this.size;
-    }
-
-    /**
-     * Sets the size of the object.
-     * 
-     * @param size - size of the object.
-     */
-    public void setSize(int size) {
-        this.size = size;
+    public Level getLevel() {
+        return this.level;
     }
 
     /**
@@ -187,11 +175,19 @@ public abstract class LevelObject {
     }
 
     /**
-     * Draws the object.
+     * Draws the object in {@link GraphicsContext}.
      * 
-     * @param gc - {@link GraphicsContext} used to draw the object
+     * @param gc     - {@link GraphicsContext} used to draw the object
+     * @param x      - The X coordinate in the {@link GraphicsContext} where to draw
+     *               the {@link LevelObject}
+     * @param y      - The Y coordinate in the {@link GraphicsContext} where to draw
+     *               the {@link LevelObject}
+     * @param width  - The width of the {@link LevelObject} in the
+     *               {@link GraphicsContext}
+     * @param height - The height of the {@link LevelObject} in the
+     *               {@link GraphicsContext}
      */
-    public void draw(GraphicsContext gc) {
-        gc.drawImage(this.getImage(), this.getPositionX(), this.getPositionY());
+    public void draw(GraphicsContext gc, double x, double y, double width, double height) {
+        gc.drawImage(this.getImage(), x, y, width, height);
     }
 }
