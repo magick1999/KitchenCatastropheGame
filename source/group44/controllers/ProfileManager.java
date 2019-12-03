@@ -66,7 +66,7 @@ public class ProfileManager {
             throw new UsernameTakenException(username);
         } else {
             int max_id = ProfileManager.getMaxId();
-            Profile profile = new Profile(++max_id, username, 0);
+            Profile profile = new Profile(++max_id, username);
             ProfileManager.profiles.add(profile);
             return profile;
         }
@@ -162,9 +162,8 @@ public class ProfileManager {
         try {
             int id = scanner.nextInt();
             String username = scanner.next();
-            int achievedLevel = scanner.nextInt();
 
-            newProfile = new Profile(id, username, achievedLevel);
+            newProfile = new Profile(id, username);
         } catch (Exception e) {
             System.out.println("Unable to parse a Profile.\n" + e.getMessage());
         }
