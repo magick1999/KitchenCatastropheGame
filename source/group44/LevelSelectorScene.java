@@ -22,6 +22,8 @@ public class LevelSelectorScene {
     //The controller associated with the specific FXML file.
 	private LevelSelectorController levelSelectorController;
     //This is the stage where the scene is displayed.
+	//The maximum number of levels.
+	private static Integer maxLevel=3;
 	private Stage primaryStage;
     /*
      * This is the constructor that creates the scene, instantiates the controller 
@@ -34,8 +36,8 @@ public class LevelSelectorScene {
         try {
             Parent root = fxmlLoader.load();
             //Setting the stage and adding my custom style to it.
-            root.getStylesheets().add("group44/resources/application.css");
-            root.setId("pane");
+            root.getStylesheets().add("group44/application.css");
+            root.setId("root");
             Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
             //Instantiating the controller.
             LevelSelectorController tempController = fxmlLoader.getController();
@@ -69,16 +71,55 @@ public class LevelSelectorScene {
      * This method creates listeners for each of the buttons
      */
     private void loadLevels(){
-        ObservableList<Node> children = levelSelectorController.getLevels().getChildren();
-        for (Node node : children) {
-            node.setOnMouseClicked(this::setLevelSelect);
+
+        levelSelectorController.getPlay().setOnMouseClicked(this::setLevelSelect);
+}
+    
+    private void setMenu(MouseEvent e){
+        new MainMenuScene(primaryStage);
+    }
+
+    private void setNext(MouseEvent e){
+        setLevelNum(true);
+    }
+    private void setPrevious(MouseEvent e){
+        setLevelNum(false);
+    }
+    private void setLevelNum(boolean prevNext){
+        Integer currentLevel  =Integer.parseInt(levelSelectorController.getLevelNum().getText().replaceAll("[A-Z a-z]",""));
+        if(prevNext == true && currentLevel<maxLevel){
+            levelSelectorController.getLevelNum().setText("Level "+(++currentLevel).toString());
+            levelSelectorController.getPrevious().setVisible(true);
+        }else {
+            if(prevNext == false && currentLevel>1){
+                levelSelectorController.getLevelNum().setText("Level "+(--currentLevel).toString());//This could be used for level loading.
+                levelSelectorController.getNext().setVisible(true);
+            }
+        }
+        if(currentLevel==1){
+            levelSelectorController.getPrevious().setVisible(false);
+        }else {
+            if(currentLevel==maxLevel){
+                levelSelectorController.getNext().setVisible(false);
+            }
         }
     }
+    private void setTopTimes(){
+        //This is where you call the leaderboard
+        // Create an ObservableList<Record>
+        //And load it with top 3
+        //And then
+//        levelSelectorController.getLevelTimes().setItems("TopTimes");
+       }
     /**
      * This method creates listeners for all of the buttons on the scene.
      * Listeners for back and forward need to be added.
      */
     private void setUpButtons(){
         loadLevels();
+        levelSelectorController.getPrevious().setVisible(false);
+        levelSelectorController.getNext().setOnMouseClicked(this::setNext);
+        levelSelectorController.getPrevious().setOnMouseClicked(this::setPrevious);
+        levelSelectorController.getMenu().setOnMouseClicked(this::setMenu);
     }
 }

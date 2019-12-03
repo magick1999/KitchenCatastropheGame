@@ -7,6 +7,8 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 
@@ -14,18 +16,60 @@ public class LevelSelectorController {
     @FXML
     private Button logo;
     @FXML
-    private GridPane levels;
+    private Button levelNum;
     @FXML
     private Button previous;
     @FXML
     private Button next;
+    @FXML
+    private Button play;
+    @FXML
+    private ListView levelTimes;
+    @FXML
+    private Button menu;
+    @FXML
+    private BorderPane root;
     public LevelSelectorController(){
-//        ObservableList<Node> children = getLevels().getChildren();
-//        for (Node node : children) {
-//            GridPane.setHalignment(node, HPos.CENTER);
-//            GridPane.setValignment(node, VPos.CENTER);
-//        }
-//This needs to work but is buggy for now.I just leave it commented.
+    }
+
+    public void setMenu(Button menu) {
+        this.menu = menu;
+    }
+
+    public Button getMenu() {
+        return menu;
+    }
+
+    public void setRoot(BorderPane root) {
+        this.root = root;
+    }
+
+    public BorderPane getRoot() {
+        return root;
+    }
+
+    public void setLevelNum(Button levelNum) {
+        this.levelNum = levelNum;
+    }
+
+    public Button getLevelNum() {
+        return levelNum;
+    }
+
+    public void setLevelTimes(ListView levelTimes) {
+        this.levelTimes = levelTimes;
+    }
+
+    public ListView getLevelTimes() {
+        return levelTimes;
+    }
+
+    public void setPlay(Button play) {
+        this.play = play;
+    }
+
+    public Button getPlay() {
+        return play;
     }
 
     public void setLogo(Button logo) {
@@ -34,14 +78,6 @@ public class LevelSelectorController {
 
     public Button getLogo() {
         return logo;
-    }
-
-    public void setLevels(GridPane levels) {
-        this.levels = levels;
-    }
-
-    public GridPane getLevels() {
-        return levels;
     }
 
     public void setPrevious(Button previous) {

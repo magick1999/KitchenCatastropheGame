@@ -33,8 +33,8 @@ public class MainMenuScene {
         	//Setting the root.
             Parent root = fxmlLoader.load();
             //Setting the stage and adding my custom style to it.
-            root.getStylesheets().add("group44/resources/application.css");
-            root.setId("pane");
+            root.getStylesheets().add("group44/application.css");
+            root.setId("root");
             Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
             MainMenuController tempController = fxmlLoader.getController();
             setController(tempController);
@@ -73,9 +73,6 @@ public class MainMenuScene {
      * This method instantiates the LeaderboardScene class.
      * @param e The mouse event created by the press on the leaderboard button.
      */
-    private void showLeaderboard(MouseEvent e){
-        new LeaderboardScene(primaryStage);
-    }
     /**
      * This method adds the listeners to the buttons on screen.
      * The quit button needs a listener, will add that in a future commit.
@@ -86,7 +83,6 @@ public class MainMenuScene {
     private void setUpButtons(){
         mainMenuController.getPlay().setOnMouseClicked(this::pressPlay);
         mainMenuController.getNewProfile().setOnMouseClicked(this::newProfile);
-        mainMenuController.getLeaderboard().setOnMouseClicked(this::showLeaderboard);
         mainMenuController.getQuit().setOnMouseClicked(this::closeGame);
     }
 }

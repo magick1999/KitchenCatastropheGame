@@ -49,8 +49,8 @@ public class ProfileCreatorScene {
         try {
             Parent root = fxmlLoader.load();
             //Setting the stage and adding my custom style to it.
-            root.getStylesheets().add("sample/style.css");
-            root.setId("pane");
+            root.getStylesheets().add("group44/application.css");
+            root.setId("root");
             Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
             //Setting the globally available controller.
             ProfileCreatorController tempController = fxmlLoader.getController();

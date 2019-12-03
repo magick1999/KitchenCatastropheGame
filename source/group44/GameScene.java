@@ -38,9 +38,6 @@ public class GameScene {
     private Image floor = new Image("group44/resources/floor.png");
     private Image wall = new Image("group44/resources/default_silver_sand.png");
 
-    //An array containing the map textures.
-    private ImageView[][] mapTextures = new ImageView[40][40];
-
     //The controller asociated with the specific fxml file.
     private MainGameWindowController myController;
     
@@ -50,8 +47,9 @@ public class GameScene {
     //The player data.
     private ImageView playerView = new ImageView();
     
-    private Scene scene;
-    
+    //It showcases the orientation of the player.
+    int orientation = 1;
+    //The window itself.
     private Stage primaryStage;
     //This boolean lets the player move only after it has finished the previous animation.
     private boolean canMove = true;
@@ -66,10 +64,9 @@ public class GameScene {
         try {
             Parent root = fxmlLoader.load();
             //Setting the stage and adding my custom style to it.
-            root.getStylesheets().add("group44/resources/application.css");
-            root.setId("pane");
+            root.getStylesheets().add("group44/application.css");
+            root.setId("root");
             Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-            this.scene = scene;
             //Loading the controller
             MainGameWindowController tempController = fxmlLoader.getController();
             setController(tempController);
@@ -192,9 +189,9 @@ public class GameScene {
      * @param yPos is the increment or decrement added to playerY.
      * @param xPos is the increment or decrement added to playerX.
      */
-    private void smoothTransition(double yPos, double xPos) {
+    private void smoothTransition(double yPos, double xPos,int orientation) {
     	//Here is created an animation with the node to be moved being playerView, the duration and by how much to move it on the x and y axis.
-        final Animation animation = new SpriteAnimation(playerView, Duration.millis(200), xPos, yPos);
+        final Animation animation = new SpriteAnimation(playerView, Duration.millis(200), xPos, yPos,orientation);
         //This sets the number of animation repetitions to 1 meaning that the animation is played only once.
         animation.setCycleCount(1);
         //This allows the player to perform another move.
@@ -227,7 +224,7 @@ public class GameScene {
                 // Left key was pressed. So move the player right by one cell.The canMove variable is set to false until the end of the animation.
                 if ((playerView.getX() - GRID_CELL_HEIGHT) < (28 * GRID_CELL_HEIGHT) && (playerView.getX() - GRID_CELL_HEIGHT) > 0 && canMove) {
                     canMove = false;
-                    smoothTransition(0, -GRID_CELL_HEIGHT);
+                    smoothTransition(0, -GRID_CELL_HEIGHT,2);
                 }
                 break;
             }
@@ -235,7 +232,7 @@ public class GameScene {
                 // Right key was pressed. So move the player right by one cell.The canMove variable is set to false until the end of the animation.
                 if ((playerView.getX() + GRID_CELL_HEIGHT) < (28 * GRID_CELL_HEIGHT) && (playerView.getX() + GRID_CELL_HEIGHT) > 0 && canMove) {
                     canMove = false;
-                    smoothTransition(0, GRID_CELL_HEIGHT);
+                    smoothTransition(0, GRID_CELL_HEIGHT,3);
                 }
                 break;
             }
@@ -243,7 +240,7 @@ public class GameScene {
                 //Up key was pressed. So move the player down by one cell.The canMove variable is set to false until the end of the animation.
                 if ((playerView.getY() - GRID_CELL_HEIGHT) < (21 * GRID_CELL_HEIGHT) && (playerView.getY() - GRID_CELL_HEIGHT) > 0 && canMove) {
                     canMove = false;
-                    smoothTransition(-GRID_CELL_HEIGHT, 0);
+                    smoothTransition(-GRID_CELL_HEIGHT, 0,0);
                 }
                 break;
             }
@@ -251,7 +248,7 @@ public class GameScene {
                 //Down key was pressed. So move the player down by one cell.The canMove variable is set to false until the end of the animation.
                 if ((playerView.getY() + GRID_CELL_HEIGHT) < (21 * GRID_CELL_HEIGHT) && (playerView.getY() + GRID_CELL_HEIGHT) > 0 && canMove) {
                     canMove = false;
-                    smoothTransition(GRID_CELL_HEIGHT, 0);
+                    smoothTransition(GRID_CELL_HEIGHT, 0,1);
                 }
                 break;
             }

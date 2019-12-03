@@ -3,6 +3,7 @@ package group44;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 
@@ -23,6 +24,9 @@ public class MainMenuController {
     private Button play;
     @FXML
     private Button quit;
+    @FXML
+    private ImageView logo;
+    
     public MainMenuController(){
 
     }

@@ -3,6 +3,7 @@ package group44;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
@@ -19,7 +20,7 @@ public class ProfileCreatorController {
     @FXML
     private Button confirm;
     @FXML
-    private Button logo;
+    private ImageView logo;
     public ProfileCreatorController(){
     }
 
@@ -55,11 +56,11 @@ public class ProfileCreatorController {
         return confirm;
     }
 
-    public void setLogo(Button logo) {
+    public void setLogo(ImageView logo) {
         this.logo = logo;
     }
 
-    public Button getLogo() {
+    public ImageView getLogo() {
         return logo;
     }
 
