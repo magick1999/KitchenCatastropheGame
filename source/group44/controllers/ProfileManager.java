@@ -17,7 +17,16 @@ import javafx.collections.ObservableList;
  * @version 1.0
  */
 public class ProfileManager {
-	public static ObservableList<Profile> profiles = FXCollections.observableArrayList(new ArrayList<>());
+	private static ObservableList<Profile> profiles = FXCollections.observableArrayList(new ArrayList<>());
+
+	/**
+	 * Returns an {@link ObservableList} of profiles.
+	 *
+	 * @return an observable list of profiles.
+	 */
+	public static ObservableList<Profile> getProfiles() {
+		return ProfileManager.profiles;
+	}
 
 	/**
 	 * Returns a {@link Profile} with id.

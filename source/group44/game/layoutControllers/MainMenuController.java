@@ -38,8 +38,10 @@ public class MainMenuController {
     @FXML
     public void initialize(){
         logo.setImage(new Image("/group44/resources/kitchenLogo.png"));
+
+        // Load and Bind profiles to the selection
         ProfileManager.load(PROFILES);
-        profiles.setItems(ProfileManager.profiles);
+        profiles.setItems(ProfileManager.getProfiles());
     }
     public void setRoot(BorderPane root) {
         this.root = root;
