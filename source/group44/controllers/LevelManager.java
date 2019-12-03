@@ -14,7 +14,7 @@ import group44.game.Level;
  * @version 1.0
  */
 public class LevelManager {
-    private static final String LEVEL_FILE_PATTERN = "^level[0-9]+\\.txt$";
+    private static final String LEVEL_FILE_PATTERN = "^level_[0-9]+\\.txt$";
     private static ArrayList<LevelInfo> levelInfos = new ArrayList<>();
 
     /**
