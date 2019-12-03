@@ -4,6 +4,7 @@ import group44.controllers.ProfileManager;
 import group44.models.Profile;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -38,6 +39,19 @@ public class MainMenuController {
     @FXML
     public void initialize(){
         logo.setImage(new Image("/group44/resources/kitchenLogo.png"));
+
+        profiles.setCellFactory(param -> new ListCell<Profile>() {
+            @Override
+            protected void updateItem(Profile item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null || item.getUsername() == null) {
+                    setText(null);
+                } else {
+                    setText(item.getUsername());
+                }
+            }
+        });
 
         // Load and Bind profiles to the selection
         ProfileManager.load(PROFILES);
