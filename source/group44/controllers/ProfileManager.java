@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 import group44.exceptions.UsernameTakenException;
 import group44.models.Profile;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * Manages, loads, and saves user profiles.
@@ -15,7 +17,7 @@ import group44.models.Profile;
  * @version 1.0
  */
 public class ProfileManager {
-	private static ArrayList<Profile> profiles = new ArrayList<>();
+	public static ObservableList<Profile> profiles = FXCollections.observableArrayList(new ArrayList<>());
 
 	/**
 	 * Returns a {@link Profile} with id.
@@ -131,7 +133,9 @@ public class ProfileManager {
 			if (fileScanner != null) {
 				fileScanner.close();
 			}
-			ProfileManager.profiles = loadedProfiles;
+			for (Profile item : loadedProfiles) {
+				ProfileManager.profiles.add(item);
+			}
 		}
 	}
 
