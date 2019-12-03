@@ -3,6 +3,7 @@ package group44;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
@@ -14,6 +15,8 @@ public class MainGameWindowController {
     private Button restartButton;
     @FXML
     private Button resumeButton;
+    @FXML
+    public static Label timeLabel;
     @FXML
     private StackPane root;
     @FXML
@@ -66,6 +69,14 @@ public class MainGameWindowController {
     public Button getRestartButton() {
         return restartButton;
     }
+    
+    public void setTimeLabel(Label timeLabel) {
+    	this.timeLabel = timeLabel;
+    }
+
+    public static Label getTimeLabel() {
+        return timeLabel;
+    }
 
     public void setResumeButton(Button resumeButton) {
         this.resumeButton = resumeButton;
@@ -90,4 +101,7 @@ public class MainGameWindowController {
     public Pane getMovableObjects() {
         return movableObjects;
     }
+    
+  
+    
 }

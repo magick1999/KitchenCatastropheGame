@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -32,7 +33,10 @@ public class GameScene {
     // The canvas in the GUI. This needs to be a global variable
     // (in this setup) as we need to access it in different methods.
     private Canvas canvas;
-
+    
+    //Clock
+    private GTimer timer = new GTimer();
+    
     // Loaded images
     private Image player = new Image("group44/resources/player.png");
     private Image floor = new Image("group44/resources/floor.png");
@@ -55,6 +59,8 @@ public class GameScene {
     private Stage primaryStage;
     //This boolean lets the player move only after it has finished the previous animation.
     private boolean canMove = true;
+    
+    public static boolean paused = false;
     /**
      * This is the main method that loads everything required to draw the scene.
      * @param primaryStage represents the window where the stages are displayed
@@ -81,11 +87,15 @@ public class GameScene {
             drawMovableObjects();
             primaryStage.setScene(scene);
             primaryStage.show();
+            timer.startTimer(0);
         } catch (Exception e) {
             e.printStackTrace();
         }
         primaryStage.setTitle("Kitchen Catastrophe");
     }
+    
+    
+    
     /**
      * Adding the listeners to the menu buttons.
      * It also makes the player unable to move while the menu is closed.
@@ -93,6 +103,8 @@ public class GameScene {
      */
     private void setUpMenu() {
     	canMove = false;
+    	paused = true;
+    	timer.stopTimer();
     	myController.getResumeButton().setOnMouseClicked(this::setUpResume);
     	myController.getRestartButton().setOnMouseClicked(this::setUpRestart);
     	myController.getHomeButton().setOnMouseClicked(this::setUpHome);
@@ -103,7 +115,9 @@ public class GameScene {
      */
     private void setUpResume(MouseEvent event) {
         myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
+        timer.startTimer(timer.getTime());
     	canMove = true;
+    	paused = false;
     }
     
     /**
@@ -111,8 +125,10 @@ public class GameScene {
      * @param event This is the event for the click on the restart button.
      */
     private void setUpRestart(MouseEvent event) {
+    	timer.startTimer(0);
     	myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
     	canMove = true;
+    	paused = false;
     	playerView.setX(GRID_CELL_WIDTH);
     	playerView.setY(GRID_CELL_HEIGHT);
     }
@@ -217,8 +233,10 @@ public class GameScene {
         switch (event.getCode()) {
             case ESCAPE: {
             	canMove = false;
+            	
                 //Escape key was pressed. So show the menu.
                 myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
+                System.out.println(timer.getSspTime().get());
                 //Setting up the menu controls.
                 setUpMenu();
                 break;
