@@ -1,5 +1,7 @@
 package group44.entities;
 
+import group44.game.Level;
+
 /**
  * Abstract class from which all cells inherit.
  * 
@@ -11,12 +13,14 @@ public abstract class Cell extends LevelObject {
     /**
      * Creates a new {@link Cell}.
      * 
-     * @param title     - Title of the object
+     * @param level     - The {@link Level} where the {@link Cell} is located
+     * @param title     - Title of the {@link Cell}
      * @param positionX - Position X in the game
      * @param positionY - Position Y in the game
-     * @param imagePath - Image path of the instance
+     * @param imagePath - Path to the Image representing the {@link Cell} in the
+     *                  game
      */
-    public Cell(String title, int positionX, int positionY, String imagePath) {
-        super(title, positionX, positionY, imagePath);
+    public Cell(Level level, String title, int positionX, int positionY, String imagePath) {
+        super(level, title, positionX, positionY, imagePath);
     }
 }
