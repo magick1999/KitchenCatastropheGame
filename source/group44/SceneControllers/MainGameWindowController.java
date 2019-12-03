@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
-
 public class MainGameWindowController {
     @FXML
     private Button homeButton;
@@ -16,7 +15,7 @@ public class MainGameWindowController {
     @FXML
     private Button resumeButton;
     @FXML
-    public Label timeLabel;
+    private Label timeLabel;
     @FXML
     private StackPane root;
     @FXML
@@ -25,12 +24,13 @@ public class MainGameWindowController {
     private VBox menuBox;
     @FXML
     private Pane movableObjects;
-    public MainGameWindowController(){
+
+    public MainGameWindowController() {
 
     }
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         homeButton.setText("Home");
         restartButton.setText("Restart");
         resumeButton.setText("Resume");
@@ -50,7 +50,7 @@ public class MainGameWindowController {
         this.canvas = canvas;
     }
 
-    public Canvas getCanvas(){
+    public Canvas getCanvas() {
         return canvas;
     }
 
@@ -69,9 +69,9 @@ public class MainGameWindowController {
     public Button getRestartButton() {
         return restartButton;
     }
-    
+
     public void setTimeLabel(Label timeLabel) {
-    	this.timeLabel = timeLabel;
+        this.timeLabel = timeLabel;
     }
 
     public Label getTimeLabel() {
@@ -101,7 +101,4 @@ public class MainGameWindowController {
     public Pane getMovableObjects() {
         return movableObjects;
     }
-    
-  
-    
 }
