@@ -69,6 +69,23 @@ public class Leaderboard {
     }
 
     /**
+     * Indicates whether the used scored in top 3 for a specific level.
+     * 
+     * @param profile - the user {@link Profile}.
+     * @param levelId - the level id.
+     * @return true if user is in top 3; otherwise false.
+     */
+    public static boolean isInTopThreeRecors(Profile profile, int levelId) {
+        Record[] records = Leaderboard.getTopThreeRecords(levelId);
+        for (Record item : records) {
+            if (item.getProfile().getId() == profile.getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Returns an id the highest {@link Level} achieved by user.
      * 
      * @param profile - profile of the user.
