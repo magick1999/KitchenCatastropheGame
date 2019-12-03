@@ -16,7 +16,7 @@ public class MainGameWindowController {
     @FXML
     private Button resumeButton;
     @FXML
-    public static Label timeLabel;
+    public Label timeLabel;
     @FXML
     private StackPane root;
     @FXML
@@ -74,7 +74,7 @@ public class MainGameWindowController {
     	this.timeLabel = timeLabel;
     }
 
-    public static Label getTimeLabel() {
+    public Label getTimeLabel() {
         return timeLabel;
     }
 

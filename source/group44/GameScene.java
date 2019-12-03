@@ -60,7 +60,6 @@ public class GameScene {
     //This boolean lets the player move only after it has finished the previous animation.
     private boolean canMove = true;
     
-    public static boolean paused = false;
     /**
      * This is the main method that loads everything required to draw the scene.
      * @param primaryStage represents the window where the stages are displayed
@@ -87,7 +86,7 @@ public class GameScene {
             drawMovableObjects();
             primaryStage.setScene(scene);
             primaryStage.show();
-            timer.startTimer(0);
+            timer.startTimer(myController.getTimeLabel());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -103,8 +102,7 @@ public class GameScene {
      */
     private void setUpMenu() {
     	canMove = false;
-    	paused = true;
-    	timer.stopTimer();
+    	timer.pauseTimer();
     	myController.getResumeButton().setOnMouseClicked(this::setUpResume);
     	myController.getRestartButton().setOnMouseClicked(this::setUpRestart);
     	myController.getHomeButton().setOnMouseClicked(this::setUpHome);
@@ -114,10 +112,9 @@ public class GameScene {
      * @param event This is the event for the click on the resume button.
      */
     private void setUpResume(MouseEvent event) {
-        myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
-        timer.startTimer(timer.getTime());
+    	timer.resumeTimer();
+        myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());  
     	canMove = true;
-    	paused = false;
     }
     
     /**
@@ -125,10 +122,9 @@ public class GameScene {
      * @param event This is the event for the click on the restart button.
      */
     private void setUpRestart(MouseEvent event) {
-    	timer.startTimer(0);
+    	timer.startTimer(myController.getTimeLabel());
     	myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
     	canMove = true;
-    	paused = false;
     	playerView.setX(GRID_CELL_WIDTH);
     	playerView.setY(GRID_CELL_HEIGHT);
     }
@@ -137,6 +133,7 @@ public class GameScene {
      * @param event This is the event for the click on the restart button.
      */
     private void setUpHome(MouseEvent event) {
+    	timer.stopTimer();
     	new MainMenuScene(primaryStage);
     }
     
@@ -236,7 +233,7 @@ public class GameScene {
             	
                 //Escape key was pressed. So show the menu.
                 myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
-                System.out.println(timer.getSspTime().get());
+                timer.pauseTimer();
                 //Setting up the menu controls.
                 setUpMenu();
                 break;
