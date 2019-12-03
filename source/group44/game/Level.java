@@ -8,6 +8,7 @@ import group44.entities.MovableObject;
 import group44.entities.Player;
 import group44.entities.StepableCell;
 import group44.entities.Wall;
+import group44.exceptions.CollisionException;
 import group44.game.interfaces.IKeyReactive;
 import group44.game.interfaces.ILevel;
 import group44.game.interfaces.ITimeReactive;
@@ -22,12 +23,12 @@ import javafx.scene.input.KeyEvent;
  */
 public class Level implements ILevel {
     private final static String ERROR_DISPLAY_SIZE_ILLEGAL_ARGUMENT_EXCEPTION = "The displaySize must be odd and >= 3.";
+    private final static String ERROR_COLLISION_EXCEPTION = "Unable to place %s in the grid [%d][%d].";
 
     private int id;
     private Cell[][] grid; // The 2D game array
     private int displaySize; // The size of the grid displayed
     private Player player;
-    private Boolean isWon; // TODO: Add Observer pattern
 
     /**
      * Creates a new instance of {@link Level}.
@@ -119,8 +120,13 @@ public class Level implements ILevel {
      * @param x    - position X of the {@link Cell}
      * @param y    - position Y of the {@link Cell}
      * @param cell - the {@link Cell} to place in the grid
+     * @throws CollisionException when trying to rewrite existing cell in the grid
      */
-    public void addCell(int x, int y, Cell cell) {
+    public void addCell(int x, int y, Cell cell) throws CollisionException {
+        if (this.grid[x][y] != null) {
+            throw new CollisionException(String.format(Level.ERROR_COLLISION_EXCEPTION, cell.getTitle(), x, y));
+        }
+
         this.grid[x][y] = cell;
         if (cell instanceof StepableCell) {
             MovableObject object = ((StepableCell) cell).getMovableObject();
@@ -221,10 +227,5 @@ public class Level implements ILevel {
 
         return new Area(centerX - this.displaySize / 2, centerY - this.displaySize / 2, centerX + this.displaySize / 2,
                 centerY + this.displaySize / 2);
-    }
-
-    public void finish() {
-        this.isWon = true;
-        // TODO: Notify observers
     }
 }
