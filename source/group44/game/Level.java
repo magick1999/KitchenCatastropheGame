@@ -66,15 +66,16 @@ public class Level implements ILevel {
      * @return result of the collision check.
      */
     public CollisionCheckResult checkCollision(LevelObject obj) {
-        if (this.isColiding(obj)) {
-
-    /**
         Cell cell = this.grid[obj.getPositionX()][obj.getPositionY()];
 
-        if (cell instanceof StepableCell) {
-            if (((StepableCell) cell).getMovableObject() != obj) {
-                return true;
+        if (cell instanceof Wall) {
+            return new CollisionCheckResult(cell);
+        } else if (cell instanceof Door && ((Door) cell).isOpen() == false) {
+            return new CollisionCheckResult(cell);
+        } else if (cell instanceof Ground) {
+            Ground ground = (Ground) cell;
             if (ground.isSteppedOn() == true && ground.getMovableObject() != obj) {
+                return new CollisionCheckResult(ground.getMovableObject());
             }
         }
         return new CollisionCheckResult(null);
