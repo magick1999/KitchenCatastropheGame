@@ -69,22 +69,22 @@ public class SpriteAnimation extends Transition {
     }
     
     private void loadAnimations() {
-        animations[0][0] = wall;
-        animations[0][1] = player;
-        animations[0][2] = wall;
-        animations[0][3] = player;
-        animations[1][0] = wall;
-        animations[1][1] = player;
-        animations[1][2] = wall;
-        animations[1][3] = player;
-        animations[2][0] = new Image("/group44/resources/ChefLeftWalk/ChefLeftWalk1.png");
-        animations[2][1] = new Image("/group44/resources/ChefLeftWalk/ChefLeftWalk2.png");
-        animations[2][2] = new Image("/group44/resources/ChefLeftWalk/ChefLeftWalk3.png");
-        animations[2][3] = new Image("/group44/resources/ChefLeftWalk/ChefLeftWalk4.png");
-        animations[3][0] = new Image("/group44/resources/ChefRightWalk/ChefRightWalk1.png");
-        animations[3][1] = new Image("/group44/resources/ChefRightWalk/ChefRightWalk2.png");
-        animations[3][2] = new Image("/group44/resources/ChefRightWalk/ChefRightWalk3.png");
-        animations[3][3] = new Image("/group44/resources/ChefRightWalk/ChefRightWalk4.png");
+        animations[0][0] = new Image("/group44/resources/ChefUpWalk/Back1.png");
+        animations[0][1] = new Image("/group44/resources/ChefUpWalk/Back2.png");
+        animations[0][2] = new Image("/group44/resources/ChefUpWalk/Back3.png");
+        animations[0][3] = new Image("/group44/resources/ChefUpWalk/Back4.png");
+        animations[1][0] = new Image("/group44/resources/ChefDownWalk/Front1.png");
+        animations[1][1] = new Image("/group44/resources/ChefDownWalk/Front2.png");
+        animations[1][2] = new Image("/group44/resources/ChefDownWalk/Front3.png");
+        animations[1][3] = new Image("/group44/resources/ChefDownWalk/Front4.png");
+        animations[2][0] = new Image("/group44/resources/ChefLeftWalk/Left1.png");
+        animations[2][1] = new Image("/group44/resources/ChefLeftWalk/Left2.png");
+        animations[2][2] = new Image("/group44/resources/ChefLeftWalk/Left3.png");
+        animations[2][3] = new Image("/group44/resources/ChefLeftWalk/Left4.png");
+        animations[3][0] = new Image("/group44/resources/ChefRightWalk/Right1.png");
+        animations[3][1] = new Image("/group44/resources/ChefRightWalk/Right2.png");
+        animations[3][2] = new Image("/group44/resources/ChefRightWalk/Right3.png");
+        animations[3][3] = new Image("/group44/resources/ChefRightWalk/Right4.png");
     }
     /**
      * This method is called frequently to update the animation.

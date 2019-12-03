@@ -77,14 +77,6 @@ public class LevelSelectorController {
         return play;
     }
 
-    public void setLogo(Button logo) {
-        this.logo = logo;
-    }
-
-    public Button getLogo() {
-        return logo;
-    }
-
     public void setPrevious(Button previous) {
         this.previous = previous;
     }
