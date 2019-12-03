@@ -9,6 +9,8 @@ import java.util.Scanner;
 import group44.game.Level;
 import group44.models.Profile;
 import group44.models.Record;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * Represents a leaderboard of the game.
@@ -17,7 +19,7 @@ import group44.models.Record;
  * @version 1.0
  */
 public class Leaderboard {
-	private static ArrayList<Record> records = new ArrayList<>();
+	public static ObservableList<Record> records = FXCollections.observableArrayList(new ArrayList<>());
 
 	/**
 	 * Adds or updates a record in the {@link Leaderboard} if the time is
@@ -134,7 +136,9 @@ public class Leaderboard {
 			if (fileScanner != null) {
 				fileScanner.close();
 			}
-			Leaderboard.records = loadedRecords;
+			for (Record item : loadedRecords) {
+				Leaderboard.records.add(item);
+			}
 		}
 	}
 
