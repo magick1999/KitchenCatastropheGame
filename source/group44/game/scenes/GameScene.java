@@ -1,4 +1,4 @@
-package group44;
+package group44.game.scenes;
 
 import javafx.animation.*;
 import javafx.application.Application;
@@ -13,7 +13,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -26,6 +31,11 @@ import javafx.util.Duration;
 
 import static group44.Constants.*;
 
+import java.util.Optional;
+
+import group44.entities.SpriteAnimation;
+import group44.game.layoutControllers.MainGameWindowController;
+
 public class GameScene {
 
 
@@ -34,12 +44,9 @@ public class GameScene {
     private Canvas canvas;
 
     // Loaded images
-    private Image player = new Image("group44/resources/player.png");
+    private Image player = new Image("group44/resources/ChefDownWalk/Front1.png");
     private Image floor = new Image("group44/resources/floor.png");
     private Image wall = new Image("group44/resources/default_silver_sand.png");
-
-    //An array containing the map textures.
-    private ImageView[][] mapTextures = new ImageView[40][40];
 
     //The controller asociated with the specific fxml file.
     private MainGameWindowController myController;
@@ -50,8 +57,9 @@ public class GameScene {
     //The player data.
     private ImageView playerView = new ImageView();
     
-    private Scene scene;
-    
+    //It showcases the orientation of the player.
+    int orientation = 1;
+    //The window itself.
     private Stage primaryStage;
     //This boolean lets the player move only after it has finished the previous animation.
     private boolean canMove = true;
@@ -62,14 +70,13 @@ public class GameScene {
      */
     public GameScene(Stage primaryStage) {
     	this.primaryStage = primaryStage;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/group44/MainGameWindow.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/group44/game/layouts/MainGameWindow.fxml"));
         try {
             Parent root = fxmlLoader.load();
             //Setting the stage and adding my custom style to it.
             root.getStylesheets().add("group44/resources/application.css");
-            root.setId("pane");
+            root.setId("root");
             Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-            this.scene = scene;
             //Loading the controller
             MainGameWindowController tempController = fxmlLoader.getController();
             setController(tempController);
@@ -105,7 +112,43 @@ public class GameScene {
         myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
     	canMove = true;
     }
-    
+    /**
+     * This method is called when the game has ended.
+     * It shows the top 3 times and your time.
+     */
+    private void showTimes() {
+    	ButtonType levelSelector = new ButtonType("Level Selector", ButtonBar.ButtonData.OK_DONE);
+    	ButtonType mainMenu = new ButtonType("Main Menu", ButtonBar.ButtonData.OK_DONE);
+    	ButtonType restart = new ButtonType("Try Again", ButtonBar.ButtonData.OK_DONE);
+    	Alert a1 = new Alert(AlertType.NONE,  
+                "default Dialog",levelSelector,mainMenu,restart);
+    	a1.setHeight(400);
+    	a1.setWidth(500);
+    	a1.setTitle("Congrats on finishing the level!");
+    	a1.setContentText("Top times and your time: \n");//Here add the times with append 
+    	canMove=false;
+    	Optional<ButtonType> result = a1.showAndWait();
+    	if(!result.isPresent())
+    	{
+    		
+    	}
+    	else { 
+    		if(result.get() == levelSelector) {
+    			LevelSelectorScene ls = new LevelSelectorScene(primaryStage);
+    		}
+    	else {
+    			if(result.get() == mainMenu) {
+        			MainMenuScene ms = new MainMenuScene(primaryStage);
+    			}
+    		
+    		else {
+    				if(result.get() == restart) {
+    				setUpRestart(new MouseEvent(null, orientation, orientation, orientation, orientation, null, orientation, canMove, canMove, canMove, canMove, canMove, canMove, canMove, canMove, canMove, canMove, null));
+    				}
+    			}
+    		}
+    	}
+    }
     /**
      * Defining behaviour for the click on the restart button.Restarts the game and the time.
      * @param event This is the event for the click on the restart button.
@@ -171,7 +214,15 @@ public class GameScene {
         }
 
     }
-
+    /**
+     * This method should be called when the game has ended.
+     * The player time should be sent as a parameter to store it.
+     * Then an alert with the top 3 times and the player time will show.
+     */
+    private void endGame() {
+    	canMove=false;
+    	showTimes();
+    }
     /**
      * This method draws the movable objects onto a pane, above the canvas
      * so that the movement can be rendered smoothly.
@@ -192,9 +243,10 @@ public class GameScene {
      * @param yPos is the increment or decrement added to playerY.
      * @param xPos is the increment or decrement added to playerX.
      */
-    private void smoothTransition(double yPos, double xPos) {
-    	//Here is created an animation with the node to be moved being playerView, the duration and by how much to move it on the x and y axis.
-        final Animation animation = new SpriteAnimation(playerView, Duration.millis(200), xPos, yPos);
+    private void smoothTransition(double yPos, double xPos,int orientation) {
+    	//Here is created an animation with the node to be moved being playerView, the duration and by how much to move it on the x and y axis,
+    	//the orientation parameter indicates which way the player is facing.
+        final Animation animation = new SpriteAnimation(playerView, Duration.millis(200), xPos, yPos,orientation);
         //This sets the number of animation repetitions to 1 meaning that the animation is played only once.
         animation.setCycleCount(1);
         //This allows the player to perform another move.
@@ -227,7 +279,7 @@ public class GameScene {
                 // Left key was pressed. So move the player right by one cell.The canMove variable is set to false until the end of the animation.
                 if ((playerView.getX() - GRID_CELL_HEIGHT) < (28 * GRID_CELL_HEIGHT) && (playerView.getX() - GRID_CELL_HEIGHT) > 0 && canMove) {
                     canMove = false;
-                    smoothTransition(0, -GRID_CELL_HEIGHT);
+                    smoothTransition(0, -GRID_CELL_HEIGHT,2);
                 }
                 break;
             }
@@ -235,7 +287,7 @@ public class GameScene {
                 // Right key was pressed. So move the player right by one cell.The canMove variable is set to false until the end of the animation.
                 if ((playerView.getX() + GRID_CELL_HEIGHT) < (28 * GRID_CELL_HEIGHT) && (playerView.getX() + GRID_CELL_HEIGHT) > 0 && canMove) {
                     canMove = false;
-                    smoothTransition(0, GRID_CELL_HEIGHT);
+                    smoothTransition(0, GRID_CELL_HEIGHT,3);
                 }
                 break;
             }
@@ -243,7 +295,7 @@ public class GameScene {
                 //Up key was pressed. So move the player down by one cell.The canMove variable is set to false until the end of the animation.
                 if ((playerView.getY() - GRID_CELL_HEIGHT) < (21 * GRID_CELL_HEIGHT) && (playerView.getY() - GRID_CELL_HEIGHT) > 0 && canMove) {
                     canMove = false;
-                    smoothTransition(-GRID_CELL_HEIGHT, 0);
+                    smoothTransition(-GRID_CELL_HEIGHT, 0,0);
                 }
                 break;
             }
@@ -251,7 +303,7 @@ public class GameScene {
                 //Down key was pressed. So move the player down by one cell.The canMove variable is set to false until the end of the animation.
                 if ((playerView.getY() + GRID_CELL_HEIGHT) < (21 * GRID_CELL_HEIGHT) && (playerView.getY() + GRID_CELL_HEIGHT) > 0 && canMove) {
                     canMove = false;
-                    smoothTransition(GRID_CELL_HEIGHT, 0);
+                    smoothTransition(GRID_CELL_HEIGHT, 0,1);
                 }
                 break;
             }

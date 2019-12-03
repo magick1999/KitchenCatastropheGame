@@ -1,4 +1,4 @@
-package group44;
+package group44.game.layoutControllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -28,10 +28,6 @@ public class MainGameWindowController {
 
     @FXML
     public void initialize(){
-        homeButton.setText("Home");
-        restartButton.setText("Restart");
-        resumeButton.setText("Resume");
-        Font.loadFont(Main.class.getResource("resources/bloody.ttf").toExternalForm(), 40);
         menuBox.setVisible(false);
     }
 

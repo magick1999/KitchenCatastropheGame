@@ -1,4 +1,4 @@
-package group44;
+package group44.game.scenes;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 
 
 import javax.xml.soap.Text;
+
+import group44.game.layoutControllers.ProfileCreatorController;
 
 import static group44.Constants.WINDOW_HEIGHT;
 import static group44.Constants.WINDOW_WIDTH;
@@ -44,13 +46,13 @@ public class ProfileCreatorScene {
  */
     public ProfileCreatorScene(Stage primaryStage) {
     	//The FXML file is loaded.
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("profileCreator.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/group44/game/layouts/profileCreator.fxml"));
         this.primaryStage = primaryStage;
         try {
             Parent root = fxmlLoader.load();
             //Setting the stage and adding my custom style to it.
-            root.getStylesheets().add("sample/style.css");
-            root.setId("pane");
+            root.getStylesheets().add("group44/resources/application.css");
+            root.setId("root");
             Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
             //Setting the globally available controller.
             ProfileCreatorController tempController = fxmlLoader.getController();
@@ -62,6 +64,7 @@ public class ProfileCreatorScene {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        primaryStage.setTitle("Kitchen Catastrophe");
     }
     /**
      * Sets the globally available controller.

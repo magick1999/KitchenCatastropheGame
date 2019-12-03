@@ -10,6 +10,6 @@ public final class Constants {
     public static final int CANVAS_HEIGHT = 550;
 
     // The size of each cell
-    public static int GRID_CELL_WIDTH = 40;
-    public static int GRID_CELL_HEIGHT = 40;
+    public static int GRID_CELL_WIDTH = 60;
+    public static int GRID_CELL_HEIGHT = 60;
 }
