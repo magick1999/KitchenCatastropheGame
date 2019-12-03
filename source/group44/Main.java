@@ -15,6 +15,8 @@ import javafx.event.*;
 
 import static group44.Constants.*;
 
+import group44.game.scenes.MainMenuScene;
+
 /**
  * This class just redirects the player to the main menu stage.
  * @author Mihai
