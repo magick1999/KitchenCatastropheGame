@@ -1,4 +1,4 @@
-package group44;
+package group44.game.scenes;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 
 import static group44.Constants.WINDOW_HEIGHT;
 import static group44.Constants.WINDOW_WIDTH;
+
+import group44.game.layoutControllers.MainMenuController;
 /**
  * This class displays the main menu and handles all the redirecting of the player to the desired scenes.
  * It also allows the player to select the desired profile.
@@ -27,13 +29,13 @@ public class MainMenuScene {
      */
     public MainMenuScene(Stage primaryStage) {
     	//Load the FXML file.
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/group44/mainMenu.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/group44/game/layouts/mainMenu.fxml"));
         this.primaryStage = primaryStage;
         try {
         	//Setting the root.
             Parent root = fxmlLoader.load();
             //Setting the stage and adding my custom style to it.
-            root.getStylesheets().add("group44/application.css");
+            root.getStylesheets().add("group44/resources/application.css");
             root.setId("root");
             Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
             MainMenuController tempController = fxmlLoader.getController();
@@ -45,7 +47,7 @@ public class MainMenuScene {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Kitchen Catastrophe");
 
     }
     /**

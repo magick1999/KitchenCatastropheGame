@@ -1,4 +1,4 @@
-package group44;
+package group44.game.scenes;
 
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 
 import static group44.Constants.WINDOW_HEIGHT;
 import static group44.Constants.WINDOW_WIDTH;
+
+import group44.game.layoutControllers.LevelSelectorController;
 /**
  * This class displays the level selection screen and allows the player to select a certain level.
  * @author Mihai
@@ -31,12 +33,12 @@ public class LevelSelectorScene {
      * @param primaryStage This is the stage where the scene is displayed.
      */
     public LevelSelectorScene(Stage primaryStage){
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/group44/levelSelector.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/group44/game/layouts/levelSelector.fxml"));
         this.primaryStage=primaryStage;
         try {
             Parent root = fxmlLoader.load();
             //Setting the stage and adding my custom style to it.
-            root.getStylesheets().add("group44/application.css");
+            root.getStylesheets().add("group44/resources/application.css");
             root.setId("root");
             Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
             //Instantiating the controller.
@@ -49,7 +51,7 @@ public class LevelSelectorScene {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Kitchen Catastrophe");
     }
     /**
      * Sets the globally available controller.

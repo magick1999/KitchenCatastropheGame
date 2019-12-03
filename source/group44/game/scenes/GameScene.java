@@ -1,4 +1,4 @@
-package group44;
+package group44.game.scenes;
 
 import javafx.animation.*;
 import javafx.application.Application;
@@ -25,6 +25,9 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import static group44.Constants.*;
+
+import group44.entities.SpriteAnimation;
+import group44.game.layoutControllers.MainGameWindowController;
 
 public class GameScene {
 
@@ -60,11 +63,11 @@ public class GameScene {
      */
     public GameScene(Stage primaryStage) {
     	this.primaryStage = primaryStage;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/group44/MainGameWindow.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/group44/game/layouts/MainGameWindow.fxml"));
         try {
             Parent root = fxmlLoader.load();
             //Setting the stage and adding my custom style to it.
-            root.getStylesheets().add("group44/application.css");
+            root.getStylesheets().add("group44/resources/application.css");
             root.setId("root");
             Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
             //Loading the controller

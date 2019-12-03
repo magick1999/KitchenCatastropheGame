@@ -1,8 +1,8 @@
 @font-face {
-    src: url("/sample/SimpsonfontDEMO.otf");
+    src: url("../resources/SimpsonfontDEMO.otf");
 }
 #root{
-    -fx-background-image: url("background.png");
+    -fx-background-image: url("../resources/background.png");
     -fx-background-size: 800 600;
     -fx-max-height: 100%;
     -fx-max-width: 100%;
@@ -10,7 +10,7 @@
 
 }
 .button{
-    -fx-background-image: url("default_silver_sand.png");
+    -fx-background-image: url("../resources/sand.png");
     -fx-pref-width: 120px;
     -fx-pref-height: 40px;
     -fx-background-size: cover;
@@ -19,13 +19,13 @@
     -fx-font-family:"Simpsonfont";
 }
 #menuBox{
-    -fx-background-image: url("menuContainer.png");
+    -fx-background-image: url("../resources/menuContainer.png");
     -fx-background-size: cover;
     -fx-pref-height: 300;
     -fx-pref-width: 200;
 }
 #logo{
-    -fx-background-image: url("kitchenLogo.png");
+    -fx-background-image: url("../resources/kitchenLogo.png");
     -fx-background-size: cover;
     -fx-pref-height: 300;
     -fx-pref-width: 200;

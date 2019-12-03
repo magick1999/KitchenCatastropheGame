@@ -1,8 +1,9 @@
-package group44;
+package group44.game.layoutControllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
@@ -30,7 +31,10 @@ public class MainMenuController {
     public MainMenuController(){
 
     }
-
+    @FXML
+    public void initialize(){
+        logo.setImage(new Image("/group44/resources/kitchenLogo.png"));
+    }
     public void setRoot(BorderPane root) {
         this.root = root;
     }

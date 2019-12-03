@@ -1,4 +1,4 @@
-package group44;
+package group44.game.layoutControllers;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,13 +8,15 @@ import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 
 public class LevelSelectorController {
     @FXML
-    private Button logo;
+    private ImageView logo;
     @FXML
     private Button levelNum;
     @FXML
@@ -31,7 +33,10 @@ public class LevelSelectorController {
     private BorderPane root;
     public LevelSelectorController(){
     }
-
+    @FXML
+    public void initialize(){
+        logo.setImage(new Image("/group44/resources/kitchenLogo.png"));
+    }
     public void setMenu(Button menu) {
         this.menu = menu;
     }

@@ -1,4 +1,4 @@
-package group44;
+package group44.entities;
 
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;

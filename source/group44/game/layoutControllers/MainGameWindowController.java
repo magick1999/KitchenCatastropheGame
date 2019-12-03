@@ -1,4 +1,4 @@
-package group44;
+package group44.game.layoutControllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
