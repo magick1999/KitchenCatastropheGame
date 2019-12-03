@@ -1,5 +1,7 @@
 package group44.models;
 
+import group44.controllers.Leaderboard;
+
 /**
  * Represents a user profile.
  * 
@@ -9,7 +11,6 @@ package group44.models;
 public class Profile {
     private int id;
     private String username;
-    private int achievedLevel;
 
     /**
      * Creates a new instance of {@link Profile}.
@@ -17,7 +18,7 @@ public class Profile {
      * @param id       - Id of the new profile
      * @param username - the username
      */
-    public Profile(int id, String username, int achievedLevel) {
+    public Profile(int id, String username) {
         this.id = id;
         this.username = username;
     }
@@ -46,19 +47,7 @@ public class Profile {
      * @return the level id
      */
     public int getAchievedLevel() {
-        return this.achievedLevel;
-    }
-
-    /**
-     * Sets the achieved level to the new value. Keeps the old value if the new
-     * achieved level is lower than the actual achieved level.
-     * 
-     * @param achievedLevel - the achieved level
-     */
-    public void setAchievedLevel(int achievedLevel) {
-        if (this.achievedLevel < achievedLevel) {
-            this.achievedLevel = achievedLevel;
-        }
+        return Leaderboard.getAchievedLevel(this);
     }
 
     /**
