@@ -147,12 +147,17 @@ public class Leaderboard {
      */
     public static void save(String path) {
         File file = new File(path);
+        PrintWriter writer = null;
 
         try {
-            PrintWriter writer = new PrintWriter(file);
+            writer = new PrintWriter(file);
             Leaderboard.save(writer);
         } catch (Exception e) {
             System.out.println("Unable to save records.\n" + e.getMessage());
+        } finally {
+            if (writer != null) {
+                writer.close();
+            }
         }
     }
 
