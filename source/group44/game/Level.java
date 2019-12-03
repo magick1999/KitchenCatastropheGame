@@ -1,10 +1,13 @@
 package group44.game;
 
 import group44.entities.Cell;
+import group44.entities.Door;
+import group44.entities.Ground;
 import group44.entities.LevelObject;
 import group44.entities.MovableObject;
 import group44.entities.Player;
 import group44.entities.StepableCell;
+import group44.entities.Wall;
 import group44.game.interfaces.IKeyReactive;
 import group44.game.interfaces.ILevel;
 import group44.game.interfaces.ITimeReactive;
@@ -39,7 +42,7 @@ public class Level implements ILevel {
     public Level(int id, int gridWidth, int gridHeight, int displaySize) {
         this.id = id;
         this.grid = new Cell[gridWidth][gridHeight];
-        if (displaySize < 3 || displaySize > grid[0].length || displaySize > grid[0].length || displaySize % 2 != 1) {
+        if (displaySize < 3 || displaySize > gridWidth || displaySize > gridHeight || displaySize % 2 != 1) {
             throw new IllegalArgumentException(Level.ERROR_DISPLAY_SIZE_ILLEGAL_ARGUMENT_EXCEPTION);
         } else {
             this.displaySize = displaySize;
@@ -64,27 +67,17 @@ public class Level implements ILevel {
      */
     public CollisionCheckResult checkCollision(LevelObject obj) {
         if (this.isColiding(obj)) {
-            return new CollisionCheckResult(this.grid[obj.getPositionX()][obj.getPositionY()]);
-        }
-        return new CollisionCheckResult(null);
-    }
 
     /**
-     * Checks whether the object is colliding or not.
-     * 
-     * @param obj - object for which to check the collision.
-     * @return true if the object is colliding, otherwise false
-     */
-    private Boolean isColiding(LevelObject obj) {
         Cell cell = this.grid[obj.getPositionX()][obj.getPositionY()];
 
         if (cell instanceof StepableCell) {
             if (((StepableCell) cell).getMovableObject() != obj) {
                 return true;
+            if (ground.isSteppedOn() == true && ground.getMovableObject() != obj) {
             }
-        } else {
-
         }
+        return new CollisionCheckResult(null);
     }
 
     /**
