@@ -69,6 +69,26 @@ public class Leaderboard {
     }
 
     /**
+     * Returns an id the highest {@link Level} achieved by user.
+     * 
+     * @param profile - profile of the user.
+     * @return the id of the highest level; 0 if user did not finish any level.
+     */
+    public static int getAchievedLevel(Profile profile) {
+        int level = 0;
+
+        for (Record record : Leaderboard.records) {
+            if (record.getProfile() == profile) {
+                if (level < record.getLevelId()) {
+                    level = record.getLevelId();
+                }
+            }
+        }
+
+        return level;
+    }
+
+    /**
      * Loads records from the file.
      * 
      * @param path - path to a file with records
@@ -147,12 +167,17 @@ public class Leaderboard {
      */
     public static void save(String path) {
         File file = new File(path);
+        PrintWriter writer = null;
 
         try {
-            PrintWriter writer = new PrintWriter(file);
+            writer = new PrintWriter(file);
             Leaderboard.save(writer);
         } catch (Exception e) {
             System.out.println("Unable to save records.\n" + e.getMessage());
+        } finally {
+            if (writer != null) {
+                writer.close();
+            }
         }
     }
 
@@ -161,7 +186,7 @@ public class Leaderboard {
      * 
      * @param writer - {@link PrintWriter} to use when saving r cords
      */
-    public static void save(PrintWriter writer) {
+    private static void save(PrintWriter writer) {
         for (Record record : Leaderboard.records) {
             writer.println(record.toString());
         }
