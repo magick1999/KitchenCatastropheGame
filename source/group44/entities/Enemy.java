@@ -10,6 +10,7 @@ import group44.game.Level;
  * @version 1.0
  */
 public abstract class Enemy extends MovableObject {
+    private static final String ON_STEPPED_MESSAGE = "%s stepped on %s at position [%d,%d].";
 
     /**
      * Creates a new Enemy in a {@link Level} at position and velocity.
@@ -70,5 +71,24 @@ public abstract class Enemy extends MovableObject {
         } else if (object instanceof Water) {
             super.die(object);
         }
+    }
+
+    /**
+     * Interacts with the {@link StepableCell} on which the {@link Enemy} stepped.
+     * 
+     * @param cell - Cell on which the {@link Enemy} stepped.
+     */
+    @Override
+    protected void onCellStepped(StepableCell cell) {
+        System.out.printf(Enemy.ON_STEPPED_MESSAGE, this.getTitle(), cell.getTitle(), cell.getPositionX(),
+                cell.getPositionY());
+    }
+
+    /**
+     * Turns the {@link Enemy} around.
+     */
+    protected void turnAround() {
+        this.setVelocityX(this.getVelocityX() * -1);
+        this.setVelocityY(this.getVelocityY() * -1);
     }
 }
