@@ -1,6 +1,6 @@
 package group44.entities;
 
-import javafx.scene.paint.Color;
+import group44.game.Level;
 
 /**
  * Represents a colored {@link Key} in the game.
@@ -14,12 +14,13 @@ public class Key extends CollectableItem {
     /**
      * Creates a new instance of {@link Key} of specific color type.
      * 
+     * @param level     - The {@link Level} where the {@link Key} is located
      * @param type      - Color type of the {@link Key}
      * @param positionX - Position X in the game
      * @param positionY - Position Y in the game
      */
-    public Key(KeyType type, int positionX, int positionY) {
-        super(type.getTitle(), positionX, positionY, type.getImagePath());
+    public Key(Level level, KeyType type, int positionX, int positionY) {
+        super(level, type.getTitle(), positionX, positionY, type.getImagePath());
         this.keyType = type;
     }
 
