@@ -1,5 +1,6 @@
 package group44.game;
 
+import group44.entities.Cell;
 import group44.entities.LevelObject;
 import group44.entities.MovableObject;
 import group44.entities.Player;
@@ -20,7 +21,7 @@ public class Level implements ILevel {
     private final static String ERROR_DISPLAY_SIZE_ILLEGAL_ARGUMENT_EXCEPTION = "The displaySize must be odd and >= 3.";
 
     private int id;
-    private LevelObject[][] grid; // The 2D game array
+    private Cell[][] grid; // The 2D game array
     private int displaySize; // The size of the grid displayed
     private Player player;
     private Boolean isWon; // TODO: Add Observer pattern
@@ -37,7 +38,7 @@ public class Level implements ILevel {
      */
     public Level(int id, int gridWidth, int gridHeight, int displaySize) {
         this.id = id;
-        this.grid = new LevelObject[gridWidth][gridHeight];
+        this.grid = new Cell[gridWidth][gridHeight];
         if (displaySize < 3 || displaySize > grid[0].length || displaySize > grid[0].length || displaySize % 2 != 1) {
             throw new IllegalArgumentException(Level.ERROR_DISPLAY_SIZE_ILLEGAL_ARGUMENT_EXCEPTION);
         } else {
@@ -75,15 +76,23 @@ public class Level implements ILevel {
      * @return true if the object is colliding, otherwise false
      */
     private Boolean isColiding(LevelObject obj) {
-        return this.grid[obj.getPositionX()][obj.getPositionY()] != obj;
+        Cell cell = this.grid[obj.getPositionX()][obj.getPositionY()];
+
+        if (cell instanceof StepableCell) {
+            if (((StepableCell) cell).getMovableObject() != obj) {
+                return true;
+            }
+        } else {
+
+        }
     }
 
     /**
-     * Returns a 2D array with all {@link LevelObject} in the {@link Level}.
+     * Returns a 2D array with all {@link Cell} in the {@link Level}.
      * 
-     * @return 2D array of {@link LevelObject}s
+     * @return 2D array of {@link Cell}s
      */
-    public LevelObject[][] getGrid() {
+    public Cell[][] getGrid() {
         /*
          * The only class we will possibly use this method is the SmartTargetingEnemy.
          * Using some kind of repository does not make sence as the SmartTargetingEnemy
@@ -93,16 +102,34 @@ public class Level implements ILevel {
     }
 
     /**
-     * Adds {@link LevelObject} in the grid to the specific location.
+     * Returns a width of the game.
      * 
-     * @param x           - position X of the {@link LevelObject}
-     * @param y           - position Y of the {@link LevelObject}
-     * @param levelObject - the {@link LevelObject} to place in the grid
+     * @return width of the game
      */
-    public void addLevelObject(int x, int y, LevelObject levelObject) {
-        this.grid[x][y] = levelObject;
-        if (levelObject instanceof StepableCell) {
-            MovableObject object = ((StepableCell) levelObject).getMovableObject();
+    public int getGridWidth() {
+        return this.grid.length;
+    }
+
+    /**
+     * Returns a height of the game.
+     * 
+     * @return height of the game
+     */
+    public int getGridHeight() {
+        return this.grid[0].length;
+    }
+
+    /**
+     * Adds {@link Cell} in the grid to the specific location.
+     * 
+     * @param x    - position X of the {@link Cell}
+     * @param y    - position Y of the {@link Cell}
+     * @param cell - the {@link Cell} to place in the grid
+     */
+    public void addCell(int x, int y, Cell cell) {
+        this.grid[x][y] = cell;
+        if (cell instanceof StepableCell) {
+            MovableObject object = ((StepableCell) cell).getMovableObject();
             if (object instanceof Player) {
                 this.player = (Player) object;
             }
@@ -151,7 +178,7 @@ public class Level implements ILevel {
     }
 
     /**
-     * Invokes timeTick method on all {@link LevelObject}s in the active game area
+     * Invokes timeTick method on all {@link Cell}s in the active game area
      * implementing {@link group44.game.interfaces.ITimeReactive}.
      */
     @Override
@@ -162,6 +189,15 @@ public class Level implements ILevel {
             for (int y = activeArea.getY1(); y < activeArea.getY2(); y++) {
                 if (this.grid[x][y] instanceof ITimeReactive) {
                     ((ITimeReactive) this.grid[x][y]).timeTick();
+                }
+                if (this.grid[x][y] instanceof StepableCell) {
+                    StepableCell cell = (StepableCell) this.grid[x][y];
+                    if (cell.isSteppedOn()) {
+                        MovableObject movableObject = cell.getMovableObject();
+                        if (movableObject instanceof ITimeReactive) {
+                            ((ITimeReactive) movableObject).timeTick();
+                        }
+                    }
                 }
             }
         }
