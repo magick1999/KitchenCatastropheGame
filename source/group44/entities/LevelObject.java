@@ -1,14 +1,13 @@
 package group44.entities;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
 import group44.game.Level;
 
 /**
  * Abstract class from which all other classes in the game inherit.
  *
- * @author Tomas Svejnoha, Rowan Aldean
+ * @author Tomas Svejnoha
  * @version 1.0
  */
 public abstract class LevelObject {
@@ -19,12 +18,12 @@ public abstract class LevelObject {
     private int positionY; // Position Y in the game array
 
     /**
-     * Creates a new {@link LevelObject} with default colors.
+     * Creates a new {@link LevelObject}.
      *
-     * @param level     - The {@link Level} in which the {@link LevelObject} exists
-     * @param title     - Title of the object
-     * @param positionX - Position X in the game
-     * @param positionY - Position Y in the game
+     * @param level     - The {@link Level} in which the {@link LevelObject} exists.
+     * @param title     - Title of the object.
+     * @param positionX - Position X in the game.
+     * @param positionY - Position Y in the game.
      */
     public LevelObject(Level level, String title, int positionX, int positionY) {
         this.level = level;
@@ -35,29 +34,15 @@ public abstract class LevelObject {
     /**
      * Creates a new {@link LevelObject}.
      *
-     * @param level     - The {@link Level} in which the {@link LevelObject} exists
-     * @param title     - Title of the object
-     * @param positionX - Position X in the game
-     * @param positionY - Position Y in the game
-     * @param imagePath - Image path of the instance
+     * @param level     - The {@link Level} in which the {@link LevelObject} exists.
+     * @param title     - Title of the object.
+     * @param positionX - Position X in the game.
+     * @param positionY - Position Y in the game.
+     * @param imagePath - Image path of the instance.
      */
     public LevelObject(Level level, String title, int positionX, int positionY, String imagePath) {
         this(level, title, positionX, positionY);
         this.setImage(new Image(imagePath, true));
-    }
-
-    /**
-     * Creates a new {@link LevelObject}.
-     *
-     * @param level           - The {@link Level} in which the {@link LevelObject}
-     *                        exists
-     * @param title           - Title of the object
-     * @param positionX       - Position X in the game
-     * @param positionY       - Position Y in the game
-     */
-    public LevelObject(Level level, String title, int positionX, int positionY, Color foregroundColor,
-            Color backgroundColor) {
-        this(level, title, positionX, positionY);
     }
 
     /**
@@ -130,7 +115,7 @@ public abstract class LevelObject {
     }
 
     /**
-     * Draws the object in {@link GraphicsContext} if there is Image associated.
+     * Draws the object in {@link GraphicsContext} if there is an Image associated.
      *
      * @param gc     - {@link GraphicsContext} used to draw the object
      * @param x      - The X coordinate in the {@link GraphicsContext} where to draw
