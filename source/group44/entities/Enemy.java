@@ -5,16 +5,15 @@ import group44.game.Level;
 
 /**
  * Abstract class for all enemies.
- * 
+ *
  * @author Tomas Svejnoha
  * @version 1.0
  */
 public abstract class Enemy extends MovableObject {
-    private static final String ON_STEPPED_MESSAGE = "%s stepped on %s at position [%d,%d].";
 
     /**
      * Creates a new Enemy in a {@link Level} at position and velocity.
-     * 
+     *
      * @param level     - The {@link Level} where the {@link Enemy} is located.
      * @param title     - The name of the {@link Enemy}.
      * @param positionX - Position X of the {@link Enemy}.
@@ -46,14 +45,13 @@ public abstract class Enemy extends MovableObject {
 
         if (nextCell != null) {
             CollisionCheckResult collisionResult = nextCell.stepOn(this);
-            if (collisionResult.getIsColliding() && this.isAlive()) {
+            if (collisionResult.isColliding()) {
                 // Colliding; stepOn was NOT successful
-                this.onCollided((MovableObject) collisionResult.getCollidingObject());
+                this.onCollided(collisionResult);
             } else {
                 // Not colliding; stepOn was successful
                 currentCell.stepOff();
                 this.setPosition(nextCell.getPositionX(), nextCell.getPositionY());
-                this.onCellStepped(nextCell);
             }
         }
     }
@@ -61,7 +59,7 @@ public abstract class Enemy extends MovableObject {
     /**
      * Method executed when some other {@link LevelObject} tries to kill the
      * {@link Enemy}. The enemy will die if he can't protect himself.
-     * 
+     *
      * @param object - the {@link LevelObject} trying to kill the {@link Player}.
      */
     @Override
@@ -71,17 +69,6 @@ public abstract class Enemy extends MovableObject {
         } else if (object instanceof Water) {
             super.die(object);
         }
-    }
-
-    /**
-     * Interacts with the {@link StepableCell} on which the {@link Enemy} stepped.
-     * 
-     * @param cell - Cell on which the {@link Enemy} stepped.
-     */
-    @Override
-    protected void onCellStepped(StepableCell cell) {
-        System.out.printf(Enemy.ON_STEPPED_MESSAGE, this.getTitle(), cell.getTitle(), cell.getPositionX(),
-                cell.getPositionY());
     }
 
     /**
