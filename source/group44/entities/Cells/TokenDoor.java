@@ -57,7 +57,7 @@ public class TokenDoor extends Door {
 	}
 
 	/**
-     * Places {@link MovableObject} on the {@link KeyDoor}.
+     * Places {@link MovableObject} on the {@link TokenDoor}.
      * If then door is locked, {@link CollisionCheckResult} with the door as a colliding object is returned.
      * Otherwise, returns a successful {@link CollisionCheckResult}.
      *

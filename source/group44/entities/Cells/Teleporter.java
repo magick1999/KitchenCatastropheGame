@@ -7,7 +7,7 @@ import group44.game.Level;
 /**
  * Represents a teleporter in the game. The {@link Teleporter} will teleport the
  * player to some {@link StepableCell} around the linked {@link Teleporter}.
- * 
+ *
  * @author Tomas Svejnoha
  * @version 1.0
  */
@@ -16,15 +16,13 @@ public class Teleporter extends StepableCell {
 
     /**
      * Creates a new instance of {@link Teleporter} with linked {@link Teleporter}.
-     * 
-     * @param level            - The {@link Level} where the {@link Teleporter} is
-     *                         located
-     * @param title            - The title of the {@link Teleporter}
-     * @param positionX        - The position X in the game
-     * @param positionY        - The position Y in the game
-     * @param imagePath        - Path to the Image representing {@link Teleporter}
-     *                         in the game.
-     * @param linkedTeleporter - The linked {@link Teleporter}
+     *
+     * @param level            - The {@link Level} where the {@link Teleporter} is located.
+     * @param title            - The title of the {@link Teleporter}.
+     * @param positionX        - The position X in the game.
+     * @param positionY        - The position Y in the game.
+     * @param imagePath        - Path to the Image representing {@link Teleporter} in the game.
+     * @param linkedTeleporter - The linked {@link Teleporter}.
      */
     public Teleporter(Level level, String title, int positionX, int positionY, String imagePath,
             Teleporter linkedTeleporter) {
@@ -34,8 +32,8 @@ public class Teleporter extends StepableCell {
 
     /**
      * Teleports the {@link MovableObject} to the linked teleporter.
-     * 
-     * @param objectc - {@link MovableObject} that steppe on the {@link Teleporter}
+     *
+     * @param object - {@link MovableObject} that stepped on the {@link Teleporter}.
      */
     @Override
     protected void onStepped(MovableObject object) {
@@ -47,9 +45,9 @@ public class Teleporter extends StepableCell {
     /**
      * Teleports the {@link MovableObject} to the linked {@link Teleporter} if there
      * is some.
-     * 
-     * @param object - the {@link MovableObject} to teleport
-     * @return true if the teleportation was successful; false otherwise
+     *
+     * @param object - the {@link MovableObject} to teleport.
+     * @return true if the teleportation was successful; false otherwise.
      */
     protected Boolean teleport(MovableObject object) {
         if (this.linkedTeleporter != null) {
@@ -72,10 +70,9 @@ public class Teleporter extends StepableCell {
     /**
      * Returns the {@link LevelObject}s surrounding the {@link LevelObject} passed
      * as a parameter.
-     * 
-     * @param object - the surrounded {@link LevelObject}
-     * @return an array of {@link LevelObject}s surrounding the object passed as a
-     *         parameter
+     *
+     * @param object - the surrounded {@link LevelObject}.
+     * @return an array of {@link LevelObject}s surrounding the object passed as a parameter.
      */
     private LevelObject[][] getSurroundingArea(LevelObject object) {
         LevelObject[][] grid = this.getLevel().getGrid();

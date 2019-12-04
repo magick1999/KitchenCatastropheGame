@@ -26,17 +26,13 @@ public class Ground extends StepableCell {
     }
 
     /**
-     * Creates a new instance of {@link Ground} at a specific location in the
-     * {@link Level}.
+     * Creates a new instance of {@link Ground} at a specific location in the {@link Level}.
      *
-     * @param level           - The {@link Level} where the {@link Goal} is located
-     * @param positionX       - Position X of the {@link Ground} in the
-     *                        {@link Level}
-     * @param positionY       - Position Y of the {@link Ground} in the
-     *                        {@link Level}
-     * @param imagePath       - Path to the Image representing the {@link Ground} in
-     *                        the game
-     * @param collectableItem - {@link CollectableItem} placed on the {@link Ground}
+     * @param level           - The {@link Level} where the {@link Goal} is located.
+     * @param positionX       - Position X of the {@link Ground} in the {@link Level}.
+     * @param positionY       - Position Y of the {@link Ground} in the {@link Level}.
+     * @param imagePath       - Path to the Image representing the {@link Ground} in the game.
+     * @param collectableItem - {@link CollectableItem} placed on the {@link Ground}.
      */
     public Ground(Level level, int positionX, int positionY, String imagePath, CollectableItem collectableItem) {
         this(level, positionX, positionY, imagePath);
@@ -46,7 +42,7 @@ public class Ground extends StepableCell {
     /**
      * Returns {@link CollectableItem} placed on the {@link Ground}.
      *
-     * @return {@link CollectableItem} if present; otherwise null
+     * @return {@link CollectableItem} if present; otherwise null.
      */
     public CollectableItem collect() {
         CollectableItem item = this.collectableItem;
@@ -58,7 +54,7 @@ public class Ground extends StepableCell {
      * Indicates whether there is some {@link CollectableItem} on the {@link Ground}
      * or not.
      *
-     * @return true if there is {@link CollectableItem}; false otherwise
+     * @return true if there is {@link CollectableItem}; false otherwise.
      */
     public Boolean hasCollectableItem() {
         return this.collectableItem != null;
