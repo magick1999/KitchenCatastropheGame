@@ -21,7 +21,7 @@ import javafx.scene.input.KeyEvent;
  * @author Tomas Svejnoha
  * @version 1.0
  */
-public class Level implements ILevel {
+public class Level {
     private final static String ERROR_DISPLAY_SIZE_ILLEGAL_ARGUMENT_EXCEPTION = "The displaySize must be odd and >= 3.";
     private final static String ERROR_COLLISION_EXCEPTION = "Unable to place %s in the grid [%d][%d].";
 
@@ -150,7 +150,6 @@ public class Level implements ILevel {
      *
      * @param gc - {@link GraphicsContext} to which the game is drawn
      */
-    @Override
     public void draw(GraphicsContext gc) {
         double cellWidth = gc.getCanvas().getWidth() / this.displaySize;
         double cellHeight = gc.getCanvas().getHeight() / this.displaySize;
@@ -170,36 +169,9 @@ public class Level implements ILevel {
      *
      * @param event - the {@link KeyEvent}
      */
-    @Override
     public void keyDown(KeyEvent event) {
         if (this.grid[this.player.getPositionX()][this.player.getPositionY()] instanceof IKeyReactive) {
             ((IKeyReactive) this.grid[this.player.getPositionX()][this.player.getPositionY()]).keyDown(event);
-        }
-    }
-
-    /**
-     * Invokes timeTick method on all {@link Cell}s in the active game area
-     * implementing {@link group44.game.interfaces.ITimeReactive}.
-     */
-    @Override
-    public void timeTick() {
-        Area activeArea = this.getActiveArea();
-
-        for (int x = activeArea.getX1(); x < activeArea.getX2(); x++) {
-            for (int y = activeArea.getY1(); y < activeArea.getY2(); y++) {
-                if (this.grid[x][y] instanceof ITimeReactive) {
-                    ((ITimeReactive) this.grid[x][y]).timeTick();
-                }
-                if (this.grid[x][y] instanceof StepableCell) {
-                    StepableCell cell = (StepableCell) this.grid[x][y];
-                    if (cell.isSteppedOn()) {
-                        MovableObject movableObject = cell.getMovableObject();
-                        if (movableObject instanceof ITimeReactive) {
-                            ((ITimeReactive) movableObject).timeTick();
-                        }
-                    }
-                }
-            }
         }
     }
 
