@@ -2,6 +2,7 @@ package group44.entities.MovableObjects;
 
 import group44.entities.LevelObject;
 import group44.entities.Cells.Ground;
+import group44.game.CollisionCheckResult;
 import group44.game.Level;
 
 /**
@@ -36,14 +37,13 @@ public class WallFollowingEnemy extends Enemy {
 	 * Method invoked after the {@link WallFollowingEnemy} collided with another
 	 * {@link MovableObject}.
 	 *
-	 * @param object
-	 *            - the colliding {@link MovableObject}
+	 * @param result - the {@link CollisionCheckResult} with the collision status.
 	 */
 	@Override
-	protected void onCollided(MovableObject object) {
-		if (object instanceof Player) {
-			object.die(this);
-		} else if (object instanceof Enemy) {
+	protected void onCollided(CollisionCheckResult result) {
+		if (result.getCollidingObject() instanceof Player) {
+			((Player) result.getCollidingObject()).die(this);
+		} else if (result.getCollidingObject() instanceof Enemy) {
 			this.turnAround();
 		}
 	}
