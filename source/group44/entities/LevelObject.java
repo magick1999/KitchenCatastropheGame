@@ -48,7 +48,7 @@ public abstract class LevelObject {
     /**
      * Gets the title of an object.
      *
-     * @return the title of the object
+     * @return the title of the object.
      */
     public String getTitle() {
         return this.title;
@@ -57,7 +57,7 @@ public abstract class LevelObject {
     /**
      * Sets the title of an object.
      *
-     * @param title - the title to set
+     * @param title - the title to set.
      */
     public void setTitle(String title) {
         this.title = title;
@@ -75,12 +75,17 @@ public abstract class LevelObject {
     /**
      * Sets an image of the object.
      *
-     * @param image - the image
+     * @param image - the image.
      */
     public void setImage(Image image) {
         this.image = image;
     }
 
+    /**
+     * Returns the {@link Level} in which the object is located.
+     *
+     * @return the {@link Level}.
+     */
     public Level getLevel() {
         return this.level;
     }
@@ -106,8 +111,8 @@ public abstract class LevelObject {
     /**
      * Sets object position to x and y.
      *
-     * @param x - X coordinate
-     * @param y - Y coordinate
+     * @param x - X coordinate.
+     * @param y - Y coordinate.
      */
     public void setPosition(int x, int y) {
         this.positionX = x;
@@ -117,15 +122,15 @@ public abstract class LevelObject {
     /**
      * Draws the object in {@link GraphicsContext} if there is an Image associated.
      *
-     * @param gc     - {@link GraphicsContext} used to draw the object
+     * @param gc     - {@link GraphicsContext} used to draw the object.
      * @param x      - The X coordinate in the {@link GraphicsContext} where to draw
-     *               the {@link LevelObject}
+     *               the {@link LevelObject}.
      * @param y      - The Y coordinate in the {@link GraphicsContext} where to draw
-     *               the {@link LevelObject}
+     *               the {@link LevelObject}.
      * @param width  - The width of the {@link LevelObject} in the
-     *               {@link GraphicsContext}
+     *               {@link GraphicsContext}.
      * @param height - The height of the {@link LevelObject} in the
-     *               {@link GraphicsContext}
+     *               {@link GraphicsContext}.
      */
     public void draw(GraphicsContext gc, double x, double y, double width, double height) {
     	if (this.getImage() != null) {
