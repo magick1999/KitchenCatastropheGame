@@ -50,14 +50,12 @@ public class GameScene {
     private Image floor = new Image("group44/resources/floor.png");
     private Image wall = new Image("group44/resources/default_silver_sand.png");
 
-<<<<<<< HEAD:source/group44/GameScene.java
     //An array containing the map textures.
     private ImageView[][] mapTextures = new ImageView[40][40];
 
     //The controller associated with the specific fxml file.
-=======
+
     //The controller asociated with the specific fxml file.
->>>>>>> mihai/dev:source/group44/game/scenes/GameScene.java
     private MainGameWindowController myController;
     
     //Holds the map images
@@ -74,7 +72,6 @@ public class GameScene {
     private boolean canMove = true;
 
     //Testing with fileReader
-    Level testLevel = FileHandler.readLevelFile("level1.txt");
 
     /**
      * This is the main method that loads everything required to draw the scene.
@@ -97,7 +94,7 @@ public class GameScene {
             setCanvas(myController.getCanvas());
             //Adding the key listener to the scene.
             scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> processKeyEvent(event));
-            drawGame(testLevel);
+            drawGame();
             drawMovableObjects();
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -203,7 +200,7 @@ public class GameScene {
     /**
      * This method draws every non movable object onto the screen.
      */
-    private void drawGame(Level aLevel) {
+    private void drawGame() {
         // Get the Graphic Context of the canvas. This is what we draw on.
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -212,14 +209,8 @@ public class GameScene {
 
 
         //TODO: Read each object from each row array in the grid map and draw themselves.
-        for(LevelObject[] row: aLevel.getGrid()){
-            for(LevelObject obj: row){
-                obj.draw(gc, obj.getPositionX(), obj.getPositionY(), GRID_CELL_WIDTH, GRID_CELL_HEIGHT);
-            }
-        }
 
         //KEPT FOR REFERENCE
-        /*
         //Adding objects to map.
         for (int x = 0; x <= 10; x++) {
             for (int j = 0; j <= 10; j++) {
@@ -236,7 +227,7 @@ public class GameScene {
             for (int j = 0; j <= 10; ++j) {
                 gc.drawImage(map[i][j],j*GRID_CELL_WIDTH,i*GRID_CELL_HEIGHT);
             }
-        }*/
+        }
 
     }
     /**
@@ -338,7 +329,7 @@ public class GameScene {
         }
 
         // Redraw game as the player may have moved.
-        drawGame(testLevel);
+        drawGame();
         // Consume the event. This means we mark it as dealt with. This stops other GUI nodes (buttons etc) responding to it.
         event.consume();
     }
