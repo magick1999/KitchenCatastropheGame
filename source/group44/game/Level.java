@@ -57,29 +57,6 @@ public class Level {
     }
 
     /**
-     * Checks whether the object is colliding or not.
-     *
-     * @param obj - object for to check the collision.
-     *
-     * @return result of the collision check.
-     */
-    public CollisionCheckResult checkCollision(LevelObject obj) {
-        Cell cell = this.grid[obj.getPositionX()][obj.getPositionY()];
-
-        if (cell instanceof Wall) {
-            return new CollisionCheckResult(cell);
-        } else if (cell instanceof Door && ((Door) cell).isOpen() == false) {
-            return new CollisionCheckResult(cell);
-        } else if (cell instanceof Ground) {
-            Ground ground = (Ground) cell;
-            if (ground.isSteppedOn() == true && ground.getMovableObject() != obj) {
-                return new CollisionCheckResult(ground.getMovableObject());
-            }
-        }
-        return new CollisionCheckResult(null);
-    }
-
-    /**
      * Returns a 2D array with all {@link Cell} in the {@link Level}.
      *
      * @return 2D array of {@link Cell}s
