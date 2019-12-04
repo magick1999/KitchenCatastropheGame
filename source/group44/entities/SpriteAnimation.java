@@ -40,10 +40,6 @@ public class SpriteAnimation extends Transition {
     private double startingX;
     //The starting y position.
     private double startingY;
-
-    public SpriteAnimation(
-            ImageView imageView,
-            Duration duration, double x, double y) {
     //This showcases the orientation of the player.
     int orientation;
     //Sets the speed of the animation.
@@ -61,9 +57,6 @@ public class SpriteAnimation extends Transition {
         this.imageView = imageView;
         startingX = imageView.getX();
         startingY = imageView.getY();
-        this.count = 5;
-        this.byX = x;
-        this.byY = y;
         this.count = 3;
         this.orientation=orientation;
         this.byX = x;
@@ -99,18 +92,6 @@ public class SpriteAnimation extends Transition {
      */
     protected void interpolate(double k) {
     	//Move the player.
-        imageView.setX(startingX+(k * byX));
-        imageView.setY(startingY+(k * byY));
-        //Change the image.
-        if (imageCounter<=count) {
-            imageView.setImage(images.get(imageCounter));
-            imageCounter++;
-        }else{
-        	imageView.setImage(images.get(0));
-            imageCounter = 1;
-            }
-    }
-}
         if (speed % 3 == 0 || k==1) {
             imageView.setX(startingX + (k * byX));
             imageView.setY(startingY + (k * byY));
