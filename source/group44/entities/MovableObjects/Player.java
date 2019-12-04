@@ -7,6 +7,7 @@ import group44.entities.Cells.Fire;
 import group44.entities.Cells.Ground;
 import group44.entities.Cells.KeyDoor;
 import group44.entities.Cells.StepableCell;
+import group44.entities.Cells.Teleporter;
 import group44.entities.Cells.TokenDoor;
 import group44.entities.Cells.Water;
 import group44.entities.CollectableItems.CollectableItem;
@@ -68,7 +69,9 @@ public class Player extends MovableObject {
             } else {
                 // Not colliding; stepOn was successful
                 currentCell.stepOff();
-                this.setPosition(nextCell.getPositionX(), nextCell.getPositionY());
+                if (nextCell instanceof Teleporter == false) {
+                	this.setPosition(nextCell.getPositionX(), nextCell.getPositionY());
+                }
                 this.onCellStepped(nextCell);
             }
         }
