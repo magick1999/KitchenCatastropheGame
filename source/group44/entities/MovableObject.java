@@ -11,7 +11,6 @@ import group44.game.Level;
 public abstract class MovableObject extends LevelObject {
     private int velocityX;
     private int velocityY;
-    private Boolean isAlive;
 
     /**
      * Creates a new {@link MovableObject}.
@@ -32,7 +31,6 @@ public abstract class MovableObject extends LevelObject {
 
         this.setVelocityX(velocityX);
         this.setVelocityY(velocityY);
-        this.isAlive = true;
     }
 
     /**
@@ -79,16 +77,6 @@ public abstract class MovableObject extends LevelObject {
     public void die(LevelObject object) {
         // Remove MovableObject from the grid
         ((StepableCell) this.getLevel().getGrid()[this.getPositionX()][this.getPositionY()]).stepOff();
-        this.isAlive = false;
-    }
-
-    /**
-     * Indicates whether the object is alive or not.
-     *
-     * @return true if the {@link MovableObject} is alive, false otherwise.
-     */
-    public Boolean isAlive() {
-        return this.isAlive;
     }
 
     /**
@@ -119,7 +107,7 @@ public abstract class MovableObject extends LevelObject {
      * @param velocityX - velocity X of the object.
      * @param velocityY - velocity Y of the object.
      * @return the next {@link StepableCell} the {@link MovableObject} will step on;
-     *         null if out of range.
+     *         null if {@link Wall} or out of range.
      */
     protected StepableCell getNextStepableCellInVelocity(MovableObject object, int velocityX, int velocityY) {
     	Cell[][] grid = this.getLevel().getGrid();
