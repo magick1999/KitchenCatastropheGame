@@ -1,7 +1,7 @@
 package group44.entities.cells;
 
-import group44.entities.MovableObjects.MovableObject;
-import group44.entities.MovableObjects.Player;
+import group44.entities.movableObjects.MovableObject;
+import group44.entities.movableObjects.Player;
 import group44.game.CollisionCheckResult;
 import group44.game.Level;
 import group44.game.CollisionCheckResult.CollisionCheckResultType;

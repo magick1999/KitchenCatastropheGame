@@ -1,9 +1,9 @@
 package group44.entities.cells;
 
-import group44.entities.MovableObjects.MovableObject;
 import group44.entities.collectableItems.CollectableItem;
 import group44.entities.collectableItems.Key;
 import group44.entities.collectableItems.Key.KeyType;
+import group44.entities.movableObjects.MovableObject;
 import group44.game.CollisionCheckResult;
 import group44.game.Level;
 import javafx.scene.image.Image;

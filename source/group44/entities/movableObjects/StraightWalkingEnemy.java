@@ -1,4 +1,4 @@
-package group44.entities.MovableObjects;
+package group44.entities.movableObjects;
 
 import group44.entities.cells.Ground;
 import group44.entities.cells.StepableCell;

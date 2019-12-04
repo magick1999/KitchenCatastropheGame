@@ -1,4 +1,4 @@
-package group44.entities.MovableObjects;
+package group44.entities.movableObjects;
 
 import group44.game.CollisionCheckResult;
 import group44.game.Level;

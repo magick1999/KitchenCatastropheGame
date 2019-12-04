@@ -1,4 +1,4 @@
-package group44.entities.MovableObjects;
+package group44.entities.movableObjects;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
 package group44.entities.cells;
 
-import group44.entities.MovableObjects.MovableObject;
+import group44.entities.movableObjects.MovableObject;
 import group44.game.Level;
 
 /**
