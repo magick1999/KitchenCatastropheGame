@@ -2,7 +2,6 @@ package group44.entities;
 
 import group44.game.CollisionCheckResult;
 import group44.game.Level;
-import group44.game.CollisionCheckResult.CollisionCheckResultType;
 
 /**
  * An abstract class for cells on which can {@link MovableObject} step.
