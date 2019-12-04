@@ -1,10 +1,12 @@
 package group44.entities.cells;
 
+import group44.entities.LevelObject;
 import group44.entities.movableObjects.MovableObject;
 import group44.entities.movableObjects.Player;
 import group44.game.CollisionCheckResult;
 import group44.game.Level;
 import group44.game.CollisionCheckResult.CollisionCheckResultType;
+import javafx.scene.canvas.GraphicsContext;
 
 /**
  * An abstract class for cells on which can {@link MovableObject} step.
@@ -89,4 +91,26 @@ public abstract class StepableCell extends Cell {
      * @param object - The {@link MovableObject} that stepped on cell.
      */
     protected abstract void onStepped(MovableObject object);
+
+    /**
+     * Draws the {@link StepableCell} with any {@link MovableObject} on it in {@link GraphicsContext}.
+     *
+     * @param gc     - {@link GraphicsContext} used to draw the object.
+     * @param x      - The X coordinate in the {@link GraphicsContext} where to draw
+     *               the {@link LevelObject}.
+     * @param y      - The Y coordinate in the {@link GraphicsContext} where to draw
+     *               the {@link LevelObject}.
+     * @param width  - The width of the {@link LevelObject} in the
+     *               {@link GraphicsContext}.
+     * @param height - The height of the {@link LevelObject} in the
+     *               {@link GraphicsContext}.
+     */
+    @Override
+    public void draw(GraphicsContext gc, double x, double y, double width, double height) {
+    	super.draw(gc, x, y, width, height);
+
+    	if (this.getMovableObject() != null) {
+    		this.getMovableObject().draw(gc, x, y, width, height);
+    	}
+    }
 }

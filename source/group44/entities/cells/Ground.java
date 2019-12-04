@@ -1,8 +1,10 @@
 package group44.entities.cells;
 
+import group44.entities.LevelObject;
 import group44.entities.collectableItems.CollectableItem;
 import group44.entities.movableObjects.MovableObject;
 import group44.game.Level;
+import javafx.scene.canvas.GraphicsContext;
 
 /**
  * Represents a ground in the game.
@@ -58,6 +60,28 @@ public class Ground extends StepableCell {
      */
     public Boolean hasCollectableItem() {
         return this.collectableItem != null;
+    }
+
+    /**
+     * Draws the {@link StepableCell} with any {@link MovableObject} or {@link CollectableItem} on it in {@link GraphicsContext}.
+     *
+     * @param gc     - {@link GraphicsContext} used to draw the object.
+     * @param x      - The X coordinate in the {@link GraphicsContext} where to draw
+     *               the {@link LevelObject}.
+     * @param y      - The Y coordinate in the {@link GraphicsContext} where to draw
+     *               the {@link LevelObject}.
+     * @param width  - The width of the {@link LevelObject} in the
+     *               {@link GraphicsContext}.
+     * @param height - The height of the {@link LevelObject} in the
+     *               {@link GraphicsContext}.
+     */
+    @Override
+    public void draw(GraphicsContext gc, double x, double y, double width, double height) {
+    	super.draw(gc, x, y, width, height);
+
+    	if (this.getMovableObject() == null && this.collectableItem != null) {
+    		this.collectableItem.draw(gc, x, y, width, height);
+    	}
     }
 
     /**
