@@ -7,19 +7,30 @@ import java.util.Scanner;
 
 import group44.exceptions.UsernameTakenException;
 import group44.models.Profile;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * Manages, loads, and saves user profiles.
- * 
+ *
  * @author Tomas Svejnoha
  * @version 1.0
  */
 public class ProfileManager {
-    private static ArrayList<Profile> profiles = new ArrayList<>();
+    private static ObservableList<Profile> profiles = FXCollections.observableArrayList(new ArrayList<>());
+
+    /**
+     * Returns an {@link ObservableList} of profiles.
+     *
+     * @return profiles
+     */
+    public static ObservableList<Profile> getProfiles() {
+    	return ProfileManager.profiles;
+    }
 
     /**
      * Returns a {@link Profile} with id.
-     * 
+     *
      * @param id - id to find
      * @return {@link Profile} if match was found; otherwise null
      */
@@ -37,7 +48,7 @@ public class ProfileManager {
 
     /**
      * Returns a {@link Profile} with username.
-     * 
+     *
      * @param username - username to find
      * @return {@link Profile} if match is found; otherwise null
      */
@@ -56,7 +67,7 @@ public class ProfileManager {
     /**
      * Creates a new {@link Profile} with username, if the username is not already
      * taken. The achieved level id for the new profile is 0.
-     * 
+     *
      * @param username - username to be used
      * @throws UsernameTakenException if the username is already taken
      * @return the created {@link Profile}
@@ -74,7 +85,7 @@ public class ProfileManager {
 
     /**
      * Check if a {@link Profile} with username already exists.
-     * 
+     *
      * @param username - the username to check
      * @return true if the username is already taken; otherwise false
      */
@@ -89,7 +100,7 @@ public class ProfileManager {
 
     /**
      * Returns the maximum id in the known profiles.
-     * 
+     *
      * @return the maximum id
      */
     private static int getMaxId() {
@@ -106,7 +117,7 @@ public class ProfileManager {
 
     /**
      * Loads profiles from specified file.
-     * 
+     *
      * @param path - path where the file with profiles is located
      * @return a list of loaded {@link Profile}s
      */
@@ -125,13 +136,15 @@ public class ProfileManager {
             if (fileScanner != null) {
                 fileScanner.close();
             }
-            ProfileManager.profiles = loadedProfiles;
+            for (Profile profile : loadedProfiles) {
+            	ProfileManager.profiles.add(profile);
+			}
         }
     }
 
     /**
      * Loads stored profiles.
-     * 
+     *
      * @param fileScanner - scanner of the file where the profiles are stored
      * @return a list of loaded {@link Profile}s
      */
@@ -150,7 +163,7 @@ public class ProfileManager {
 
     /**
      * Creates a new {@link Profile} from the scanner.
-     * 
+     *
      * @param scanner - scanner with the serialised profile
      * @return {@link Profile} created from values in scanner; null if there is some
      *         exception
@@ -173,7 +186,7 @@ public class ProfileManager {
 
     /**
      * Saves managed profiles.
-     * 
+     *
      * @param path - path to the file where to store the profiles
      */
     public static void save(String path) {
@@ -194,7 +207,7 @@ public class ProfileManager {
 
     /**
      * Saves profiles using provided writer.
-     * 
+     *
      * @param writer - {@link PrintWriter} to use when saving profiles
      */
     private static void save(PrintWriter writer) {

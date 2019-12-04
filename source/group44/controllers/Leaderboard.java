@@ -9,19 +9,30 @@ import java.util.Scanner;
 import group44.game.Level;
 import group44.models.Profile;
 import group44.models.Record;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * Represents a leaderboard of the game.
- * 
+ *
  * @author Tomas Svejnoha
  * @version 1.0
  */
 public class Leaderboard {
-    private static ArrayList<Record> records = new ArrayList<>();
+    private static ObservableList<Record> records = FXCollections.observableArrayList(new ArrayList<Record>());
+
+    /**
+     * Returns an {@link ObservableList} of records.
+     *
+     * @return profiles
+     */
+    public static ObservableList<Record> getProfiles() {
+    	return Leaderboard.records;
+    }
 
     /**
      * Adds or updates a record in the {@link Leaderboard} if the time is better.
-     * 
+     *
      * @param profile - {@link Profile} of the user
      * @param levelId - Id of the {@link Level} the user finished
      * @param time    - time taken to finish the {@link Level}
@@ -45,7 +56,7 @@ public class Leaderboard {
 
     /**
      * Returns up to 3 top records for the level.
-     * 
+     *
      * @param levelId - id of the {@link Level} for which we want the records
      * @return array of up to 3 top records
      */
@@ -70,7 +81,7 @@ public class Leaderboard {
 
     /**
      * Indicates whether the used scored in top 3 for a specific level.
-     * 
+     *
      * @param profile - the user {@link Profile}.
      * @param levelId - the level id.
      * @return true if user is in top 3; otherwise false.
@@ -87,7 +98,7 @@ public class Leaderboard {
 
     /**
      * Returns an id the highest {@link Level} achieved by user.
-     * 
+     *
      * @param profile - profile of the user.
      * @return the id of the highest level; 0 if user did not finish any level.
      */
@@ -107,7 +118,7 @@ public class Leaderboard {
 
     /**
      * Loads records from the file.
-     * 
+     *
      * @param path - path to a file with records
      */
     public static void load(String path) {
@@ -125,13 +136,15 @@ public class Leaderboard {
             if (fileScanner != null) {
                 fileScanner.close();
             }
-            Leaderboard.records = loadedRecords;
+            for (Record record : loadedRecords) {
+            	Leaderboard.records.add(record);
+			}
         }
     }
 
     /**
      * Loads stored records.
-     * 
+     *
      * @param fileScanner - scanner of the file where the records are stored
      * @return a list of loaded {@link Record}s
      */
@@ -150,7 +163,7 @@ public class Leaderboard {
 
     /**
      * Creates a new {@link Record} from the Scanner.
-     * 
+     *
      * @param scanner - scanner with the serialised record
      * @return created {@link Record}; null if associated {@link Profile} was not
      *         found
@@ -179,7 +192,7 @@ public class Leaderboard {
 
     /**
      * Saves all records in the {@link Leaderboard}.
-     * 
+     *
      * @param path - path to the file where to store the profiles
      */
     public static void save(String path) {
@@ -200,7 +213,7 @@ public class Leaderboard {
 
     /**
      * Saves records using provided writer.
-     * 
+     *
      * @param writer - {@link PrintWriter} to use when saving r cords
      */
     private static void save(PrintWriter writer) {
