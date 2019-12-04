@@ -1,4 +1,4 @@
-package group44.entities;
+package group44.entities.Cells;
 
 import group44.game.Level;
 

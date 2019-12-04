@@ -1,5 +1,9 @@
-package group44.entities;
+package group44.entities.MovableObjects;
 
+import group44.entities.LevelObject;
+import group44.entities.Cells.Cell;
+import group44.entities.Cells.StepableCell;
+import group44.entities.Cells.Wall;
 import group44.game.CollisionCheckResult;
 import group44.game.Level;
 

@@ -1,11 +1,20 @@
-package group44.entities;
+package group44.entities.MovableObjects;
 
 import java.util.ArrayList;
 
+import group44.entities.LevelObject;
+import group44.entities.Cells.Fire;
+import group44.entities.Cells.Ground;
+import group44.entities.Cells.KeyDoor;
+import group44.entities.Cells.StepableCell;
+import group44.entities.Cells.TokenDoor;
+import group44.entities.Cells.Water;
+import group44.entities.CollectableItems.CollectableItem;
 import group44.entities.CollectableItems.FireBoots;
 import group44.entities.CollectableItems.Flippers;
 import group44.entities.CollectableItems.Key;
 import group44.entities.CollectableItems.Token;
+import group44.entities.CollectableItems.TokenAccumulator;
 import group44.entities.CollectableItems.Key.KeyType;
 import group44.game.CollisionCheckResult;
 import group44.game.CollisionCheckResult.CollisionCheckResultType;

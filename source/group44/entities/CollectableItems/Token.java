@@ -1,7 +1,6 @@
 package group44.entities.CollectableItems;
 
-import group44.entities.CollectableItem;
-import group44.entities.Ground;
+import group44.entities.Cells.Ground;
 import group44.game.Level;
 
 /**

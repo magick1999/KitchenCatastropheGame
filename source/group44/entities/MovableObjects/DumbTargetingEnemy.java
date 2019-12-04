@@ -1,4 +1,4 @@
-package group44.entities;
+package group44.entities.MovableObjects;
 
 import group44.game.Level;
 import group44.game.Position;

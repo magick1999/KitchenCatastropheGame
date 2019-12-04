@@ -1,6 +1,6 @@
 package group44.exceptions;
 
-import group44.entities.TokenDoor;
+import group44.entities.Cells.TokenDoor;
 import group44.entities.CollectableItems.Token;
 
 /**

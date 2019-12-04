@@ -1,6 +1,9 @@
-package group44.entities;
+package group44.entities.Cells;
 
+import group44.entities.CollectableItems.CollectableItem;
 import group44.entities.CollectableItems.Key;
+import group44.entities.CollectableItems.TokenAccumulator;
+import group44.entities.MovableObjects.MovableObject;
 import group44.game.CollisionCheckResult;
 import group44.game.CollisionCheckResult.CollisionCheckResultType;
 import group44.game.Level;

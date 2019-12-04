@@ -1,13 +1,13 @@
 package group44.game;
 
-import group44.entities.Cell;
-import group44.entities.Door;
-import group44.entities.Ground;
 import group44.entities.LevelObject;
-import group44.entities.MovableObject;
-import group44.entities.Player;
-import group44.entities.StepableCell;
-import group44.entities.Wall;
+import group44.entities.Cells.Cell;
+import group44.entities.Cells.Door;
+import group44.entities.Cells.Ground;
+import group44.entities.Cells.StepableCell;
+import group44.entities.Cells.Wall;
+import group44.entities.MovableObjects.MovableObject;
+import group44.entities.MovableObjects.Player;
 import group44.exceptions.CollisionException;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
