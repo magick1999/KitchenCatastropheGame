@@ -7,7 +7,7 @@ import group44.game.Level;
 
 /**
  * Abstract class from which all other classes in the game inherit.
- * 
+ *
  * @author Tomas Svejnoha, Rowan Aldean
  * @version 1.0
  */
@@ -22,7 +22,7 @@ public abstract class LevelObject {
 
     /**
      * Creates a new {@link LevelObject} with default colors.
-     * 
+     *
      * @param level     - The {@link Level} in which the {@link LevelObject} exists
      * @param title     - Title of the object
      * @param positionX - Position X in the game
@@ -39,7 +39,7 @@ public abstract class LevelObject {
 
     /**
      * Creates a new {@link LevelObject}.
-     * 
+     *
      * @param level     - The {@link Level} in which the {@link LevelObject} exists
      * @param title     - Title of the object
      * @param positionX - Position X in the game
@@ -53,7 +53,7 @@ public abstract class LevelObject {
 
     /**
      * Creates a new {@link LevelObject}.
-     * 
+     *
      * @param level           - The {@link Level} in which the {@link LevelObject}
      *                        exists
      * @param title           - Title of the object
@@ -89,7 +89,7 @@ public abstract class LevelObject {
 
     /**
      * Returns the background color of the object.
-     * 
+     *
      * @return the background color of the object
      */
     public Color getBackgroundColor() {
@@ -98,7 +98,7 @@ public abstract class LevelObject {
 
     /**
      * Sets a background color of an object.
-     * 
+     *
      * @param color - background color
      */
     public void setBackgroundColor(Color color) {
@@ -107,7 +107,7 @@ public abstract class LevelObject {
 
     /**
      * Returns the foreground color of the object.
-     * 
+     *
      * @return the foreground color of the object
      */
     public Color getForegroundColor() {
@@ -116,7 +116,7 @@ public abstract class LevelObject {
 
     /**
      * Sets the foreground color of the object.
-     * 
+     *
      * @param color - foreground color
      */
     public void setForegroundColor(Color color) {
@@ -125,7 +125,7 @@ public abstract class LevelObject {
 
     /**
      * Returns an image of the object.
-     * 
+     *
      * @return the image of the object.
      */
     public Image getImage() {
@@ -134,7 +134,7 @@ public abstract class LevelObject {
 
     /**
      * Sets an image of the object.
-     * 
+     *
      * @param image - the image
      */
     public void setImage(Image image) {
@@ -147,7 +147,7 @@ public abstract class LevelObject {
 
     /**
      * Returns the X coordinate of an object.
-     * 
+     *
      * @return the x coordinate of an object.
      */
     public int getPositionX() {
@@ -156,7 +156,7 @@ public abstract class LevelObject {
 
     /**
      * Returns the y coordinate of an object.
-     * 
+     *
      * @return the y coordinate of an object.
      */
     public int getPositionY() {
@@ -165,7 +165,7 @@ public abstract class LevelObject {
 
     /**
      * Sets object position to x and y.
-     * 
+     *
      * @param x - X coordinate
      * @param y - Y coordinate
      */
@@ -175,8 +175,8 @@ public abstract class LevelObject {
     }
 
     /**
-     * Draws the object in {@link GraphicsContext}.
-     * 
+     * Draws the object in {@link GraphicsContext} if there is Image associated.
+     *
      * @param gc     - {@link GraphicsContext} used to draw the object
      * @param x      - The X coordinate in the {@link GraphicsContext} where to draw
      *               the {@link LevelObject}
@@ -188,6 +188,8 @@ public abstract class LevelObject {
      *               {@link GraphicsContext}
      */
     public void draw(GraphicsContext gc, double x, double y, double width, double height) {
-        gc.drawImage(this.getImage(), x, y, width, height);
+    	if (this.getImage() != null) {
+    		gc.drawImage(this.getImage(), x, y, width, height);
+    	}
     }
 }

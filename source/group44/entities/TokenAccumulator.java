@@ -7,7 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 /**
  * Represents an accumulator for {@link Token}s.
- * 
+ *
  * @author Tomas Svejnoha
  * @version 1.0
  */
@@ -20,13 +20,13 @@ public class TokenAccumulator extends CollectableItem {
      * Creates a new instance of {@link TokenAccumulator}.
      */
     public TokenAccumulator() {
-        super(null, "Token Accumulator", 0, 0, "");
+        super(null, "Token Accumulator", 0, 0);
         this.accumulatedTokens = new ArrayList<>();
     }
 
     /**
      * Draws the object in {@link GraphicsContext}.
-     * 
+     *
      * @param gc     - {@link GraphicsContext} used to draw the object.
      * @param x      - The X coordinate in the {@link GraphicsContext} where to draw
      *               the {@link LevelObject}.
@@ -44,7 +44,7 @@ public class TokenAccumulator extends CollectableItem {
 
     /**
      * Add {@link Token} to the accumulator if it's not already there.
-     * 
+     *
      * @param token - the collected {@link Token}.
      */
     public void addToken(Token token) {
@@ -55,7 +55,7 @@ public class TokenAccumulator extends CollectableItem {
 
     /**
      * Checks if the token was already collected or not.
-     * 
+     *
      * @param token - the collected {@link Token}.
      * @return true if the token is already collected, false otherwise.
      */
@@ -70,7 +70,7 @@ public class TokenAccumulator extends CollectableItem {
 
     /**
      * Uses certain number of tokens in the accumulator.
-     * 
+     *
      * @param count - the number of tokens to use.
      * @throws NotEnoughTokensException if user tried to use more tokens than were
      *                                  collected.
@@ -86,7 +86,7 @@ public class TokenAccumulator extends CollectableItem {
 
     /**
      * Returns a number of tokens in the accumulator.
-     * 
+     *
      * @return number of tokens.
      */
     public int getTokensCount() {
