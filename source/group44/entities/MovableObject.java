@@ -5,7 +5,7 @@ import group44.game.Level;
 /**
  * Abstract classes from which inherits all objects able to move.
  *
- * @author Tomas Svejnoha, Rowan Aldean
+ * @author Tomas Svejnoha
  * @version 1.0
  */
 public abstract class MovableObject extends LevelObject {
@@ -17,14 +17,14 @@ public abstract class MovableObject extends LevelObject {
      * Creates a new {@link MovableObject}.
      *
      * @param level     - The {@link Level} where the {@link MovableObject} is
-     *                  located
-     * @param title     - Title of the object
-     * @param positionX - Position X in the game
-     * @param positionY - Position Y in the game
-     * @param velocityX - Velocity X of the instance
-     * @param velocityY - Velocity Y of the instance
+     *                  located.
+     * @param title     - Title of the object.
+     * @param positionX - Position X in the game.
+     * @param positionY - Position Y in the game.
+     * @param velocityX - Velocity X of the instance.
+     * @param velocityY - Velocity Y of the instance.
      * @param imagePath - Path to the Image representing {@link MovableObject} in
-     *                  the game
+     *                  the game.
      */
     public MovableObject(Level level, String title, int positionX, int positionY, int velocityX, int velocityY,
             String imagePath) {
@@ -38,7 +38,7 @@ public abstract class MovableObject extends LevelObject {
     /**
      * Returns the velocity of the object on the X axis.
      *
-     * @return velocity X
+     * @return velocity X.
      */
     public int getVelocityX() {
         return this.velocityX;
@@ -47,7 +47,7 @@ public abstract class MovableObject extends LevelObject {
     /**
      * Sets the velocity on the X axis.
      *
-     * @param vx - velocity X
+     * @param vx - velocity X.
      */
     public void setVelocityX(int vx) {
         this.velocityX = vx;
@@ -56,7 +56,7 @@ public abstract class MovableObject extends LevelObject {
     /**
      * Returns the velocity of the object on the Y axis.
      *
-     * @return velocity Y
+     * @return velocity Y.
      */
     public int getVelocityY() {
         return this.velocityY;
@@ -65,14 +65,14 @@ public abstract class MovableObject extends LevelObject {
     /**
      * Sets the velocity on the Y axis.
      *
-     * @param vy - velocity Y
+     * @param vy - velocity Y.
      */
     public void setVelocityY(int vy) {
         this.velocityY = vy;
     }
 
     /**
-     * Method that kills the {@link MovableObject}.
+     * Kills the {@link MovableObject} and removes it from the grid.
      *
      * @param object - {@link LevelObject} trying to kill the {@link MovableObject}.
      */
@@ -85,7 +85,7 @@ public abstract class MovableObject extends LevelObject {
     /**
      * Indicates whether the object is alive or not.
      *
-     * @return true if the {@link MovableObject} is alive, false otherwise
+     * @return true if the {@link MovableObject} is alive, false otherwise.
      */
     public Boolean isAlive() {
         return this.isAlive;
@@ -105,7 +105,7 @@ public abstract class MovableObject extends LevelObject {
      *         otherwise null
      */
     protected StepableCell getStepableCellAtMovableObjectPosition(MovableObject object) {
-        LevelObject[][] grid = this.getLevel().getGrid();
+        Cell[][] grid = this.getLevel().getGrid();
         if (grid[object.getPositionX()][object.getPositionY()] instanceof StepableCell) {
             return (StepableCell) grid[object.getPositionX()][object.getPositionY()];
         }
@@ -115,14 +115,14 @@ public abstract class MovableObject extends LevelObject {
     /**
      * Returns the next {@link StepableCell} the {@link MovableObject} will step on.
      *
-     * @param object    - The instance of {@link MovableObject}
-     * @param velocityX - velocity X of the object
-     * @param velocityY - velocity Y of the object
+     * @param object    - The instance of {@link MovableObject}.
+     * @param velocityX - velocity X of the object.
+     * @param velocityY - velocity Y of the object.
      * @return the next {@link StepableCell} the {@link MovableObject} will step on;
-     *         null if out of range
+     *         null if out of range.
      */
     protected StepableCell getNextStepableCellInVelocity(MovableObject object, int velocityX, int velocityY) {
-        LevelObject[][] grid = this.getLevel().getGrid();
+    	Cell[][] grid = this.getLevel().getGrid();
         StepableCell cell = this.getStepableCellAtMovableObjectPosition(object);
 
         // Next position based on current position and velocity
@@ -131,14 +131,19 @@ public abstract class MovableObject extends LevelObject {
 
         // Return StepableCell if the next step is in the boundaries of the grid;
         // otherwise null
-        if (0 <= nextCellIndexX && nextCellIndexX < grid[cell.getPositionY()].length && 0 <= nextCellIndexY
-                && nextCellIndexY < grid.length && grid[nextCellIndexX][nextCellIndexY] instanceof StepableCell) {
+        if (
+        		0 <= nextCellIndexX && nextCellIndexX < this.getLevel().getGridWidth() &&
+        		0 <= nextCellIndexY && nextCellIndexY < this.getLevel().getGridHeight() &&
+        		grid[nextCellIndexX][nextCellIndexY] instanceof StepableCell) {
             return (StepableCell) grid[nextCellIndexX][nextCellIndexY];
         }
         return null;
     }
 
+    /**
+     * Method executed when the {@link MovableObject} object collides with some {@link MovableObject}.
+     *
+     * @param object - the {@link MovableObject} with which the object collided.
+     */
     protected abstract void onCollided(MovableObject object);
-
-    protected abstract void onCellStepped(StepableCell cell);
 }
