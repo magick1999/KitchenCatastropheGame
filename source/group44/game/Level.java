@@ -4,30 +4,26 @@ import group44.entities.LevelObject;
 import group44.entities.MovableObject;
 import group44.entities.Player;
 import group44.entities.StepableCell;
-import group44.game.interfaces.IKeyReactive;
-import group44.game.interfaces.ILevel;
-import group44.game.interfaces.ITimeReactive;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 
 /**
  * Level maintains all data and event handling in the game.
- * 
+ *
  * @author Tomas Svejnoha
  * @version 1.0
  */
-public class Level implements ILevel {
+public class Level {
     private final static String ERROR_DISPLAY_SIZE_ILLEGAL_ARGUMENT_EXCEPTION = "The displaySize must be odd and >= 3.";
 
     private int id;
     private LevelObject[][] grid; // The 2D game array
     private int displaySize; // The size of the grid displayed
     private Player player;
-    private Boolean isWon; // TODO: Add Observer pattern
 
     /**
      * Creates a new instance of {@link Level}.
-     * 
+     *
      * @param id          - the Id of the level
      * @param gridWidth   - width of the 2D array
      * @param gridHeight  - height of the 2D array
@@ -47,7 +43,7 @@ public class Level implements ILevel {
 
     /**
      * Returns the Id of the {@link Level}.
-     * 
+     *
      * @return the level id
      */
     public int getId() {
@@ -56,9 +52,9 @@ public class Level implements ILevel {
 
     /**
      * Checks whether the object is colliding or not.
-     * 
+     *
      * @param obj - object for to check the collision.
-     * 
+     *
      * @return result of the collision check.
      */
     public CollisionCheckResult checkCollision(LevelObject obj) {
@@ -70,7 +66,7 @@ public class Level implements ILevel {
 
     /**
      * Checks whether the object is colliding or not.
-     * 
+     *
      * @param obj - object for which to check the collision.
      * @return true if the object is colliding, otherwise false
      */
@@ -80,7 +76,7 @@ public class Level implements ILevel {
 
     /**
      * Returns a 2D array with all {@link LevelObject} in the {@link Level}.
-     * 
+     *
      * @return 2D array of {@link LevelObject}s
      */
     public LevelObject[][] getGrid() {
@@ -94,7 +90,7 @@ public class Level implements ILevel {
 
     /**
      * Adds {@link LevelObject} in the grid to the specific location.
-     * 
+     *
      * @param x           - position X of the {@link LevelObject}
      * @param y           - position Y of the {@link LevelObject}
      * @param levelObject - the {@link LevelObject} to place in the grid
@@ -111,7 +107,7 @@ public class Level implements ILevel {
 
     /**
      * Returns a current position of the {@link Player}.
-     * 
+     *
      * @return the {@link Player}'s position
      */
     public Position getPlayerPosition() {
@@ -120,10 +116,9 @@ public class Level implements ILevel {
 
     /**
      * Draws the cell in the active game area.
-     * 
+     *
      * @param gc - {@link GraphicsContext} to which the game is drawn
      */
-    @Override
     public void draw(GraphicsContext gc) {
         double cellWidth = gc.getCanvas().getWidth() / this.displaySize;
         double cellHeight = gc.getCanvas().getHeight() / this.displaySize;
@@ -140,36 +135,16 @@ public class Level implements ILevel {
 
     /**
      * Passes the {@link KeyEvent} to the {@link Player}.
-     * 
+     *
      * @param event - the {@link KeyEvent}
      */
-    @Override
     public void keyDown(KeyEvent event) {
-        if (this.grid[this.player.getPositionX()][this.player.getPositionY()] instanceof IKeyReactive) {
-            ((IKeyReactive) this.grid[this.player.getPositionX()][this.player.getPositionY()]).keyDown(event);
-        }
-    }
-
-    /**
-     * Invokes timeTick method on all {@link LevelObject}s in the active game area
-     * implementing {@link group44.game.interfaces.ITimeReactive}.
-     */
-    @Override
-    public void timeTick() {
-        Area activeArea = this.getActiveArea();
-
-        for (int x = activeArea.getX1(); x < activeArea.getX2(); x++) {
-            for (int y = activeArea.getY1(); y < activeArea.getY2(); y++) {
-                if (this.grid[x][y] instanceof ITimeReactive) {
-                    ((ITimeReactive) this.grid[x][y]).timeTick();
-                }
-            }
-        }
+    	this.player.keyDown(event);
     }
 
     /**
      * Returns the active {@link Area} of the game.
-     * 
+     *
      * @return the active area of the game
      */
     private Area getActiveArea() {
@@ -193,8 +168,10 @@ public class Level implements ILevel {
                 centerY + this.displaySize / 2);
     }
 
+    /**
+     * Finishes the level
+     * */
     public void finish() {
-        this.isWon = true;
-        // TODO: Notify observers
+        throw new UnsupportedOperationException(); // TODO: Implement
     }
 }
