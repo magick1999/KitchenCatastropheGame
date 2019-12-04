@@ -69,10 +69,12 @@ public class Player extends MovableObject {
             } else {
                 // Not colliding; stepOn was successful
                 currentCell.stepOff();
-                if (nextCell instanceof Teleporter == false) {
+
+                // If the movableObject on the nextCell is not equal to this => Teleporter - position is already set
+                if (nextCell.getMovableObject() == this) {
                 	this.setPosition(nextCell.getPositionX(), nextCell.getPositionY());
                 }
-                this.onCellStepped(nextCell);
+                this.onCellStepped(nextCell); // Does nothing for Teleporters => safe
             }
         }
     }

@@ -56,7 +56,11 @@ public abstract class Enemy extends MovableObject {
             } else {
                 // Not colliding; stepOn was successful
                 currentCell.stepOff();
-                this.setPosition(nextCell.getPositionX(), nextCell.getPositionY());
+
+                // If the movableObject on the nextCell is not equal to this => Teleporter - position is already set
+                if (nextCell.getMovableObject() == this) {
+                	this.setPosition(nextCell.getPositionX(), nextCell.getPositionY());
+                }
             }
         }
     }
