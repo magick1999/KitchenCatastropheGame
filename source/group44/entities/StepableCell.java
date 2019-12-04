@@ -26,15 +26,11 @@ public abstract class StepableCell extends Cell {
     }
 
     /**
-     * Places object on the {@link StepableCell} if it's free and returns empty
-     * {@link CollisionCheckResult}. If there is already some {@link MovableObject}
-     * on the {@link StepableCell}, a {@link CollisionCheckResult} with colliding
-     * object is returned.
+     * Places {@link MovableObject} on the {@link StepableCell}.
      *
      * @param object - {@link MovableObject} that steps on the cell.
      *
-     * @return the {@link CollisionCheckResult} with a result and colliding
-     *         {@link LevelObject}.
+     * @return the {@link CollisionCheckResult} with information about the action result.
      */
     public abstract CollisionCheckResult stepOn(MovableObject object);
 
