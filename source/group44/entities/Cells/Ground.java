@@ -14,13 +14,12 @@ public class Ground extends StepableCell {
     private CollectableItem collectableItem;
 
     /**
-     * Creates a new instance of {@link Ground} at a specific location in the
-     * {@link Level}
+     * Creates a new instance of {@link Ground} at a specific location in the {@link Level}.
      *
-     * @param level     - The {@link Level} where the {@link Ground} is located
-     * @param positionX - Position X of the {@link Ground} in the {@link Level}
-     * @param positionY - Position X of the {@link Ground} in the {@link Level}
-     * @param imagePath - Path to the Image representing {@link Ground} in the game
+     * @param level     - The {@link Level} where the {@link Ground} is located.
+     * @param positionX - Position X of the {@link Ground} in the {@link Level}.
+     * @param positionY - Position X of the {@link Ground} in the {@link Level}.
+     * @param imagePath - Path to the Image representing {@link Ground} in the game.
      */
     public Ground(Level level, int positionX, int positionY, String imagePath) {
         super(level, "Ground", positionX, positionY, imagePath);

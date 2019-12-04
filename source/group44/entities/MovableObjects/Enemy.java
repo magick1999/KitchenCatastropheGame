@@ -47,6 +47,7 @@ public abstract class Enemy extends MovableObject {
         StepableCell currentCell = this.getStepableCellAtMovableObjectPosition(this);
         StepableCell nextCell = this.getNextStepableCellInVelocity(this, this.getVelocityX(), this.getVelocityY());
 
+        // Check if the move can be done; if not, do not move
         if (nextCell != null) {
             CollisionCheckResult collisionResult = nextCell.stepOn(this);
             if (collisionResult.isColliding()) {
