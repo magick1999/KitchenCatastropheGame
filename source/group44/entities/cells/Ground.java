@@ -13,6 +13,8 @@ import javafx.scene.canvas.GraphicsContext;
  * @version 1.0
  */
 public class Ground extends StepableCell {
+	private static final String CELL_NAME = "Ground";
+
     private CollectableItem collectableItem;
 
     /**
@@ -24,7 +26,7 @@ public class Ground extends StepableCell {
      * @param imagePath - Path to the Image representing {@link Ground} in the game.
      */
     public Ground(Level level, int positionX, int positionY, String imagePath) {
-        super(level, "Ground", positionX, positionY, imagePath);
+        super(level, CELL_NAME, positionX, positionY, imagePath);
     }
 
     /**
@@ -45,14 +47,13 @@ public class Ground extends StepableCell {
      * Creates a new {@link Ground}.
      *
      * @param level       - The {@link Level} where the object is located.
-     * @param title       - Title of the object.
      * @param positionX   - Position X in the game.
      * @param positionY   - Position Y in the game.
      * @param imagePath   - Image path of the instance.
      * @param steppedItem - The {@link MovableObject} on the cell.
      */
-    public Ground(Level level, String title, int positionX, int positionY, String imagePath, MovableObject steppedItem) {
-        super(level, title, positionX, positionY, imagePath, steppedItem);
+    public Ground(Level level, int positionX, int positionY, String imagePath, MovableObject steppedItem) {
+        super(level, CELL_NAME, positionX, positionY, imagePath, steppedItem);
     }
 
     /**
