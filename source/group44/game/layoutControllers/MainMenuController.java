@@ -38,7 +38,7 @@ public class MainMenuController {
     }
     @FXML
     public void initialize(){
-        logo.setImage(new Image("/group44/resources/kitchenLogo.png"));
+        logo.setImage(new Image("/group44/resources/KitchenCatastrophe.png"));
 
         profiles.setCellFactory(param -> new ListCell<Profile>() {
             @Override
