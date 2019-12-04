@@ -1,5 +1,6 @@
 package group44.entities;
 
+import group44.game.CollisionCheckResult;
 import group44.game.Level;
 
 /**
@@ -129,9 +130,9 @@ public abstract class MovableObject extends LevelObject {
     }
 
     /**
-     * Method executed when the {@link MovableObject} object collides with some {@link MovableObject}.
+     * Method executed when the {@link MovableObject} object collides with some {@link LevelObject}.
      *
-     * @param object - the {@link MovableObject} with which the object collided.
+     * @param object - the {@link CollisionCheckResult} with the collision status.
      */
-    protected abstract void onCollided(MovableObject object);
+    protected abstract void onCollided(CollisionCheckResult result);
 }
