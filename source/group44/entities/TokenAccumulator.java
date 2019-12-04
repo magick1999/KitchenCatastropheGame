@@ -25,24 +25,6 @@ public class TokenAccumulator extends CollectableItem {
     }
 
     /**
-     * Draws the object in {@link GraphicsContext}.
-     *
-     * @param gc     - {@link GraphicsContext} used to draw the object.
-     * @param x      - The X coordinate in the {@link GraphicsContext} where to draw
-     *               the {@link LevelObject}.
-     * @param y      - The Y coordinate in the {@link GraphicsContext} where to draw
-     *               the {@link LevelObject}.
-     * @param width  - The width of the {@link LevelObject} in the
-     *               {@link GraphicsContext}.
-     * @param height - The height of the {@link LevelObject} in the
-     *               {@link GraphicsContext}.
-     */
-    @Override
-    public void draw(GraphicsContext gc, double x, double y, double width, double height) {
-        System.out.println(this.getTitle() + ": TokenAccumulator.draw(...)"); // Do not draw
-    }
-
-    /**
      * Add {@link Token} to the accumulator if it's not already there.
      *
      * @param token - the collected {@link Token}.
