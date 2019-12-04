@@ -4,8 +4,11 @@ import java.util.ArrayList;
 
 import group44.entities.CollectableItems.FireBoots;
 import group44.entities.CollectableItems.Flippers;
+import group44.entities.CollectableItems.Key;
 import group44.entities.CollectableItems.Token;
+import group44.entities.CollectableItems.Key.KeyType;
 import group44.game.CollisionCheckResult;
+import group44.game.CollisionCheckResult.CollisionCheckResultType;
 import group44.game.Level;
 import javafx.scene.input.KeyEvent;
 
@@ -50,9 +53,9 @@ public class Player extends MovableObject {
         // Check if the move can be done; if not, do not move
         if (nextCell != null) {
             CollisionCheckResult collisionResult = nextCell.stepOn(this);
-            if (collisionResult.getIsColliding() && this.isAlive()) {
+            if (collisionResult.isColliding()) {
                 // Colliding; stepOn was NOT successful
-                this.onCollided((MovableObject) collisionResult.getCollidingObject());
+                this.onCollided(collisionResult);
             } else {
                 // Not colliding; stepOn was successful
                 currentCell.stepOff();
@@ -64,14 +67,73 @@ public class Player extends MovableObject {
 
     /**
      * Method invoked after the {@link Player} collided with another
-     * {@link MovableObject}.
+     * {@link LevelObject}.
      *
-     * @param object - the colliding {@link MovableObject}
+     * @param result - the {@link CollisionCheckResult}.
      */
     @Override
-    protected void onCollided(MovableObject object) {
-        System.out.println(
-                this.getTitle() + " collided with " + object.getTitle() + " and " + this.getTitle() + " did nothing.");
+    protected void onCollided(CollisionCheckResult result) {
+    	switch (result.getType()) {
+    	case Enemy:
+    		Enemy enemy = (Enemy) result.getCollidingObject();
+    		enemy.onCollided(new CollisionCheckResult(CollisionCheckResultType.Player, this));
+    		break;
+		case MissingKey:
+			if (this.tryToOpenKeyDoor(result)) {
+				this.move();
+			}
+			break;
+		case NotEnoughTokens:
+			if (this.tryToOpenTokenDoor(result)) {
+				this.move();
+			}
+			break;
+		default:
+			break;
+		}
+    }
+
+    /**
+     * Tries to open {@link KeyDoor}.
+     *
+     * @param result - collision result.
+     * @return true if the door are open; otherwise false.
+     */
+    private boolean tryToOpenKeyDoor(CollisionCheckResult result) {
+    	KeyDoor door = (KeyDoor) result.getCollidingObject();
+    	Key key = this.getKey(door.getUnlockingKeyType());
+
+    	if (key != null) {
+    		door.open(key);
+    	}
+
+    	return door.isOpen();
+    }
+
+    /**
+     * Returns a key of a specific type if player has it in inventory.
+     *
+     * @param type - type of the key to find.
+     * @return the key if found; otherwise null.
+     */
+    private Key getKey(KeyType type) {
+    	for (CollectableItem collectableItem : this.inventory) {
+			if (collectableItem instanceof Key && ((Key) collectableItem).getKeyCode() == type.getKeyCode()) {
+				return (Key) collectableItem;
+			}
+		}
+    	return null;
+    }
+
+    /**
+     * Tries to open {@link TokenDoor}.
+     *
+     * @param result - collision result.
+     * @return true if the door are open; otherwise false.
+     */
+    private boolean tryToOpenTokenDoor(CollisionCheckResult result) {
+    	TokenDoor door = (TokenDoor) result.getCollidingObject();
+    	return door.open(this.getTokenAccumulator());
     }
 
     /**
@@ -80,8 +142,7 @@ public class Player extends MovableObject {
      *
      * @param cell - {@link StepableCell} the {@link Player} stepped on.
      */
-    @Override
-    protected void onCellStepped(StepableCell cell) {
+    private void onCellStepped(StepableCell cell) {
         if (cell instanceof Ground) {
             Ground ground = ((Ground) cell);
             if (ground.hasCollectableItem()) {
@@ -115,7 +176,7 @@ public class Player extends MovableObject {
     /**
      * Checks if {@link Player} has {@link FireBoots} in inventory.
      *
-     * @return true if the playes has them; false otherwise.
+     * @return true if the player has them; false otherwise.
      */
     private boolean hasFireBoots() {
         for (CollectableItem item : this.inventory) {
@@ -129,7 +190,7 @@ public class Player extends MovableObject {
     /**
      * Checks if {@link Player} has {@link Flippers} in inventory.
      *
-     * @return true if the playes has them; false otherwise.
+     * @return true if the player has them; false otherwise.
      */
     private boolean hasFlippers() {
         for (CollectableItem item : this.inventory) {
