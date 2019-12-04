@@ -4,16 +4,15 @@ import java.util.ArrayList;
 
 import group44.game.CollisionCheckResult;
 import group44.game.Level;
-import group44.game.interfaces.IKeyReactive;
 import javafx.scene.input.KeyEvent;
 
 /**
  * Represents a player in the game.
- * 
+ *
  * @author Tomas Svejnoha
  * @version 1.0
  */
-public class Player extends MovableObject implements IKeyReactive {
+public class Player extends MovableObject {
     private ArrayList<CollectableItem> inventory;
 
     /**
@@ -96,7 +95,7 @@ public class Player extends MovableObject implements IKeyReactive {
     /**
      * Method executed when some other {@link LevelObject} tries to kill the
      * {@link Player}. The player will die if he can't protect himself.
-     * 
+     *
      * @param object - the {@link LevelObject} trying to kill the {@link Player}.
      */
     @Override
@@ -112,7 +111,7 @@ public class Player extends MovableObject implements IKeyReactive {
 
     /**
      * Checks if {@link Player} has {@link FireBoots} in inventory.
-     * 
+     *
      * @return true if the playes has them; false otherwise.
      */
     private boolean hasFireBoots() {
@@ -126,7 +125,7 @@ public class Player extends MovableObject implements IKeyReactive {
 
     /**
      * Checks if {@link Player} has {@link Flippers} in inventory.
-     * 
+     *
      * @return true if the playes has them; false otherwise.
      */
     private boolean hasFlippers() {
@@ -140,10 +139,9 @@ public class Player extends MovableObject implements IKeyReactive {
 
     /**
      * Sets the velocity of the {@link Player} based on the arrow pressed.
-     * 
+     *
      * @param event - the {@link KeyEvent}.
      */
-    @Override
     public void keyDown(KeyEvent event) {
         switch (event.getCode()) {
         case LEFT:
@@ -162,6 +160,8 @@ public class Player extends MovableObject implements IKeyReactive {
             this.setVelocityX(0);
             this.setVelocityY(1);
             break;
+		default:
+			break;
         }
     }
 
@@ -169,7 +169,7 @@ public class Player extends MovableObject implements IKeyReactive {
      * Returns a {@link TokenAccumulator} from the inventory the {@link Player} has.
      * The method creates one and adds it to the inventory if {@link Player} does
      * not have it.
-     * 
+     *
      * @return the {@link TokenAccumulator}.
      */
     private TokenAccumulator getTokenAccumulator() {

@@ -9,7 +9,6 @@ import group44.entities.Player;
 import group44.entities.StepableCell;
 import group44.entities.Wall;
 import group44.exceptions.CollisionException;
-import group44.game.interfaces.IKeyReactive;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 
@@ -168,9 +167,7 @@ public class Level {
      * @param event - the {@link KeyEvent}
      */
     public void keyDown(KeyEvent event) {
-        if (this.grid[this.player.getPositionX()][this.player.getPositionY()] instanceof IKeyReactive) {
-            ((IKeyReactive) this.grid[this.player.getPositionX()][this.player.getPositionY()]).keyDown(event);
-        }
+    	this.player.keyDown(event);
     }
 
     /**
