@@ -1,8 +1,10 @@
 package group44.entities.Cells;
 
 import group44.entities.MovableObjects.MovableObject;
+import group44.entities.MovableObjects.Player;
 import group44.game.CollisionCheckResult;
 import group44.game.Level;
+import group44.game.CollisionCheckResult.CollisionCheckResultType;
 
 /**
  * An abstract class for cells on which can {@link MovableObject} step.
@@ -33,7 +35,19 @@ public abstract class StepableCell extends Cell {
      *
      * @return the {@link CollisionCheckResult} with information about the action result.
      */
-    public abstract CollisionCheckResult stepOn(MovableObject object);
+    public CollisionCheckResult stepOn(MovableObject object) {
+    	if (this.getMovableObject() == null) {
+            this.setMovableObject(object);
+            this.onStepped(object);
+            return new CollisionCheckResult(CollisionCheckResultType.Successful);
+        } else {
+        	if (this.getMovableObject() instanceof Player) {
+        		return new CollisionCheckResult(CollisionCheckResultType.Player, this.getMovableObject());
+        	} else {
+        		return new CollisionCheckResult(CollisionCheckResultType.Enemy, this.getMovableObject());
+        	}
+        }
+    }
 
     /**
      * Removes {@link MovableObject} from the {@link StepableCell}.
@@ -58,6 +72,15 @@ public abstract class StepableCell extends Cell {
      */
     public MovableObject getMovableObject() {
         return this.movableObject;
+    }
+
+    /**
+     * Sets the {@link MovableObject} on the cell.
+     *
+     * @param object - the new {@link MovableObject}.
+     */
+    protected void setMovableObject(MovableObject object) {
+    	this.movableObject = object;
     }
 
     /**
