@@ -1,7 +1,7 @@
 package group44.entities.cells;
 
-import group44.entities.CollectableItems.CollectableItem;
 import group44.entities.MovableObjects.MovableObject;
+import group44.entities.collectableItems.CollectableItem;
 import group44.game.Level;
 import javafx.scene.image.Image;
 

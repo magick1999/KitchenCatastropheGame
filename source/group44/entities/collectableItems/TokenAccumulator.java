@@ -1,4 +1,4 @@
-package group44.entities.CollectableItems;
+package group44.entities.collectableItems;
 
 import java.util.ArrayList;
 
