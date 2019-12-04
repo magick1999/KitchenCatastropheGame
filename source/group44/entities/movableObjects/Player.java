@@ -7,7 +7,6 @@ import group44.entities.cells.Fire;
 import group44.entities.cells.Ground;
 import group44.entities.cells.KeyDoor;
 import group44.entities.cells.StepableCell;
-import group44.entities.cells.Teleporter;
 import group44.entities.cells.TokenDoor;
 import group44.entities.cells.Water;
 import group44.entities.collectableItems.CollectableItem;
