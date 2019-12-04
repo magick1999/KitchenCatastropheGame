@@ -136,7 +136,7 @@ public abstract class MovableObject extends LevelObject {
     /**
      * Method executed when the {@link MovableObject} object collides with some {@link LevelObject}.
      *
-     * @param object - the {@link CollisionCheckResult} with the collision status.
+     * @param result - the {@link CollisionCheckResult} with the collision status.
      */
     protected abstract void onCollided(CollisionCheckResult result);
 }
