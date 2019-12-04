@@ -10,8 +10,6 @@ import group44.entities.StepableCell;
 import group44.entities.Wall;
 import group44.exceptions.CollisionException;
 import group44.game.interfaces.IKeyReactive;
-import group44.game.interfaces.ILevel;
-import group44.game.interfaces.ITimeReactive;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 
