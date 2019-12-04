@@ -31,6 +31,22 @@ public abstract class StepableCell extends Cell {
     }
 
     /**
+     * Creates a new {@link StepableCell}.
+     *
+     * @param level       - The {@link Level} where the object is located.
+     * @param title       - Title of the object.
+     * @param positionX   - Position X in the game.
+     * @param positionY   - Position Y in the game.
+     * @param imagePath   - Image path of the instance.
+     * @param steppedItem - The {@link MovableObject} on the cell.
+     */
+    public StepableCell(Level level, String title, int positionX, int positionY, String imagePath, MovableObject steppedItem) {
+        super(level, title, positionX, positionY, imagePath);
+
+        this.movableObject = steppedItem;
+    }
+
+    /**
      * Places {@link MovableObject} on the {@link StepableCell}.
      *
      * @param object - {@link MovableObject} that steps on the cell.

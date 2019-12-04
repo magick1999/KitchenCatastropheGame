@@ -42,6 +42,20 @@ public class Ground extends StepableCell {
     }
 
     /**
+     * Creates a new {@link Ground}.
+     *
+     * @param level       - The {@link Level} where the object is located.
+     * @param title       - Title of the object.
+     * @param positionX   - Position X in the game.
+     * @param positionY   - Position Y in the game.
+     * @param imagePath   - Image path of the instance.
+     * @param steppedItem - The {@link MovableObject} on the cell.
+     */
+    public Ground(Level level, String title, int positionX, int positionY, String imagePath, MovableObject steppedItem) {
+        super(level, title, positionX, positionY, imagePath, steppedItem);
+    }
+
+    /**
      * Returns {@link CollectableItem} placed on the {@link Ground}.
      *
      * @return {@link CollectableItem} if present; otherwise null.
