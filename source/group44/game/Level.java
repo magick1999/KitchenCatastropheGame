@@ -1,9 +1,9 @@
 package group44.game;
 
-import group44.entities.Cells.Cell;
-import group44.entities.Cells.StepableCell;
 import group44.entities.MovableObjects.MovableObject;
 import group44.entities.MovableObjects.Player;
+import group44.entities.cells.Cell;
+import group44.entities.cells.StepableCell;
 import group44.exceptions.CollisionException;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;

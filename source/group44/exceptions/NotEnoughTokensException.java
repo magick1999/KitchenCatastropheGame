@@ -1,7 +1,7 @@
 package group44.exceptions;
 
-import group44.entities.Cells.TokenDoor;
 import group44.entities.CollectableItems.Token;
+import group44.entities.cells.TokenDoor;
 
 /**
  * Represents an exception raised when trying to open {@link TokenDoor} without

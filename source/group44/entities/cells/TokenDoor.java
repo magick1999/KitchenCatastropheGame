@@ -1,4 +1,4 @@
-package group44.entities.Cells;
+package group44.entities.cells;
 
 import group44.entities.CollectableItems.CollectableItem;
 import group44.entities.CollectableItems.Key;
