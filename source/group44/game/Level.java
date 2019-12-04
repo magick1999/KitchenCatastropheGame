@@ -82,7 +82,7 @@ public class Level {
     public LevelObject[][] getGrid() {
         /*
          * The only class we will possibly use this method is the SmartTargetingEnemy.
-         * Using some kind of repository does not make sence as the SmartTargetingEnemy
+         * Using some kind of repository does not make sense as the SmartTargetingEnemy
          * should decide on its own.
          */
         return this.grid;
