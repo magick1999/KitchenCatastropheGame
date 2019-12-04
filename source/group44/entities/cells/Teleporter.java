@@ -53,8 +53,8 @@ public class Teleporter extends StepableCell {
         if (this.linkedTeleporter != null) {
             LevelObject[][] surroudingArea = this.getSurroundingArea(this.linkedTeleporter);
 
-            for (int x = 0; x < surroudingArea[0].length; x++) {
-                for (int y = 0; y < surroudingArea.length; y++) {
+            for (int x = 0; x < surroudingArea.length; x++) {
+                for (int y = 0; y < surroudingArea[0].length; y++) {
                     LevelObject levelObject = surroudingArea[x][y];
 
                     if (levelObject instanceof Ground && ((Ground) surroudingArea[x][y]).isSteppedOn() == false) {
@@ -76,6 +76,9 @@ public class Teleporter extends StepableCell {
      * @return an array of {@link LevelObject}s surrounding the object passed as a parameter.
      */
     private LevelObject[][] getSurroundingArea(LevelObject object) {
+    	int gridWidth = this.getLevel().getGridWidth();
+    	int gridHeight = this.getLevel().getGridHeight();
+
         LevelObject[][] grid = this.getLevel().getGrid();
         LevelObject[][] area;
 
@@ -87,28 +90,28 @@ public class Teleporter extends StepableCell {
                     area[x][y] = grid[x][y];
                 }
             }
-        } else if (object.getPositionX() == 0 && object.getPositionY() == grid.length - 1) {
+        } else if (object.getPositionX() == 0 && object.getPositionY() == gridHeight - 1) {
             area = new LevelObject[2][2];
 
             for (int x = 0; x < 2; x++) {
                 for (int y = 0; y < 2; y++) {
-                    area[x][y] = grid[x][grid.length - 2 + y];
+                    area[x][y] = grid[x][gridHeight - 2 + y];
                 }
             }
-        } else if (object.getPositionX() == grid[0].length - 1 && object.getPositionY() == grid.length - 1) {
+        } else if (object.getPositionX() == gridWidth - 1 && object.getPositionY() == gridHeight - 1) {
             area = new LevelObject[2][2];
 
             for (int x = 0; x < 2; x++) {
                 for (int y = 0; y < 2; y++) {
-                    area[x][y] = grid[grid[0].length - 2 + x][grid.length - 2 + y];
+                    area[x][y] = grid[gridWidth - 2 + x][gridHeight - 2 + y];
                 }
             }
-        } else if (object.getPositionX() == grid[0].length - 1 && object.getPositionY() == 0) {
+        } else if (object.getPositionX() == gridWidth - 1 && object.getPositionY() == 0) {
             area = new LevelObject[2][2];
 
             for (int x = 0; x < 2; x++) {
                 for (int y = 0; y < 2; y++) {
-                    area[x][y] = grid[grid[0].length - 2 + x][y];
+                    area[x][y] = grid[gridWidth - 2 + x][y];
                 }
             }
         } else if (object.getPositionX() == 0) {
@@ -119,7 +122,7 @@ public class Teleporter extends StepableCell {
                     area[x][y] = grid[x][object.getPositionY() - 1 + y];
                 }
             }
-        } else if (object.getPositionX() == grid[0].length - 1) {
+        } else if (object.getPositionX() == gridWidth - 1) {
             area = new LevelObject[2][3];
 
             for (int x = 0; x < 2; x++) {
@@ -135,7 +138,7 @@ public class Teleporter extends StepableCell {
                     area[x][y] = grid[object.getPositionX() - 1 + x][object.getPositionY() + y];
                 }
             }
-        } else if (object.getPositionY() == grid.length - 1) {
+        } else if (object.getPositionY() == gridHeight - 1) {
             area = new LevelObject[3][2];
 
             for (int x = 0; x < 3; x++) {
