@@ -1,5 +1,6 @@
 package group44.entities;
 
+import group44.entities.CollectableItems.Key;
 import group44.game.Level;
 
 /**

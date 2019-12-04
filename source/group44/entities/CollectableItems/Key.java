@@ -1,23 +1,24 @@
-package group44.entities;
+package group44.entities.CollectableItems;
 
+import group44.entities.CollectableItem;
 import group44.game.Level;
 
 /**
- * Represents a colored {@link Key} in the game.
+ * Represents a coloured {@link Key} in the game.
  *
- * @author Tomas Svejnoha, Rowan Aldean
+ * @author Tomas Svejnoha, Rowan Aldean, Amy Mason
  * @version 1.0
  */
 public class Key extends CollectableItem {
     private KeyType keyType;
 
     /**
-     * Creates a new instance of {@link Key} of specific color type.
-     * 
-     * @param level     - The {@link Level} where the {@link Key} is located
-     * @param type      - Color type of the {@link Key}
-     * @param positionX - Position X in the game
-     * @param positionY - Position Y in the game
+     * Creates a new instance of {@link Key} of specific colour type.
+     *
+     * @param level     - The {@link Level} where the {@link Key} is located.
+     * @param type      - Colour type of the {@link Key}.
+     * @param positionX - Position X in the game.
+     * @param positionY - Position Y in the game.
      */
     public Key(Level level, KeyType type, int positionX, int positionY) {
         super(level, type.getTitle(), positionX, positionY, type.getImagePath());
@@ -25,9 +26,9 @@ public class Key extends CollectableItem {
     }
 
     /**
-     * Returns the code of the key
-     * 
-     * @return key code represented as {@link Integer}
+     * Returns the code of the key.
+     *
+     * @return key code represented as {@link Integer}.
      */
     public int getKeyCode() {
         return this.keyType.getKeyCode();
@@ -53,27 +54,27 @@ public class Key extends CollectableItem {
         }
 
         /**
-         * Returns the code of the key
-         * 
-         * @return key code represented as {@link Integer}
+         * Returns the code of the key.
+         *
+         * @return key code represented as {@link Integer}.
          */
         public int getKeyCode() {
             return this.code;
         }
 
         /**
-         * Returns the title (name) of the key
-         * 
-         * @return the title
+         * Returns the title (name) of the key.
+         *
+         * @return the title.
          */
         public String getTitle() {
             return this.title;
         }
 
         /**
-         * Returns a path to the image of the key
-         * 
-         * @return a path represented as {@link String}
+         * Returns a path to the image of the key.
+         *
+         * @return a path represented as {@link String}.
          */
         public String getImagePath() {
             return this.imagePath;

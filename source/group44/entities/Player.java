@@ -2,6 +2,9 @@ package group44.entities;
 
 import java.util.ArrayList;
 
+import group44.entities.CollectableItems.FireBoots;
+import group44.entities.CollectableItems.Flippers;
+import group44.entities.CollectableItems.Token;
 import group44.game.CollisionCheckResult;
 import group44.game.Level;
 import javafx.scene.input.KeyEvent;

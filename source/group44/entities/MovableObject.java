@@ -4,7 +4,7 @@ import group44.game.Level;
 
 /**
  * Abstract classes from which inherits all objects able to move.
- * 
+ *
  * @author Tomas Svejnoha, Rowan Aldean
  * @version 1.0
  */
@@ -15,7 +15,7 @@ public abstract class MovableObject extends LevelObject {
 
     /**
      * Creates a new {@link MovableObject}.
-     * 
+     *
      * @param level     - The {@link Level} where the {@link MovableObject} is
      *                  located
      * @param title     - Title of the object
@@ -37,7 +37,7 @@ public abstract class MovableObject extends LevelObject {
 
     /**
      * Returns the velocity of the object on the X axis.
-     * 
+     *
      * @return velocity X
      */
     public int getVelocityX() {
@@ -46,7 +46,7 @@ public abstract class MovableObject extends LevelObject {
 
     /**
      * Sets the velocity on the X axis.
-     * 
+     *
      * @param vx - velocity X
      */
     public void setVelocityX(int vx) {
@@ -55,7 +55,7 @@ public abstract class MovableObject extends LevelObject {
 
     /**
      * Returns the velocity of the object on the Y axis.
-     * 
+     *
      * @return velocity Y
      */
     public int getVelocityY() {
@@ -64,7 +64,7 @@ public abstract class MovableObject extends LevelObject {
 
     /**
      * Sets the velocity on the Y axis.
-     * 
+     *
      * @param vy - velocity Y
      */
     public void setVelocityY(int vy) {
@@ -73,7 +73,7 @@ public abstract class MovableObject extends LevelObject {
 
     /**
      * Method that kills the {@link MovableObject}.
-     * 
+     *
      * @param object - {@link LevelObject} trying to kill the {@link MovableObject}.
      */
     public void die(LevelObject object) {
@@ -84,7 +84,7 @@ public abstract class MovableObject extends LevelObject {
 
     /**
      * Indicates whether the object is alive or not.
-     * 
+     *
      * @return true if the {@link MovableObject} is alive, false otherwise
      */
     public Boolean isAlive() {
@@ -99,7 +99,7 @@ public abstract class MovableObject extends LevelObject {
     /**
      * Returns the {@link StepableCell} on which the {@link MovableObject} is
      * located.
-     * 
+     *
      * @param object - the {@link MovableObject}
      * @return if found, the {@link StepableCell} where the object is located,
      *         otherwise null
@@ -114,7 +114,7 @@ public abstract class MovableObject extends LevelObject {
 
     /**
      * Returns the next {@link StepableCell} the {@link MovableObject} will step on.
-     * 
+     *
      * @param object    - The instance of {@link MovableObject}
      * @param velocityX - velocity X of the object
      * @param velocityY - velocity Y of the object

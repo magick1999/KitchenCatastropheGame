@@ -2,6 +2,7 @@ package group44.entities;
 
 import java.util.ArrayList;
 
+import group44.entities.CollectableItems.Token;
 import group44.exceptions.NotEnoughTokensException;
 import javafx.scene.canvas.GraphicsContext;
 
