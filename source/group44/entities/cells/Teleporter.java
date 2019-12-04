@@ -49,7 +49,7 @@ public class Teleporter extends StepableCell {
      * @param object - the {@link MovableObject} to teleport.
      * @return true if the teleportation was successful; false otherwise.
      */
-    protected Boolean teleport(MovableObject object) {
+    private Boolean teleport(MovableObject object) {
         if (this.linkedTeleporter != null) {
             LevelObject[][] surroudingArea = this.getSurroundingArea(this.linkedTeleporter);
 
