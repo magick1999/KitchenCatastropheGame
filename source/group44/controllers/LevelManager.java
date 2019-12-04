@@ -9,7 +9,7 @@ import group44.game.Level;
 
 /**
  * Manages and loads Levels.
- * 
+ *
  * @author Tomas Svejnoha
  * @version 1.0
  */
@@ -19,7 +19,7 @@ public class LevelManager {
 
     /**
      * Returns information about available levels.
-     * 
+     *
      * @return A list of {@link LevelInfo}
      */
     public static ArrayList<LevelInfo> getLevelInfos() {
@@ -28,7 +28,7 @@ public class LevelManager {
 
     /**
      * Loads metadata about levels in a folder.
-     * 
+     *
      * @param directory - directory containing all {@link Level} files
      */
     public static void load(String directory) {
@@ -42,7 +42,7 @@ public class LevelManager {
 
     /**
      * Returns a list of files containing definitions of {@link Level}s.
-     * 
+     *
      * @param directory - the directory with {@link Level}s
      * @return the list of {@link Level} files
      */
@@ -62,7 +62,7 @@ public class LevelManager {
 
     /**
      * Returns a {@link LevelInfo} of the {@link Level}.
-     * 
+     *
      * @param file - {@link File} containing the {@link Level} definition.
      * @return the information about the {@link Level}; null if not found
      */
@@ -72,15 +72,22 @@ public class LevelManager {
 
         try {
             fileScanner = new Scanner(file);
-            fileScanner.useDelimiter(",");
 
-            int id = fileScanner.nextInt();
-            int width = fileScanner.nextInt();
-            int height = fileScanner.nextInt();
+            if (fileScanner.hasNextLine()) {
+            	String line = fileScanner.nextLine();
+            	System.out.println(line);
 
-            levelInfo = new LevelInfo(id, width, height, file);
+            	Scanner lineScanner = new Scanner(line);
+            	lineScanner.useDelimiter(",");
+                int id = lineScanner.nextInt();
+                int width = lineScanner.nextInt();
+                int height = lineScanner.nextInt();
+                lineScanner.close();
+
+                levelInfo = new LevelInfo(id, width, height, file);
+            }
         } catch (Exception e) {
-            System.out.println("Error while loading file (" + file.getAbsolutePath() + ") with profiles.");
+            System.out.println("LevelManager: Error while loading file (" + file.getAbsolutePath() + ") with profiles.\n" + e.getMessage());
         } finally {
             if (fileScanner != null) {
                 fileScanner.close();
@@ -91,7 +98,7 @@ public class LevelManager {
 
     /**
      * Returns a loaded {@link Level}.
-     * 
+     *
      * @param levelInfo - information about the {@link Level} to load
      * @return the loaded {@link Level}
      */

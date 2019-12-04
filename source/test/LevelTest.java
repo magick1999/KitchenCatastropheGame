@@ -1,10 +1,19 @@
 package test;
 
+import java.io.FileNotFoundException;
+
 import group44.Constants;
+import group44.controllers.LevelManager;
+import group44.controllers.parsers.LevelParser;
+import group44.entities.cells.Cell;
+import group44.exceptions.CollisionException;
+import group44.exceptions.ParsingException;
 import group44.game.Level;
+import group44.models.LevelInfo;
 
 public class LevelTest {
 	private static int DISPLAY_SIZE = 7;
+	private static final String LEVELS = "source/group44/data/levels/";
 
 	private static String PLAYER_NAME = "Tomas";
 	private static int PLAYER_VECTOR_X = 0;
@@ -13,15 +22,31 @@ public class LevelTest {
 	private static String PARSE_PATTERN_CELL = "%s,%d,%d,%s";
 	private static String PARSE_PATTERN_PLAYER = "%s,%s,%d,%d,%d,%d,%s";
 
-	private static String PATH_IMAGE_WALL = "source/group44/resources/WallCounter.png";
-	private static String PATH_IMAGE_GROUND = "source/group44/resources/cells/floor.png";
-	private static String PATH_IMAGE_WATER = "source/group44/resources/cells/water.png";
-	private static String PATH_IMAGE_FIRE = "source/group44/resources/cells/fire.png";
-	private static String PATH_IMAGE_GOAL = "source/group44/resources/cells/goal.png";
-	private static String PATH_IMAGE_PLAYER = "source/group44/resources/ChefDownWalk/Front1.png";
+	private static String PATH_IMAGE_WALL = "group44/resources/WallCounter.png";
+	private static String PATH_IMAGE_GROUND = "group44/resources/cells/floor.png";
+	private static String PATH_IMAGE_WATER = "group44/resources/cells/water.png";
+	private static String PATH_IMAGE_FIRE = "group44/resources/cells/fire.png";
+	private static String PATH_IMAGE_GOAL = "group44/resources/cells/goal.png";
+	private static String PATH_IMAGE_PLAYER = "group44/resources/ChefDownWalk/Front1.png";
 
 	public static void main(String[] args) {
 		generateLevelFile01();
+
+		if (true) {
+			LevelManager.load(LEVELS);
+
+			for (LevelInfo info : LevelManager.getLevelInfos()) {
+				if (info.getId() == 1) {
+					try {
+						Level level = LevelParser.parseLevel(info);
+					} catch (FileNotFoundException | CollisionException | ParsingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+
 	}
 
 	public static void createLevel(int id, int width, int height) {

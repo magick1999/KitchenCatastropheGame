@@ -35,9 +35,13 @@ public class LevelParser {
 		try {
 			fileScanner = new Scanner(info.getFile());
 
-			int id = fileScanner.nextInt();
-			int width = fileScanner.nextInt();
-			int height = fileScanner.nextInt();
+			Scanner lineScanner = new Scanner(fileScanner.nextLine());
+			lineScanner.useDelimiter(",");
+
+			int id = lineScanner.nextInt();
+			int width = lineScanner.nextInt();
+			int height = lineScanner.nextInt();
+			lineScanner.close();
 
 			level = new Level(id, width, height, Constants.LEVEL_DISPLAY_SIZE);
 			parseLevel(level, fileScanner);
@@ -78,6 +82,7 @@ public class LevelParser {
 	 * @throws ParsingException when trying to parse invalid data type.
 	 */
 	private static Cell parseEntry(Level level, Scanner scanner) throws ParsingException {
+		scanner.useDelimiter(",");
 		String type = scanner.next();
 
 		switch (type) {
