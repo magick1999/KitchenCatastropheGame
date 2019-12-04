@@ -59,6 +59,7 @@ public class Teleporter extends StepableCell {
 
                     if (levelObject instanceof Ground && ((Ground) surroudingArea[x][y]).isSteppedOn() == false) {
                         ((Ground) surroudingArea[x][y]).stepOn(object);
+                        object.setPosition(x, y);
                         return true;
                     }
                 }
