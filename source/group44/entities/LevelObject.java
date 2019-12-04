@@ -13,8 +13,6 @@ import group44.game.Level;
  */
 public abstract class LevelObject {
     private String title;
-    private Color backgroundColor;
-    private Color foregroundColor;
     private Image image;
     private Level level;
     private int positionX; // Position X in the game array
@@ -32,9 +30,6 @@ public abstract class LevelObject {
         this.level = level;
         this.setTitle(title);
         this.setPosition(positionX, positionY);
-        // Default colors
-        this.setBackgroundColor(Color.RED);
-        this.setForegroundColor(Color.BLACK);
     }
 
     /**
@@ -59,14 +54,10 @@ public abstract class LevelObject {
      * @param title           - Title of the object
      * @param positionX       - Position X in the game
      * @param positionY       - Position Y in the game
-     * @param foregroundColor - Foreground color
-     * @param backgroundColor - Background color
      */
     public LevelObject(Level level, String title, int positionX, int positionY, Color foregroundColor,
             Color backgroundColor) {
         this(level, title, positionX, positionY);
-        this.setForegroundColor(foregroundColor);
-        this.setBackgroundColor(backgroundColor);
     }
 
     /**
@@ -85,42 +76,6 @@ public abstract class LevelObject {
      */
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    /**
-     * Returns the background color of the object.
-     *
-     * @return the background color of the object
-     */
-    public Color getBackgroundColor() {
-        return this.backgroundColor;
-    }
-
-    /**
-     * Sets a background color of an object.
-     *
-     * @param color - background color
-     */
-    public void setBackgroundColor(Color color) {
-        this.backgroundColor = color;
-    }
-
-    /**
-     * Returns the foreground color of the object.
-     *
-     * @return the foreground color of the object
-     */
-    public Color getForegroundColor() {
-        return this.foregroundColor;
-    }
-
-    /**
-     * Sets the foreground color of the object.
-     *
-     * @param color - foreground color
-     */
-    public void setForegroundColor(Color color) {
-        this.foregroundColor = color;
     }
 
     /**
