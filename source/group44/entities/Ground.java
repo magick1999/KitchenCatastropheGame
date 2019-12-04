@@ -4,7 +4,7 @@ import group44.game.Level;
 
 /**
  * Represents a ground in the game.
- * 
+ *
  * @author Tomas Svejnoha
  * @version 1.0
  */
@@ -14,7 +14,7 @@ public class Ground extends StepableCell {
     /**
      * Creates a new instance of {@link Ground} at a specific location in the
      * {@link Level}
-     * 
+     *
      * @param level     - The {@link Level} where the {@link Ground} is located
      * @param positionX - Position X of the {@link Ground} in the {@link Level}
      * @param positionY - Position X of the {@link Ground} in the {@link Level}
@@ -27,7 +27,7 @@ public class Ground extends StepableCell {
     /**
      * Creates a new instance of {@link Ground} at a specific location in the
      * {@link Level}.
-     * 
+     *
      * @param level           - The {@link Level} where the {@link Goal} is located
      * @param positionX       - Position X of the {@link Ground} in the
      *                        {@link Level}
@@ -44,7 +44,7 @@ public class Ground extends StepableCell {
 
     /**
      * Returns {@link CollectableItem} placed on the {@link Ground}.
-     * 
+     *
      * @return {@link CollectableItem} if present; otherwise null
      */
     public CollectableItem collect() {
@@ -56,7 +56,7 @@ public class Ground extends StepableCell {
     /**
      * Indicates whether there is some {@link CollectableItem} on the {@link Ground}
      * or not.
-     * 
+     *
      * @return true if there is {@link CollectableItem}; false otherwise
      */
     public Boolean hasCollectableItem() {
@@ -65,11 +65,11 @@ public class Ground extends StepableCell {
 
     /**
      * Interacts with {@link MovableObject} that stepped on the {@link Ground}.
-     * 
+     *
      * @param object - The {@link MovableObject} that stepped on {@link Ground}.
      */
     @Override
     protected void onStepped(MovableObject object) {
-        System.out.println(object.getTitle() + " stepped on the " + this.getTitle());
+
     }
 }
