@@ -5,6 +5,8 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 
+import group44.game.scenes.MainMenuScene;
+
 /**
  * This class just redirects the player to the main menu stage.
  * @author Mihai

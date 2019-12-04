@@ -1,1 +1,32 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+@font-face {
+    src: url("../resources/SimpsonfontDEMO.otf");
+}
+#root{
+    -fx-background-image: url("../resources/background.png");
+    -fx-background-size: 800 600;
+    -fx-max-height: 100%;
+    -fx-max-width: 100%;
+    -fx-background-position: center center;
+
+}
+.button{
+    -fx-background-image: url("../resources/sand.png");
+    -fx-pref-width: 120px;
+    -fx-pref-height: 40px;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
+    -fx-font-family:"Simpsonfont";
+}
+#menuBox{
+    -fx-background-image: url("../resources/menuContainer.png");
+    -fx-background-size: cover;
+    -fx-pref-height: 300;
+    -fx-pref-width: 200;
+}
+#logo{
+    -fx-background-image: url("../resources/kitchenLogo.png");
+    -fx-background-size: cover;
+    -fx-pref-height: 300;
+    -fx-pref-width: 200;
+}

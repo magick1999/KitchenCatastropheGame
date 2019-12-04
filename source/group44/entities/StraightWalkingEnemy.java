@@ -1,6 +1,5 @@
 package group44.entities;
 
-import group44.game.CollisionCheckResult;
 import group44.game.Level;
 
 /**
@@ -41,14 +40,6 @@ public class StraightWalkingEnemy extends Enemy {
     }
 
     /**
-     * Turns the {@link StraightWalkingEnemy} around.
-     */
-    protected void turnAround() {
-        this.setVelocityX(this.getVelocityX() * -1);
-        this.setVelocityY(this.getVelocityY() * -1);
-    }
-
-    /**
      * Interacts with the colliding object.
      * 
      * @param object - the {@link MovableObject} the {@link Enemy} collided with.
@@ -56,20 +47,9 @@ public class StraightWalkingEnemy extends Enemy {
     @Override
     protected void onCollided(MovableObject object) {
         if (object instanceof Player) {
-            object.die();
+            object.die(this);
         } else {
             this.turnAround();
         }
-    }
-
-    /**
-     * Interacts with the {@link StepableCell} on which the
-     * {@link StraightWalkingEnemy} stepped.
-     * 
-     * @param cell - Cell on which the {@link StraightWalkingEnemy} stepped.
-     */
-    @Override
-    protected void onCellStepped(StepableCell cell) {
-        System.out.println(this.getTitle() + " stepped on " + cell.getTitle());
     }
 }

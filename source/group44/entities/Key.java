@@ -1,7 +1,6 @@
 package group44.entities;
 
 import group44.game.Level;
-import javafx.scene.paint.Color;
 
 /**
  * Represents a colored {@link Key} in the game.

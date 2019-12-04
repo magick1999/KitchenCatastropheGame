@@ -20,14 +20,11 @@ public class DumbTargetingEnemy extends Enemy {
      * @param name      - name of the {@link DumbTargetingEnemy}
      * @param positionX - position X in the game
      * @param positionY - position Y in the game
-     * @param velocityX - velocity X of the {@link DumbTargetingEnemy}
-     * @param velocityY - velocity Y of the {@link DumbTargetingEnemy}
      * @param imagePath - path to the Image representing the
      *                  {@link DumbTargetingEnemy}
      */
-    public DumbTargetingEnemy(Level level, String name, int positionX, int positionY, int velocityX, int velocityY,
-            String imagePath) {
-        super(level, name, positionX, positionY, velocityX, velocityY, imagePath);
+    public DumbTargetingEnemy(Level level, String name, int positionX, int positionY, String imagePath) {
+        super(level, name, positionX, positionY, 0, 0, imagePath);
     }
 
     /**
@@ -62,18 +59,7 @@ public class DumbTargetingEnemy extends Enemy {
     @Override
     protected void onCollided(MovableObject object) {
         if (object instanceof Player) {
-            object.die();
+            object.die(this);
         }
-    }
-
-    /**
-     * Interacts with the {@link StepableCell} on which the
-     * {@link DumbTargetingEnemy} stepped.
-     * 
-     * @param cell - Cell on which the {@link DumbTargetingEnemy} stepped.
-     */
-    @Override
-    protected void onCellStepped(StepableCell cell) {
-        System.out.println(this.getTitle() + " stepped on " + cell.getTitle());
     }
 }

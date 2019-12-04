@@ -10,6 +10,7 @@ import group44.game.Level;
  * @version 1.0
  */
 public abstract class Enemy extends MovableObject {
+    private static final String ON_STEPPED_MESSAGE = "%s stepped on %s at position [%d,%d].";
 
     /**
      * Creates a new Enemy in a {@link Level} at position and velocity.
@@ -55,5 +56,39 @@ public abstract class Enemy extends MovableObject {
                 this.onCellStepped(nextCell);
             }
         }
+    }
+
+    /**
+     * Method executed when some other {@link LevelObject} tries to kill the
+     * {@link Enemy}. The enemy will die if he can't protect himself.
+     * 
+     * @param object - the {@link LevelObject} trying to kill the {@link Player}.
+     */
+    @Override
+    public void die(LevelObject object) {
+        if (object instanceof Fire) {
+            super.die(object);
+        } else if (object instanceof Water) {
+            super.die(object);
+        }
+    }
+
+    /**
+     * Interacts with the {@link StepableCell} on which the {@link Enemy} stepped.
+     * 
+     * @param cell - Cell on which the {@link Enemy} stepped.
+     */
+    @Override
+    protected void onCellStepped(StepableCell cell) {
+        System.out.printf(Enemy.ON_STEPPED_MESSAGE, this.getTitle(), cell.getTitle(), cell.getPositionX(),
+                cell.getPositionY());
+    }
+
+    /**
+     * Turns the {@link Enemy} around.
+     */
+    protected void turnAround() {
+        this.setVelocityX(this.getVelocityX() * -1);
+        this.setVelocityY(this.getVelocityY() * -1);
     }
 }
