@@ -27,8 +27,23 @@ public class Leaderboard {
 	 *
 	 * @return profiles
 	 */
-	public static ObservableList<Record> getProfiles() {
+	public static ObservableList<Record> getAllRecords() {
 		return Leaderboard.records;
+	}
+
+	/**
+	 * Adds or updates a record in the {@link Leaderboard} if the time is
+	 * better.
+	 *
+	 * @param profileId
+	 *            - Id of the profile.
+	 * @param levelId
+	 *            - Id of the {@link Level} the user finished.
+	 * @param time
+	 *            - time taken to finish the {@link Level}.
+	 */
+	public static void addOrUpdate(int profileId, int levelId, long time) {
+		Leaderboard.addOrUpdate(ProfileManager.getProfile(profileId), levelId, time);
 	}
 
 	/**
@@ -42,7 +57,7 @@ public class Leaderboard {
 	 * @param time
 	 *            - time taken to finish the {@link Level}
 	 */
-	public static void addOrUpdate(Profile profile, int levelId, long time) {
+	private static void addOrUpdate(Profile profile, int levelId, long time) {
 		Record record = null;
 
 		for (Record item : Leaderboard.records) {
@@ -134,7 +149,7 @@ public class Leaderboard {
 	 */
 	public static ObservableList<Record> load() {
 		Leaderboard.load(Constants.FILE_RECORDS);
-		return Leaderboard.getProfiles();
+		return Leaderboard.getAllRecords();
 	}
 
 	/**
