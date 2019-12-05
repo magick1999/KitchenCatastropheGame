@@ -30,6 +30,8 @@ public final class Constants {
     public static final String TYPE_DUMB_TARGETING_ENEMY = "dumbTargetingEnemy";
     public static final String TYPE_STRAIGHT_WALKING_ENEMY = "straightWalkingEnemy";
     public static final String TYPE_WALL_FOLLOWING_ENEMY = "wallFollowingEnemy";
+    public static final String TYPE_TOKEN_DOOR = "tokenDoor";
+    public static final String TYPE_KEY_DOOR = "keyDoor";
     
     
 }

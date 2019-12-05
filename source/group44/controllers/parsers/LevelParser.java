@@ -102,6 +102,10 @@ public class LevelParser {
 			return parseFireEntry(level, scanner);
 		case Constants.TYPE_GOAL:
 			return parseGoalEntry(level, scanner);
+		case Constants.TYPE_KEY_DOOR:
+			return parseKeyDoorEntry(level, scanner);
+		case Constants.TYPE_TOKEN_DOOR:
+			return parseTokenDoorEntry(level, scanner);
 		default:
 			throw new ParsingException(scanner.nextLine());
 		}
@@ -168,6 +172,27 @@ public class LevelParser {
 			return new Ground(level, positionX, positionY, imagePath);
 		}
 	}
+	
+	/**
+	 * Retrieves the Key Type.
+	 * 
+	 * @param keyTypeID - the key ID, specific to Key Type
+	 * @return - the Key Type
+	 */
+	private static KeyType getKeyType (int keyTypeID) {
+		switch (keyTypeID) {
+		case 1:
+			return KeyType.RED;
+		case 2:
+			return KeyType.BLUE;
+		case 3:
+			return KeyType.GREEN;
+		case 4:
+			return KeyType.GOLD;
+		default:
+			return KeyType.RED;
+		}
+	}
 
 	/**
 	 * Parses the line into cell.
@@ -200,7 +225,46 @@ public class LevelParser {
 
 		return new Fire(level, positionX, positionY, imagePath);
 	}
-
+	
+	/**
+	 * Parses the line into cell.
+	 * 
+	 * @param level - the level where the Cell is located.
+	 * @param scanner - scanner with the serialised Cell.
+	 * 
+	 * @return the serialised {@link Key Door} as a type {@link Cell}.
+	 */
+	private static Cell parseKeyDoorEntry(Level level, Scanner scanner) {
+		String title = scanner.next();
+		int positionX = scanner.nextInt();
+		int positionY = scanner.nextInt();
+		String lockedImagePath = scanner.next();
+		String unlockedImagePath = scanner.next();
+		KeyType unlockingKey = getKeyType(scanner.nextInt());
+		
+		return new KeyDoor(level, title, positionX, positionY, lockedImagePath, unlockedImagePath, unlockingKey);
+	}
+	
+	/**
+	 * Parses the line into cell.
+	 * 
+	 * @param level - the level where the Cell is located.
+	 * @param scanner - scanner with the serialised Cell.
+	 * 
+	 * @return the serialised {@link Token Door} as a type {@link Cell}.
+	 */
+	private static Cell parseTokenDoorEntry(Level level, Scanner scanner) {
+		String title = scanner.next();
+		int positionX = scanner.nextInt();
+		int positionY = scanner.nextInt();
+		String lockedImagePath = scanner.next();
+		String unlockedImagePath = scanner.next();
+		int tokensNeeded = scanner.nextInt();
+		
+		return new TokenDoor(level, title, positionX, positionY, lockedImagePath, unlockedImagePath, tokensNeeded);
+	}
+	
+	
 	/**
 	 * Parses the line into cell.
 	 *
@@ -336,25 +400,7 @@ public class LevelParser {
 		int keyTypeID = scanner.nextInt();
 		int positionX = scanner.nextInt();
 		int positionY = scanner.nextInt();
-
-		KeyType keyType = null;
-		switch (keyTypeID) {
-		case 1:
-			keyType = KeyType.RED;
-			break;
-		case 2:
-			keyType = KeyType.BLUE;
-			break;
-		case 3:
-			keyType = KeyType.GREEN;
-			break;
-		case 4:
-			keyType = KeyType.GOLD;
-			break;
-		default:
-			keyType = KeyType.RED;
-			break;
-		}
+		KeyType keyType = getKeyType(keyTypeID);
 
 		return new Key(level, keyType, positionX, positionY);
 	}
