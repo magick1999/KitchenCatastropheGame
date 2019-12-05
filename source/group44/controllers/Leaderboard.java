@@ -266,7 +266,17 @@ public class Leaderboard {
 	 */
 	private static void save(PrintWriter writer) {
 		for (Record record : Leaderboard.records) {
-			writer.println(record.toString());
+			writer.println(serialiseRecord(record));
 		}
+	}
+
+	/**
+	 * Returns a serialised record.
+	 * @param record - record to serialise
+	 *
+	 * @return a string representation of a record
+	 */
+	private static String serialiseRecord(Record record) {
+		return record.getProfile().getId() + "," + record.getLevelId() + "," + record.getTime();
 	}
 }
