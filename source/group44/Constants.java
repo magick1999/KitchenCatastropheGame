@@ -23,4 +23,9 @@ public final class Constants {
     public static final String TYPE_FIRE = "fire";
     public static final String TYPE_GOAL = "goal";
     public static final String TYPE_PLAYER = "player";
+    public static final String TYPE_FIRE_BOOTS = "fireBoots";
+    public static final String TYPE_FLIPPERS = "flippers";
+    public static final String TYPE_KEY = "key";
+    public static final String TYPE_TOKEN = "token";
+    
 }
