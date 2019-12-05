@@ -27,7 +27,7 @@ public class LevelSelectorScene {
     private LevelSelectorController levelSelectorController;
     //This is the stage where the scene is displayed.
     //The maximum number of levels.
-    private static Integer maxLevel = 3;
+    private static Integer maxLevel = LevelManager.load().size();
     private Stage primaryStage;
     private Integer currentLevelIndex;
     private Profile currentProfile;
