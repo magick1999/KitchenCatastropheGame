@@ -1,10 +1,14 @@
 package group44.controllers;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import group44.models.LevelInfo;
+import group44.controllers.parsers.LevelParser;
+import group44.exceptions.CollisionException;
+import group44.exceptions.ParsingException;
 import group44.game.Level;
 
 /**
@@ -99,11 +103,14 @@ public class LevelManager {
     /**
      * Returns a loaded {@link Level}.
      *
-     * @param levelInfo - information about the {@link Level} to load
-     * @return the loaded {@link Level}
+     * @param levelInfo - information about the {@link Level} to load.
+     * @return the loaded {@link Level}.
+     *
+     * @throws CollisionException when two cells are at the same position.
+	 * @throws ParsingException when trying to parse invalid data type.
+	 * @throws FileNotFoundException when level file is not found.
      */
-    public static Level load(LevelInfo levelInfo) {
-        System.out.println("LevelManager.load(...) is not implemented.");
-        throw new UnsupportedOperationException("Not implemented");
+    public static Level load(LevelInfo levelInfo) throws FileNotFoundException, CollisionException, ParsingException {
+        return LevelParser.parseLevel(levelInfo);
     }
 }
