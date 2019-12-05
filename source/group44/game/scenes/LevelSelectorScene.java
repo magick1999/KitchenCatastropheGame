@@ -127,9 +127,7 @@ public class LevelSelectorScene {
 
     private void setTopTimes() {
         Leaderboard.load();
-        Record[] top3 = Leaderboard.getTopThreeRecords(currentLevelIndex);
-        ObservableList<Record> observableList = FXCollections.observableArrayList(top3);
-        levelSelectorController.getLevelTimes().setItems(observableList);
+        levelSelectorController.getLevelTimes().setItems(Leaderboard.getTopThreeRecords(currentLevelIndex));
     }
 
     /**

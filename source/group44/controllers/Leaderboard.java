@@ -22,6 +22,10 @@ import javafx.collections.ObservableList;
 public class Leaderboard {
 	private static ObservableList<Record> records = FXCollections.observableArrayList(new ArrayList<Record>());
 
+	private static int currentLevel;
+	private static ObservableList<Record> top3RecordsForCurrentLevel = FXCollections
+			.observableArrayList(new ArrayList<Record>());
+
 	/**
 	 * Returns an {@link ObservableList} of records.
 	 *
@@ -74,32 +78,36 @@ public class Leaderboard {
 		}
 
 		Leaderboard.save();
+		Leaderboard.refresh();
 	}
 
 	/**
 	 * Returns up to 3 top records for the level.
 	 *
 	 * @param levelId
-	 *            - id of the {@link Level} for which we want the records
-	 * @return array of up to 3 top records
+	 *            - id of the {@link Level} for which we want the records.
+	 * @return an observable list of up to 3 top records.
 	 */
-	public static Record[] getTopThreeRecords(int levelId) {
+	public static ObservableList<Record> getTopThreeRecords(int levelId) {
+		Leaderboard.currentLevel = levelId;
+
 		ArrayList<Record> levelRecords = new ArrayList<>();
 
 		for (Record item : Leaderboard.records) {
-			if (item.getLevelId() == levelId) {
+			if (item.getLevelId() == Leaderboard.currentLevel) {
 				levelRecords.add(item);
 			}
 		}
-
 		Collections.sort(levelRecords);
 
-		Record[] top3 = new Record[(levelRecords.size() < 3) ? levelRecords.size() : 3];
-		for (int i = 0; i < 3; i++) {
-			top3[i] = levelRecords.get(i);
+		Leaderboard.top3RecordsForCurrentLevel.clear();
+		int maxRecords = (levelRecords.size() < 3) ? levelRecords.size() : 3;
+
+		for (int i = 0; i < maxRecords; i++) {
+			Leaderboard.top3RecordsForCurrentLevel.add(levelRecords.get(i));
 		}
 
-		return top3;
+		return Leaderboard.top3RecordsForCurrentLevel;
 	}
 
 	/**
@@ -112,8 +120,7 @@ public class Leaderboard {
 	 * @return true if user is in top 3; otherwise false.
 	 */
 	public static boolean isInTopThreeRecors(int profileId, int levelId) {
-		Record[] records = Leaderboard.getTopThreeRecords(levelId);
-		for (Record item : records) {
+		for (Record item : Leaderboard.getTopThreeRecords(levelId)) {
 			if (item.getProfile().getId() == profileId) {
 				return true;
 			}
@@ -140,6 +147,13 @@ public class Leaderboard {
 		}
 
 		return level;
+	}
+
+	/**
+	 * Refreshes the best times for the current level.
+	 */
+	private static void refresh() {
+		Leaderboard.getTopThreeRecords(Leaderboard.currentLevel);
 	}
 
 	/**
@@ -272,7 +286,9 @@ public class Leaderboard {
 
 	/**
 	 * Returns a serialised record.
-	 * @param record - record to serialise
+	 *
+	 * @param record
+	 *            - record to serialise
 	 *
 	 * @return a string representation of a record
 	 */
