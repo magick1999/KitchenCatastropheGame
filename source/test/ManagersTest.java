@@ -16,8 +16,8 @@ public class ManagersTest {
 	private static final String LEVELS = "source/group44/data/levels/";
 
 	public static void main(String[] args) {
-		ProfileManager.load(PROFILES);
-		Leaderboard.load(LEADERBOARD);
+		ProfileManager.load();
+		Leaderboard.load();
 		LevelManager.load(LEVELS);
 
 		printProfile(ProfileManager.getProfile(1));
@@ -29,7 +29,7 @@ public class ManagersTest {
 		} catch (UsernameTakenException e) {
 			e.printStackTrace();
 		}
-		ProfileManager.save(PROFILES);
+		ProfileManager.save();
 
 		// ***********************************************************
 		// ***********************************************************
@@ -37,10 +37,10 @@ public class ManagersTest {
 
 		printRecords(Leaderboard.getTopThreeRecords(1));
 		System.out.println("-------------------------------------\n");
-		Leaderboard.addOrUpdate(ProfileManager.getProfile(7), 1, 2000);
+		Leaderboard.addOrUpdate(ProfileManager.getProfile(7).getId(), 1, 2000);
 		printRecords(Leaderboard.getTopThreeRecords(1));
 		System.out.println("-------------------------------------\n");
-		Leaderboard.save(LEADERBOARD);
+		Leaderboard.save();
 
 		// ***********************************************************
 		// ***********************************************************
