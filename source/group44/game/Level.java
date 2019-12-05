@@ -1,7 +1,10 @@
 package group44.game;
 
+import java.util.ArrayList;
+
 import group44.entities.cells.Cell;
 import group44.entities.cells.StepableCell;
+import group44.entities.movableObjects.Enemy;
 import group44.entities.movableObjects.MovableObject;
 import group44.entities.movableObjects.Player;
 import group44.exceptions.CollisionException;
@@ -22,6 +25,7 @@ public class Level {
     private Cell[][] grid; // The 2D game array
     private int displaySize; // The size of the grid displayed
     private Player player;
+    private ArrayList<Enemy> enemies;
 
     /**
      * Creates a new instance of {@link Level}.
@@ -41,6 +45,7 @@ public class Level {
         } else {
             this.displaySize = displaySize;
         }
+        this.enemies = new ArrayList<>();
     }
 
     /**
@@ -103,6 +108,9 @@ public class Level {
             if (object instanceof Player) {
                 this.player = (Player) object;
             }
+            if (object instanceof Enemy) {
+            	this.enemies.add((Enemy) object);
+            }
         }
     }
 
@@ -141,6 +149,16 @@ public class Level {
      */
     public void keyDown(KeyEvent event) {
     	this.player.keyDown(event);
+    	this.moveEnemies();
+    }
+
+    /**
+     * Moves all enemies in the game.
+     */
+    private void moveEnemies() {
+    	for (Enemy enemy : this.enemies) {
+    		enemy.move();
+		}
     }
 
     /**
