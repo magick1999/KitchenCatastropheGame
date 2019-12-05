@@ -33,7 +33,7 @@ public class LevelTest {
 
 	public static void main(String[] args) throws FileNotFoundException, IllegalArgumentException, CollisionException, ParsingException {
 		JFXPanel jfxPanel = new JFXPanel();
-		generateLevelFile01("source/group44/data/levels/level_001.txt");
+		generateLevelFile01(LEVELS + "level_001.txt");
 
 		//File f = new File(PATH_IMAGE_GROUND);
 		//System.out.println(f.exists());
