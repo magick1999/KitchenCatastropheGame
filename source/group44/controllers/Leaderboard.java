@@ -129,6 +129,24 @@ public class Leaderboard {
 	}
 
 	/**
+	 * Returns a record for player in a level.
+	 *
+	 * @param profileId
+	 *            - profile id of the player.
+	 * @param levelId
+	 *            - id of the level.
+	 * @return
+	 */
+	public static Record getRecord(int profileId, int levelId) {
+		for (Record record : Leaderboard.records) {
+			if (record.getProfile().getId() == profileId && record.getLevelId() == levelId) {
+				return record;
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Returns an id the highest {@link Level} achieved by user.
 	 *
 	 * @param profileId
