@@ -23,4 +23,15 @@ public final class Constants {
     public static final String TYPE_FIRE = "fire";
     public static final String TYPE_GOAL = "goal";
     public static final String TYPE_PLAYER = "player";
+    public static final String TYPE_FIRE_BOOTS = "fireBoots";
+    public static final String TYPE_FLIPPERS = "flippers";
+    public static final String TYPE_KEY = "key";
+    public static final String TYPE_TOKEN = "token";
+    public static final String TYPE_DUMB_TARGETING_ENEMY = "dumbTargetingEnemy";
+    public static final String TYPE_STRAIGHT_WALKING_ENEMY = "straightWalkingEnemy";
+    public static final String TYPE_WALL_FOLLOWING_ENEMY = "wallFollowingEnemy";
+    public static final String TYPE_TOKEN_DOOR = "tokenDoor";
+    public static final String TYPE_KEY_DOOR = "keyDoor";
+    
+    
 }
