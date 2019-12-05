@@ -1,10 +1,14 @@
 package group44.controllers;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import group44.models.LevelInfo;
+import group44.controllers.parsers.LevelParser;
+import group44.exceptions.CollisionException;
+import group44.exceptions.ParsingException;
 import group44.game.Level;
 
 /**
@@ -75,15 +79,23 @@ public class LevelManager {
 
 		try {
 			fileScanner = new Scanner(file);
-			fileScanner.useDelimiter(",");
 
-			int id = fileScanner.nextInt();
-			int width = fileScanner.nextInt();
-			int height = fileScanner.nextInt();
+			if (fileScanner.hasNextLine()) {
+				String line = fileScanner.nextLine();
+				System.out.println(line);
 
-			levelInfo = new LevelInfo(id, width, height, file);
+				Scanner lineScanner = new Scanner(line);
+				lineScanner.useDelimiter(",");
+				int id = lineScanner.nextInt();
+				int width = lineScanner.nextInt();
+				int height = lineScanner.nextInt();
+				lineScanner.close();
+
+				levelInfo = new LevelInfo(id, width, height, file);
+			}
 		} catch (Exception e) {
-			System.out.println("Error while loading file (" + file.getAbsolutePath() + ") with profiles.");
+			System.out.println("LevelManager: Error while loading file (" + file.getAbsolutePath()
+					+ ") with profiles.\n" + e.getMessage());
 		} finally {
 			if (fileScanner != null) {
 				fileScanner.close();
@@ -96,11 +108,17 @@ public class LevelManager {
 	 * Returns a loaded {@link Level}.
 	 *
 	 * @param levelInfo
-	 *            - information about the {@link Level} to load
-	 * @return the loaded {@link Level}
+	 *            - information about the {@link Level} to load.
+	 * @return the loaded {@link Level}.
+	 *
+	 * @throws CollisionException
+	 *             when two cells are at the same position.
+	 * @throws ParsingException
+	 *             when trying to parse invalid data type.
+	 * @throws FileNotFoundException
+	 *             when level file is not found.
 	 */
-	public static Level load(LevelInfo levelInfo) {
-		System.out.println("LevelManager.load(...) is not implemented.");
-		throw new UnsupportedOperationException("Not implemented");
+	public static Level load(LevelInfo levelInfo) throws FileNotFoundException, CollisionException, ParsingException {
+		return LevelParser.parseLevel(levelInfo);
 	}
 }

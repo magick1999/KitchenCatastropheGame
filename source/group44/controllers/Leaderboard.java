@@ -19,7 +19,16 @@ import javafx.collections.ObservableList;
  * @version 1.0
  */
 public class Leaderboard {
-	public static ObservableList<Record> records = FXCollections.observableArrayList(new ArrayList<>());
+	private static ObservableList<Record> records = FXCollections.observableArrayList(new ArrayList<Record>());
+
+	/**
+	 * Returns an {@link ObservableList} of records.
+	 *
+	 * @return profiles
+	 */
+	public static ObservableList<Record> getProfiles() {
+		return Leaderboard.records;
+	}
 
 	/**
 	 * Adds or updates a record in the {@link Leaderboard} if the time is

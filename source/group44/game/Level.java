@@ -1,33 +1,35 @@
 package group44.game;
 
-import group44.entities.LevelObject;
-import group44.entities.MovableObject;
-import group44.entities.Player;
-import group44.entities.StepableCell;
-import group44.game.interfaces.IKeyReactive;
-import group44.game.interfaces.ILevel;
-import group44.game.interfaces.ITimeReactive;
+import java.util.ArrayList;
+
+import group44.entities.cells.Cell;
+import group44.entities.cells.StepableCell;
+import group44.entities.movableObjects.Enemy;
+import group44.entities.movableObjects.MovableObject;
+import group44.entities.movableObjects.Player;
+import group44.exceptions.CollisionException;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 
 /**
  * Level maintains all data and event handling in the game.
- * 
+ *
  * @author Tomas Svejnoha
  * @version 1.0
  */
-public class Level implements ILevel {
+public class Level {
     private final static String ERROR_DISPLAY_SIZE_ILLEGAL_ARGUMENT_EXCEPTION = "The displaySize must be odd and >= 3.";
+    private final static String ERROR_COLLISION_EXCEPTION = "Unable to place %s in the grid [%d][%d].";
 
     private int id;
-    private LevelObject[][] grid; // The 2D game array
+    private Cell[][] grid; // The 2D game array
     private int displaySize; // The size of the grid displayed
     private Player player;
-    private Boolean isWon; // TODO: Add Observer pattern
+    private ArrayList<Enemy> enemies;
 
     /**
      * Creates a new instance of {@link Level}.
-     * 
+     *
      * @param id          - the Id of the level
      * @param gridWidth   - width of the 2D array
      * @param gridHeight  - height of the 2D array
@@ -37,17 +39,18 @@ public class Level implements ILevel {
      */
     public Level(int id, int gridWidth, int gridHeight, int displaySize) {
         this.id = id;
-        this.grid = new LevelObject[gridWidth][gridHeight];
-        if (displaySize < 3 || displaySize > grid[0].length || displaySize > grid[0].length || displaySize % 2 != 1) {
+        this.grid = new Cell[gridWidth][gridHeight];
+        if (displaySize < 3 || displaySize > gridWidth || displaySize > gridHeight || displaySize % 2 != 1) {
             throw new IllegalArgumentException(Level.ERROR_DISPLAY_SIZE_ILLEGAL_ARGUMENT_EXCEPTION);
         } else {
             this.displaySize = displaySize;
         }
+        this.enemies = new ArrayList<>();
     }
 
     /**
      * Returns the Id of the {@link Level}.
-     * 
+     *
      * @return the level id
      */
     public int getId() {
@@ -55,35 +58,11 @@ public class Level implements ILevel {
     }
 
     /**
-     * Checks whether the object is colliding or not.
-     * 
-     * @param obj - object for to check the collision.
-     * 
-     * @return result of the collision check.
+     * Returns a 2D array with all {@link Cell} in the {@link Level}.
+     *
+     * @return 2D array of {@link Cell}s
      */
-    public CollisionCheckResult checkCollision(LevelObject obj) {
-        if (this.isColiding(obj)) {
-            return new CollisionCheckResult(this.grid[obj.getPositionX()][obj.getPositionY()]);
-        }
-        return new CollisionCheckResult(null);
-    }
-
-    /**
-     * Checks whether the object is colliding or not.
-     * 
-     * @param obj - object for which to check the collision.
-     * @return true if the object is colliding, otherwise false
-     */
-    private Boolean isColiding(LevelObject obj) {
-        return this.grid[obj.getPositionX()][obj.getPositionY()] != obj;
-    }
-
-    /**
-     * Returns a 2D array with all {@link LevelObject} in the {@link Level}.
-     * 
-     * @return 2D array of {@link LevelObject}s
-     */
-    public LevelObject[][] getGrid() {
+    public Cell[][] getGrid() {
         /*
          * The only class we will possibly use this method is the SmartTargetingEnemy.
          * Using some kind of repository does not make sence as the SmartTargetingEnemy
@@ -93,25 +72,51 @@ public class Level implements ILevel {
     }
 
     /**
-     * Adds {@link LevelObject} in the grid to the specific location.
-     * 
-     * @param x           - position X of the {@link LevelObject}
-     * @param y           - position Y of the {@link LevelObject}
-     * @param levelObject - the {@link LevelObject} to place in the grid
+     * Returns a width of the game.
+     *
+     * @return width of the game
      */
-    public void addLevelObject(int x, int y, LevelObject levelObject) {
-        this.grid[x][y] = levelObject;
-        if (levelObject instanceof StepableCell) {
-            MovableObject object = ((StepableCell) levelObject).getMovableObject();
+    public int getGridWidth() {
+        return this.grid.length;
+    }
+
+    /**
+     * Returns a height of the game.
+     *
+     * @return height of the game
+     */
+    public int getGridHeight() {
+        return this.grid[0].length;
+    }
+
+    /**
+     * Adds {@link Cell} in the grid to the specific location.
+     *
+     * @param x    - position X of the {@link Cell}
+     * @param y    - position Y of the {@link Cell}
+     * @param cell - the {@link Cell} to place in the grid
+     * @throws CollisionException when trying to rewrite existing cell in the grid
+     */
+    public void addCell(int x, int y, Cell cell) throws CollisionException {
+        if (this.grid[x][y] != null) {
+            throw new CollisionException(String.format(Level.ERROR_COLLISION_EXCEPTION, cell.getTitle(), x, y));
+        }
+
+        this.grid[x][y] = cell;
+        if (cell instanceof StepableCell) {
+            MovableObject object = ((StepableCell) cell).getMovableObject();
             if (object instanceof Player) {
                 this.player = (Player) object;
+            }
+            if (object instanceof Enemy) {
+            	this.enemies.add((Enemy) object);
             }
         }
     }
 
     /**
      * Returns a current position of the {@link Player}.
-     * 
+     *
      * @return the {@link Player}'s position
      */
     public Position getPlayerPosition() {
@@ -120,10 +125,9 @@ public class Level implements ILevel {
 
     /**
      * Draws the cell in the active game area.
-     * 
+     *
      * @param gc - {@link GraphicsContext} to which the game is drawn
      */
-    @Override
     public void draw(GraphicsContext gc) {
         double cellWidth = gc.getCanvas().getWidth() / this.displaySize;
         double cellHeight = gc.getCanvas().getHeight() / this.displaySize;
@@ -140,36 +144,26 @@ public class Level implements ILevel {
 
     /**
      * Passes the {@link KeyEvent} to the {@link Player}.
-     * 
+     *
      * @param event - the {@link KeyEvent}
      */
-    @Override
     public void keyDown(KeyEvent event) {
-        if (this.grid[this.player.getPositionX()][this.player.getPositionY()] instanceof IKeyReactive) {
-            ((IKeyReactive) this.grid[this.player.getPositionX()][this.player.getPositionY()]).keyDown(event);
-        }
+    	this.player.keyDown(event);
+    	this.moveEnemies();
     }
 
     /**
-     * Invokes timeTick method on all {@link LevelObject}s in the active game area
-     * implementing {@link group44.game.interfaces.ITimeReactive}.
+     * Moves all enemies in the game.
      */
-    @Override
-    public void timeTick() {
-        Area activeArea = this.getActiveArea();
-
-        for (int x = activeArea.getX1(); x < activeArea.getX2(); x++) {
-            for (int y = activeArea.getY1(); y < activeArea.getY2(); y++) {
-                if (this.grid[x][y] instanceof ITimeReactive) {
-                    ((ITimeReactive) this.grid[x][y]).timeTick();
-                }
-            }
-        }
+    private void moveEnemies() {
+    	for (Enemy enemy : this.enemies) {
+    		enemy.move();
+		}
     }
 
     /**
      * Returns the active {@link Area} of the game.
-     * 
+     *
      * @return the active area of the game
      */
     private Area getActiveArea() {
@@ -193,8 +187,10 @@ public class Level implements ILevel {
                 centerY + this.displaySize / 2);
     }
 
+    /**
+     * Finished the current level.
+     */
     public void finish() {
-        this.isWon = true;
-        // TODO: Notify observers
+    	throw new UnsupportedOperationException();
     }
 }
