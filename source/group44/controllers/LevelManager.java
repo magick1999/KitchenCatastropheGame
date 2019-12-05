@@ -32,6 +32,15 @@ public class LevelManager {
 	}
 
 	/**
+	 * Returns a number of available levels.
+	 *
+	 * @return number of levels.
+	 */
+	public static int countAvailableLevels() {
+		return LevelManager.levelInfos.size();
+	}
+
+	/**
 	 * Loads metadata about levels in a folder.
 	 *
 	 * @param directory
