@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import group44.models.LevelInfo;
+import group44.Constants;
 import group44.controllers.parsers.LevelParser;
 import group44.exceptions.CollisionException;
 import group44.exceptions.ParsingException;
@@ -41,12 +42,22 @@ public class LevelManager {
 	}
 
 	/**
+	 * Loads level information from the default folder.
+	 *
+	 * @return array of {@link LevelInfo}s.
+	 */
+	public static ArrayList<LevelInfo> load() {
+		load(Constants.FOLDER_LEVELS);
+		return LevelManager.getLevelInfos();
+	}
+
+	/**
 	 * Loads metadata about levels in a folder.
 	 *
 	 * @param directory
 	 *            - directory containing all {@link Level} files
 	 */
-	public static void load(String directory) {
+	private static void load(String directory) {
 		for (File item : LevelManager.getLevelFiles(new File(directory))) {
 			LevelInfo info = LevelManager.getLevelInfo(item);
 			if (info != null) {
