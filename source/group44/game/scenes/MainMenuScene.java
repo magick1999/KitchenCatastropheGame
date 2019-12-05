@@ -1,8 +1,13 @@
 package group44.game.scenes;
 
+import group44.controllers.ProfileManager;
+import group44.models.Profile;
+import javafx.collections.FXCollections;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListCell;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -22,6 +27,8 @@ public class MainMenuScene {
 	private MainMenuController mainMenuController;
     //This is the stage where all the scenes are displayed.
     private Stage primaryStage;
+    private Profile currentProfile;
+
     /**
      * This is the constructor for this class.It instantiates the scene, the respective controller and adds listeners to the buttons.
      * It also displays the scene.
@@ -52,7 +59,7 @@ public class MainMenuScene {
     }
     /**
      * This method sets the globally available controller to the current controller.
-     * @param tempController The current controller.
+     * @param mainMenuController The current controller.
      */
     private void setController(MainMenuController mainMenuController) {
         this.mainMenuController = mainMenuController;
@@ -62,7 +69,7 @@ public class MainMenuScene {
      * @param e The mouse event created by the press on the play button.
      */
     private void pressPlay(MouseEvent e){
-        new LevelSelectorScene(primaryStage);
+        new LevelSelectorScene(primaryStage,currentProfile);
     }
     /**
      * This method instantiates the ProfileCreatorScene class.
@@ -82,7 +89,30 @@ public class MainMenuScene {
     private void closeGame(MouseEvent e) {
     	primaryStage.close();
     }
+    private void profilesListener(){
+        ProfileManager.load("source/group44/data/profiles.txt");
+        mainMenuController.getProfiles().setCellFactory(param -> new ListCell<Profile>() {
+            @Override
+            protected void updateItem(Profile item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null || item.getUsername() == null) {
+                    setText(null);
+                } else {
+                    setText(item.getUsername());
+                }
+            }
+        });
+        mainMenuController.getProfiles().setItems(FXCollections.observableArrayList(ProfileManager.getProfiles()));
+        mainMenuController.getProfiles().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                currentProfile = mainMenuController.getProfiles().getSelectionModel().getSelectedItem();
+            }
+        });
+    }
     private void setUpButtons(){
+        profilesListener();
         mainMenuController.getPlay().setOnMouseClicked(this::pressPlay);
         mainMenuController.getNewProfile().setOnMouseClicked(this::newProfile);
         mainMenuController.getQuit().setOnMouseClicked(this::closeGame);

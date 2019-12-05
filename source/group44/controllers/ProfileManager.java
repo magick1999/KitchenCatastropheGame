@@ -31,8 +31,7 @@ public class ProfileManager {
 	/**
 	 * Returns a {@link Profile} with id.
 	 *
-	 * @param id
-	 *            - id to find.
+	 * @param id - id to find.
 	 * @return {@link Profile} if match was found; otherwise null.
 	 */
 	public static Profile getProfile(int id) {
@@ -50,8 +49,7 @@ public class ProfileManager {
 	/**
 	 * Returns a {@link Profile} with username.
 	 *
-	 * @param username
-	 *            - username to find.
+	 * @param username - username to find.
 	 * @return {@link Profile} if match is found; otherwise null.
 	 */
 	public static Profile getProfile(String username) {
@@ -67,13 +65,11 @@ public class ProfileManager {
 	}
 
 	/**
-	 * Creates a new {@link Profile} with username, if the username is not
-	 * already taken. The achieved level id for the new profile is 0.
+	 * Creates a new {@link Profile} with username, if the username is not already
+	 * taken. The achieved level id for the new profile is 0.
 	 *
-	 * @param username
-	 *            - username to be used.
-	 * @throws UsernameTakenException
-	 *             if the username is already taken.
+	 * @param username - username to be used.
+	 * @throws UsernameTakenException if the username is already taken.
 	 * @return the created {@link Profile}.
 	 */
 	public static Profile register(String username) throws UsernameTakenException {
@@ -90,8 +86,7 @@ public class ProfileManager {
 	/**
 	 * Check if a {@link Profile} with username already exists.
 	 *
-	 * @param username
-	 *            - the username to check
+	 * @param username - the username to check
 	 * @return true if the username is already taken; otherwise false
 	 */
 	private static Boolean exists(String username) {
@@ -123,8 +118,7 @@ public class ProfileManager {
 	/**
 	 * Loads profiles from specified file.
 	 *
-	 * @param path
-	 *            - path where the file with profiles is located
+	 * @param path - path where the file with profiles is located
 	 * @return a list of loaded {@link Profile}s
 	 */
 	public static void load(String path) {
@@ -151,8 +145,7 @@ public class ProfileManager {
 	/**
 	 * Loads stored profiles.
 	 *
-	 * @param fileScanner
-	 *            - scanner of the file where the profiles are stored
+	 * @param fileScanner - scanner of the file where the profiles are stored
 	 * @return a list of loaded {@link Profile}s
 	 */
 	private static ArrayList<Profile> load(Scanner fileScanner) {
@@ -171,10 +164,9 @@ public class ProfileManager {
 	/**
 	 * Creates a new {@link Profile} from the scanner.
 	 *
-	 * @param scanner
-	 *            - scanner with the serialised profile
-	 * @return {@link Profile} created from values in scanner; null if there is
-	 *         some exception
+	 * @param scanner - scanner with the serialised profile
+	 * @return {@link Profile} created from values in scanner; null if there is some
+	 *         exception
 	 */
 	private static Profile parseProfile(Scanner scanner) {
 		Profile newProfile = null;
@@ -195,8 +187,7 @@ public class ProfileManager {
 	/**
 	 * Saves managed profiles.
 	 *
-	 * @param path
-	 *            - path to the file where to store the profiles
+	 * @param path - path to the file where to store the profiles
 	 */
 	public static void save(String path) {
 		File file = new File(path);
@@ -217,8 +208,7 @@ public class ProfileManager {
 	/**
 	 * Saves profiles using provided writer.
 	 *
-	 * @param writer
-	 *            - {@link PrintWriter} to use when saving profiles
+	 * @param writer - {@link PrintWriter} to use when saving profiles
 	 */
 	private static void save(PrintWriter writer) {
 		for (Profile profile : ProfileManager.profiles) {

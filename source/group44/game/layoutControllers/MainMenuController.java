@@ -1,7 +1,10 @@
 package group44.game.layoutControllers;
 
+import group44.controllers.ProfileManager;
+import group44.models.Profile;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -9,6 +12,8 @@ import javafx.scene.layout.BorderPane;
 
 
 public class MainMenuController {
+	private static final String PROFILES = "source/group44/data/profiles.txt";
+
     @FXML
     private BorderPane root;
     @FXML
@@ -20,20 +25,20 @@ public class MainMenuController {
     @FXML
     private Button newProfile;
     @FXML
-    private ListView<?> profiles;
+    private ListView<Profile> profiles;
     @FXML
     private Button play;
     @FXML
     private Button quit;
     @FXML
     private ImageView logo;
-    
+
     public MainMenuController(){
 
     }
     @FXML
     public void initialize(){
-        logo.setImage(new Image("/group44/resources/kitchenLogo.png"));
+        logo.setImage(new Image("/group44/resources/KitchenCatastrophe.png"));
     }
     public void setRoot(BorderPane root) {
         this.root = root;
@@ -51,11 +56,11 @@ public class MainMenuController {
         return play;
     }
 
-    public void setProfiles(ListView<?> profiles) {
+    public void setProfiles(ListView<Profile> profiles) {
         this.profiles = profiles;
     }
 
-    public ListView<?> getProfiles() {
+    public ListView<Profile> getProfiles() {
         return profiles;
     }
 

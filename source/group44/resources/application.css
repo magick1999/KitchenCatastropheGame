@@ -24,9 +24,12 @@
     -fx-pref-height: 300;
     -fx-pref-width: 200;
 }
+
 #logo{
-    -fx-background-image: url("../resources/kitchenLogo.png");
+    -fx-background-image: url("../resources/KitchenCatastrophe.png");
     -fx-background-size: cover;
+    -fx-width: 100;
+    -fx-height: 100;
     -fx-pref-height: 300;
     -fx-pref-width: 200;
 }

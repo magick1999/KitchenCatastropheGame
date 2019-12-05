@@ -1,13 +1,10 @@
 package group44.game.scenes;
 
-import javafx.animation.*;
-import javafx.application.Application;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.value.WritableValue;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
+import group44.entities.SpriteAnimation;
+import group44.game.Level;
+import group44.game.layoutControllers.MainGameWindowController;
+import group44.models.Profile;
+import javafx.animation.Animation;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,26 +12,18 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import static group44.Constants.*;
-
 import java.util.Optional;
 
-import group44.entities.SpriteAnimation;
-import group44.game.layoutControllers.MainGameWindowController;
+import static group44.Constants.*;
 
 public class GameScene {
 
@@ -58,17 +47,18 @@ public class GameScene {
     private ImageView playerView = new ImageView();
     
     //It showcases the orientation of the player.
-    int orientation = 1;
+    private int orientation = 1;
     //The window itself.
     private Stage primaryStage;
     //This boolean lets the player move only after it has finished the previous animation.
     private boolean canMove = true;
+    private Level currentLevel;
+    private Profile currentProfile;
     /**
      * This is the main method that loads everything required to draw the scene.
      * @param primaryStage represents the window where the stages are displayed
-     * @throws Exception
      */
-    public GameScene(Stage primaryStage) {
+    public GameScene(Stage primaryStage, Level currentLevel, Profile currentProfile) {
     	this.primaryStage = primaryStage;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/group44/game/layouts/MainGameWindow.fxml"));
         try {
@@ -80,6 +70,7 @@ public class GameScene {
             //Loading the controller
             MainGameWindowController tempController = fxmlLoader.getController();
             setController(tempController);
+            this.currentLevel = currentLevel;
             //Setting the canvas
             setCanvas(myController.getCanvas());
             //Adding the key listener to the scene.
@@ -88,6 +79,7 @@ public class GameScene {
             drawMovableObjects();
             primaryStage.setScene(scene);
             primaryStage.show();
+            this.currentProfile = currentProfile;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -125,16 +117,14 @@ public class GameScene {
     	a1.setHeight(400);
     	a1.setWidth(500);
     	a1.setTitle("Congrats on finishing the level!");
-    	a1.setContentText("Top times and your time: \n");//Here add the times with append 
+        a1.setContentText("Top times and your time: \n" + "");//TODO Here add the times with append
     	canMove=false;
     	Optional<ButtonType> result = a1.showAndWait();
-    	if(!result.isPresent())
-    	{
-    		
+    	if(!result.isPresent()) {
     	}
     	else { 
     		if(result.get() == levelSelector) {
-    			LevelSelectorScene ls = new LevelSelectorScene(primaryStage);
+    			LevelSelectorScene ls = new LevelSelectorScene(primaryStage,currentProfile);
     		}
     	else {
     			if(result.get() == mainMenu) {
@@ -158,6 +148,7 @@ public class GameScene {
     	canMove = true;
     	playerView.setX(GRID_CELL_WIDTH);
     	playerView.setY(GRID_CELL_HEIGHT);
+        playerView.setImage(player);
     }
     /**
      * Defining behaviour for the click on the home button.Sends the player to the home screen.
@@ -197,22 +188,22 @@ public class GameScene {
         // Clear canvas
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        //Create a map for testing
-        for (int x = 0; x <= 22; x++) {
-            for (int j = 0; j <= 29; j++) {
-                if (x == 0 || x == 21 || j == 0 || j == 28)
-                    map[x][j] = wall;
-                else
-                    map[x][j] = floor;
-            }
-        }
-        //Drawing the map
-        for (int i = 0; i <= 22; ++i) {
-            for (int j = 0; j <= 29; ++j) {
-                gc.drawImage(map[i][j], j * GRID_CELL_WIDTH, i * GRID_CELL_HEIGHT);
-            }
-        }
-
+//        //Create a map for testing
+//        for (int x = 0; x <= 22; x++) {
+//            for (int j = 0; j <= 29; j++) {
+//                if (x == 0 || x == 21 || j == 0 || j == 28)
+//                    map[x][j] = wall;
+//                else
+//                    map[x][j] = floor;
+//            }
+//        }
+//        //Drawing the map
+//        for (int i = 0; i <= 22; ++i) {
+//            for (int j = 0; j <= 29; ++j) {
+//                gc.drawImage(map[i][j], j * GRID_CELL_WIDTH, i * GRID_CELL_HEIGHT);
+//            }
+//        }
+        currentLevel.draw(gc);
     }
     /**
      * This method should be called when the game has ended.
@@ -220,6 +211,7 @@ public class GameScene {
      * Then an alert with the top 3 times and the player time will show.
      */
     private void endGame() {
+        //TODO Save the record here
     	canMove=false;
     	showTimes();
     }
@@ -250,12 +242,7 @@ public class GameScene {
         //This sets the number of animation repetitions to 1 meaning that the animation is played only once.
         animation.setCycleCount(1);
         //This allows the player to perform another move.
-        animation.setOnFinished(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                canMove = true;
-            }
-        });
+        animation.setOnFinished(event -> canMove = true);
         //Start the animation
         animation.play();
     }
