@@ -40,13 +40,13 @@ public class GameScene {
 
     //The controller asociated with the specific fxml file.
     private MainGameWindowController myController;
-    
+
     //Holds the map images
     private Image[][] map = new Image[40][40];
-    
+
     //The player data.
     private ImageView playerView = new ImageView();
-    
+
     //It showcases the orientation of the player.
     private int orientation = 1;
     //The window itself.
@@ -55,6 +55,7 @@ public class GameScene {
     private boolean canMove = true;
     private Level currentLevel;
     private Profile currentProfile;
+
     /**
      * This is the main method that loads everything required to draw the scene.
      * @param primaryStage represents the window where the stages are displayed
@@ -77,7 +78,7 @@ public class GameScene {
             //Adding the key listener to the scene.
             scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> processKeyEvent(event));
             drawGame();
-            drawMovableObjects();
+            //drawMovableObjects();
             primaryStage.setScene(scene);
             primaryStage.show();
             this.currentProfile = currentProfile;
@@ -113,7 +114,7 @@ public class GameScene {
     	ButtonType levelSelector = new ButtonType("Level Selector", ButtonBar.ButtonData.OK_DONE);
     	ButtonType mainMenu = new ButtonType("Main Menu", ButtonBar.ButtonData.OK_DONE);
     	ButtonType restart = new ButtonType("Try Again", ButtonBar.ButtonData.OK_DONE);
-    	Alert a1 = new Alert(AlertType.NONE,  
+    	Alert a1 = new Alert(AlertType.NONE,
                 "default Dialog",levelSelector,mainMenu,restart);
     	a1.setHeight(400);
     	a1.setWidth(500);
@@ -123,7 +124,7 @@ public class GameScene {
     	Optional<ButtonType> result = a1.showAndWait();
     	if(!result.isPresent()) {
     	}
-    	else { 
+    	else {
     		if(result.get() == levelSelector) {
     			LevelSelectorScene ls = new LevelSelectorScene(primaryStage,currentProfile);
     		}
@@ -131,7 +132,7 @@ public class GameScene {
     			if(result.get() == mainMenu) {
         			MainMenuScene ms = new MainMenuScene(primaryStage);
     			}
-    		
+
     		else {
     				if(result.get() == restart) {
     				setUpRestart(new MouseEvent(null, orientation, orientation, orientation, orientation, null, orientation, canMove, canMove, canMove, canMove, canMove, canMove, canMove, canMove, canMove, canMove, null));
@@ -158,7 +159,7 @@ public class GameScene {
     private void setUpHome(MouseEvent event) {
     	new MainMenuScene(primaryStage);
     }
-    
+
 
 
     /**
@@ -189,21 +190,6 @@ public class GameScene {
         // Clear canvas
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-//        //Create a map for testing
-//        for (int x = 0; x <= 22; x++) {
-//            for (int j = 0; j <= 29; j++) {
-//                if (x == 0 || x == 21 || j == 0 || j == 28)
-//                    map[x][j] = wall;
-//                else
-//                    map[x][j] = floor;
-//            }
-//        }
-//        //Drawing the map
-//        for (int i = 0; i <= 22; ++i) {
-//            for (int j = 0; j <= 29; ++j) {
-//                gc.drawImage(map[i][j], j * GRID_CELL_WIDTH, i * GRID_CELL_HEIGHT);
-//            }
-//        }
         currentLevel.draw(gc);
     }
     /**
@@ -263,7 +249,7 @@ public class GameScene {
                 setUpMenu();
                 break;
             }
-            case LEFT: {
+            /*case LEFT: {
                 // Left key was pressed. So move the player right by one cell.The canMove variable is set to false until the end of the animation.
                 if ((playerView.getX() - GRID_CELL_HEIGHT) < (28 * GRID_CELL_HEIGHT) && (playerView.getX() - GRID_CELL_HEIGHT) > 0 && canMove) {
                     canMove = false;
@@ -294,9 +280,9 @@ public class GameScene {
                     smoothTransition(GRID_CELL_HEIGHT, 0,1);
                 }
                 break;
-            }
+            }*/
             default:
-                // Do nothing
+                this.currentLevel.keyDown(event);
                 break;
         }
 

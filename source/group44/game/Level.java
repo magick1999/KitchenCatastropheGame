@@ -108,11 +108,9 @@ public class Level {
         	MovableObject object = stepableCell.getMovableObject();
             if (object instanceof Player) {
                 this.player = (Player) object;
-                stepableCell.stepOff(); // HACK: INTEGRATION
             }
             if (object instanceof Enemy) {
             	this.enemies.add((Enemy) object);
-            	stepableCell.stepOff(); // HACK: INTEGRATION
             }
         }
     }
@@ -154,7 +152,7 @@ public class Level {
         double cellHeight = gc.getCanvas().getHeight() / this.displaySize;
         double cellSize = Math.min(cellWidth, cellHeight);
 
-        Area activeArea = this.getActiveArea();
+        Area activeArea = this.getActiveArea(); // Bug HERE - not moving to left corner
 
         for (int x = activeArea.getX1(); x <= activeArea.getX2(); x++) {
             for (int y = activeArea.getY1(); y <= activeArea.getY2(); y++) {
@@ -170,6 +168,7 @@ public class Level {
      */
     public void keyDown(KeyEvent event) {
     	this.player.keyDown(event);
+    	this.player.move();
     	this.moveEnemies();
     }
 
