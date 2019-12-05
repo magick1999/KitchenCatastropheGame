@@ -1,5 +1,6 @@
 package group44.game.scenes;
 
+import group44.controllers.Leaderboard;
 import group44.entities.SpriteAnimation;
 import group44.game.Level;
 import group44.game.layoutControllers.MainGameWindowController;
@@ -211,7 +212,7 @@ public class GameScene {
      * Then an alert with the top 3 times and the player time will show.
      */
     private void endGame() {
-        //TODO Save the record here
+    	Leaderboard.save();
     	canMove=false;
     	showTimes();
     }
