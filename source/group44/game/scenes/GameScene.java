@@ -3,6 +3,7 @@ package group44.game.scenes;
 import group44.entities.SpriteAnimation;
 import group44.game.Level;
 import group44.game.layoutControllers.MainGameWindowController;
+import group44.models.Profile;
 import javafx.animation.Animation;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -52,11 +53,12 @@ public class GameScene {
     //This boolean lets the player move only after it has finished the previous animation.
     private boolean canMove = true;
     private Level currentLevel;
+    private Profile currentProfile;
     /**
      * This is the main method that loads everything required to draw the scene.
      * @param primaryStage represents the window where the stages are displayed
      */
-    public GameScene(Stage primaryStage, Level currentLevel) {
+    public GameScene(Stage primaryStage, Level currentLevel, Profile currentProfile) {
     	this.primaryStage = primaryStage;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/group44/game/layouts/MainGameWindow.fxml"));
         try {
@@ -77,6 +79,7 @@ public class GameScene {
             drawMovableObjects();
             primaryStage.setScene(scene);
             primaryStage.show();
+            this.currentProfile = currentProfile;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -114,14 +117,14 @@ public class GameScene {
     	a1.setHeight(400);
     	a1.setWidth(500);
     	a1.setTitle("Congrats on finishing the level!");
-    	a1.setContentText("Top times and your time: \n");//Here add the times with append 
+    	a1.setContentText("Top times and your time: \n"+"");//Here add the times with append
     	canMove=false;
     	Optional<ButtonType> result = a1.showAndWait();
     	if(!result.isPresent()) {
     	}
     	else { 
     		if(result.get() == levelSelector) {
-    			LevelSelectorScene ls = new LevelSelectorScene(primaryStage);
+    			LevelSelectorScene ls = new LevelSelectorScene(primaryStage,currentProfile);
     		}
     	else {
     			if(result.get() == mainMenu) {

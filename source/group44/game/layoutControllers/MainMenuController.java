@@ -39,23 +39,6 @@ public class MainMenuController {
     @FXML
     public void initialize(){
         logo.setImage(new Image("/group44/resources/KitchenCatastrophe.png"));
-
-        profiles.setCellFactory(param -> new ListCell<Profile>() {
-            @Override
-            protected void updateItem(Profile item, boolean empty) {
-                super.updateItem(item, empty);
-
-                if (empty || item == null || item.getUsername() == null) {
-                    setText(null);
-                } else {
-                    setText(item.getUsername());
-                }
-            }
-        });
-
-        // Load and Bind profiles to the selection
-        ProfileManager.load(PROFILES);
-        profiles.setItems(ProfileManager.getProfiles());
     }
     public void setRoot(BorderPane root) {
         this.root = root;

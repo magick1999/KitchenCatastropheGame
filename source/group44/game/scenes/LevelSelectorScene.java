@@ -4,6 +4,7 @@ import group44.controllers.Leaderboard;
 import group44.controllers.LevelManager;
 import group44.game.Level;
 import group44.game.layoutControllers.LevelSelectorController;
+import group44.models.Profile;
 import group44.models.Record;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,12 +30,13 @@ public class LevelSelectorScene {
     private static Integer maxLevel = 3;
     private Stage primaryStage;
     private Integer currentLevelIndex;
+    private Profile currentProfile;
     /*
      * This is the constructor that creates the scene, instantiates the controller
      * and sets up the listeners for the buttons on the screen.
      * @param primaryStage This is the stage where the scene is displayed.
      */
-    public LevelSelectorScene(Stage primaryStage) {
+    public LevelSelectorScene(Stage primaryStage, Profile currentProfile) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/group44/game/layouts/levelSelector.fxml"));
         this.primaryStage = primaryStage;
         try {
@@ -51,6 +53,7 @@ public class LevelSelectorScene {
             setUpButtons();
             primaryStage.setScene(scene);
             primaryStage.show();
+            this.currentProfile = currentProfile;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -77,7 +80,7 @@ public class LevelSelectorScene {
         try {
             LevelManager.load("source/group44/data/levels/");
             Level currentLevel = LevelManager.load(LevelManager.getLevelInfos().get(currentLevelIndex - 1));
-            new GameScene(primaryStage, currentLevel);
+            new GameScene(primaryStage, currentLevel, currentProfile);
         } catch (Exception exception) {
             exception.printStackTrace();
         }
