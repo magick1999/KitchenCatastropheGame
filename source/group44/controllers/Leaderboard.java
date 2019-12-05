@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+import group44.Constants;
 import group44.game.Level;
 import group44.models.Profile;
 import group44.models.Record;
@@ -202,12 +203,19 @@ public class Leaderboard {
 	}
 
 	/**
+	 * Saves the records in the leaderboard.
+	 */
+	public static void save() {
+		save(Constants.FILE_RECORDS);
+	}
+
+	/**
 	 * Saves all records in the {@link Leaderboard}.
 	 *
 	 * @param path
 	 *            - path to the file where to store the profiles
 	 */
-	public static void save(String path) {
+	private static void save(String path) {
 		File file = new File(path);
 		PrintWriter writer = null;
 
