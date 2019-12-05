@@ -104,14 +104,35 @@ public class Level {
 
         this.grid[x][y] = cell;
         if (cell instanceof StepableCell) {
-            MovableObject object = ((StepableCell) cell).getMovableObject();
+        	StepableCell stepableCell = ((StepableCell) cell);
+        	MovableObject object = stepableCell.getMovableObject();
             if (object instanceof Player) {
                 this.player = (Player) object;
+                stepableCell.stepOff(); // HACK: INTEGRATION
             }
             if (object instanceof Enemy) {
             	this.enemies.add((Enemy) object);
+            	stepableCell.stepOff(); // HACK: INTEGRATION
             }
         }
+    }
+
+    /**
+     * Returns the instance of {@link Player} in the game.
+     *
+     * @return the player.
+     */
+    public Player getPlayer() {
+    	return this.player;
+    }
+
+    /**
+     * Returns all enemies in the game.
+     *
+     * @return list of enemies.
+     */
+    public ArrayList<Enemy> getEnemies() {
+    	return this.enemies;
     }
 
     /**
@@ -143,7 +164,7 @@ public class Level {
     }
 
     /**
-     * Passes the {@link KeyEvent} to the {@link Player}.
+     * Passes the {@link KeyEvent} to the {@link Player}. Also moves all enemies.
      *
      * @param event - the {@link KeyEvent}
      */

@@ -111,7 +111,7 @@ public class LevelSelectorScene {
             levelSelectorController.getLevelNum().setText("Level " + (++currentLevelIndex).toString());
             levelSelectorController.getPrevious().setVisible(true);
         } else {
-            if (prevNext && currentLevelIndex > 1) {
+            if (!prevNext && currentLevelIndex > 1) {
                 levelSelectorController.getLevelNum().setText("Level " + (--currentLevelIndex).toString());//This could be used for level loading.
                 levelSelectorController.getNext().setVisible(true);
             }
@@ -126,10 +126,8 @@ public class LevelSelectorScene {
     }
 
     private void setTopTimes() {
-        Leaderboard.load("source/group44/data/records.txt");
-        Record[] top3 = Leaderboard.getTopThreeRecords(currentLevelIndex);
-        ObservableList<Record> observableList = FXCollections.observableArrayList(top3);
-        levelSelectorController.getLevelTimes().setItems(observableList);
+        Leaderboard.load();
+        levelSelectorController.getLevelTimes().setItems(Leaderboard.getTopThreeRecords(currentLevelIndex));
     }
 
     /**

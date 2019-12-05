@@ -90,7 +90,6 @@ public class MainMenuScene {
     	primaryStage.close();
     }
     private void profilesListener(){
-        ProfileManager.load("source/group44/data/profiles.txt");
         mainMenuController.getProfiles().setCellFactory(param -> new ListCell<Profile>() {
             @Override
             protected void updateItem(Profile item, boolean empty) {
@@ -103,7 +102,7 @@ public class MainMenuScene {
                 }
             }
         });
-        mainMenuController.getProfiles().setItems(FXCollections.observableArrayList(ProfileManager.getProfiles()));
+        mainMenuController.getProfiles().setItems(ProfileManager.load());
         mainMenuController.getProfiles().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {

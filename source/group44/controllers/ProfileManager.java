@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import group44.Constants;
 import group44.exceptions.UsernameTakenException;
 import group44.models.Profile;
 import javafx.collections.FXCollections;
@@ -79,7 +80,38 @@ public class ProfileManager {
 			int max_id = ProfileManager.getMaxId();
 			Profile profile = new Profile(++max_id, username);
 			ProfileManager.profiles.add(profile);
+
+			ProfileManager.save();
+
 			return profile;
+		}
+	}
+
+	/**
+	 * Deletes a profile by id.
+	 *
+	 * @param profileId - if of profile to delete.
+	 */
+	public static void delete(int profileId) {
+		Profile profile = getProfile(profileId);
+
+		if (profile != null) {
+			ProfileManager.profiles.remove(profile);
+			ProfileManager.save();
+		}
+	}
+
+	/**
+	 * Deletes a profile by username.
+	 *
+	 * @param profileId - username of profile to delete.
+	 */
+	public static void delete(String username) {
+		Profile profile = getProfile(username);
+
+		if (profile != null) {
+			ProfileManager.profiles.remove(profile);
+			ProfileManager.save();
 		}
 	}
 
@@ -116,12 +148,22 @@ public class ProfileManager {
 	}
 
 	/**
+	 * Loads the profiles from the default file.
+	 *
+	 * @return an observable list of loaded profiles.
+	 */
+	public static ObservableList<Profile> load() {
+		ProfileManager.load(Constants.FILE_PROFILES);
+		return ProfileManager.getProfiles();
+	}
+
+	/**
 	 * Loads profiles from specified file.
 	 *
 	 * @param path - path where the file with profiles is located
 	 * @return a list of loaded {@link Profile}s
 	 */
-	public static void load(String path) {
+	private static void load(String path) {
 		ArrayList<Profile> loadedProfiles = null;
 		Scanner fileScanner = null;
 		File file = new File(path);
@@ -185,11 +227,18 @@ public class ProfileManager {
 	}
 
 	/**
+	 * Saves the profiles to the default file.
+	 */
+	public static void save() {
+		ProfileManager.save(Constants.FILE_PROFILES);
+	}
+
+	/**
 	 * Saves managed profiles.
 	 *
 	 * @param path - path to the file where to store the profiles
 	 */
-	public static void save(String path) {
+	private static void save(String path) {
 		File file = new File(path);
 		PrintWriter writer = null;
 

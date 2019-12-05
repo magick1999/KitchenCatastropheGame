@@ -19,6 +19,7 @@ import group44.game.Level;
  */
 public class LevelManager {
 	private static final String LEVEL_FILE_PATTERN = "^level_[0-9]+\\.txt$";
+	private static final String ERROR_LEVELID_NOT_FOUND = "Unable to find level with id=%d.";
 	private static ArrayList<LevelInfo> levelInfos = new ArrayList<>();
 
 	/**
@@ -120,5 +121,47 @@ public class LevelManager {
 	 */
 	public static Level load(LevelInfo levelInfo) throws FileNotFoundException, CollisionException, ParsingException {
 		return LevelParser.parseLevel(levelInfo);
+	}
+
+	/**
+	 * Returns a loaded {@link Level}.
+	 *
+	 * @param levelInfo
+	 *            - information about the {@link Level} to load.
+	 * @return the loaded {@link Level}.
+	 *
+	 * @throws CollisionException
+	 *             when two cells are at the same position.
+	 * @throws ParsingException
+	 *             when trying to parse invalid data type.
+	 * @throws FileNotFoundException
+	 *             when level file is not found.
+	 * @throws IllegalArgumentException
+	 *             when Level with levelId is not found.
+	 *
+	 */
+	public static Level load(int levelId)
+			throws FileNotFoundException, CollisionException, ParsingException, IllegalArgumentException {
+		LevelInfo levelInfo = getLevelInfo(levelId);
+		if (levelInfo == null) {
+			throw new IllegalArgumentException(String.format(ERROR_LEVELID_NOT_FOUND, levelId));
+		}
+
+		return LevelParser.parseLevel(levelInfo);
+	}
+
+	/**
+	 * Looks for a level with id in the loaded levels.
+	 *
+	 * @param id - id of a level to load.
+	 * @return the {@link LevelInfo} for the level with id.
+	 */
+	private static LevelInfo getLevelInfo(int id) {
+		for (LevelInfo levelInfo : levelInfos) {
+			if (levelInfo.getId() == id) {
+				return levelInfo;
+			}
+		}
+		return null;
 	}
 }
