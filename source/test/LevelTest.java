@@ -1,13 +1,10 @@
 package test;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
 import group44.Constants;
 import group44.controllers.LevelManager;
-import group44.controllers.parsers.LevelParser;
-import group44.entities.cells.Cell;
 import group44.exceptions.CollisionException;
 import group44.exceptions.ParsingException;
 import group44.game.Level;
@@ -25,7 +22,7 @@ public class LevelTest {
 	private static String PARSE_PATTERN_CELL = "%s,%d,%d,%s";
 	private static String PARSE_PATTERN_PLAYER = "%s,%s,%d,%d,%d,%d,%s";
 
-	private static String BASE_PATH_IMAGE = "source/group44/resources/";
+	private static String BASE_PATH_IMAGE = "group44/resources/";
 
 	private static String PATH_IMAGE_WALL = BASE_PATH_IMAGE + "WallCounter.png";
 	private static String PATH_IMAGE_GROUND = BASE_PATH_IMAGE + "cells/floor.png";
