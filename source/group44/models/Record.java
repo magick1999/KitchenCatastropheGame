@@ -1,8 +1,13 @@
 package group44.models;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 /**
  * Represents a Record in the {@link Leaderboard}.
- * 
+ *
  * @author Tomas Svejnoha, Rowan Aldean
  * @version 1.0
  */
@@ -13,7 +18,7 @@ public class Record implements Comparable<Record> {
 
     /**
      * Creates a new istance of {@link Record}.
-     * 
+     *
      * @param profile - {@link Profile} linked to the record
      * @param levelId - Id of the associated {@link Level}
      * @param time    - time taken to finish the level
@@ -26,7 +31,7 @@ public class Record implements Comparable<Record> {
 
     /**
      * Returns the associated {@link Profile}.
-     * 
+     *
      * @return the associated profile
      */
     public Profile getProfile() {
@@ -35,7 +40,7 @@ public class Record implements Comparable<Record> {
 
     /**
      * Returns Id of the associated {@link Level}.
-     * 
+     *
      * @return the level id
      */
     public int getLevelId() {
@@ -44,7 +49,7 @@ public class Record implements Comparable<Record> {
 
     /**
      * Returns the time taken by the user to finish the {@link Level}.
-     * 
+     *
      * @return the time taken
      */
     public long getTime() {
@@ -53,7 +58,7 @@ public class Record implements Comparable<Record> {
 
     /**
      * Updates the time taken to finish the {@link Level}.
-     * 
+     *
      * @param time - the new time taken
      */
     public void setTime(long time) {
@@ -62,7 +67,7 @@ public class Record implements Comparable<Record> {
 
     /**
      * Compares {@link Record}s based on the time taken to finish the level.
-     * 
+     *
      * @param o - the {@link Record} to compare
      */
     @Override
@@ -72,11 +77,15 @@ public class Record implements Comparable<Record> {
 
     /**
      * Returns a string representation of the record.
-     * 
+     *
      * @return {@link Record} converted to {@link String}.
      */
     @Override
     public String toString() {
-        return this.getProfile().getId() + "," + this.getLevelId() + "," + this.getTime();
+    	Date date = new Date(this.getTime());
+    	DateFormat formatter = new SimpleDateFormat("mm:ss");
+    	formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+    	String dateFormatted = formatter.format(date);
+        return dateFormatted + " - " + this.getProfile().getUsername() ;
     }
 }
