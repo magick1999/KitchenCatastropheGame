@@ -111,7 +111,7 @@ public class LevelSelectorScene {
             levelSelectorController.getLevelNum().setText("Level " + (++currentLevelIndex).toString());
             levelSelectorController.getPrevious().setVisible(true);
         } else {
-            if (prevNext && currentLevelIndex > 1) {
+            if (!prevNext && currentLevelIndex > 1) {
                 levelSelectorController.getLevelNum().setText("Level " + (--currentLevelIndex).toString());//This could be used for level loading.
                 levelSelectorController.getNext().setVisible(true);
             }
