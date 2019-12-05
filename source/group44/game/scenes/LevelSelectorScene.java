@@ -78,8 +78,7 @@ public class LevelSelectorScene {
      */
     private void setLevelSelect(MouseEvent e) {
         try {
-            LevelManager.load("source/group44/data/levels/");
-            Level currentLevel = LevelManager.load(LevelManager.getLevelInfos().get(currentLevelIndex - 1));
+            Level currentLevel = LevelManager.load(LevelManager.load().get(currentLevelIndex - 1));
             new GameScene(primaryStage, currentLevel, currentProfile);
         } catch (Exception exception) {
             exception.printStackTrace();
