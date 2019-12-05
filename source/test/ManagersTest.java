@@ -35,10 +35,10 @@ public class ManagersTest {
 		// ***********************************************************
 		// ***********************************************************
 
-		printRecords(Leaderboard.getTopThreeRecords(1));
+		//printRecords(Leaderboard.getTopThreeRecords(1));
 		System.out.println("-------------------------------------\n");
 		Leaderboard.addOrUpdate(ProfileManager.getProfile(7).getId(), 1, 2000);
-		printRecords(Leaderboard.getTopThreeRecords(1));
+		//printRecords(Leaderboard.getTopThreeRecords(1));
 		System.out.println("-------------------------------------\n");
 		Leaderboard.save();
 
