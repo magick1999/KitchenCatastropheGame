@@ -31,7 +31,7 @@ public class LevelTest {
 	private static String PATH_IMAGE_GOAL = BASE_PATH_IMAGE + "cells/goal.png";
 	private static String PATH_IMAGE_PLAYER = BASE_PATH_IMAGE + "ChefDownWalk/Front1.png";
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws FileNotFoundException, IllegalArgumentException, CollisionException, ParsingException {
 		JFXPanel jfxPanel = new JFXPanel();
 		generateLevelFile01("source/group44/data/levels/level_001.txt");
 
@@ -41,6 +41,8 @@ public class LevelTest {
 
 		if (true) {
 			LevelManager.load(LEVELS);
+			Level level1 = LevelManager.load(1);
+			System.out.println("\n" + level1.getId());
 
 			for (LevelInfo info : LevelManager.getLevelInfos()) {
 				if (info.getId() == 1) {
