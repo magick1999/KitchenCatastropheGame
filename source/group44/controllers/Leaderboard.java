@@ -129,9 +129,12 @@ public class Leaderboard {
 
 	/**
 	 * Loads records from the default file.
+	 *
+	 * @return an observable list of records.
 	 */
-	public static void load() {
+	public static ObservableList<Record> load() {
 		Leaderboard.load(Constants.FILE_RECORDS);
+		return Leaderboard.getProfiles();
 	}
 
 	/**
@@ -140,7 +143,7 @@ public class Leaderboard {
 	 * @param path
 	 *            - path to a file with records
 	 */
-	public static void load(String path) {
+	private static void load(String path) {
 		ArrayList<Record> loadedRecords = null;
 		Scanner fileScanner = null;
 		File file = new File(path);
@@ -224,7 +227,7 @@ public class Leaderboard {
 	 * @param path
 	 *            - path to the file where to store the profiles
 	 */
-	public static void save(String path) {
+	private static void save(String path) {
 		File file = new File(path);
 		PrintWriter writer = null;
 
