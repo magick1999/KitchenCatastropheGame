@@ -40,7 +40,7 @@ public class LevelTest {
 		//System.out.println(f.getAbsolutePath());
 
 		if (true) {
-			LevelManager.load(LEVELS);
+			LevelManager.load();
 			Level level1 = LevelManager.load(1);
 			System.out.println("\n" + level1.getId());
 

@@ -18,7 +18,7 @@ public class ManagersTest {
 	public static void main(String[] args) {
 		ProfileManager.load();
 		Leaderboard.load();
-		LevelManager.load(LEVELS);
+		LevelManager.load();
 
 		printProfile(ProfileManager.getProfile(1));
 		printProfile(ProfileManager.getProfile(7));
