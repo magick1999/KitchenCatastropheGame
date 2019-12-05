@@ -5,11 +5,11 @@ public final class Constants {
 	}
 
 	// Data - Folders
-	public static final String FOLDER_LEVELS = "group44/data/levels/";
+	public static final String FOLDER_LEVELS = "source/group44/data/levels/";
 
 	// Data - Files
-	public static final String FILE_RECORDS = "group44/data/records.txt";
-	public static final String FILE_PROFILES = "group44/data/profiles.txt";
+	public static final String FILE_RECORDS = "source/group44/data/records.txt";
+	public static final String FILE_PROFILES = "source/group44/data/profiles.txt";
 
 	public static final int WINDOW_WIDTH = 800;
 	public static final int WINDOW_HEIGHT = 600;
