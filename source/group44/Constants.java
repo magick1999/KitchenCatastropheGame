@@ -12,4 +12,6 @@ public final class Constants {
     // The size of each cell
     public static int GRID_CELL_WIDTH = 60;
     public static int GRID_CELL_HEIGHT = 60;
+
+    public static int GRID_DISPLAY_SIZE = 7;
 }

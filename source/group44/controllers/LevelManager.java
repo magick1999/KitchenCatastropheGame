@@ -2,9 +2,12 @@ package group44.controllers;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import group44.models.LevelInfo;
+import group44.Constants;
+import group44.controllers.parsers.LevelObjectParser;
 import group44.game.Level;
 
 /**
@@ -100,7 +103,30 @@ public class LevelManager {
 	 * @return the loaded {@link Level}
 	 */
 	public static Level load(LevelInfo levelInfo) {
-		System.out.println("LevelManager.load(...) is not implemented.");
-		throw new UnsupportedOperationException("Not implemented");
+		Level level = new Level(levelInfo.getId(), levelInfo.getWidth(), levelInfo.getHeight(), Constants.GRID_DISPLAY_SIZE);
+		LevelManager.readLevelObjects(levelInfo.getFile(), level);
+
+		return level;
+	}
+
+	private static void readLevelObjects(File file, Level level) {
+		Scanner fileScanner = null;
+
+		try {
+			fileScanner = new Scanner(file);
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	private static void readLevelObjects(Scanner fileScanner, Level level) {
+		while (fileScanner.hasNextLine()) {
+
+			Scanner lineScanner = new Scanner(fileScanner.nextLine());
+			String type = lineScanner.next();
+
+
+		}
 	}
 }
