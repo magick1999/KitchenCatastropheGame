@@ -21,6 +21,8 @@ import group44.game.CollisionCheckResult.CollisionCheckResultType;
 import group44.game.Level;
 import javafx.scene.input.KeyEvent;
 
+
+
 /**
  * Represents a player in the game.
  *
@@ -29,7 +31,6 @@ import javafx.scene.input.KeyEvent;
  */
 public class Player extends MovableObject {
     private ArrayList<CollectableItem> inventory;
-
     /**
      * Creates a new instance of {@link Player} at specific position in a specific
      * {@link Level}.
@@ -46,7 +47,6 @@ public class Player extends MovableObject {
     public Player(Level level, String name, int positionX, int positionY, int velocityX, int velocityY,
             String imagePath) {
         super(level, name, positionX, positionY, velocityX, velocityY, imagePath);
-
         this.inventory = new ArrayList<>();
         this.inventory.add(new TokenAccumulator());
     }

@@ -75,9 +75,9 @@ public class GameScene {
             //Setting the canvas
             setCanvas(myController.getCanvas());
             //Adding the key listener to the scene.
-            scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> processKeyEvent(event));
+            scene.addEventFilter(KeyEvent.KEY_PRESSED, event->currentLevel.keyDown(event));
             drawGame();
-            drawMovableObjects();
+//            drawMovableObjects();
             primaryStage.setScene(scene);
             primaryStage.show();
             this.currentProfile = currentProfile;
@@ -91,7 +91,7 @@ public class GameScene {
      * It also makes the player unable to move while the menu is closed.
      * Here the time of the player needs to be stopped aswell.
      */
-    private void setUpMenu() {
+    public void setUpMenu() {
     	canMove = false;
     	myController.getResumeButton().setOnMouseClicked(this::setUpResume);
     	myController.getRestartButton().setOnMouseClicked(this::setUpRestart);
@@ -220,15 +220,15 @@ public class GameScene {
      * This method draws the movable objects onto a pane, above the canvas
      * so that the movement can be rendered smoothly.
      */
-    private void drawMovableObjects() {
-        playerView.setFitWidth(GRID_CELL_WIDTH);
-        playerView.setFitHeight(GRID_CELL_HEIGHT);
-        playerView.setImage(player);
-        playerView.setY(GRID_CELL_HEIGHT);
-        playerView.setX(GRID_CELL_WIDTH);
-        //Add the movable objects to the pane destined for them.
-        myController.getMovableObjects().getChildren().add(playerView);
-    }
+//    private void drawMovableObjects() {
+//        playerView.setFitWidth(GRID_CELL_WIDTH);
+//        playerView.setFitHeight(GRID_CELL_HEIGHT);
+//        playerView.setImage(player);
+//        playerView.setY(GRID_CELL_HEIGHT);
+//        playerView.setX(GRID_CELL_WIDTH);
+//        //Add the movable objects to the pane destined for them.
+//        myController.getMovableObjects().getChildren().add(playerView);
+//    }
 
     /**
      * This method smoothly translates the player position from playerY and playerX to playerY+yPos and playerX+xPos.
@@ -236,74 +236,74 @@ public class GameScene {
      * @param yPos is the increment or decrement added to playerY.
      * @param xPos is the increment or decrement added to playerX.
      */
-    private void smoothTransition(double yPos, double xPos,int orientation) {
-    	//Here is created an animation with the node to be moved being playerView, the duration and by how much to move it on the x and y axis,
-    	//the orientation parameter indicates which way the player is facing.
-        final Animation animation = new SpriteAnimation(playerView, Duration.millis(200), xPos, yPos,orientation);
-        //This sets the number of animation repetitions to 1 meaning that the animation is played only once.
-        animation.setCycleCount(1);
-        //This allows the player to perform another move.
-        animation.setOnFinished(event -> canMove = true);
-        //Start the animation
-        animation.play();
-    }
+//    private void smoothTransition(double yPos, double xPos,int orientation) {
+//    	//Here is created an animation with the node to be moved being playerView, the duration and by how much to move it on the x and y axis,
+//    	//the orientation parameter indicates which way the player is facing.
+//        final Animation animation = new SpriteAnimation(playerView, Duration.millis(200), xPos, yPos,orientation);
+//        //This sets the number of animation repetitions to 1 meaning that the animation is played only once.
+//        animation.setCycleCount(1);
+//        //This allows the player to perform another move.
+//        animation.setOnFinished(event -> canMove = true);
+//        //Start the animation
+//        animation.play();
+//    }
 
     /**
      * This method handles the keyboard input.
      *
      * @param event Passes in the events from the keyboard.
      */
-    private void processKeyEvent(KeyEvent event) {
-        switch (event.getCode()) {
-            case ESCAPE: {
-            	canMove = false;
-                //Escape key was pressed. So show the menu.
-                myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
-                //Setting up the menu controls.
-                setUpMenu();
-                break;
-            }
-            case LEFT: {
-                // Left key was pressed. So move the player right by one cell.The canMove variable is set to false until the end of the animation.
-                if ((playerView.getX() - GRID_CELL_HEIGHT) < (28 * GRID_CELL_HEIGHT) && (playerView.getX() - GRID_CELL_HEIGHT) > 0 && canMove) {
-                    canMove = false;
-                    smoothTransition(0, -GRID_CELL_HEIGHT,2);
-                }
-                break;
-            }
-            case RIGHT: {
-                // Right key was pressed. So move the player right by one cell.The canMove variable is set to false until the end of the animation.
-                if ((playerView.getX() + GRID_CELL_HEIGHT) < (28 * GRID_CELL_HEIGHT) && (playerView.getX() + GRID_CELL_HEIGHT) > 0 && canMove) {
-                    canMove = false;
-                    smoothTransition(0, GRID_CELL_HEIGHT,3);
-                }
-                break;
-            }
-            case UP: {
-                //Up key was pressed. So move the player down by one cell.The canMove variable is set to false until the end of the animation.
-                if ((playerView.getY() - GRID_CELL_HEIGHT) < (21 * GRID_CELL_HEIGHT) && (playerView.getY() - GRID_CELL_HEIGHT) > 0 && canMove) {
-                    canMove = false;
-                    smoothTransition(-GRID_CELL_HEIGHT, 0,0);
-                }
-                break;
-            }
-            case DOWN: {
-                //Down key was pressed. So move the player down by one cell.The canMove variable is set to false until the end of the animation.
-                if ((playerView.getY() + GRID_CELL_HEIGHT) < (21 * GRID_CELL_HEIGHT) && (playerView.getY() + GRID_CELL_HEIGHT) > 0 && canMove) {
-                    canMove = false;
-                    smoothTransition(GRID_CELL_HEIGHT, 0,1);
-                }
-                break;
-            }
-            default:
-                // Do nothing
-                break;
-        }
-
-        // Redraw game as the player may have moved.
-        drawGame();
-        // Consume the event. This means we mark it as dealt with. This stops other GUI nodes (buttons etc) responding to it.
-        event.consume();
-    }
+//    private void processKeyEvent(KeyEvent event) {
+//        switch (event.getCode()) {
+//            case ESCAPE: {
+//            	canMove = false;
+//                //Escape key was pressed. So show the menu.
+//                myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
+//                //Setting up the menu controls.
+//                setUpMenu();
+//                break;
+//            }
+//            case LEFT: {
+//                // Left key was pressed. So move the player right by one cell.The canMove variable is set to false until the end of the animation.
+//                if ((playerView.getX() - GRID_CELL_HEIGHT) < (28 * GRID_CELL_HEIGHT) && (playerView.getX() - GRID_CELL_HEIGHT) > 0 && canMove) {
+//                    canMove = false;
+//                    smoothTransition(0, -GRID_CELL_HEIGHT,2);
+//                }
+//                break;
+//            }
+//            case RIGHT: {
+//                // Right key was pressed. So move the player right by one cell.The canMove variable is set to false until the end of the animation.
+//                if ((playerView.getX() + GRID_CELL_HEIGHT) < (28 * GRID_CELL_HEIGHT) && (playerView.getX() + GRID_CELL_HEIGHT) > 0 && canMove) {
+//                    canMove = false;
+//                    smoothTransition(0, GRID_CELL_HEIGHT,3);
+//                }
+//                break;
+//            }
+//            case UP: {
+//                //Up key was pressed. So move the player down by one cell.The canMove variable is set to false until the end of the animation.
+//                if ((playerView.getY() - GRID_CELL_HEIGHT) < (21 * GRID_CELL_HEIGHT) && (playerView.getY() - GRID_CELL_HEIGHT) > 0 && canMove) {
+//                    canMove = false;
+//                    smoothTransition(-GRID_CELL_HEIGHT, 0,0);
+//                }
+//                break;
+//            }
+//            case DOWN: {
+//                //Down key was pressed. So move the player down by one cell.The canMove variable is set to false until the end of the animation.
+//                if ((playerView.getY() + GRID_CELL_HEIGHT) < (21 * GRID_CELL_HEIGHT) && (playerView.getY() + GRID_CELL_HEIGHT) > 0 && canMove) {
+//                    canMove = false;
+//                    smoothTransition(GRID_CELL_HEIGHT, 0,1);
+//                }
+//                break;
+//            }
+//            default:
+//                // Do nothing
+//                break;
+//        }
+//
+//        // Redraw game as the player may have moved.
+//        drawGame();
+//        // Consume the event. This means we mark it as dealt with. This stops other GUI nodes (buttons etc) responding to it.
+//        event.consume();
+//    }
 
 }
