@@ -20,7 +20,7 @@ import group44.models.LevelInfo;
 /**
  * Parses the level file into {@link Level}.
  *
- * @author Tomas Svejnoha, Amy Mason
+ * @author Tomas Svejnoha, Amy Mason.
  * @version 1.0
  */
 public class LevelParser {
@@ -172,14 +172,14 @@ public class LevelParser {
 			return new Ground(level, positionX, positionY, imagePath);
 		}
 	}
-	
+
 	/**
 	 * Retrieves the Key Type.
 	 * 
-	 * @param keyTypeID - the key ID, specific to Key Type
-	 * @return - the Key Type
+	 * @param keyTypeID - the key ID, specific to Key Type.
+	 * @return - the Key Type.
 	 */
-	private static KeyType getKeyType (int keyTypeID) {
+	private static KeyType getKeyType(int keyTypeID) {
 		switch (keyTypeID) {
 		case 1:
 			return KeyType.RED;
@@ -225,11 +225,11 @@ public class LevelParser {
 
 		return new Fire(level, positionX, positionY, imagePath);
 	}
-	
+
 	/**
 	 * Parses the line into cell.
 	 * 
-	 * @param level - the level where the Cell is located.
+	 * @param level   - the level where the Cell is located.
 	 * @param scanner - scanner with the serialised Cell.
 	 * 
 	 * @return the serialised {@link Key Door} as a type {@link Cell}.
@@ -241,14 +241,14 @@ public class LevelParser {
 		String lockedImagePath = scanner.next();
 		String unlockedImagePath = scanner.next();
 		KeyType unlockingKey = getKeyType(scanner.nextInt());
-		
+
 		return new KeyDoor(level, title, positionX, positionY, lockedImagePath, unlockedImagePath, unlockingKey);
 	}
-	
+
 	/**
 	 * Parses the line into cell.
 	 * 
-	 * @param level - the level where the Cell is located.
+	 * @param level   - the level where the Cell is located.
 	 * @param scanner - scanner with the serialised Cell.
 	 * 
 	 * @return the serialised {@link Token Door} as a type {@link Cell}.
@@ -260,11 +260,10 @@ public class LevelParser {
 		String lockedImagePath = scanner.next();
 		String unlockedImagePath = scanner.next();
 		int tokensNeeded = scanner.nextInt();
-		
+
 		return new TokenDoor(level, title, positionX, positionY, lockedImagePath, unlockedImagePath, tokensNeeded);
 	}
-	
-	
+
 	/**
 	 * Parses the line into cell.
 	 *
