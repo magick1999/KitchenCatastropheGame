@@ -107,15 +107,15 @@ public class Leaderboard {
 	/**
 	 * Returns an id the highest {@link Level} achieved by user.
 	 *
-	 * @param profile
-	 *            - profile of the user.
+	 * @param profileId
+	 *            - profile Id of the user.
 	 * @return the id of the highest level; 0 if user did not finish any level.
 	 */
-	public static int getAchievedLevel(Profile profile) {
+	public static int getAchievedLevel(int profileId) {
 		int level = 0;
 
 		for (Record record : Leaderboard.records) {
-			if (record.getProfile() == profile) {
+			if (record.getProfile().getId() == profileId) {
 				if (level < record.getLevelId()) {
 					level = record.getLevelId();
 				}
