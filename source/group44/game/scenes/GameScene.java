@@ -117,7 +117,7 @@ public class GameScene {
     	a1.setHeight(400);
     	a1.setWidth(500);
     	a1.setTitle("Congrats on finishing the level!");
-    	a1.setContentText("Top times and your time: \n"+"");//Here add the times with append
+        a1.setContentText("Top times and your time: \n" + "");//TODO Here add the times with append
     	canMove=false;
     	Optional<ButtonType> result = a1.showAndWait();
     	if(!result.isPresent()) {
@@ -211,6 +211,7 @@ public class GameScene {
      * Then an alert with the top 3 times and the player time will show.
      */
     private void endGame() {
+        //TODO Save the record here
     	canMove=false;
     	showTimes();
     }
