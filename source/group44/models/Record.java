@@ -82,10 +82,18 @@ public class Record implements Comparable<Record> {
      */
     @Override
     public String toString() {
+        return this.timeString() + " - " + this.getProfile().getUsername() ;
+    }
+
+    /**
+     * Formats a record time into string representation.
+     *
+     * @return time in a format of mm:ss.
+     */
+    public String timeString() {
     	Date date = new Date(this.getTime());
     	DateFormat formatter = new SimpleDateFormat("mm:ss");
     	formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
-    	String dateFormatted = formatter.format(date);
-        return dateFormatted + " - " + this.getProfile().getUsername() ;
+    	return formatter.format(date);
     }
 }
