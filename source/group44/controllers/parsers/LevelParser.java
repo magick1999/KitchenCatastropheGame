@@ -143,6 +143,12 @@ public class LevelParser {
 
 			if (type.equals(Constants.TYPE_PLAYER)) {
 				movableObject = parsePlayerEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_DUMB_TARGETING_ENEMY)) {
+				movableObject = parseDumbTargetingEnemyEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_STRAIGHT_WALKING_ENEMY)) {
+				movableObject = parseStraightWalkingEnemyEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_WALL_FOLLOWING_ENEMY)) {
+				movableObject = parseWallFollowingEnemyEntry(level, scanner);
 			} else if (type.equals(Constants.TYPE_FIRE_BOOTS)) {
 				collectableItem = parseFireBootsEntry(level, scanner);
 			} else if (type.equals(Constants.TYPE_FLIPPERS)) {
@@ -231,10 +237,66 @@ public class LevelParser {
 	}
 
 	/**
+	 * Parses the Dumb Targeting Enemy on the scanned line.
+	 *
+	 * @param level   - the level where the enemy is located.
+	 * @param scanner - scanner with the serialised enemy.
+	 *
+	 * @return the serialised {@link DumbTargetingEnemy} as a type of
+	 *         {@link MovableObject}.
+	 */
+	private static MovableObject parseDumbTargetingEnemyEntry(Level level, Scanner scanner) {
+		String name = scanner.next();
+		int positionX = scanner.nextInt();
+		int positionY = scanner.nextInt();
+		String imagePath = scanner.next();
+
+		return new DumbTargetingEnemy(level, name, positionX, positionY, imagePath);
+	}
+
+	/**
+	 * Parses the Straight Walking Enemy on the scanned line.
+	 *
+	 * @param level   - the level where the enemy is located.
+	 * @param scanner - scanner with the serialised enemy.
+	 *
+	 * @return the serialised {@link StraightWalkingEnemy} as a type of
+	 *         {@link MovableObject}.
+	 */
+	private static MovableObject parseStraightWalkingEnemyEntry(Level level, Scanner scanner) {
+		String name = scanner.next();
+		int positionX = scanner.nextInt();
+		int positionY = scanner.nextInt();
+		int velocityX = scanner.nextInt();
+		int velocityY = scanner.nextInt();
+		String imagePath = scanner.next();
+
+		return new StraightWalkingEnemy(level, name, positionX, positionY, velocityX, velocityY, imagePath);
+	}
+
+	/**
+	 * Parses the Wall Following Enemy on the scanned line.
+	 *
+	 * @param level   - the level where the enemy is located.
+	 * @param scanner - scanner with the serialised enemy.
+	 *
+	 * @return the serialised {@link WallFollowingEnemy} as a type of
+	 *         {@link MovableObject}.
+	 */
+	private static MovableObject parseWallFollowingEnemyEntry(Level level, Scanner scanner) {
+		String name = scanner.next();
+		int positionX = scanner.nextInt();
+		int positionY = scanner.nextInt();
+		String imagePath = scanner.next();
+
+		return new WallFollowingEnemy(level, name, positionX, positionY, imagePath);
+	}
+
+	/**
 	 * Parses the line into Collectable item - Fire Boots.
 	 * 
 	 * @param level   - the level where the item is located.
-	 * @param scanner - scanner with the serialised player.
+	 * @param scanner - scanner with the serialised fire boots.
 	 * 
 	 * @return the serialised {@link FireBoots} as a type {@link CollectableItem}.
 	 */
@@ -250,7 +312,7 @@ public class LevelParser {
 	 * Parses the line into Collectable item - Flippers.
 	 * 
 	 * @param level   - the level where the item is located.
-	 * @param scanner - scanner with the serialised player.
+	 * @param scanner - scanner with the serialised flippers.
 	 * 
 	 * @return the serialised {@link Flippers} as a type {@link CollectableItem}.
 	 */
@@ -266,7 +328,7 @@ public class LevelParser {
 	 * Parses the line into Collectable item - Key.
 	 * 
 	 * @param level   - the level where the item is located.
-	 * @param scanner - scanner with the serialised player.
+	 * @param scanner - scanner with the serialised key.
 	 * 
 	 * @return the serialised {@link Key} as a type {@link CollectableItem}.
 	 */
@@ -301,7 +363,7 @@ public class LevelParser {
 	 * Parses the line into Collectable item - Token.
 	 * 
 	 * @param level   - the level where the item is located.
-	 * @param scanner - scanner with the serialised player.
+	 * @param scanner - scanner with the serialised token.
 	 * 
 	 * @return the serialised {@link Token} as a type {@link CollectableItem}.
 	 */
