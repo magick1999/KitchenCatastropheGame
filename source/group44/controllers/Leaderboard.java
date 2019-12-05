@@ -57,6 +57,8 @@ public class Leaderboard {
 		} else if (record.getTime() > time) {
 			record.setTime(time);
 		}
+
+		Leaderboard.save();
 	}
 
 	/**
@@ -123,6 +125,13 @@ public class Leaderboard {
 		}
 
 		return level;
+	}
+
+	/**
+	 * Loads records from the default file.
+	 */
+	public static void load() {
+		Leaderboard.load(Constants.FILE_RECORDS);
 	}
 
 	/**
