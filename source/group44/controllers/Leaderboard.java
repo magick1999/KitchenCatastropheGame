@@ -203,7 +203,7 @@ public class Leaderboard {
 	}
 
 	/**
-	 * Saves the records in the leaderboard.
+	 * Saves the records in the {@link Leaderboard} to the default file.
 	 */
 	public static void save() {
 		save(Constants.FILE_RECORDS);
@@ -215,7 +215,7 @@ public class Leaderboard {
 	 * @param path
 	 *            - path to the file where to store the profiles
 	 */
-	private static void save(String path) {
+	public static void save(String path) {
 		File file = new File(path);
 		PrintWriter writer = null;
 
