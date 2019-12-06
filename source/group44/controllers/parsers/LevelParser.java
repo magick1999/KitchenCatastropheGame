@@ -401,11 +401,9 @@ public class LevelParser {
 	 *         {@link CollectableItem}.
 	 */
 	private static CollectableItem parseFireBootsEntry(Level level, Scanner scanner) {
-		int positionX = scanner.nextInt();
-		int positionY = scanner.nextInt();
 		String imagePath = scanner.next();
 
-		return new FireBoots(level, positionX, positionY, imagePath);
+		return new FireBoots(level, imagePath);
 	}
 
 	/**
@@ -420,11 +418,9 @@ public class LevelParser {
 	 *         {@link CollectableItem}.
 	 */
 	private static CollectableItem parseFlipperEntry(Level level, Scanner scanner) {
-		int positionX = scanner.nextInt();
-		int positionY = scanner.nextInt();
 		String imagePath = scanner.next();
 
-		return new Flippers(level, positionX, positionY, imagePath);
+		return new Flippers(level, imagePath);
 	}
 
 	/**
@@ -439,11 +435,9 @@ public class LevelParser {
 	 */
 	private static CollectableItem parseKeyEntry(Level level, Scanner scanner) {
 		int keyTypeID = scanner.nextInt();
-		int positionX = scanner.nextInt();
-		int positionY = scanner.nextInt();
 		KeyType keyType = getKeyType(keyTypeID);
 
-		return new Key(level, keyType, positionX, positionY);
+		return new Key(level, keyType);
 	}
 
 	/**
@@ -457,10 +451,8 @@ public class LevelParser {
 	 * @return the serialised {@link Token} as a type {@link CollectableItem}.
 	 */
 	private static CollectableItem parseTokenEntry(Level level, Scanner scanner) {
-		int positionX = scanner.nextInt();
-		int positionY = scanner.nextInt();
 		String imagePath = scanner.next();
 
-		return new Token(level, positionX, positionY, imagePath);
+		return new Token(level, imagePath);
 	}
 }
