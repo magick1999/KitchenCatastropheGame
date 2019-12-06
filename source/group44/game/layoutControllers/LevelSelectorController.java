@@ -35,7 +35,7 @@ public class LevelSelectorController {
     }
     @FXML
     public void initialize(){
-        logo.setImage(new Image("/group44/resources/kitchenLogo.png"));
+        logo.setImage(new Image("/group44/resources/KitchenCatastrophe.png"));
     }
     public void setMenu(Button menu) {
         this.menu = menu;

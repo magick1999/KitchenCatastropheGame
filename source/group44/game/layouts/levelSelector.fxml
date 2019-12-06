@@ -14,19 +14,19 @@
       <ImageView fx:id="logo" id="logo" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER"></ImageView>
    </top>
    <bottom>
-      <HBox alignment="CENTER" stylesheets="@group44/resources/application.css" prefHeight="100.0" prefWidth="200.0" spacing="100" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" stylesheets="@group44/resources/application.css" prefHeight="100.0" prefWidth="200.0" spacing="50" BorderPane.alignment="CENTER">
          <children>
             <Button id="button" fx:id="previous" stylesheets="@group44/resources/application.css" alignment="CENTER" mnemonicParsing="false" text="Previous" />
-            <Button id="button" fx:id="play" stylesheets="@group44/resources/application.css" mnemonicParsing="false" text="Play" />
+            <Button id="button" fx:id="play" stylesheets="@group44/resources/application.css" alignment="CENTER" mnemonicParsing="false" text="Play" />
             <Button id="button" fx:id="next" stylesheets="@group44/resources/application.css" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Next" />
-            <Button id="button" fx:id="menu" stylesheets="@group44/resources/application.css" mnemonicParsing="false" text="Main Menu" />
+            <Button id="button" fx:id="menu" stylesheets="@group44/resources/application.css" alignment="CENTER" mnemonicParsing="false" text="Main Menu" />
          </children>
       </HBox>
    </bottom>
    <center>
       <VBox id="levelInfo" alignment="CENTER" stylesheets="@group44/resources/application.css" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Button id="button" fx:id="levelNum" stylesheets="@group44/resources/application.css" mnemonicParsing="false" text="Level 1" />
+            <Button id="button" fx:id="levelNum" stylesheets="@group44/resources/application.css" alignment="CENTER" mnemonicParsing="false" text="Level 1" />
             <ListView fx:id="levelTimes" stylesheets="@group44/resources/application.css" prefHeight="200.0" prefWidth="200.0" />
          </children>
          <opaqueInsets>

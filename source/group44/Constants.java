@@ -2,8 +2,8 @@ package group44;
 
 public final class Constants {
     private Constants(){}
-    public static final int WINDOW_WIDTH = 1000;
-    public static final int WINDOW_HEIGHT = 770;
+    public static final int WINDOW_WIDTH = 800;
+    public static final int WINDOW_HEIGHT = 600;
 
     // The dimensions of the canvas
     public static final int CANVAS_WIDTH = 725;
