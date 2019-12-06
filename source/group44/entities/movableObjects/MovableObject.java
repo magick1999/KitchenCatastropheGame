@@ -82,6 +82,11 @@ public abstract class MovableObject extends LevelObject {
     public void die(LevelObject object) {
         // Remove MovableObject from the grid
         ((StepableCell) this.getLevel().getGrid()[this.getPositionX()][this.getPositionY()]).stepOff();
+        if (this instanceof Enemy) {
+        	this.getLevel().finish();
+        } else if (this instanceof Enemy) {
+        	this.getLevel().getEnemies().remove(this);
+        }
     }
 
     /**
