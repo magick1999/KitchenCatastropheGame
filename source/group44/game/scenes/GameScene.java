@@ -3,6 +3,7 @@ package group44.game.scenes;
 import group44.controllers.Leaderboard;
 import group44.entities.SpriteAnimation;
 import group44.game.Level;
+import group44.game.LevelFinishStatus;
 import group44.game.layoutControllers.MainGameWindowController;
 import group44.models.Profile;
 import javafx.animation.Animation;
@@ -34,14 +35,9 @@ public class GameScene {
 
 	// Loaded images
 	private Image player = new Image("group44/resources/ChefDownWalk/Front1.png");
-	private Image floor = new Image("group44/resources/floor.png");
-	private Image wall = new Image("group44/resources/default_silver_sand.png");
 
-	// The controller asociated with the specific fxml file.
+	// The controller associated with the specific fxml file.
 	private MainGameWindowController myController;
-
-	// Holds the map images
-	private Image[][] map = new Image[40][40];
 
 	// The player data.
 	private ImageView playerView = new ImageView();
@@ -159,6 +155,8 @@ public class GameScene {
 	 *            This is the event for the click on the restart button.
 	 */
 	private void setUpRestart(MouseEvent event) {
+		// TODO: RESTART GAME
+
 		myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
 		canMove = true;
 		playerView.setX(GRID_CELL_WIDTH);
@@ -223,55 +221,13 @@ public class GameScene {
 	}
 
 	/**
-	 * This method draws the movable objects onto a pane, above the canvas so
-	 * that the movement can be rendered smoothly.
-	 */
-	private void drawMovableObjects() {
-		playerView.setFitWidth(GRID_CELL_WIDTH);
-		playerView.setFitHeight(GRID_CELL_HEIGHT);
-		playerView.setImage(player);
-		playerView.setY(GRID_CELL_HEIGHT);
-		playerView.setX(GRID_CELL_WIDTH);
-		// Add the movable objects to the pane destined for them.
-		myController.getMovableObjects().getChildren().add(playerView);
-	}
-
-	/**
-	 * This method smoothly translates the player position from playerY and
-	 * playerX to playerY+yPos and playerX+xPos.
-	 *
-	 * @param yPos
-	 *            is the increment or decrement added to playerY.
-	 * @param xPos
-	 *            is the increment or decrement added to playerX.
-	 */
-	private void smoothTransition(double yPos, double xPos, int orientation) {
-		// Here is created an animation with the node to be moved being
-		// playerView, the duration and by how much to move it on the x and y
-		// axis,
-		// the orientation parameter indicates which way the player is facing.
-		final Animation animation = new SpriteAnimation(playerView, Duration.millis(200), xPos, yPos, orientation);
-		// This sets the number of animation repetitions to 1 meaning that the
-		// animation is played only once.
-		animation.setCycleCount(1);
-		// This allows the player to perform another move.
-		animation.setOnFinished(event -> canMove = true);
-		// Start the animation
-		animation.play();
-	}
-
-	/**
 	 * This method handles the keyboard input.
 	 *
 	 * @param event
 	 *            Passes in the events from the keyboard.
 	 */
 	private void processKeyEvent(KeyEvent event) {
-		if (this.currentLevel.isFinished()) {
-			// TODO: Show reason
-
-			this.showTimes();
-		} else {
+		{
 			switch (event.getCode()) {
 			case ESCAPE: {
 				canMove = false;
@@ -281,8 +237,17 @@ public class GameScene {
 				setUpMenu();
 				break;
 			}
-			default:
+
+			// All keys going to the level
+			case UP:
+			case DOWN:
+			case LEFT:
+			case RIGHT:
 				this.currentLevel.keyDown(event);
+				break;
+
+			default:
+				// Do nothing
 				break;
 			}
 		}
@@ -292,6 +257,20 @@ public class GameScene {
 		// Consume the event. This means we mark it as dealt with. This stops
 		// other GUI nodes (buttons etc) responding to it.
 		event.consume();
+
+		if (this.currentLevel.isFinished()) {
+			this.levelFinished();
+		}
 	}
 
+	/**
+	 * Shows dialogs based on reason to finish level.
+	 */
+	private void levelFinished() {
+		// TODO: Update leaderboard
+		if (this.currentLevel.getFinishStatus() == LevelFinishStatus.GoalReached) {
+			this.showTimes();
+		}
+
+	}
 }
