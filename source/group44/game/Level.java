@@ -1,8 +1,5 @@
 package group44.game;
 
-import java.awt.*;
-import java.util.ArrayList;
-
 import group44.entities.SpriteAnimation;
 import group44.entities.cells.Cell;
 import group44.entities.cells.StepableCell;
@@ -11,7 +8,6 @@ import group44.entities.movableObjects.MovableObject;
 import group44.entities.movableObjects.Player;
 import group44.exceptions.CollisionException;
 import group44.game.layoutControllers.MainGameWindowController;
-import group44.game.scenes.GameScene;
 import javafx.animation.Animation;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.canvas.GraphicsContext;
@@ -19,6 +15,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
+
+import java.util.ArrayList;
 
 import static group44.Constants.GRID_CELL_HEIGHT;
 import static group44.Constants.GRID_CELL_WIDTH;
@@ -39,10 +37,11 @@ public class Level {
     private int displaySize; // The size of the grid displayed
     private Player player;
     private ArrayList<Enemy> enemies;
-    private ImageView playerView;
+    private ImageView playerView = new ImageView();
     private MainGameWindowController mainGameWindowController;
-    private boolean canMove=TRUE;
-    private int orientation=0;
+    private boolean canMove = TRUE;
+    private int orientation = 0;
+
     /**
      * Creates a new instance of {@link Level}.
      *
@@ -122,22 +121,28 @@ public class Level {
 
         this.grid[x][y] = cell;
         if (cell instanceof StepableCell) {
-        	StepableCell stepableCell = ((StepableCell) cell);
-        	MovableObject object = stepableCell.getMovableObject();
+            StepableCell stepableCell = ((StepableCell) cell);
+            MovableObject object = stepableCell.getMovableObject();
             if (object instanceof Player) {
                 this.player = (Player) object;
                 stepableCell.stepOff(); // HACK: INTEGRATION
-                playerView.setX(player.getPositionX()-player.getVelocityX());
-                playerView.setY(player.getPositionY()-player.getVelocityY());
+                playerView.setX(player.getPositionX() - player.getVelocityX());
+                playerView.setY(player.getPositionY() - player.getVelocityY());
                 playerView.setImage(player.getImage());
                 playerView.setFitWidth(GRID_CELL_WIDTH);
                 playerView.setFitHeight(GRID_CELL_HEIGHT);
-                this.mainGameWindowController = new FXMLLoader(getClass().getResource("/group44/game/layouts/MainGameWindow.fxml")).getController();
-                mainGameWindowController.getMovableObjects().getChildren().add(playerView);
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/group44/game/layouts/MainGameWindow.fxml"));
+                try {
+                    fxmlLoader.load();
+                    this.mainGameWindowController = fxmlLoader.getController();
+                    mainGameWindowController.getMovableObjects().getChildren().add(playerView);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             if (object instanceof Enemy) {
-            	this.enemies.add((Enemy) object);
-            	stepableCell.stepOff(); // HACK: INTEGRATION
+                this.enemies.add((Enemy) object);
+                stepableCell.stepOff(); // HACK: INTEGRATION
             }
         }
     }
@@ -148,7 +153,7 @@ public class Level {
      * @return the player.
      */
     public Player getPlayer() {
-    	return this.player;
+        return this.player;
     }
 
     /**
@@ -157,7 +162,7 @@ public class Level {
      * @return list of enemies.
      */
     public ArrayList<Enemy> getEnemies() {
-    	return this.enemies;
+        return this.enemies;
     }
 
     /**
@@ -178,32 +183,33 @@ public class Level {
         double cellWidth = gc.getCanvas().getWidth() / this.displaySize;
         double cellHeight = gc.getCanvas().getHeight() / this.displaySize;
         double cellSize = Math.min(cellWidth, cellHeight);
-
+        playerView.setFitHeight(cellSize);
+        playerView.setFitWidth(cellSize);
         Area activeArea = this.getActiveArea();
 
         for (int x = activeArea.getX1(); x <= activeArea.getX2(); x++) {
             for (int y = activeArea.getY1(); y <= activeArea.getY2(); y++) {
-                if(x==player.getPositionX()&&y==player.getPositionY()) {
-                    if(player.getVelocityX()!=0){
-                        if(player.getVelocityX()==-1)
+                if (x == player.getPositionX() && y == player.getPositionY() && player.getVelocityY() + player.getVelocityX() != 0) {
+                    if (player.getVelocityX() != 0) {
+                        if (player.getVelocityX() == -1)
                             orientation = 2;
                         else
                             orientation = 3;
-                    }else{
-                        if(player.getVelocityY() == -1){
+                    } else {
+                        if (player.getVelocityY() == -1) {
                             orientation = 0;
-                        }
-                        else
+                        } else
                             orientation = 1;
                     }
-                    final Animation animation = new SpriteAnimation(playerView, Duration.millis(200), playerView.getX(), playerView.getY(),orientation);
+                    final Animation animation = new SpriteAnimation(playerView, Duration.millis(200), playerView.getX(), playerView.getY(), orientation);
                     animation.setCycleCount(1);
                     animation.setOnFinished(event -> canMove = true);
                     animation.play();
 
-                }else{
-                    this.grid[x][y].draw(gc, x * cellSize, y * cellSize, cellSize, cellSize);}
+                } else {
+                    this.grid[x][y].draw(gc, x * cellSize, y * cellSize, cellSize, cellSize);
                 }
+            }
         }
     }
 
@@ -213,24 +219,24 @@ public class Level {
      * @param event - the {@link KeyEvent}
      */
     public void keyDown(KeyEvent event) {
-        if(event.getCode() == KeyCode.ESCAPE){
-            	canMove = false;
-                //Escape key was pressed. So show the menu.
-                mainGameWindowController.getMenuBox().setVisible(!mainGameWindowController.getMenuBox().isVisible());
-                //Setting up the menu controls.
+        if (event.getCode() == KeyCode.ESCAPE) {
+            canMove = false;
+            //Escape key was pressed. So show the menu.
+            mainGameWindowController.getMenuBox().setVisible(!mainGameWindowController.getMenuBox().isVisible());
+            //Setting up the menu controls.
 //                GameScene.setUpMenu();
-            }
-    	this.player.keyDown(event);
-    	this.moveEnemies();
+        }
+        this.player.keyDown(event);
+        this.moveEnemies();
     }
 
     /**
      * Moves all enemies in the game.
      */
     private void moveEnemies() {
-    	for (Enemy enemy : this.enemies) {
-    		enemy.move();
-		}
+        for (Enemy enemy : this.enemies) {
+            enemy.move();
+        }
     }
 
     /**
@@ -263,6 +269,6 @@ public class Level {
      * Finished the current level.
      */
     public void finish() {
-    	throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 }
