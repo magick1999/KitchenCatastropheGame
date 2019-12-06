@@ -2,6 +2,7 @@ package group44.entities.cells;
 
 import group44.entities.movableObjects.MovableObject;
 import group44.game.Level;
+import group44.game.LevelFinishStatus;
 
 /**
  * Represents a Goal in the game.
@@ -35,6 +36,6 @@ public class Goal extends StepableCell {
 	 */
 	@Override
 	protected void onStepped(MovableObject object) {
-		this.getLevel().finish();
+		this.getLevel().finish(LevelFinishStatus.GoalReached);
 	}
 }

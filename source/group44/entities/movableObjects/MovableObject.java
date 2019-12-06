@@ -6,6 +6,7 @@ import group44.entities.cells.StepableCell;
 import group44.entities.cells.Wall;
 import group44.game.CollisionCheckResult;
 import group44.game.Level;
+import group44.game.LevelFinishStatus;
 
 /**
  * Abstract classes from which inherits all objects able to move.
@@ -82,8 +83,13 @@ public abstract class MovableObject extends LevelObject {
     public void die(LevelObject object) {
         // Remove MovableObject from the grid
         ((StepableCell) this.getLevel().getGrid()[this.getPositionX()][this.getPositionY()]).stepOff();
-        if (this instanceof Enemy) {
-        	this.getLevel().finish();
+        if (this instanceof Player) {
+        	if (object instanceof MovableObject) {
+        		this.getLevel().finish(LevelFinishStatus.PlayerKilled);
+        	} else {
+        		this.getLevel().finish(LevelFinishStatus.PlayerDied);
+        	}
+
         } else if (this instanceof Enemy) {
         	this.getLevel().getEnemies().remove(this);
         }

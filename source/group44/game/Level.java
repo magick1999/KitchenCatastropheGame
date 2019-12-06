@@ -26,6 +26,7 @@ public class Level {
 	private int displaySize; // The size of the grid displayed
 	private Player player;
 	private ArrayList<Enemy> enemies;
+	private boolean isFinished;
 
 	/**
 	 * Creates a new instance of {@link Level}.
@@ -51,6 +52,15 @@ public class Level {
 			this.displaySize = displaySize;
 		}
 		this.enemies = new ArrayList<>();
+	}
+
+	/**
+	 * Indicates whether the player finished the level.
+	 *
+	 * @return true if finished; otherwise false.
+	 */
+	public boolean isFinished() {
+		return this.isFinished;
 	}
 
 	/**
@@ -116,8 +126,7 @@ public class Level {
 			StepableCell stepableCell = ((StepableCell) cell);
 			MovableObject object = stepableCell.getMovableObject();
 			if (object instanceof Player) {
-				this.player = (Player) object; // the player is in the
-												// Level.getPlayer().
+				this.player = (Player) object;
 			}
 			if (object instanceof Enemy) {
 				this.enemies.add((Enemy) object);
@@ -178,9 +187,6 @@ public class Level {
 				}
 			}
 		}
-
-		// System.out.println(
-		// String.format("[%d,%d]", x + activeArea.getX1(), y + activeArea.getY1()));
 	}
 
 	/**
@@ -191,9 +197,11 @@ public class Level {
 	 *            - the {@link KeyEvent}
 	 */
 	public void keyDown(KeyEvent event) {
-		this.player.keyDown(event);
-		this.player.move();
-		this.moveEnemies();
+		if (this.isFinished == false) {
+			this.player.keyDown(event);
+			this.player.move();
+			this.moveEnemies();
+		}
 	}
 
 	/**
@@ -239,8 +247,6 @@ public class Level {
 
 		for (int x = 0; x < width + 1; x++) {
 			for (int y = 0; y < height + 1; y++) {
-				System.out.println(String.format("[%d,%d]", x + activeArea.getX1(), y + activeArea.getY1()));
-
 				array[x][y] = this.grid[x + activeArea.getX1()][y + activeArea.getY1()];
 			}
 		}
@@ -250,8 +256,12 @@ public class Level {
 
 	/**
 	 * Finished the current level.
+	 *
+	 * @param status - level finish status.
 	 */
-	public void finish() {
-		throw new UnsupportedOperationException();
+	public void finish(LevelFinishStatus status) {
+		System.out.println("Level.finish()");
+		this.isFinished = true;
+		// throw new UnsupportedOperationException();
 	}
 }
