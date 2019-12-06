@@ -271,6 +271,5 @@ public class GameScene {
 		if (this.currentLevel.getFinishStatus() == LevelFinishStatus.GoalReached) {
 			this.showTimes();
 		}
-
 	}
 }
