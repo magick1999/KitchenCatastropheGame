@@ -16,11 +16,9 @@ public class Key extends CollectableItem {
      *
      * @param level     - The {@link Level} where the {@link Key} is located.
      * @param type      - Colour type of the {@link Key}.
-     * @param positionX - Position X in the game.
-     * @param positionY - Position Y in the game.
      */
-    public Key(Level level, KeyType type, int positionX, int positionY) {
-        super(level, type.getTitle(), positionX, positionY, type.getImagePath());
+    public Key(Level level, KeyType type) {
+        super(level, type.getTitle(), type.getImagePath());
         this.keyType = type;
     }
 

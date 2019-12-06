@@ -17,11 +17,9 @@ public abstract class CollectableItem extends LevelObject {
      * @param level     - The {@link Level} where the {@link CollectableItem} is
      *                  located.
      * @param title     - Title of the {@link CollectableItem}.
-     * @param positionX - Position X in the game.
-     * @param positionY - Position Y in the game.
      */
-    public CollectableItem(Level level, String title, int positionX, int positionY) {
-        super(level, title, positionX, positionY);
+    public CollectableItem(Level level, String title) {
+        super(level, title, 0, 0);
     }
 
     /**
@@ -30,12 +28,10 @@ public abstract class CollectableItem extends LevelObject {
      * @param level     - The {@link Level} where the {@link CollectableItem} is
      *                  located.
      * @param title     - Title of the {@link CollectableItem}.
-     * @param positionX - Position X in the game.
-     * @param positionY - Position Y in the game.
      * @param imagePath - Path the the Image representing {@link CollectableItem} in
      *                  the game.
      */
-    public CollectableItem(Level level, String title, int positionX, int positionY, String imagePath) {
-        super(level, title, positionX, positionY, imagePath);
+    public CollectableItem(Level level, String title, String imagePath) {
+        super(level, title, 0, 0, imagePath);
     }
 }
