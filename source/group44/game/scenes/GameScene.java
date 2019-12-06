@@ -47,6 +47,7 @@ public class GameScene {
     private Image player = new Image("group44/resources/ChefDownWalk/Front1.png");
     private Image floor = new Image("group44/resources/floor.png");
     private Image wall = new Image("group44/resources/default_silver_sand.png");
+    private Image goal = new Image("group44/resources/goal.png");
 
     //The controller asociated with the specific fxml file.
     private MainGameWindowController myController;
@@ -112,6 +113,7 @@ public class GameScene {
         myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
     	canMove = true;
     }
+
     /**
      * This method is called when the game has ended.
      * It shows the top 3 times and your time.
@@ -154,7 +156,7 @@ public class GameScene {
      * @param event This is the event for the click on the restart button.
      */
     private void setUpRestart(MouseEvent event) {
-    	myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
+    	myController.getMenuBox().setVisible(false);
     	canMove = true;
     	playerView.setX(GRID_CELL_WIDTH);
     	playerView.setY(GRID_CELL_HEIGHT);
@@ -198,18 +200,19 @@ public class GameScene {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         //Create a map for testing
-        for (int x = 0; x <= 22; x++) {
-            for (int j = 0; j <= 29; j++) {
-                if (x == 0 || x == 21 || j == 0 || j == 28)
+        for (int x = 0; x <= 6; x++) {
+            for (int j = 0; j <= 6; j++) {
+                if (x == 0 || x == 6 || j == 0 || j == 6)
                     map[x][j] = wall;
                 else
                     map[x][j] = floor;
             }
+            map[5][5]=goal;
         }
         //Drawing the map
-        for (int i = 0; i <= 22; ++i) {
-            for (int j = 0; j <= 29; ++j) {
-                gc.drawImage(map[i][j], j * GRID_CELL_WIDTH, i * GRID_CELL_HEIGHT);
+        for (int i = 0; i <= 6; ++i) {
+            for (int j = 0; j <= 6; ++j) {
+                gc.drawImage(map[i][j], j * GRID_CELL_WIDTH, i * GRID_CELL_HEIGHT,GRID_CELL_HEIGHT,GRID_CELL_WIDTH);
             }
         }
 
@@ -277,7 +280,7 @@ public class GameScene {
             }
             case LEFT: {
                 // Left key was pressed. So move the player right by one cell.The canMove variable is set to false until the end of the animation.
-                if ((playerView.getX() - GRID_CELL_HEIGHT) < (28 * GRID_CELL_HEIGHT) && (playerView.getX() - GRID_CELL_HEIGHT) > 0 && canMove) {
+                if ((playerView.getX() - GRID_CELL_HEIGHT) < (6 * GRID_CELL_HEIGHT) && (playerView.getX() - GRID_CELL_HEIGHT) > 0 && canMove) {
                     canMove = false;
                     smoothTransition(0, -GRID_CELL_HEIGHT,2);
                 }
@@ -285,15 +288,19 @@ public class GameScene {
             }
             case RIGHT: {
                 // Right key was pressed. So move the player right by one cell.The canMove variable is set to false until the end of the animation.
-                if ((playerView.getX() + GRID_CELL_HEIGHT) < (28 * GRID_CELL_HEIGHT) && (playerView.getX() + GRID_CELL_HEIGHT) > 0 && canMove) {
+                if ((playerView.getX() + GRID_CELL_HEIGHT) < (6 * GRID_CELL_HEIGHT) && (playerView.getX() + GRID_CELL_HEIGHT) > 0 && canMove) {
+
                     canMove = false;
                     smoothTransition(0, GRID_CELL_HEIGHT,3);
+                    if(playerView.getX()==4*GRID_CELL_WIDTH&&playerView.getY()==5*GRID_CELL_HEIGHT){
+                        endGame();
+                    }
                 }
                 break;
             }
             case UP: {
                 //Up key was pressed. So move the player down by one cell.The canMove variable is set to false until the end of the animation.
-                if ((playerView.getY() - GRID_CELL_HEIGHT) < (21 * GRID_CELL_HEIGHT) && (playerView.getY() - GRID_CELL_HEIGHT) > 0 && canMove) {
+                if ((playerView.getY() - GRID_CELL_HEIGHT) < (6 * GRID_CELL_HEIGHT) && (playerView.getY() - GRID_CELL_HEIGHT) > 0 && canMove) {
                     canMove = false;
                     smoothTransition(-GRID_CELL_HEIGHT, 0,0);
                 }
@@ -301,9 +308,13 @@ public class GameScene {
             }
             case DOWN: {
                 //Down key was pressed. So move the player down by one cell.The canMove variable is set to false until the end of the animation.
-                if ((playerView.getY() + GRID_CELL_HEIGHT) < (21 * GRID_CELL_HEIGHT) && (playerView.getY() + GRID_CELL_HEIGHT) > 0 && canMove) {
+                if ((playerView.getY() + GRID_CELL_HEIGHT) < (6 * GRID_CELL_HEIGHT) && (playerView.getY() + GRID_CELL_HEIGHT) > 0 && canMove) {
+
                     canMove = false;
                     smoothTransition(GRID_CELL_HEIGHT, 0,1);
+                    if(playerView.getX()==5*GRID_CELL_WIDTH&&playerView.getY()==4*GRID_CELL_HEIGHT){
+                        endGame();
+                    }
                 }
                 break;
             }
