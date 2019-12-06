@@ -38,7 +38,7 @@ public class GameScene {
     private Image player = new Image("group44/resources/ChefDownWalk/Front1.png");
     private Image floor = new Image("group44/resources/floor.png");
     private Image wall = new Image("group44/resources/default_silver_sand.png");
-    private Image goal = new Image("group44/resources/goal.png");
+    private Image goal = new Image("group44/resources/cells/goal.png");
     private Image fire = new Image("group44/resources/fire.png");
     private Image water = new Image("group44/resources/water.png");
     private ArrayList obstacles = new ArrayList<Pair>();
