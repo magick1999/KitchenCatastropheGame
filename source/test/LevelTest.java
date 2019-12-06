@@ -62,7 +62,7 @@ public class LevelTest {
 	private static String PATH_IMAGE_COLLECATBLE_TOKEN = BASE_PATH_IMAGE + "cells/token.png";
 
 	private static String PATH_IMAGE_PLAYER = BASE_PATH_IMAGE + "ChefDownWalk/Front1.png";
-	private static String PATH_IMAGE_WALL_FOLLOWING_ENEMY = BASE_PATH_IMAGE + "Mr hot dog front.png";
+	private static String PATH_IMAGE_WALL_FOLLOWING_ENEMY = BASE_PATH_IMAGE + "Enemies/Hotdog/mrHotDogFront.png";
 
 	public static void main(String[] args)
 			throws FileNotFoundException, IllegalArgumentException, CollisionException, ParsingException {
@@ -341,7 +341,7 @@ public class LevelTest {
 					printTokenDoor(writer, x, y, 2);
 				} else if (x == 10 && y == 9) {
 					printTokenDoor(writer, x, y, 2);
-				} else if (x == -1 && y == 1) {
+				} else if (x == 15 && y == 1) {
 					printWallFollowingEnemy(writer, x, y); // 15, 1
 				} else if (x == 18 && y == 18) {
 					printGoal(writer, x, y);

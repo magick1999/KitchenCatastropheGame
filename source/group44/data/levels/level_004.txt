@@ -327,7 +327,7 @@ ground,14,15,group44/resources/cells/floor.png
 ground,14,16,group44/resources/cells/floor.png
 ground,14,17,group44/resources/cells/floor.png
 ground,14,18,group44/resources/cells/floor.png
-ground,15,1,group44/resources/cells/floor.png
+ground,15,1,group44/resources/cells/floor.png,wallFollowingEnemy,Wall following enemy,15,1,group44/resources/Enemies/Hotdog/mrHotDogFront.png
 ground,15,2,group44/resources/cells/floor.png
 ground,15,3,group44/resources/cells/floor.png
 ground,15,4,group44/resources/cells/floor.png
