@@ -103,7 +103,6 @@ public class LevelManager {
 
 			if (fileScanner.hasNextLine()) {
 				String line = fileScanner.nextLine();
-				System.out.println(line);
 
 				Scanner lineScanner = new Scanner(line);
 				lineScanner.useDelimiter(",");
