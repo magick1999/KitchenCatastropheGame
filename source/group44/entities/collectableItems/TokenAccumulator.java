@@ -20,7 +20,7 @@ public class TokenAccumulator extends CollectableItem {
      * Creates a new instance of {@link TokenAccumulator}.
      */
     public TokenAccumulator() {
-        super(null, "Token Accumulator", 0, 0);
+        super(null, "Token Accumulator");
         this.accumulatedTokens = new ArrayList<>();
     }
 
