@@ -137,7 +137,7 @@ water,4,5,group44/resources/cells/water.png
 water,4,6,group44/resources/cells/water.png
 water,4,7,group44/resources/cells/water.png
 water,4,8,group44/resources/cells/water.png
-keyDoor,Blue doors,4,9,group44/resources/cells/blueDoor.png,group44/resources/cells/floor.png,2
+keyDoor,Blue door,4,9,group44/resources/cells/blueDoor.png,group44/resources/cells/floor.png,2
 water,4,10,group44/resources/cells/water.png
 water,4,11,group44/resources/cells/water.png
 water,4,12,group44/resources/cells/water.png
