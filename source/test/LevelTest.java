@@ -300,7 +300,7 @@ public class LevelTest {
 		writer.close();
 	}
 	public static void generateLevelFile04(String path) throws FileNotFoundException {
-		int id = 3;
+		int id = 4;
 
 		PrintWriter writer = new PrintWriter(path);
 
@@ -342,7 +342,61 @@ public class LevelTest {
 				} else if (x == 10 && y == 9) {
 					printTokenDoor(writer, x, y, 2);
 				} else if (x == 15 && y == 1) {
-					printWallFollowingEnemy(writer, x, y); // 15, 1
+					printWallFollowingEnemy(writer, x, y); // Wall following enemy
+				} else if (x == 18 && y == 18) {
+					printGoal(writer, x, y);
+				} else {
+					printGround(writer, x, y); // GROUND
+				}
+				writer.println(); // add NEW LINE
+			}
+		}
+
+		writer.close();
+	}
+	public static void generateLevelFile05(String path) throws FileNotFoundException {
+		int id = 5;
+		PrintWriter writer = new PrintWriter(path);
+
+		writer.println(String.format("%d,%d,%d", id, WIDTH, HEIGHT));
+		generateBorders(writer);
+
+		// GROUND [1,1]-[3,18]
+		for (int x = 1; x < WIDTH - 1; x++) {
+			for (int y = 1; y < HEIGHT - 1; y++) {
+
+				if (x == 1 && y == 15) {
+					printBlueKey(writer, x, y); // Ground + BlueKey
+				} else if (x == 1 && y == 18) {
+					printPlayer(writer, x, y); // Ground + Player
+				} else if (x == 3 && y == 1) {
+					printGoldKey(writer, x, y); // Ground + BlueKey
+				} else if (x == 4 && y == 9) {
+					printBlueKeyDoor(writer, x, y); // Blue Key Door
+				} else if ((x == 4 || x == 6) && y != 9) {
+					printWater(writer, x, y); // Water
+				} else if (x == 5 && y == 1) {
+					printToken(writer, x, y); // Token
+				} else if (x == 5 && y == 9) {
+					printGoldKeyDoor(writer, x, y); // Gold Key Door
+				} else if (x == 5 && y != 9) {
+					printFire(writer, x, y); // Fire
+				} else if (x == 6 && y == 9) {
+					printToken(writer, x, y); // Ground + Fire
+				} else if (x == 7 && y == 1) {
+					printToken(writer, x, y); // Ground + Token
+				} else if ((x == 8 || x == 9 || x == 10) && y != 9) {
+					printWall(writer, x, y); // Wall
+				} else if (x == 8 && y == 9) {
+					printTokenDoor(writer, x, y, 1);
+				} else if (x == 9 && y == 9) {
+					printFireBoots(writer, x, y);
+				} else if (x == 10 && y == 9) {
+					printTokenDoor(writer, x, y, 2);
+				} else if (x == 10 && y == 9) {
+					printTokenDoor(writer, x, y, 2);
+				} else if (x == 15 && y == 1) {
+					printWallFollowingEnemy(writer, x, y); // Wall following enemy
 				} else if (x == 18 && y == 18) {
 					printGoal(writer, x, y);
 				} else {
