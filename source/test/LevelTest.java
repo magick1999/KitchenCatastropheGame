@@ -26,7 +26,9 @@ public class LevelTest {
 	private static String DOOR_KEY_RED = "Red door";
 	private static String DOOR_KEY_TOKEN = "Token door";
 
-	private static String WALL_FOLLOWING_ENEMY_NAME = "Wall following enemy";
+	private static String ENEMY_NAME_WALL_FOLLOWING = "Wall following enemy";
+	private static String ENEMY_NAME_STRAIGHT_WALKING = "Straight walking enemy";
+	private static String ENEMY_NAME_DUMB_TARGETING = "Dumb targeting enemy";
 
 	private static String PLAYER_NAME = "Tomas";
 	private static int PLAYER_VECTOR_X = 0;
@@ -63,6 +65,8 @@ public class LevelTest {
 
 	private static String PATH_IMAGE_PLAYER = BASE_PATH_IMAGE + "ChefDownWalk/Front1.png";
 	private static String PATH_IMAGE_WALL_FOLLOWING_ENEMY = BASE_PATH_IMAGE + "Enemies/Hotdog/mrHotDogFront.png";
+	private static String PATH_IMAGE_STRAIGHT_WALKING_ENEMY = BASE_PATH_IMAGE + "Enemies/Hotdog/mrCarrotFront.png";
+	private static String PATH_IMAGE_DUMB_TARGETTING_ENEMY = BASE_PATH_IMAGE + "Enemies/Hotdog/mrHotDogFront.png";
 
 	public static void main(String[] args)
 			throws FileNotFoundException, IllegalArgumentException, CollisionException, ParsingException {
@@ -72,6 +76,7 @@ public class LevelTest {
 		generateLevelFile02(LEVELS + "level_002.txt");
 		generateLevelFile03(LEVELS + "level_003.txt");
 		generateLevelFile04(LEVELS + "level_004.txt");
+		generateLevelFile04(LEVELS + "level_005.txt");
 
 		if (true) {
 			for (LevelInfo info : LevelManager.getLevelInfos()) {
@@ -299,6 +304,7 @@ public class LevelTest {
 
 		writer.close();
 	}
+
 	public static void generateLevelFile04(String path) throws FileNotFoundException {
 		int id = 4;
 
@@ -342,7 +348,8 @@ public class LevelTest {
 				} else if (x == 10 && y == 9) {
 					printTokenDoor(writer, x, y, 2);
 				} else if (x == 15 && y == 1) {
-					printWallFollowingEnemy(writer, x, y); // Wall following enemy
+					printWallFollowingEnemy(writer, x, y); // Wall following
+															// enemy
 				} else if (x == 18 && y == 18) {
 					printGoal(writer, x, y);
 				} else {
@@ -354,6 +361,7 @@ public class LevelTest {
 
 		writer.close();
 	}
+
 	public static void generateLevelFile05(String path) throws FileNotFoundException {
 		int id = 5;
 		PrintWriter writer = new PrintWriter(path);
@@ -396,7 +404,8 @@ public class LevelTest {
 				} else if (x == 10 && y == 9) {
 					printTokenDoor(writer, x, y, 2);
 				} else if (x == 15 && y == 1) {
-					printWallFollowingEnemy(writer, x, y); // Wall following enemy
+					printWallFollowingEnemy(writer, x, y); // Wall following
+															// enemy
 				} else if (x == 18 && y == 18) {
 					printGoal(writer, x, y);
 				} else {
@@ -415,9 +424,6 @@ public class LevelTest {
 	}
 
 	// Steppable cells
-	// Steppable Cells
-
-	// Steppable cells
 	private static void printGround(PrintWriter writer, int x, int y) {
 		writer.print(String.format(PARSE_PATTERN_CELL, Constants.TYPE_GROUND, x, y, PATH_IMAGE_GROUND));
 	}
@@ -434,8 +440,6 @@ public class LevelTest {
 		writer.print(String.format(PARSE_PATTERN_CELL, Constants.TYPE_GOAL, x, y, PATH_IMAGE_GOAL));
 	}
 
-	// Collectable Items
-
 	private static void printBlueKeyDoor(PrintWriter writer, int x, int y) {
 		writer.print(String.format(PARSE_PATTERN_DOOR, Constants.TYPE_KEY_DOOR, DOOR_KEY_BLUE, x, y,
 				PATH_IMAGE_DOOR_KEY_BLUE, PATH_IMAGE_GROUND, KeyType.BLUE.getKeyCode()));
@@ -446,7 +450,6 @@ public class LevelTest {
 				PATH_IMAGE_DOOR_KEY_GOLD, PATH_IMAGE_GROUND, KeyType.GOLD.getKeyCode()));
 	}
 
-	// Collectable Items
 	private static void printTokenDoor(PrintWriter writer, int x, int y, int tokens) {
 		writer.print(String.format(PARSE_PATTERN_DOOR, Constants.TYPE_TOKEN_DOOR, DOOR_KEY_TOKEN, x, y,
 				PATH_IMAGE_DOOR_TOKEN, PATH_IMAGE_GROUND, tokens));
@@ -493,13 +496,17 @@ public class LevelTest {
 				PATH_IMAGE_COLLECATBLE_FLIPPERS));
 	}
 
-	// Movable Objects
-
 	// Movable objects
 	private static void printWallFollowingEnemy(PrintWriter writer, int x, int y) {
 		printGround(writer, x, y);
-		writer.print(String.format(PARSE_PATTERN_ENEMY, Constants.TYPE_WALL_FOLLOWING_ENEMY, WALL_FOLLOWING_ENEMY_NAME,
+		writer.print(String.format(PARSE_PATTERN_ENEMY, Constants.TYPE_WALL_FOLLOWING_ENEMY, ENEMY_NAME_WALL_FOLLOWING,
 				x, y, PATH_IMAGE_WALL_FOLLOWING_ENEMY));
+	}
+
+	private static void printStraightWalkingEnemy(PrintWriter writer, int x, int y) {
+		printGround(writer, x, y);
+		writer.print(String.format(PARSE_PATTERN_ENEMY, Constants.TYPE_STRAIGHT_WALKING_ENEMY,
+				ENEMY_NAME_STRAIGHT_WALKING, x, y, PATH_IMAGE_STRAIGHT_WALKING_ENEMY));
 	}
 
 	private static void printPlayer(PrintWriter writer, int x, int y) {
