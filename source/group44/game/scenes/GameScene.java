@@ -1,6 +1,5 @@
 package group44.game.scenes;
 
-import group44.controllers.Leaderboard;
 import group44.controllers.LevelManager;
 import group44.exceptions.CollisionException;
 import group44.exceptions.ParsingException;
@@ -223,20 +222,8 @@ public class GameScene {
 	 * should be sent as a parameter to store it. Then an alert with the top 3
 	 * times and the player time will show.
 	 */
-	private void endGame() {
-        if (this.currentLevel.getFinishStatus() == LevelFinishStatus.GoalReached) {
-            Leaderboard.save();
-            canMove = false;
-            showTimes(1);
-        }
-        if (this.currentLevel.getFinishStatus() == LevelFinishStatus.PlayerDied) {
-            canMove = false;
-            showTimes(2);
-        }
-        if (this.currentLevel.getFinishStatus() == LevelFinishStatus.PlayerKilled) {
-            canMove = false;
-            showTimes(3);
-        }
+	private void endGame(int option) {
+		showTimes(option);
 	}
 
 	/**
@@ -289,13 +276,13 @@ public class GameScene {
 	private void levelFinished() {
 		// TODO: Update leaderboard
         if (this.currentLevel.getFinishStatus() == LevelFinishStatus.GoalReached) {
-            this.endGame();
+			this.endGame(1);
         }
         if (this.currentLevel.getFinishStatus() == LevelFinishStatus.PlayerDied) {
-            this.endGame();
+			this.endGame(2);
         }
         if (this.currentLevel.getFinishStatus() == LevelFinishStatus.PlayerKilled) {
-            this.endGame();
+			this.endGame(3);
         }
 	}
 }
