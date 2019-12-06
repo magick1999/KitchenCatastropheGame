@@ -43,6 +43,7 @@ public class LevelTest {
 
 	private static String PARSE_PATTERN_PLAYER = ",%s,%s,%d,%d,%d,%d,%s";
 	private static String PARSE_PATTERN_ENEMY = ",%s,%s,%d,%d,%s";
+	private static String PARSE_PATTERN_ENEMY_VELOCITY = ",%s,%s,%d,%d,%d,%d,%s";
 
 	private static String BASE_PATH_IMAGE = "group44/resources/";
 
@@ -64,9 +65,10 @@ public class LevelTest {
 	private static String PATH_IMAGE_COLLECATBLE_TOKEN = BASE_PATH_IMAGE + "cells/token.png";
 
 	private static String PATH_IMAGE_PLAYER = BASE_PATH_IMAGE + "ChefDownWalk/Front1.png";
+
 	private static String PATH_IMAGE_WALL_FOLLOWING_ENEMY = BASE_PATH_IMAGE + "Enemies/Hotdog/mrHotDogFront.png";
-	private static String PATH_IMAGE_STRAIGHT_WALKING_ENEMY = BASE_PATH_IMAGE + "Enemies/Hotdog/mrCarrotFront.png";
-	private static String PATH_IMAGE_DUMB_TARGETTING_ENEMY = BASE_PATH_IMAGE + "Enemies/Hotdog/mrHotDogFront.png";
+	private static String PATH_IMAGE_STRAIGHT_WALKING_ENEMY = BASE_PATH_IMAGE + "Enemies/Carrot/mrCarrotFront.png";
+	private static String PATH_IMAGE_DUMB_TARGETTING_ENEMY = BASE_PATH_IMAGE + "Enemies/Pickle/mrPickleFront.png";
 
 	public static void main(String[] args)
 			throws FileNotFoundException, IllegalArgumentException, CollisionException, ParsingException {
@@ -395,13 +397,29 @@ public class LevelTest {
 					printTokenDoor(writer, x, y, 1);
 				} else if (x == 9 && y == 9) {
 					printFireBoots(writer, x, y);
-				} else if (x == 10 && y == 9) {
-					printTokenDoor(writer, x, y, 2);
-				} else if (x == 10 && y == 9) {
-					printTokenDoor(writer, x, y, 2);
+				} else if (x == 11 && y == 1) {
+					printGreenKey(writer, x, y);
+
+				} else if (x == 11 && y == 7) {
+					printStraightWalkingEnemy(writer, x, y, 1, 0); // STRAIGHT WALKING ENEMY - HERE HERE HERE HERE HERE HERE HERE HERE
+
+				} else if ((x >= 11 && x <= 14) && (y == 2 || y == 8)) {
+					printWall(writer, x, y);
+				} else if (x == 12 && y >= 10 && y <= 17) {
+					printWall(writer, x, y);
+				} else if ((x == 12 || x == 14) && y == 5) {
+					printWall(writer, x, y);
+				} else if (x == 13 && y == 5) {
+					printFire(writer, x, y);
+				} else if (x >= 13 && x <= 16 && y == 10) {
+					printWall(writer, x, y);
 				} else if (x == 15 && y == 1) {
 					printWallFollowingEnemy(writer, x, y); // Wall following
 															// enemy
+				} else if (x == 17 && y >= 2 && y <= 18) {
+					printWall(writer, x, y);
+				} else if (x == 16 && y == 18) {
+					printDumbTargetingEnemy(writer, x, y); // DUMB TARGETTING ENEMY
 				} else if (x == 18 && y == 18) {
 					printGoal(writer, x, y);
 				} else {
@@ -499,10 +517,17 @@ public class LevelTest {
 				x, y, PATH_IMAGE_WALL_FOLLOWING_ENEMY));
 	}
 
-	private static void printStraightWalkingEnemy(PrintWriter writer, int x, int y) {
+	private static void printStraightWalkingEnemy(PrintWriter writer, int x, int y, int vx, int vy) {
+		// ",%s,%s,%d,%d,%d,%d,%s"
 		printGround(writer, x, y);
-		writer.print(String.format(PARSE_PATTERN_ENEMY, Constants.TYPE_STRAIGHT_WALKING_ENEMY,
-				ENEMY_NAME_STRAIGHT_WALKING, x, y, PATH_IMAGE_STRAIGHT_WALKING_ENEMY));
+		writer.print(String.format(PARSE_PATTERN_ENEMY_VELOCITY, Constants.TYPE_STRAIGHT_WALKING_ENEMY,
+				ENEMY_NAME_STRAIGHT_WALKING, x, y, vx, vy, PATH_IMAGE_STRAIGHT_WALKING_ENEMY));
+	}
+
+	private static void printDumbTargetingEnemy(PrintWriter writer, int x, int y) {
+		printGround(writer, x, y);
+		writer.print(String.format(PARSE_PATTERN_ENEMY, Constants.TYPE_DUMB_TARGETING_ENEMY,
+				ENEMY_NAME_DUMB_TARGETING, x, y, PATH_IMAGE_DUMB_TARGETTING_ENEMY));
 	}
 
 	private static void printPlayer(PrintWriter writer, int x, int y) {
