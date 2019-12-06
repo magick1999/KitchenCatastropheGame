@@ -169,15 +169,8 @@ public class Level {
 		int areaWidth = area.length;
 		int areaHeight = area[0].length;
 
-		//System.out.println("areaWidth: " + areaWidth);
-		//System.out.println("areaHeight: " + areaHeight);
-
-		int width = activeArea.getX2() - activeArea.getX1();
-		int height = activeArea.getY2() - activeArea.getY1();
-
-
-		for (int x = 0; x < width + 1; x++) {
-			for (int y = 0; y < height + 1; y++) {
+		for (int x = 0; x < areaWidth; x++) {
+			for (int y = 0; y < areaHeight; y++) {
 
 				Cell cell = area[x][y];
 				if (cell != null) {
