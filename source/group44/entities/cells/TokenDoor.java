@@ -70,6 +70,7 @@ public class TokenDoor extends Door {
 		if (this.isOpen() == false) {
 			return new CollisionCheckResult(CollisionCheckResultType.NotEnoughTokens, this);
 		}
+		this.setMovableObject(object);
 		return new CollisionCheckResult(CollisionCheckResultType.Successful);
 	}
 }

@@ -74,6 +74,7 @@ public class KeyDoor extends Door {
 		if (this.isOpen() == false) {
 			return new CollisionCheckResult(CollisionCheckResultType.MissingKey, this);
 		}
+		this.setMovableObject(object);
 		return new CollisionCheckResult(CollisionCheckResultType.Successful);
 	}
 }
