@@ -92,7 +92,7 @@ ground,1,14,group44/resources/cells/floor.png
 ground,1,15,group44/resources/cells/floor.png
 ground,1,16,group44/resources/cells/floor.png
 ground,1,17,group44/resources/cells/floor.png
-ground,1,18,group44/resources/cells/floor.png
+ground,1,18,group44/resources/cells/floor.png,flippers,group44/resources/cells/flippers.png
 ground,2,1,group44/resources/cells/floor.png
 ground,2,2,group44/resources/cells/floor.png
 ground,2,3,group44/resources/cells/floor.png
@@ -128,7 +128,7 @@ ground,3,14,group44/resources/cells/floor.png
 ground,3,15,group44/resources/cells/floor.png
 ground,3,16,group44/resources/cells/floor.png
 ground,3,17,group44/resources/cells/floor.png
-ground,3,18,group44/resources/cells/floor.png
+ground,3,18,group44/resources/cells/floor.png,fireBoots,group44/resources/cells/fireBoots.png
 water,4,1,group44/resources/cells/water.png
 water,4,2,group44/resources/cells/water.png
 water,4,3,group44/resources/cells/water.png
