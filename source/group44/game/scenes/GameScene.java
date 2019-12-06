@@ -1,12 +1,13 @@
 package group44.game.scenes;
 
 import group44.controllers.Leaderboard;
-import group44.entities.SpriteAnimation;
+import group44.controllers.LevelManager;
+import group44.exceptions.CollisionException;
+import group44.exceptions.ParsingException;
 import group44.game.Level;
 import group44.game.LevelFinishStatus;
 import group44.game.layoutControllers.MainGameWindowController;
 import group44.models.Profile;
-import javafx.animation.Animation;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,11 +22,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
+import java.io.FileNotFoundException;
 import java.util.Optional;
 
-import static group44.Constants.*;
+import static group44.Constants.WINDOW_HEIGHT;
+import static group44.Constants.WINDOW_WIDTH;
 
 public class GameScene {
 
@@ -38,6 +40,7 @@ public class GameScene {
 
 	// The controller associated with the specific fxml file.
 	private MainGameWindowController myController;
+
 
 	// The player data.
 	private ImageView playerView = new ImageView();
@@ -70,7 +73,7 @@ public class GameScene {
 			// Loading the controller
 			MainGameWindowController tempController = fxmlLoader.getController();
 			setController(tempController);
-			this.currentLevel = currentLevel;
+            this.currentLevel = currentLevel;
 			// Setting the canvas
 			setCanvas(myController.getCanvas());
 			// Adding the key listener to the scene.
@@ -111,57 +114,25 @@ public class GameScene {
 	}
 
 	/**
-	 * This method is called when the game has ended. It shows the top 3 times
-	 * and your time.
-	 */
-	private void showTimes() {
-		ButtonType levelSelector = new ButtonType("Level Selector", ButtonBar.ButtonData.OK_DONE);
-		ButtonType mainMenu = new ButtonType("Main Menu", ButtonBar.ButtonData.OK_DONE);
-		ButtonType restart = new ButtonType("Try Again", ButtonBar.ButtonData.OK_DONE);
-		Alert a1 = new Alert(AlertType.NONE, "default Dialog", levelSelector, mainMenu, restart);
-		a1.setHeight(400);
-		a1.setWidth(500);
-		a1.setTitle("Congrats on finishing the level!");
-		a1.setContentText("Top times and your time: \n" + "");// TODO Here add
-																// the times
-																// with append
-		canMove = false;
-		Optional<ButtonType> result = a1.showAndWait();
-		if (!result.isPresent()) {
-		} else {
-			if (result.get() == levelSelector) {
-				LevelSelectorScene ls = new LevelSelectorScene(primaryStage, currentProfile);
-			} else {
-				if (result.get() == mainMenu) {
-					MainMenuScene ms = new MainMenuScene(primaryStage);
-				}
-
-				else {
-					if (result.get() == restart) {
-						setUpRestart(new MouseEvent(null, orientation, orientation, orientation, orientation, null,
-								orientation, canMove, canMove, canMove, canMove, canMove, canMove, canMove, canMove,
-								canMove, canMove, null));
-					}
-				}
-			}
-		}
-	}
-
-	/**
 	 * Defining behaviour for the click on the restart button.Restarts the game
 	 * and the time.
 	 *
 	 * @param event
 	 *            This is the event for the click on the restart button.
 	 */
-	private void setUpRestart(MouseEvent event) {
+    private void setUpRestart(MouseEvent event) {
 		// TODO: RESTART GAME
-
-		myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
-		canMove = true;
-		playerView.setX(GRID_CELL_WIDTH);
-		playerView.setY(GRID_CELL_HEIGHT);
-		playerView.setImage(player);
+        Level newLevel = null;
+        try {
+            newLevel = LevelManager.load(LevelManager.load().get(this.currentLevel.getId() - 1));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (CollisionException e) {
+            e.printStackTrace();
+        } catch (ParsingException e) {
+            e.printStackTrace();
+        }
+        new GameScene(this.primaryStage, newLevel, this.currentProfile);
 	}
 
 	/**
@@ -175,6 +146,44 @@ public class GameScene {
 		new MainMenuScene(primaryStage);
 	}
 
+    /**
+     * This method is called when the game has ended. It shows the top 3 times
+     * and your time.
+     */
+    private void showTimes(int option) {
+        ButtonType levelSelector = new ButtonType("Level Selector", ButtonBar.ButtonData.OK_DONE);
+        ButtonType mainMenu = new ButtonType("Main Menu", ButtonBar.ButtonData.OK_DONE);
+        ButtonType restart = new ButtonType("Try Again", ButtonBar.ButtonData.OK_DONE);
+        Alert a1 = new Alert(AlertType.NONE,
+                "default Dialog", levelSelector, mainMenu, restart);
+        a1.setHeight(400);
+        a1.setWidth(500);
+        if (option == 1) {
+            a1.setTitle("Congrats on finishing the level!");
+            a1.setContentText("Top times and your time: \n");
+        }//Here add the times with append
+        else {
+            a1.setTitle("And then I took an arrow to the knee!");
+            a1.setContentText("Just a suggestion: \n Practice makes it perfect! \n");//Here add the times with append }
+        }
+        canMove = false;
+        Optional<ButtonType> result = a1.showAndWait();
+        if (!result.isPresent()) {
+
+        } else {
+            if (result.get() == levelSelector) {
+                LevelSelectorScene ls = new LevelSelectorScene(primaryStage, this.currentProfile);
+            } else {
+                if (result.get() == mainMenu) {
+                    MainMenuScene ms = new MainMenuScene(primaryStage);
+                } else {
+                    if (result.get() == restart) {
+                        setUpRestart(new MouseEvent(null, orientation, orientation, orientation, orientation, null, orientation, canMove, canMove, canMove, canMove, canMove, canMove, canMove, canMove, canMove, canMove, null));
+                    }
+                }
+            }
+        }
+    }
 	/**
 	 * This method sets the globally available controller to the current
 	 * controller.
@@ -215,9 +224,19 @@ public class GameScene {
 	 * times and the player time will show.
 	 */
 	private void endGame() {
-		Leaderboard.save();
-		canMove = false;
-		showTimes();
+        if (this.currentLevel.getFinishStatus() == LevelFinishStatus.GoalReached) {
+            Leaderboard.save();
+            canMove = false;
+            showTimes(1);
+        }
+        if (this.currentLevel.getFinishStatus() == LevelFinishStatus.PlayerDied) {
+            canMove = false;
+            showTimes(2);
+        }
+        if (this.currentLevel.getFinishStatus() == LevelFinishStatus.PlayerKilled) {
+            canMove = false;
+            showTimes(3);
+        }
 	}
 
 	/**
@@ -260,7 +279,8 @@ public class GameScene {
 
 		if (this.currentLevel.isFinished()) {
 			this.levelFinished();
-		}
+
+        }
 	}
 
 	/**
@@ -268,8 +288,14 @@ public class GameScene {
 	 */
 	private void levelFinished() {
 		// TODO: Update leaderboard
-		if (this.currentLevel.getFinishStatus() == LevelFinishStatus.GoalReached) {
-			this.showTimes();
-		}
+        if (this.currentLevel.getFinishStatus() == LevelFinishStatus.GoalReached) {
+            this.endGame();
+        }
+        if (this.currentLevel.getFinishStatus() == LevelFinishStatus.PlayerDied) {
+            this.endGame();
+        }
+        if (this.currentLevel.getFinishStatus() == LevelFinishStatus.PlayerKilled) {
+            this.endGame();
+        }
 	}
 }
