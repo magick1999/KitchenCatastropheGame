@@ -1,6 +1,7 @@
 @font-face {
     src: url("../resources/SimpsonfontDEMO.otf");
 }
+
 #root{
     -fx-background-image: url("../resources/background.png");
     -fx-background-size: 800 600;
@@ -9,15 +10,37 @@
     -fx-background-position: center center;
 
 }
+
 .button{
-    -fx-background-image: url("../resources/sand.png");
-    -fx-pref-width: 120px;
-    -fx-pref-height: 40px;
+    -fx-background-image: url("../resources/Buttons/green_button1.png");
+    -fx-pref-width: 130px;
+    -fx-pref-height: 65px;
     -fx-background-size: cover;
+    -fx-background-color: transparent;
     -fx-background-position: center center;
-    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
     -fx-font-family:"Simpsonfont";
 }
+
+.button:hover{
+    -fx-background-image: url("../resources/Buttons/orange_button1.png");
+    -fx-pref-width: 130px;
+    -fx-pref-height: 65px;
+    -fx-background-size: cover;
+    -fx-background-color: transparent;
+    -fx-background-position: center center;
+    -fx-font-family:"Simpsonfont";
+}
+
+.button:pressed{
+    -fx-background-image: url("../resources/Buttons/orange_button1.png");
+    -fx-pref-width: 120px;
+    -fx-pref-height: 65px;
+    -fx-background-size: cover;
+    -fx-background-color: transparent;
+    -fx-background-position: center center;
+    -fx-font-family:"Simpsonfont";
+}
+
 #menuBox{
     -fx-background-image: url("../resources/menuContainer.png");
     -fx-background-size: cover;
