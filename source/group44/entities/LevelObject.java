@@ -42,7 +42,7 @@ public abstract class LevelObject {
      */
     public LevelObject(Level level, String title, int positionX, int positionY, String imagePath) {
         this(level, title, positionX, positionY);
-        this.setImage(new Image(imagePath, true));
+        this.setImage(new Image(imagePath));
     }
 
     /**

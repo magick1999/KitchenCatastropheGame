@@ -27,6 +27,7 @@ public class Level {
 	private Player player;
 	private ArrayList<Enemy> enemies;
 	private boolean isFinished;
+	private LevelFinishStatus finishStatus;
 
 	/**
 	 * Creates a new instance of {@link Level}.
@@ -61,6 +62,15 @@ public class Level {
 	 */
 	public boolean isFinished() {
 		return this.isFinished;
+	}
+
+	/**
+	 * Returns the status under which the level finished.
+	 *
+	 * @return the finish status.
+	 */
+	public LevelFinishStatus getFinishStatus() {
+		return this.finishStatus;
 	}
 
 	/**
@@ -262,6 +272,6 @@ public class Level {
 	public void finish(LevelFinishStatus status) {
 		System.out.println("Level.finish()");
 		this.isFinished = true;
-		// throw new UnsupportedOperationException();
+		this.finishStatus = status;
 	}
 }
