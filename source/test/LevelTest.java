@@ -94,7 +94,7 @@ public class LevelTest {
 
 		// GROUND [1,1]-[3,18]
 		for (int x = 1; x < 4; x++) {
-			for (int y = 1; y < height - 2; y++) {
+			for (int y = 1; y < height - 1; y++) {
 				if (x == 1 && y == 1) {
 					writer.print(String.format(PARSE_PATTERN_CELL, Constants.TYPE_GROUND, x, y, PATH_IMAGE_GROUND));
 					writer.println(String.format("," + PARSE_PATTERN_PLAYER, Constants.TYPE_PLAYER, PLAYER_NAME, x, y,
@@ -107,7 +107,7 @@ public class LevelTest {
 
 		// WATER,FIRE,WATER
 		for (int x = 4; x < 7; x++) {
-			for (int y = 1; y < height - 2; y++) {
+			for (int y = 1; y < height - 1; y++) {
 				if (y == 9) {
 					writer.println(String.format(PARSE_PATTERN_CELL, Constants.TYPE_GROUND, x, y, PATH_IMAGE_GROUND));
 					continue;
