@@ -27,12 +27,16 @@ public class LevelParser {
 	/**
 	 * Parses level file and adds LevelObjects into level.
 	 *
-	 * @param info - the {@link LevelInfo}.
+	 * @param info
+	 *            - the {@link LevelInfo}.
 	 * @return the parsed {@link Level}.
 	 *
-	 * @throws CollisionException    when two cells are at the same position.
-	 * @throws ParsingException      when trying to parse invalid data type.
-	 * @throws FileNotFoundException when level file is not found.
+	 * @throws CollisionException
+	 *             when two cells are at the same position.
+	 * @throws ParsingException
+	 *             when trying to parse invalid data type.
+	 * @throws FileNotFoundException
+	 *             when level file is not found.
 	 */
 	public static Level parseLevel(LevelInfo info) throws CollisionException, ParsingException, FileNotFoundException {
 		Scanner fileScanner = null;
@@ -64,11 +68,15 @@ public class LevelParser {
 	/**
 	 * Parses level file and adds LevelObjects into level.
 	 *
-	 * @param level       - the level to parse.
-	 * @param fileScanner - scanner for the level file.
+	 * @param level
+	 *            - the level to parse.
+	 * @param fileScanner
+	 *            - scanner for the level file.
 	 *
-	 * @throws CollisionException when two cells are at the same position.
-	 * @throws ParsingException   when trying to parse invalid data type.
+	 * @throws CollisionException
+	 *             when two cells are at the same position.
+	 * @throws ParsingException
+	 *             when trying to parse invalid data type.
 	 */
 	private static void parseLevel(Level level, Scanner fileScanner) throws CollisionException, ParsingException {
 		while (fileScanner.hasNextLine()) {
@@ -80,12 +88,15 @@ public class LevelParser {
 	/**
 	 * Parses Cell on the line.
 	 *
-	 * @param level   - the level where the Cell is located.
-	 * @param scanner - scanner with the serialised cell.
+	 * @param level
+	 *            - the level where the Cell is located.
+	 * @param scanner
+	 *            - scanner with the serialised cell.
 	 *
 	 * @return the parsed {@link Cell}
 	 *
-	 * @throws ParsingException when trying to parse invalid data type.
+	 * @throws ParsingException
+	 *             when trying to parse invalid data type.
 	 */
 	private static Cell parseEntry(Level level, Scanner scanner) throws ParsingException {
 		scanner.useDelimiter(",");
@@ -114,8 +125,10 @@ public class LevelParser {
 	/**
 	 * Parses the line into cell.
 	 *
-	 * @param level   - the level where the Cell is located.
-	 * @param scanner - scanner with the serialised cell.
+	 * @param level
+	 *            - the level where the Cell is located.
+	 * @param scanner
+	 *            - scanner with the serialised cell.
 	 *
 	 * @return the serialised {@link Wall} as a type {@link Cell}.
 	 */
@@ -130,8 +143,10 @@ public class LevelParser {
 	/**
 	 * Parses the line into cell.
 	 *
-	 * @param level   - the level where the Cell is located.
-	 * @param scanner - scanner with the serialised cell.
+	 * @param level
+	 *            - the level where the Cell is located.
+	 * @param scanner
+	 *            - scanner with the serialised cell.
 	 *
 	 * @return the serialised {@link Ground} as a type {@link Cell}.
 	 */
@@ -175,8 +190,9 @@ public class LevelParser {
 
 	/**
 	 * Retrieves the Key Type.
-	 * 
-	 * @param keyTypeID - the key ID, specific to Key Type.
+	 *
+	 * @param keyTypeID
+	 *            - the key ID, specific to Key Type.
 	 * @return - the Key Type.
 	 */
 	private static KeyType getKeyType(int keyTypeID) {
@@ -197,8 +213,10 @@ public class LevelParser {
 	/**
 	 * Parses the line into cell.
 	 *
-	 * @param level   - the level where the Cell is located.
-	 * @param scanner - scanner with the serialised cell.
+	 * @param level
+	 *            - the level where the Cell is located.
+	 * @param scanner
+	 *            - scanner with the serialised cell.
 	 *
 	 * @return the serialised {@link Water} as a type {@link Cell}.
 	 */
@@ -213,8 +231,10 @@ public class LevelParser {
 	/**
 	 * Parses the line into cell.
 	 *
-	 * @param level   - the level where the Cell is located.
-	 * @param scanner - scanner with the serialised cell.
+	 * @param level
+	 *            - the level where the Cell is located.
+	 * @param scanner
+	 *            - scanner with the serialised cell.
 	 *
 	 * @return the serialised {@link Fire} as a type {@link Cell}.
 	 */
@@ -228,10 +248,12 @@ public class LevelParser {
 
 	/**
 	 * Parses the line into cell.
-	 * 
-	 * @param level   - the level where the Cell is located.
-	 * @param scanner - scanner with the serialised Cell.
-	 * 
+	 *
+	 * @param level
+	 *            - the level where the Cell is located.
+	 * @param scanner
+	 *            - scanner with the serialised Cell.
+	 *
 	 * @return the serialised {@link Key Door} as a type {@link Cell}.
 	 */
 	private static Cell parseKeyDoorEntry(Level level, Scanner scanner) {
@@ -247,10 +269,12 @@ public class LevelParser {
 
 	/**
 	 * Parses the line into cell.
-	 * 
-	 * @param level   - the level where the Cell is located.
-	 * @param scanner - scanner with the serialised Cell.
-	 * 
+	 *
+	 * @param level
+	 *            - the level where the Cell is located.
+	 * @param scanner
+	 *            - scanner with the serialised Cell.
+	 *
 	 * @return the serialised {@link Token Door} as a type {@link Cell}.
 	 */
 	private static Cell parseTokenDoorEntry(Level level, Scanner scanner) {
@@ -267,8 +291,10 @@ public class LevelParser {
 	/**
 	 * Parses the line into cell.
 	 *
-	 * @param level   - the level where the Cell is located.
-	 * @param scanner - scanner with the serialised cell.
+	 * @param level
+	 *            - the level where the Cell is located.
+	 * @param scanner
+	 *            - scanner with the serialised cell.
 	 *
 	 * @return the serialised {@link Goal} as a type {@link Cell}.
 	 */
@@ -283,8 +309,10 @@ public class LevelParser {
 	/**
 	 * Parses the player on the scanned line.
 	 *
-	 * @param level   - the level where the player is located.
-	 * @param scanner - scanner with the serialised player.
+	 * @param level
+	 *            - the level where the player is located.
+	 * @param scanner
+	 *            - scanner with the serialised player.
 	 *
 	 * @return the serialised {@link Player} as a type of {@link MovableObject}.
 	 */
@@ -302,8 +330,10 @@ public class LevelParser {
 	/**
 	 * Parses the Dumb Targeting Enemy on the scanned line.
 	 *
-	 * @param level   - the level where the enemy is located.
-	 * @param scanner - scanner with the serialised enemy.
+	 * @param level
+	 *            - the level where the enemy is located.
+	 * @param scanner
+	 *            - scanner with the serialised enemy.
 	 *
 	 * @return the serialised {@link DumbTargetingEnemy} as a type of
 	 *         {@link MovableObject}.
@@ -320,8 +350,10 @@ public class LevelParser {
 	/**
 	 * Parses the Straight Walking Enemy on the scanned line.
 	 *
-	 * @param level   - the level where the enemy is located.
-	 * @param scanner - scanner with the serialised enemy.
+	 * @param level
+	 *            - the level where the enemy is located.
+	 * @param scanner
+	 *            - scanner with the serialised enemy.
 	 *
 	 * @return the serialised {@link StraightWalkingEnemy} as a type of
 	 *         {@link MovableObject}.
@@ -340,8 +372,10 @@ public class LevelParser {
 	/**
 	 * Parses the Wall Following Enemy on the scanned line.
 	 *
-	 * @param level   - the level where the enemy is located.
-	 * @param scanner - scanner with the serialised enemy.
+	 * @param level
+	 *            - the level where the enemy is located.
+	 * @param scanner
+	 *            - scanner with the serialised enemy.
 	 *
 	 * @return the serialised {@link WallFollowingEnemy} as a type of
 	 *         {@link MovableObject}.
@@ -357,11 +391,14 @@ public class LevelParser {
 
 	/**
 	 * Parses the line into Collectable item - Fire Boots.
-	 * 
-	 * @param level   - the level where the item is located.
-	 * @param scanner - scanner with the serialised fire boots.
-	 * 
-	 * @return the serialised {@link FireBoots} as a type {@link CollectableItem}.
+	 *
+	 * @param level
+	 *            - the level where the item is located.
+	 * @param scanner
+	 *            - scanner with the serialised fire boots.
+	 *
+	 * @return the serialised {@link FireBoots} as a type
+	 *         {@link CollectableItem}.
 	 */
 	private static CollectableItem parseFireBootsEntry(Level level, Scanner scanner) {
 		int positionX = scanner.nextInt();
@@ -373,11 +410,14 @@ public class LevelParser {
 
 	/**
 	 * Parses the line into Collectable item - Flippers.
-	 * 
-	 * @param level   - the level where the item is located.
-	 * @param scanner - scanner with the serialised flippers.
-	 * 
-	 * @return the serialised {@link Flippers} as a type {@link CollectableItem}.
+	 *
+	 * @param level
+	 *            - the level where the item is located.
+	 * @param scanner
+	 *            - scanner with the serialised flippers.
+	 *
+	 * @return the serialised {@link Flippers} as a type
+	 *         {@link CollectableItem}.
 	 */
 	private static CollectableItem parseFlipperEntry(Level level, Scanner scanner) {
 		int positionX = scanner.nextInt();
@@ -389,10 +429,12 @@ public class LevelParser {
 
 	/**
 	 * Parses the line into Collectable item - Key.
-	 * 
-	 * @param level   - the level where the item is located.
-	 * @param scanner - scanner with the serialised key.
-	 * 
+	 *
+	 * @param level
+	 *            - the level where the item is located.
+	 * @param scanner
+	 *            - scanner with the serialised key.
+	 *
 	 * @return the serialised {@link Key} as a type {@link CollectableItem}.
 	 */
 	private static CollectableItem parseKeyEntry(Level level, Scanner scanner) {
@@ -406,10 +448,12 @@ public class LevelParser {
 
 	/**
 	 * Parses the line into Collectable item - Token.
-	 * 
-	 * @param level   - the level where the item is located.
-	 * @param scanner - scanner with the serialised token.
-	 * 
+	 *
+	 * @param level
+	 *            - the level where the item is located.
+	 * @param scanner
+	 *            - scanner with the serialised token.
+	 *
 	 * @return the serialised {@link Token} as a type {@link CollectableItem}.
 	 */
 	private static CollectableItem parseTokenEntry(Level level, Scanner scanner) {
