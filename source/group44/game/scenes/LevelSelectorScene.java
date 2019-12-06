@@ -27,6 +27,8 @@ public class LevelSelectorScene {
 	//The maximum number of levels.
 	private static Integer maxLevel=3;
 	private Stage primaryStage;
+    Integer currentLevel = 1;
+
     /*
      * This is the constructor that creates the scene, instantiates the controller 
      * and sets up the listeners for the buttons on the screen.
@@ -67,7 +69,7 @@ public class LevelSelectorScene {
      * @param e This is the event from the click on the level button/
      */
     private void setLevelSelect(MouseEvent e){
-        new GameScene(primaryStage);
+        new GameScene(primaryStage,currentLevel);
     }
     /**
      * This method creates listeners for each of the buttons
@@ -88,7 +90,7 @@ public class LevelSelectorScene {
         setLevelNum(false);
     }
     private void setLevelNum(boolean prevNext){
-        Integer currentLevel  =Integer.parseInt(levelSelectorController.getLevelNum().getText().replaceAll("[A-Z a-z]",""));
+        currentLevel  =Integer.parseInt(levelSelectorController.getLevelNum().getText().replaceAll("[A-Z a-z]",""));
         if(prevNext == true && currentLevel<maxLevel){
             levelSelectorController.getLevelNum().setText("Level "+(++currentLevel).toString());
             levelSelectorController.getPrevious().setVisible(true);

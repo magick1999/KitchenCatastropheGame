@@ -3,7 +3,7 @@
 }
 #root{
     -fx-background-image: url("../resources/background.png");
-    -fx-background-size: 800 600;
+    -fx-background-size: 1000 770;
     -fx-max-height: 100%;
     -fx-max-width: 100%;
     -fx-background-position: center center;
