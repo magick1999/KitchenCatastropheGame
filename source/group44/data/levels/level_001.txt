@@ -92,6 +92,7 @@ ground,1,14,group44/resources/cells/floor.png
 ground,1,15,group44/resources/cells/floor.png
 ground,1,16,group44/resources/cells/floor.png
 ground,1,17,group44/resources/cells/floor.png
+ground,1,18,group44/resources/cells/floor.png
 ground,2,1,group44/resources/cells/floor.png
 ground,2,2,group44/resources/cells/floor.png
 ground,2,3,group44/resources/cells/floor.png
@@ -109,6 +110,7 @@ ground,2,14,group44/resources/cells/floor.png
 ground,2,15,group44/resources/cells/floor.png
 ground,2,16,group44/resources/cells/floor.png
 ground,2,17,group44/resources/cells/floor.png
+ground,2,18,group44/resources/cells/floor.png
 ground,3,1,group44/resources/cells/floor.png
 ground,3,2,group44/resources/cells/floor.png
 ground,3,3,group44/resources/cells/floor.png
@@ -126,6 +128,7 @@ ground,3,14,group44/resources/cells/floor.png
 ground,3,15,group44/resources/cells/floor.png
 ground,3,16,group44/resources/cells/floor.png
 ground,3,17,group44/resources/cells/floor.png
+ground,3,18,group44/resources/cells/floor.png
 water,4,1,group44/resources/cells/water.png
 water,4,2,group44/resources/cells/water.png
 water,4,3,group44/resources/cells/water.png
@@ -143,6 +146,7 @@ water,4,14,group44/resources/cells/water.png
 water,4,15,group44/resources/cells/water.png
 water,4,16,group44/resources/cells/water.png
 water,4,17,group44/resources/cells/water.png
+water,4,18,group44/resources/cells/water.png
 fire,5,1,group44/resources/cells/fire.png
 fire,5,2,group44/resources/cells/fire.png
 fire,5,3,group44/resources/cells/fire.png
@@ -160,6 +164,7 @@ fire,5,14,group44/resources/cells/fire.png
 fire,5,15,group44/resources/cells/fire.png
 fire,5,16,group44/resources/cells/fire.png
 fire,5,17,group44/resources/cells/fire.png
+fire,5,18,group44/resources/cells/fire.png
 water,6,1,group44/resources/cells/water.png
 water,6,2,group44/resources/cells/water.png
 water,6,3,group44/resources/cells/water.png
@@ -177,6 +182,7 @@ water,6,14,group44/resources/cells/water.png
 water,6,15,group44/resources/cells/water.png
 water,6,16,group44/resources/cells/water.png
 water,6,17,group44/resources/cells/water.png
+water,6,18,group44/resources/cells/water.png
 ground,7,1,group44/resources/cells/floor.png
 ground,7,2,group44/resources/cells/floor.png
 ground,7,3,group44/resources/cells/floor.png
