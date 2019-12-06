@@ -76,7 +76,7 @@ public class LevelTest {
 		generateLevelFile02(LEVELS + "level_002.txt");
 		generateLevelFile03(LEVELS + "level_003.txt");
 		generateLevelFile04(LEVELS + "level_004.txt");
-		generateLevelFile04(LEVELS + "level_005.txt");
+		generateLevelFile05(LEVELS + "level_005.txt");
 
 		if (true) {
 			for (LevelInfo info : LevelManager.getLevelInfos()) {
@@ -291,8 +291,6 @@ public class LevelTest {
 					printFireBoots(writer, x, y);
 				} else if (x == 10 && y == 9) {
 					printTokenDoor(writer, x, y, 2);
-				} else if (x == 10 && y == 9) {
-					printTokenDoor(writer, x, y, 2);
 				} else if (x == 18 && y == 18) {
 					printGoal(writer, x, y);
 				} else {
@@ -343,8 +341,6 @@ public class LevelTest {
 					printTokenDoor(writer, x, y, 1);
 				} else if (x == 9 && y == 9) {
 					printFireBoots(writer, x, y);
-				} else if (x == 10 && y == 9) {
-					printTokenDoor(writer, x, y, 2);
 				} else if (x == 10 && y == 9) {
 					printTokenDoor(writer, x, y, 2);
 				} else if (x == 15 && y == 1) {
