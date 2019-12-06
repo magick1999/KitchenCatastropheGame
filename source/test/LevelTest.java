@@ -1,6 +1,8 @@
 package test;
 
+import java.awt.PrintGraphics;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.PrintWriter;
 
 import group44.Constants;
@@ -13,7 +15,6 @@ import group44.models.LevelInfo;
 import javafx.embed.swing.JFXPanel;
 
 public class LevelTest {
-	private static int DISPLAY_SIZE = 7;
 	private static final String LEVELS = "source/group44/data/levels/";
 
 	private static int WIDTH = 20;
@@ -21,6 +22,11 @@ public class LevelTest {
 
 	private static String DOOR_KEY_BLUE = "Blue door";
 	private static String DOOR_KEY_GOLD = "Gold door";
+	private static String DOOR_KEY_GREEN = "Green door";
+	private static String DOOR_KEY_RED = "Red door";
+	private static String DOOR_KEY_TOKEN = "Token door";
+
+	private static String WALL_FOLLOWING_ENEMY_NAME = "Wall following enemy";
 
 	private static String PLAYER_NAME = "Tomas";
 	private static int PLAYER_VECTOR_X = 0;
@@ -28,13 +34,13 @@ public class LevelTest {
 
 	private static String PARSE_PATTERN_CELL = "%s,%d,%d,%s";
 
-	private static String PARSE_PATTERN_DOOR_KEY = "%s,%s,%d,%d,%s,%s,%d";
-	private static String PARSE_PATTERN_DOOR_TOKEN = "%s,%s,%d,%d,%s";
+	private static String PARSE_PATTERN_DOOR = "%s,%s,%d,%d,%s,%s,%d";
 
 	private static String PARSE_PATTERN_COLLECTABLE_NOTKEYS = ",%s,%s";
 	private static String PARSE_PATTERN_COLLECTABLE_KEY = ",%s,%d";
 
 	private static String PARSE_PATTERN_PLAYER = ",%s,%s,%d,%d,%d,%d,%s";
+	private static String PARSE_PATTERN_ENEMY = ",%s,%s,%d,%d,%s";
 
 	private static String BASE_PATH_IMAGE = "group44/resources/";
 
@@ -47,64 +53,67 @@ public class LevelTest {
 	private static String PATH_IMAGE_DOOR_KEY_BLUE = BASE_PATH_IMAGE + "cells/blueDoor.png";
 	private static String PATH_IMAGE_DOOR_KEY_GOLD = BASE_PATH_IMAGE + "cells/goldDoor.png";
 	private static String PATH_IMAGE_DOOR_KEY_GREEN = BASE_PATH_IMAGE + "cells/greenDoor.png";
+	private static String PATH_IMAGE_DOOR_KEY_RED = BASE_PATH_IMAGE + "cells/redDoor.png";
+
+	private static String PATH_IMAGE_DOOR_TOKEN = BASE_PATH_IMAGE + "cells/tokenDoor.png";
 
 	private static String PATH_IMAGE_COLLECATBLE_FLIPPERS = BASE_PATH_IMAGE + "cells/flippers.png";
 	private static String PATH_IMAGE_COLLECATBLE_FIRE_BOOTS = BASE_PATH_IMAGE + "cells/fireBoots.png";
+	private static String PATH_IMAGE_COLLECATBLE_TOKEN = BASE_PATH_IMAGE + "cells/token.png";
 
 	private static String PATH_IMAGE_PLAYER = BASE_PATH_IMAGE + "ChefDownWalk/Front1.png";
+	private static String PATH_IMAGE_WALL_FOLLOWING_ENEMY = BASE_PATH_IMAGE + "Mr hot dog front.png";
 
 	public static void main(String[] args)
 			throws FileNotFoundException, IllegalArgumentException, CollisionException, ParsingException {
 		JFXPanel jfxPanel = new JFXPanel();
+
 		generateLevelFile01(LEVELS + "level_001.txt");
 		generateLevelFile02(LEVELS + "level_002.txt");
+		generateLevelFile03(LEVELS + "level_003.txt");
+		generateLevelFile04(LEVELS + "level_004.txt");
 
 		if (true) {
-			LevelManager.load();
-			Level level1 = LevelManager.load(1);
-			System.out.println("\n" + level1.getId());
-
 			for (LevelInfo info : LevelManager.getLevelInfos()) {
-				if (info.getId() == 1) {
-					try {
-						Level level = LevelManager.load(info);
-						System.out.println(level.getId());
-					} catch (FileNotFoundException | CollisionException | ParsingException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+				try {
+					Level level = LevelManager.load(info);
+					System.out.println(level.getId());
+				} catch (FileNotFoundException | CollisionException | ParsingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		}
-
 	}
 
 	private static void generateBorders(PrintWriter writer) {
 		// TOP BORDER
 		for (int x = 0; x < WIDTH; x++) {
-			writer.println(String.format(PARSE_PATTERN_CELL, Constants.TYPE_WALL, x, 0, PATH_IMAGE_WALL));
+			printWall(writer, x, 0);
+			writer.println();
 		}
 
 		// BOTTOM BORDER
 		for (int x = 0; x < WIDTH; x++) {
-			writer.println(String.format(PARSE_PATTERN_CELL, Constants.TYPE_WALL, x, HEIGHT - 1, PATH_IMAGE_WALL));
+			printWall(writer, x, HEIGHT - 1);
+			writer.println();
 		}
 
 		// LEFT BORDER
 		for (int y = 1; y < WIDTH - 1; y++) {
-			writer.println(String.format(PARSE_PATTERN_CELL, Constants.TYPE_WALL, 0, y, PATH_IMAGE_WALL));
+			printWall(writer, 0, y);
+			writer.println();
 		}
 
 		// RIGHT BORDER
 		for (int y = 1; y < WIDTH - 1; y++) {
-			writer.println(String.format(PARSE_PATTERN_CELL, Constants.TYPE_WALL, HEIGHT - 1, y, PATH_IMAGE_WALL));
+			printWall(writer, HEIGHT - 1, y);
+			writer.println();
 		}
 	}
 
 	public static void generateLevelFile01(String path) throws FileNotFoundException {
 		int id = 1;
-		int WIDTH = 20;
-		int HEIGHT = 20;
 
 		PrintWriter writer = new PrintWriter(path);
 
@@ -175,10 +184,12 @@ public class LevelTest {
 							PLAYER_VECTOR_X, PLAYER_VECTOR_Y, PATH_IMAGE_PLAYER));
 					continue;
 				} else if (x == 1 && y == 3) {
-					writer.println(String.format(PARSE_PATTERN_COLLECTABLE_KEY, Constants.TYPE_KEY, KeyType.BLUE.getKeyCode()));
+					writer.println(String.format(PARSE_PATTERN_COLLECTABLE_KEY, Constants.TYPE_KEY,
+							KeyType.BLUE.getKeyCode()));
 					continue;
 				} else if (x == 1 && y == 4) {
-					writer.println(String.format(PARSE_PATTERN_COLLECTABLE_KEY, Constants.TYPE_KEY, KeyType.GOLD.getKeyCode()));
+					writer.println(String.format(PARSE_PATTERN_COLLECTABLE_KEY, Constants.TYPE_KEY,
+							KeyType.GOLD.getKeyCode()));
 					continue;
 				} else if (x == 1 && y == 18) {
 					writer.println(String.format(PARSE_PATTERN_COLLECTABLE_NOTKEYS, Constants.TYPE_FLIPPERS,
@@ -193,17 +204,19 @@ public class LevelTest {
 			}
 		}
 
-		// WATER,FIRE,WATER
+		// WATER,FIRE,WATER + KEY DOORS
 		for (int x = 4; x < 7; x++) {
 			for (int y = 1; y < HEIGHT - 1; y++) {
 				if (x == 4 && y == 9) {
 					// BLUE DOOR
 					// PARSE_PATTERN_DOOR_KEY = "%s,%s,%d,%d,%s,%s,%d";
-					writer.println(String.format(PARSE_PATTERN_DOOR_KEY, Constants.TYPE_KEY_DOOR, DOOR_KEY_BLUE, x, y, PATH_IMAGE_DOOR_KEY_BLUE, PATH_IMAGE_GROUND, KeyType.BLUE.getKeyCode()));
+					writer.println(String.format(PARSE_PATTERN_DOOR, Constants.TYPE_KEY_DOOR, DOOR_KEY_BLUE, x, y,
+							PATH_IMAGE_DOOR_KEY_BLUE, PATH_IMAGE_GROUND, KeyType.BLUE.getKeyCode()));
 					continue;
 				} else if (x == 5 && y == 9) {
 					// BLUE DOOR
-					writer.println(String.format(PARSE_PATTERN_DOOR_KEY, Constants.TYPE_KEY_DOOR, DOOR_KEY_GOLD, x, y, PATH_IMAGE_DOOR_KEY_GOLD, PATH_IMAGE_GROUND, KeyType.GOLD.getKeyCode()));
+					writer.println(String.format(PARSE_PATTERN_DOOR, Constants.TYPE_KEY_DOOR, DOOR_KEY_GOLD, x, y,
+							PATH_IMAGE_DOOR_KEY_GOLD, PATH_IMAGE_GROUND, KeyType.GOLD.getKeyCode()));
 					continue;
 				} else if (y == 9) {
 					writer.println(String.format(PARSE_PATTERN_CELL, Constants.TYPE_GROUND, x, y, PATH_IMAGE_GROUND));
@@ -231,5 +244,213 @@ public class LevelTest {
 		}
 
 		writer.close();
+	}
+
+	public static void generateLevelFile03(String path) throws FileNotFoundException {
+		int id = 3;
+
+		PrintWriter writer = new PrintWriter(path);
+
+		writer.println(String.format("%d,%d,%d", id, WIDTH, HEIGHT));
+		generateBorders(writer);
+
+		// GROUND [1,1]-[3,18]
+		for (int x = 1; x < WIDTH - 1; x++) {
+			for (int y = 1; y < HEIGHT - 1; y++) {
+
+				if (x == 1 && y == 15) {
+					printBlueKey(writer, x, y); // Ground + BlueKey
+				} else if (x == 1 && y == 18) {
+					printPlayer(writer, x, y); // Ground + Player
+				} else if (x == 3 && y == 1) {
+					printGoldKey(writer, x, y); // Ground + BlueKey
+				} else if (x == 4 && y == 9) {
+					printBlueKeyDoor(writer, x, y); // Blue Key Door
+				} else if ((x == 4 || x == 6) && y != 9) {
+					printWater(writer, x, y); // Water
+				} else if (x == 5 && y == 1) {
+					printToken(writer, x, y); // Token
+				} else if (x == 5 && y == 9) {
+					printGoldKeyDoor(writer, x, y); // Gold Key Door
+				} else if (x == 5 && y != 9) {
+					printFire(writer, x, y); // Fire
+				} else if (x == 6 && y == 9) {
+					printToken(writer, x, y); // Ground + Fire
+				} else if (x == 7 && y == 1) {
+					printToken(writer, x, y); // Ground + Token
+				} else if ((x == 8 || x == 9 || x == 10) && y != 9) {
+					printWall(writer, x, y); // Wall
+				} else if (x == 8 && y == 9) {
+					printTokenDoor(writer, x, y, 1);
+				} else if (x == 9 && y == 9) {
+					printFireBoots(writer, x, y);
+				} else if (x == 10 && y == 9) {
+					printTokenDoor(writer, x, y, 2);
+				} else if (x == 10 && y == 9) {
+					printTokenDoor(writer, x, y, 2);
+				} else if (x == 18 && y == 18) {
+					printGoal(writer, x, y);
+				} else {
+					printGround(writer, x, y); // GROUND
+				}
+				writer.println(); // add NEW LINE
+			}
+		}
+
+		writer.close();
+	}
+	public static void generateLevelFile04(String path) throws FileNotFoundException {
+		int id = 3;
+
+		PrintWriter writer = new PrintWriter(path);
+
+		writer.println(String.format("%d,%d,%d", id, WIDTH, HEIGHT));
+		generateBorders(writer);
+
+		// GROUND [1,1]-[3,18]
+		for (int x = 1; x < WIDTH - 1; x++) {
+			for (int y = 1; y < HEIGHT - 1; y++) {
+
+				if (x == 1 && y == 15) {
+					printBlueKey(writer, x, y); // Ground + BlueKey
+				} else if (x == 1 && y == 18) {
+					printPlayer(writer, x, y); // Ground + Player
+				} else if (x == 3 && y == 1) {
+					printGoldKey(writer, x, y); // Ground + BlueKey
+				} else if (x == 4 && y == 9) {
+					printBlueKeyDoor(writer, x, y); // Blue Key Door
+				} else if ((x == 4 || x == 6) && y != 9) {
+					printWater(writer, x, y); // Water
+				} else if (x == 5 && y == 1) {
+					printToken(writer, x, y); // Token
+				} else if (x == 5 && y == 9) {
+					printGoldKeyDoor(writer, x, y); // Gold Key Door
+				} else if (x == 5 && y != 9) {
+					printFire(writer, x, y); // Fire
+				} else if (x == 6 && y == 9) {
+					printToken(writer, x, y); // Ground + Fire
+				} else if (x == 7 && y == 1) {
+					printToken(writer, x, y); // Ground + Token
+				} else if ((x == 8 || x == 9 || x == 10) && y != 9) {
+					printWall(writer, x, y); // Wall
+				} else if (x == 8 && y == 9) {
+					printTokenDoor(writer, x, y, 1);
+				} else if (x == 9 && y == 9) {
+					printFireBoots(writer, x, y);
+				} else if (x == 10 && y == 9) {
+					printTokenDoor(writer, x, y, 2);
+				} else if (x == 10 && y == 9) {
+					printTokenDoor(writer, x, y, 2);
+				} else if (x == -1 && y == 1) {
+					printWallFollowingEnemy(writer, x, y); // 15, 1
+				} else if (x == 18 && y == 18) {
+					printGoal(writer, x, y);
+				} else {
+					printGround(writer, x, y); // GROUND
+				}
+				writer.println(); // add NEW LINE
+			}
+		}
+
+		writer.close();
+	}
+
+	// Non steppable cells
+	private static void printWall(PrintWriter writer, int x, int y) {
+		writer.print(String.format(PARSE_PATTERN_CELL, Constants.TYPE_WALL, x, y, PATH_IMAGE_WALL));
+	}
+
+	// Steppable cells
+	// Steppable Cells
+
+	// Steppable cells
+	private static void printGround(PrintWriter writer, int x, int y) {
+		writer.print(String.format(PARSE_PATTERN_CELL, Constants.TYPE_GROUND, x, y, PATH_IMAGE_GROUND));
+	}
+
+	private static void printWater(PrintWriter writer, int x, int y) {
+		writer.print(String.format(PARSE_PATTERN_CELL, Constants.TYPE_WATER, x, y, PATH_IMAGE_WATER));
+	}
+
+	private static void printFire(PrintWriter writer, int x, int y) {
+		writer.print(String.format(PARSE_PATTERN_CELL, Constants.TYPE_FIRE, x, y, PATH_IMAGE_FIRE));
+	}
+
+	private static void printGoal(PrintWriter writer, int x, int y) {
+		writer.print(String.format(PARSE_PATTERN_CELL, Constants.TYPE_GOAL, x, y, PATH_IMAGE_GOAL));
+	}
+
+	// Collectable Items
+
+	private static void printBlueKeyDoor(PrintWriter writer, int x, int y) {
+		writer.print(String.format(PARSE_PATTERN_DOOR, Constants.TYPE_KEY_DOOR, DOOR_KEY_BLUE, x, y,
+				PATH_IMAGE_DOOR_KEY_BLUE, PATH_IMAGE_GROUND, KeyType.BLUE.getKeyCode()));
+	}
+
+	private static void printGoldKeyDoor(PrintWriter writer, int x, int y) {
+		writer.print(String.format(PARSE_PATTERN_DOOR, Constants.TYPE_KEY_DOOR, DOOR_KEY_GOLD, x, y,
+				PATH_IMAGE_DOOR_KEY_GOLD, PATH_IMAGE_GROUND, KeyType.GOLD.getKeyCode()));
+	}
+
+	// Collectable Items
+	private static void printTokenDoor(PrintWriter writer, int x, int y, int tokens) {
+		writer.print(String.format(PARSE_PATTERN_DOOR, Constants.TYPE_TOKEN_DOOR, DOOR_KEY_TOKEN, x, y,
+				PATH_IMAGE_DOOR_TOKEN, PATH_IMAGE_GROUND, tokens));
+	}
+
+	// Collectable Items
+	private static void printBlueKey(PrintWriter writer, int x, int y) {
+		printGround(writer, x, y);
+		writer.print(String.format(PARSE_PATTERN_COLLECTABLE_KEY, Constants.TYPE_KEY, KeyType.BLUE.getKeyCode()));
+	}
+
+	private static void printGoldKey(PrintWriter writer, int x, int y) {
+		printGround(writer, x, y);
+		writer.print(String.format(PARSE_PATTERN_COLLECTABLE_KEY, Constants.TYPE_KEY, KeyType.GOLD.getKeyCode()));
+	}
+
+	private static void printGreenKey(PrintWriter writer, int x, int y) {
+		printGround(writer, x, y);
+		writer.print(String.format(PARSE_PATTERN_COLLECTABLE_KEY, Constants.TYPE_KEY, KeyType.GREEN.getKeyCode()));
+	}
+
+	private static void printRedKey(PrintWriter writer, int x, int y) {
+		printGround(writer, x, y);
+		writer.print(String.format(PARSE_PATTERN_COLLECTABLE_KEY, Constants.TYPE_KEY, KeyType.RED.getKeyCode()));
+	}
+
+	private static void printToken(PrintWriter writer, int x, int y) {
+		printGround(writer, x, y);
+		writer.print(
+				String.format(PARSE_PATTERN_COLLECTABLE_NOTKEYS, Constants.TYPE_TOKEN, PATH_IMAGE_COLLECATBLE_TOKEN));
+	}
+
+	// Movable Objects
+
+	private static void printFireBoots(PrintWriter writer, int x, int y) {
+		printGround(writer, x, y);
+		writer.print(String.format(PARSE_PATTERN_COLLECTABLE_NOTKEYS, Constants.TYPE_FIRE_BOOTS,
+				PATH_IMAGE_COLLECATBLE_FIRE_BOOTS));
+	}
+
+	private static void printFlippers(PrintWriter writer, int x, int y) {
+		printGround(writer, x, y);
+		writer.print(String.format(PARSE_PATTERN_COLLECTABLE_NOTKEYS, Constants.TYPE_FLIPPERS,
+				PATH_IMAGE_COLLECATBLE_FLIPPERS));
+	}
+
+	// Movable Objects
+
+	// Movable objects
+	private static void printWallFollowingEnemy(PrintWriter writer, int x, int y) {
+		printGround(writer, x, y);
+		writer.print(String.format(PARSE_PATTERN_ENEMY, Constants.TYPE_WALL_FOLLOWING_ENEMY, WALL_FOLLOWING_ENEMY_NAME,
+				x, y, PATH_IMAGE_WALL_FOLLOWING_ENEMY));
+	}
+
+	private static void printPlayer(PrintWriter writer, int x, int y) {
+		printGround(writer, x, y);
+		writer.print(String.format(PARSE_PATTERN_PLAYER, Constants.TYPE_PLAYER, PLAYER_NAME, x, y, PLAYER_VECTOR_X,
+				PLAYER_VECTOR_Y, PATH_IMAGE_PLAYER));
 	}
 }
