@@ -34,6 +34,8 @@ public class LevelTest {
 	private static int PLAYER_VECTOR_X = 0;
 	private static int PLAYER_VECTOR_Y = 0;
 
+	private static String TELEPORTER_NAME = "Teleporter";
+
 	private static String PARSE_PATTERN_CELL = "%s,%d,%d,%s";
 
 	private static String PARSE_PATTERN_DOOR = "%s,%s,%d,%d,%s,%s,%d";
@@ -52,6 +54,7 @@ public class LevelTest {
 	private static String PATH_IMAGE_WATER = BASE_PATH_IMAGE + "cells/water.png";
 	private static String PATH_IMAGE_FIRE = BASE_PATH_IMAGE + "cells/fire.png";
 	private static String PATH_IMAGE_GOAL = BASE_PATH_IMAGE + "cells/goal.png";
+	private static String PATH_IMAGE_TELEPORTER = BASE_PATH_IMAGE + "cells/teleporter.png";
 
 	private static String PATH_IMAGE_DOOR_KEY_BLUE = BASE_PATH_IMAGE + "cells/blueDoor.png";
 	private static String PATH_IMAGE_DOOR_KEY_GOLD = BASE_PATH_IMAGE + "cells/goldDoor.png";
@@ -399,10 +402,8 @@ public class LevelTest {
 					printFireBoots(writer, x, y);
 				} else if (x == 11 && y == 1) {
 					printGreenKey(writer, x, y);
-
 				} else if (x == 11 && y == 7) {
-					printStraightWalkingEnemy(writer, x, y, 1, 0); // STRAIGHT WALKING ENEMY - HERE HERE HERE HERE HERE HERE HERE HERE
-
+					printStraightWalkingEnemy(writer, x, y, 1, 0);
 				} else if ((x >= 11 && x <= 14) && (y == 2 || y == 8)) {
 					printWall(writer, x, y);
 				} else if (x == 12 && y >= 10 && y <= 17) {
@@ -420,6 +421,12 @@ public class LevelTest {
 					printWall(writer, x, y);
 				} else if (x == 16 && y == 18) {
 					printDumbTargetingEnemy(writer, x, y); // DUMB TARGETTING ENEMY
+				} else if (x == 18 && y == 14) {
+					printGreenKeyDoor(writer, x, y); // GREEN KEY DOOR
+				} else if (x == 18 && y == 15) {
+					printRedKey(writer, x, y); // RED KEY DOOR
+				} else if (x == 18 && y == 15) {
+					printRedKeyDoor(writer, x, y); // RED DOOR
 				} else if (x == 18 && y == 18) {
 					printGoal(writer, x, y);
 				} else {
@@ -462,6 +469,16 @@ public class LevelTest {
 	private static void printGoldKeyDoor(PrintWriter writer, int x, int y) {
 		writer.print(String.format(PARSE_PATTERN_DOOR, Constants.TYPE_KEY_DOOR, DOOR_KEY_GOLD, x, y,
 				PATH_IMAGE_DOOR_KEY_GOLD, PATH_IMAGE_GROUND, KeyType.GOLD.getKeyCode()));
+	}
+
+	private static void printGreenKeyDoor(PrintWriter writer, int x, int y) {
+		writer.print(String.format(PARSE_PATTERN_DOOR, Constants.TYPE_KEY_DOOR, DOOR_KEY_GREEN, x, y,
+				PATH_IMAGE_DOOR_KEY_GREEN, PATH_IMAGE_GROUND, KeyType.GREEN.getKeyCode()));
+	}
+
+	private static void printRedKeyDoor(PrintWriter writer, int x, int y) {
+		writer.print(String.format(PARSE_PATTERN_DOOR, Constants.TYPE_KEY_DOOR, DOOR_KEY_RED, x, y,
+				PATH_IMAGE_DOOR_KEY_RED, PATH_IMAGE_GROUND, KeyType.RED.getKeyCode()));
 	}
 
 	private static void printTokenDoor(PrintWriter writer, int x, int y, int tokens) {
@@ -534,5 +551,10 @@ public class LevelTest {
 		printGround(writer, x, y);
 		writer.print(String.format(PARSE_PATTERN_PLAYER, Constants.TYPE_PLAYER, PLAYER_NAME, x, y, PLAYER_VECTOR_X,
 				PLAYER_VECTOR_Y, PATH_IMAGE_PLAYER));
+	}
+
+	private static void printTeleporter(PrintWriter writer, int x, int y) {
+		printGround(writer, x, y);
+		writer.print(String.format(PARSE_PATTERN_CELL, Constants.TYPE_TELEPORTER, TELEPORTER_NAME, x, y, PATH_IMAGE_TELEPORTER));
 	}
 }
