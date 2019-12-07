@@ -399,3 +399,4 @@ ground,18,15,group44/resources/cells/floor.png
 ground,18,16,group44/resources/cells/floor.png
 ground,18,17,group44/resources/cells/floor.png
 goal,18,18,group44/resources/cells/goal.png
+teleporterLink,7,18,14,4

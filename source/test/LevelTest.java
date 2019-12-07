@@ -38,6 +38,7 @@ public class LevelTest {
 
 	private static String PARSE_PATTERN_CELL = "%s,%d,%d,%s";
 	private static String PARSE_PATTERN_CELL_TITLE = "%s,%s,%d,%d,%s";
+	private static String PARSE_PATTERN_TELEPORTER_LINK = "%s,%d,%d,%d,%d";
 
 	private static String PARSE_PATTERN_DOOR = "%s,%s,%d,%d,%s,%s,%d";
 
@@ -304,7 +305,9 @@ public class LevelTest {
 				} else if (x == 10 && y == 9) {
 					printTokenDoor(writer, x, y, 2);
 				} else if (x == 14 && y == 4) {
+
 					printTeleporter(writer, x, y);
+
 				} else if (x == 18 && y == 18) {
 					printGoal(writer, x, y);
 				} else {
@@ -314,8 +317,8 @@ public class LevelTest {
 			}
 		}
 
-		// TODO: Print teleporter link
-		// Teleporter
+		// Teleporter link
+		printTeleportersLink(writer, 7, 18, 14, 4);
 
 		writer.close();
 	}
@@ -567,5 +570,10 @@ public class LevelTest {
 		printGround(writer, x, y);
 		writer.print(String.format(PARSE_PATTERN_PLAYER, Constants.TYPE_PLAYER, PLAYER_NAME, x, y, PLAYER_VECTOR_X,
 				PLAYER_VECTOR_Y, PATH_IMAGE_PLAYER));
+	}
+
+	// Others
+	private static void printTeleportersLink(PrintWriter writer, int x1, int y1, int x2, int y2) {
+		writer.print(String.format(PARSE_PATTERN_TELEPORTER_LINK, Constants.TYPE_TELEPORTER_LINK, x1, y1, x2, y2));
 	}
 }
