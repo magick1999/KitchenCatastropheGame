@@ -17,7 +17,8 @@ import static group44.Constants.WINDOW_WIDTH;
 /**
  * This class displays the level selection screen and allows the player to select a certain level.
  *
- * @author Mihai
+ * @author Mihai, Tomas Svejnoha
+ * @version 1.0
  */
 public class LevelSelectorScene {
     //The controller associated with the specific FXML file.
@@ -50,6 +51,7 @@ public class LevelSelectorScene {
             setUpButtons();
             primaryStage.setScene(scene);
             primaryStage.show();
+
             this.maxLevel = Math.min(Leaderboard.getAchievedLevel(currentProfile.getId()) + 1, LevelManager.load().size());
             this.currentProfile = currentProfile;
 
