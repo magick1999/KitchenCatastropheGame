@@ -17,6 +17,7 @@ import group44.game.Level;
  */
 public class SmartTargetingEnemy extends Enemy {
 	private CellPathInfo[][] cellPathInfos;
+	private boolean isInitialised;
 
 	/**
 	 * Creates a new instance of {@link SmartTargetingEnemy}.
@@ -36,7 +37,6 @@ public class SmartTargetingEnemy extends Enemy {
 		super(level, title, positionX, positionY, 0, 0, imagePath);
 
 		this.cellPathInfos = new CellPathInfo[level.getGridWidth()][level.getGridHeight()];
-		this.initialise();
 	}
 
 	/**
@@ -55,6 +55,11 @@ public class SmartTargetingEnemy extends Enemy {
 	 */
 	@Override
 	protected void computeVelocity() {
+		if (this.isInitialised == false) {
+			this.initialise();
+			this.isInitialised = true;
+		}
+
 		this.resetCellInfos();
 
 		int targetX = this.getLevel().getPlayer().getPositionX();

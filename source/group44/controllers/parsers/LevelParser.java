@@ -190,6 +190,8 @@ public class LevelParser {
 				movableObject = parseStraightWalkingEnemyEntry(level, scanner);
 			} else if (type.equals(Constants.TYPE_WALL_FOLLOWING_ENEMY)) {
 				movableObject = parseWallFollowingEnemyEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_SMART_TARGETING_ENEMY)) {
+				movableObject = parseSmartTargetingEnemyEntry(level, scanner);
 			} else if (type.equals(Constants.TYPE_FIRE_BOOTS)) {
 				collectableItem = parseFireBootsEntry(level, scanner);
 			} else if (type.equals(Constants.TYPE_FLIPPERS)) {
@@ -409,6 +411,27 @@ public class LevelParser {
 		String imagePath = scanner.next();
 
 		return new WallFollowingEnemy(level, name, positionX, positionY, imagePath);
+	}
+
+	//
+	/**
+	 * Parses the Smart Targeting Enemy on the scanned line.
+	 *
+	 * @param level
+	 *            - the level where the enemy is located.
+	 * @param scanner
+	 *            - scanner with the serialised enemy.
+	 *
+	 * @return the serialised {@link SmartTargetingEnemy} as a type of
+	 *         {@link MovableObject}.
+	 */
+	private static MovableObject parseSmartTargetingEnemyEntry(Level level, Scanner scanner) {
+		String name = scanner.next();
+		int positionX = scanner.nextInt();
+		int positionY = scanner.nextInt();
+		String imagePath = scanner.next();
+
+		return new SmartTargetingEnemy(level, name, positionX, positionY, imagePath);
 	}
 
 	/**

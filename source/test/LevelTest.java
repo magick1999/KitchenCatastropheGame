@@ -28,6 +28,7 @@ public class LevelTest {
 	private static String DOOR_KEY_RED = "Red door";
 	private static String DOOR_KEY_TOKEN = "Token door";
 
+	private static String ENEMY_NAME_SMART_TARGETING = "Smart targeting enemy";
 	private static String ENEMY_NAME_WALL_FOLLOWING = "Wall following enemy";
 	private static String ENEMY_NAME_STRAIGHT_WALKING = "Straight walking enemy";
 	private static String ENEMY_NAME_DUMB_TARGETING = "Dumb targeting enemy";
@@ -73,6 +74,7 @@ public class LevelTest {
 
 	private static String PATH_IMAGE_PLAYER = BASE_PATH_IMAGE + "ChefDownWalk/Front1.png";
 
+	private static String PATH_IMAGE_SMART_TARGETING_ENEMY = BASE_PATH_IMAGE + "Enemies/Egg/mrEggFront.png";
 	private static String PATH_IMAGE_WALL_FOLLOWING_ENEMY = BASE_PATH_IMAGE + "Enemies/Hotdog/mrHotDogFront.png";
 	private static String PATH_IMAGE_STRAIGHT_WALKING_ENEMY = BASE_PATH_IMAGE + "Enemies/Carrot/mrCarrotFront.png";
 	private static String PATH_IMAGE_DUMB_TARGETTING_ENEMY = BASE_PATH_IMAGE + "Enemies/Pickle/mrPickleFront.png";
@@ -84,8 +86,7 @@ public class LevelTest {
 		generateLevelFile01(LEVELS + "level_001.txt", 11, 11, 0);
 		generateLevelFile02(LEVELS + "level_002.txt", 0);
 		generateLevelFile03(LEVELS + "level_003.txt", 0);
-		//generateLevelFile04(LEVELS + "level_004.txt", 0);
-		// generateLevelFile05(LEVELS + "level_005.txt"); // LEVEL 04 - enemies
+		generateLevelFile04(LEVELS + "level_004.txt", 0);
 
 		System.out.println("Levels generated");
 
@@ -324,38 +325,20 @@ public class LevelTest {
 		for (int x = 1; x < WIDTH - 1; x++) {
 			for (int y = 1; y < HEIGHT - 1; y++) {
 
-				if (x == 1 && y == 15) {
-					printBlueKey(writer, x, y); // Ground + BlueKey
-				} else if (x == 1 && y == 18) {
+				if (x == 1 && y == 18) {
 					printPlayer(writer, x, y); // Ground + Player
-				} else if (x == 3 && y == 1) {
-					printGoldKey(writer, x, y); // Ground + BlueKey
-				} else if (x == 4 && y == 9) {
-					printBlueKeyDoor(writer, x, y); // Blue Key Door
-				} else if ((x == 4 || x == 6) && y != 9) {
+				} else if ((x == 4 || x == 6) && (y != 9 || y != 3)) {
 					printWater(writer, x, y); // Water
-				} else if (x == 5 && y == 1) {
-					printToken(writer, x, y); // Token
-				} else if (x == 5 && y == 9) {
-					printGoldKeyDoor(writer, x, y); // Gold Key Door
 				} else if (x == 5 && y != 9) {
 					printFire(writer, x, y); // Fire
-				} else if (x == 6 && y == 9) {
-					printToken(writer, x, y); // Ground + Fire
-				} else if (x == 7 && y == 1) {
-					printToken(writer, x, y); // Ground + Token
-				} else if ((x == 8 || x == 9 || x == 10) && y != 9) {
+				} else if (x == 7 && y == 16) {
+					printTeleporter(writer, x, y);
+				} else if ((x >= 8 && x <= 10) && y != 9) {
 					printWall(writer, x, y); // Wall
-				} else if (x == 8 && y == 9) {
-					printTokenDoor(writer, x, y, 1);
-				} else if (x == 9 && y == 9) {
-					printFireBoots(writer, x, y);
-				} else if (x == 11 && y == 1) {
-					printGreenKey(writer, x, y);
-				} else if (x == 11 && y == 7) {
-					printStraightWalkingEnemy(writer, x, y, 1, 0);
 				} else if ((x >= 11 && x <= 14) && (y == 2 || y == 8)) {
 					printWall(writer, x, y);
+				} else if (x == 11 && y == 7) {
+					printTeleporter(writer, x, y);
 				} else if (x == 12 && y >= 10 && y <= 17) {
 					printWall(writer, x, y);
 				} else if ((x == 12 || x == 14) && y == 5) {
@@ -364,20 +347,10 @@ public class LevelTest {
 					printFire(writer, x, y);
 				} else if (x >= 13 && x <= 16 && y == 10) {
 					printWall(writer, x, y);
-				} else if (x == 15 && y == 1) {
-					printWallFollowingEnemy(writer, x, y); // Wall following
-															// enemy
 				} else if (x == 17 && y >= 2 && y <= 18) {
 					printWall(writer, x, y);
-				} else if (x == 16 && y == 18) {
-					printDumbTargetingEnemy(writer, x, y); // DUMB TARGETTING
-															// ENEMY
-				} else if (x == 18 && y == 14) {
-					printGreenKeyDoor(writer, x, y); // GREEN KEY DOOR
-				} else if (x == 18 && y == 15) {
-					printRedKey(writer, x, y); // RED KEY DOOR
 				} else if (x == 18 && y == 16) {
-					printRedKeyDoor(writer, x, y); // RED DOOR
+					printSmartTargetingEnemy(writer, x, y);
 				} else if (x == 18 && y == 18) {
 					printGoal(writer, x, y);
 				} else {
@@ -386,6 +359,8 @@ public class LevelTest {
 				writer.println(); // add NEW LINE
 			}
 		}
+
+		printTeleportersLink(writer, 7, 16, 11, 7);
 
 		writer.close();
 	}
@@ -488,6 +463,13 @@ public class LevelTest {
 		printGround(writer, x, y);
 		writer.print(String.format(PARSE_PATTERN_ENEMY, Constants.TYPE_WALL_FOLLOWING_ENEMY, ENEMY_NAME_WALL_FOLLOWING,
 				x, y, PATH_IMAGE_WALL_FOLLOWING_ENEMY));
+	}
+
+	// ENEMY_NAME_SMART_TARGETING
+	private static void printSmartTargetingEnemy(PrintWriter writer, int x, int y) {
+		printGround(writer, x, y);
+		writer.print(String.format(PARSE_PATTERN_ENEMY, Constants.TYPE_SMART_TARGETING_ENEMY,
+				ENEMY_NAME_SMART_TARGETING, x, y, PATH_IMAGE_SMART_TARGETING_ENEMY));
 	}
 
 	private static void printStraightWalkingEnemy(PrintWriter writer, int x, int y, int vx, int vy) {
