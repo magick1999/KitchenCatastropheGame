@@ -81,11 +81,11 @@ public class LevelTest {
 			throws FileNotFoundException, IllegalArgumentException, CollisionException, ParsingException {
 		JFXPanel jfxPanel = new JFXPanel();
 
-		generateLevelFile01(LEVELS + "level_001.txt", 20, 20, 0);
-		generateLevelFile02(LEVELS + "level_002.txt");
-		generateLevelFile03(LEVELS + "level_003.txt");
-		generateLevelFile04(LEVELS + "level_004.txt");
-		// generateLevelFile05(LEVELS + "level_005.txt");
+		generateLevelFile01(LEVELS + "level_001.txt", 11, 11, 0);
+		//generateLevelFile02(LEVELS + "level_002.txt", 0);
+		//generateLevelFile03(LEVELS + "level_003.txt", 0);
+		//generateLevelFile04(LEVELS + "level_004.txt", 0);
+		// generateLevelFile05(LEVELS + "level_005.txt"); // LEVEL 04 - enemies
 
 		System.out.println("Levels generated");
 
@@ -136,7 +136,7 @@ public class LevelTest {
 		writer.println(String.format(FILE_HEADER_PATTERN, id, width, height, time));
 		generateBorders(writer, width, height);
 
-		for (int x = 1; x < 4; x++) {
+		for (int x = 1; x < width - 1; x++) {
 			for (int y = 1; y < height - 1; y++) {
 				if (x == 1 && y == 1) {
 					printPlayer(writer, x, y);
@@ -146,6 +146,8 @@ public class LevelTest {
 					printFire(writer, x, y);
 				} else if (x == 9 && y == 9) {
 					printGoal(writer, x, y);
+				} else {
+					printGround(writer, x, y);
 				}
 
 				writer.println(); // add NEW LINE
@@ -257,55 +259,49 @@ public class LevelTest {
 					printWater(writer, x, y); // Water
 				} else if (x == 5 && y != 9) {
 					printFire(writer, x, y); // Fire
-				} else if (x == 7 && y == 11) {
-					printToken(writer, x, y); // Ground + Token
-
-				} else if (x == 7 && y == 10) {
-					printToken(writer, x, y); // Ground + Token
-				} else if (x == 7 && y == 18) {
-					printTeleporter(writer, x, y); // Teleporter
-				} else if ((x == 8 || x == 9 || x == 10) && y != 9) {
-					printWall(writer, x, y); // Wall
 				} else if (x == 7 && y == 1) {
 					printStraightWalkingEnemy(writer, x, y, 0, 1);
+				} else if (x == 7 && y == 11) {
+					printToken(writer, x, y); // Ground + Token
 				} else if (x == 8 && y == 9) {
-					printTokenDoor(writer, x, y, 2);
-				} else if (x == 9 && y == 9) {
-					printFireBoots(writer, x, y);
+					printToken(writer, x, y); // Ground + Token
 				} else if (x == 10 && y == 9) {
 					printTokenDoor(writer, x, y, 2);
+				} else if ((x >= 8 && x <= 10) && y != 9) {
+					printWall(writer, x, y); // Wall
 				} else if (x == 11 && y == 1) {
 					printRedKey(writer, x, y);
-				} else if (x == 12 && y == 2) {
+				} else if (x == 11 && y == 18) {
 					printDumbTargetingEnemy(writer, x, y);
-				} else if (x == 12 && y == 3) {
-					printGreenKey(writer, x, y);
-				} else if (x == 13 && y >= 3 && y <= 16) {
+				} else if (x >= 11 && x <= 12 && y == 10) {
+					printWall(writer, x, y);
+				} else if (x >= 13 && x <= 14 && y == 3) {
 					printWall(writer, x, y);
 				} else if (x == 14 && y == 1) {
 					printFlippers(writer, x, y);
-				} else if (x == 14 && y == 3) {
+				} else if (x == 14 && y == 9) {
+					printGreenKey(writer, x, y);
+				} else if (x == 15 && y >= 3 && y <= 4) {
 					printWall(writer, x, y);
-				} else if (x == 14 && y == 4) {
-					printTeleporter(writer, x, y);
-				} else if (x == 15 && y == 5) {
-					printFire(writer, x, y);
-				} else if (x == 15 && y >= 3 && y <= 18) {
+				} else if (x == 15 && y >= 5 && y <= 7) {
+					printWater(writer, x, y);
+				} else if (x == 15 && y >= 7 && y <= 18) {
 					printWall(writer, x, y);
-				} else if (x == 16 && y == 14) {
+				} else if (x == 16 && y == 12) {
 					printRedKeyDoor(writer, x, y);
+				} else if (x == 16 && y == 14) {
+					printToken(writer, x, y);
 				} else if (x >= 16 && x <= 18 && y == 15) {
 					printWater(writer, x, y);
+				} else if (x == 16 && y >= 16 && y <= 18) {
+					printWall(writer, x, y);
+				} else if (x == 18 && y >= 12 && y <= 14) {
+					printWall(writer, x, y);
 				} else if (x == 17 && y >= 12 && y <= 18 && y != 15) {
 					printWall(writer, x, y);
 				} else if (x == 18 && y == 1) {
 					printWallFollowingEnemy(writer, x, y);
-				} else if (x == 18 && y == 12) {
-					printWall(writer, x, y);
-				} else if (x == 18 && y == 13) {
-					printToken(writer, x, y);
-				} else if (x == 18 && y == 14) {
-					printGreenKeyDoor(writer, x, y);
+
 				} else if (x == 18 && y == 16) {
 					printTokenDoor(writer, x, y, 1);
 				} else if (x == 18 && y == 18) {
@@ -323,71 +319,16 @@ public class LevelTest {
 		writer.close();
 	}
 
-	public static void generateLevelFile04(String path) throws FileNotFoundException {
+	public static void generateLevelFile04(String path, int time) throws FileNotFoundException {
 		int id = 4;
-
 		PrintWriter writer = new PrintWriter(path);
 
-		writer.println(String.format(FILE_HEADER_PATTERN, id, WIDTH, HEIGHT, TIME));
-		generateBorders(writer);
+		writer.println(String.format(FILE_HEADER_PATTERN, id, WIDTH, HEIGHT, time));
+		generateBorders(writer, WIDTH, HEIGHT);
 
 		// GROUND [1,1]-[3,18]
 		for (int x = 1; x < WIDTH - 1; x++) {
 			for (int y = 1; y < HEIGHT - 1; y++) {
-
-				if (x == 1 && y == 15) {
-					printBlueKey(writer, x, y); // Ground + BlueKey
-				} else if (x == 1 && y == 18) {
-					printPlayer(writer, x, y); // Ground + Player
-				} else if (x == 3 && y == 1) {
-					printGoldKey(writer, x, y); // Ground + BlueKey
-				} else if (x == 4 && y == 9) {
-					printBlueKeyDoor(writer, x, y); // Blue Key Door
-				} else if ((x == 4 || x == 6) && y != 9) {
-					printWater(writer, x, y); // Water
-				} else if (x == 5 && y == 1) {
-					printToken(writer, x, y); // Token
-				} else if (x == 5 && y == 9) {
-					printGoldKeyDoor(writer, x, y); // Gold Key Door
-				} else if (x == 5 && y != 9) {
-					printFire(writer, x, y); // Fire
-				} else if (x == 6 && y == 9) {
-					printToken(writer, x, y); // Ground + Fire
-				} else if (x == 7 && y == 1) {
-					printToken(writer, x, y); // Ground + Token
-				} else if ((x == 8 || x == 9 || x == 10) && y != 9) {
-					printWall(writer, x, y); // Wall
-				} else if (x == 8 && y == 9) {
-					printTokenDoor(writer, x, y, 1);
-				} else if (x == 9 && y == 9) {
-					printFireBoots(writer, x, y);
-				} else if (x == 10 && y == 9) {
-					printTokenDoor(writer, x, y, 2);
-				} else if (x == 15 && y == 1) {
-					printWallFollowingEnemy(writer, x, y); // Wall following
-															// enemy
-				} else if (x == 18 && y == 18) {
-					printGoal(writer, x, y);
-				} else {
-					printGround(writer, x, y); // GROUND
-				}
-				writer.println(); // add NEW LINE
-			}
-		}
-
-		writer.close();
-	}
-
-	public static void generateLevelFile05(String path, int width, int height, int time) throws FileNotFoundException {
-		int id = 5;
-		PrintWriter writer = new PrintWriter(path);
-
-		writer.println(String.format(FILE_HEADER_PATTERN, id, width, height, time));
-		generateBorders(writer);
-
-		// GROUND [1,1]-[3,18]
-		for (int x = 1; x < width - 1; x++) {
-			for (int y = 1; y < height - 1; y++) {
 
 				if (x == 1 && y == 15) {
 					printBlueKey(writer, x, y); // Ground + BlueKey
