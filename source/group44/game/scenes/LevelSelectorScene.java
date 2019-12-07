@@ -124,6 +124,7 @@ public class LevelSelectorScene {
                 levelSelectorController.getNext().setVisible(false);
             }
         }
+        Leaderboard.getTopThreeRecords(this.currentLevelIndex);
     }
 
     private void setTopTimes() {
