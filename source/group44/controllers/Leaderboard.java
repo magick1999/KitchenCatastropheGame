@@ -180,6 +180,7 @@ public class Leaderboard {
 	 * @return an observable list of records.
 	 */
 	public static ObservableList<Record> load() {
+		Leaderboard.getAllRecords().clear();
 		Leaderboard.load(Constants.FILE_RECORDS);
 		return Leaderboard.getAllRecords();
 	}
