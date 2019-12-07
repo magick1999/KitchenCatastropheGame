@@ -42,4 +42,6 @@ public final class Constants {
 	public static final String TYPE_WALL_FOLLOWING_ENEMY = "wallFollowingEnemy";
 	public static final String TYPE_TOKEN_DOOR = "tokenDoor";
 	public static final String TYPE_KEY_DOOR = "keyDoor";
+	public static final String TYPE_TELEPORTER = "teleporter";
+	public static final String TYPE_TELEPORTER_LINK = "teleporterLink";
 }
