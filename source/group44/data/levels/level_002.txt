@@ -1,4 +1,4 @@
-2,20,20
+2,20,20,0
 wall,0,0,group44/resources/WallCounter.png
 wall,1,0,group44/resources/WallCounter.png
 wall,2,0,group44/resources/WallCounter.png

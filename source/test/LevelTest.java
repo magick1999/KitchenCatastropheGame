@@ -17,8 +17,10 @@ import javafx.embed.swing.JFXPanel;
 public class LevelTest {
 	private static final String LEVELS = "source/group44/data/levels/";
 
+	private static String FILE_HEADER_PATTERN = "%d,%d,%d,%d";
 	private static int WIDTH = 20;
 	private static int HEIGHT = 20;
+	private static int TIME = 0;
 
 	private static String DOOR_KEY_BLUE = "Blue door";
 	private static String DOOR_KEY_GOLD = "Gold door";
@@ -131,7 +133,7 @@ public class LevelTest {
 
 		PrintWriter writer = new PrintWriter(path);
 
-		writer.println(String.format("%d,%d,%d", id, WIDTH, HEIGHT));
+		writer.println(String.format(FILE_HEADER_PATTERN, id, WIDTH, HEIGHT, TIME));
 		generateBorders(writer);
 
 		// GROUND [1,1]-[3,18]
@@ -184,7 +186,7 @@ public class LevelTest {
 
 		PrintWriter writer = new PrintWriter(path);
 
-		writer.println(String.format("%d,%d,%d", id, WIDTH, HEIGHT));
+		writer.println(String.format(FILE_HEADER_PATTERN, id, WIDTH, HEIGHT, TIME));
 		generateBorders(writer);
 
 		// GROUND [1,1]-[3,18]
@@ -265,7 +267,7 @@ public class LevelTest {
 
 		PrintWriter writer = new PrintWriter(path);
 
-		writer.println(String.format("%d,%d,%d", id, WIDTH, HEIGHT));
+		writer.println(String.format(FILE_HEADER_PATTERN, id, WIDTH, HEIGHT, TIME));
 		generateBorders(writer);
 
 		// GROUND [1,1]-[3,18]
@@ -360,7 +362,7 @@ public class LevelTest {
 
 		PrintWriter writer = new PrintWriter(path);
 
-		writer.println(String.format("%d,%d,%d", id, WIDTH, HEIGHT));
+		writer.println(String.format(FILE_HEADER_PATTERN, id, WIDTH, HEIGHT, TIME));
 		generateBorders(writer);
 
 		// GROUND [1,1]-[3,18]
@@ -414,7 +416,7 @@ public class LevelTest {
 		int id = 5;
 		PrintWriter writer = new PrintWriter(path);
 
-		writer.println(String.format("%d,%d,%d", id, WIDTH, HEIGHT));
+		writer.println(String.format(FILE_HEADER_PATTERN, id, WIDTH, HEIGHT, TIME));
 		generateBorders(writer);
 
 		// GROUND [1,1]-[3,18]

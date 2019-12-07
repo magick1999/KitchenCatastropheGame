@@ -28,6 +28,7 @@ public class Level {
 	private ArrayList<Enemy> enemies;
 	private boolean isFinished;
 	private LevelFinishStatus finishStatus;
+	private long time;
 
 	/**
 	 * Creates a new instance of {@link Level}.
@@ -40,11 +41,13 @@ public class Level {
 	 *            - height of the 2D array
 	 * @param displaySize
 	 *            - size of the grid displayed on screen
+	 * @param time
+	 *            - time taken to play the level
 	 * @throws IllegalArgumentException
 	 *             If the display size is less than 3, is not odd, or exceeds a
 	 *             size of a grid.
 	 */
-	public Level(int id, int gridWidth, int gridHeight, int displaySize) {
+	public Level(int id, int gridWidth, int gridHeight, int displaySize, int time) {
 		this.id = id;
 		this.grid = new Cell[gridWidth][gridHeight];
 		if (displaySize < 3 || displaySize > gridWidth || displaySize > gridHeight || displaySize % 2 != 1) {
@@ -267,7 +270,8 @@ public class Level {
 	/**
 	 * Finished the current level.
 	 *
-	 * @param status - level finish status.
+	 * @param status
+	 *            - level finish status.
 	 */
 	public void finish(LevelFinishStatus status) {
 		System.out.println("Level.finish()");
