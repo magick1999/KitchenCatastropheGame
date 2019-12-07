@@ -200,7 +200,7 @@ ground,7,14,group44/resources/cells/floor.png
 ground,7,15,group44/resources/cells/floor.png
 ground,7,16,group44/resources/cells/floor.png
 ground,7,17,group44/resources/cells/floor.png
-ground,7,18,group44/resources/cells/floor.png
+teleporter,Teleporter,7,18,group44/resources/cells/teleporter.png
 wall,8,1,group44/resources/WallCounter.png
 wall,8,2,group44/resources/WallCounter.png
 wall,8,3,group44/resources/WallCounter.png
@@ -312,7 +312,7 @@ ground,13,18,group44/resources/cells/floor.png
 ground,14,1,group44/resources/cells/floor.png
 ground,14,2,group44/resources/cells/floor.png
 ground,14,3,group44/resources/cells/floor.png
-ground,14,4,group44/resources/cells/floor.png
+teleporter,Teleporter,14,4,group44/resources/cells/teleporter.png
 ground,14,5,group44/resources/cells/floor.png
 ground,14,6,group44/resources/cells/floor.png
 ground,14,7,group44/resources/cells/floor.png
