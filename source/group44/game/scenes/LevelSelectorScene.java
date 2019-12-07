@@ -24,7 +24,7 @@ public class LevelSelectorScene {
     private LevelSelectorController levelSelectorController;
     //This is the stage where the scene is displayed.
     //The maximum number of levels.
-    private static Integer maxLevel = LevelManager.load().size();
+    private Integer maxLevel;
     private Stage primaryStage;
     private Integer currentLevelIndex;
     private Profile currentProfile;
@@ -50,6 +50,7 @@ public class LevelSelectorScene {
             setUpButtons();
             primaryStage.setScene(scene);
             primaryStage.show();
+            this.maxLevel = Math.min(Leaderboard.getAchievedLevel(currentProfile.getId()), LevelManager.load().size());
             this.currentProfile = currentProfile;
         } catch (Exception e) {
             e.printStackTrace();
