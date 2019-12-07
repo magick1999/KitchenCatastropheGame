@@ -50,8 +50,12 @@ public class LevelSelectorScene {
             setUpButtons();
             primaryStage.setScene(scene);
             primaryStage.show();
-            this.maxLevel = Math.min(Leaderboard.getAchievedLevel(currentProfile.getId()), LevelManager.load().size());
+            this.maxLevel = Math.min(Leaderboard.getAchievedLevel(currentProfile.getId()) + 1, LevelManager.load().size());
             this.currentProfile = currentProfile;
+
+            if (currentLevelIndex.equals(maxLevel)) {
+                levelSelectorController.getNext().setVisible(false);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
