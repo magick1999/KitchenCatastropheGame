@@ -106,6 +106,7 @@ public class MainMenuScene {
         mainMenuController.getProfiles().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                mainMenuController.getPlay().setOnMouseClicked(MainMenuScene.this::pressPlay);
                 currentProfile = mainMenuController.getProfiles().getSelectionModel().getSelectedItem();
             }
         });
@@ -115,7 +116,6 @@ public class MainMenuScene {
     }
     private void setUpButtons(){
         profilesListener();
-        mainMenuController.getPlay().setOnMouseClicked(this::pressPlay);
         mainMenuController.getNewProfile().setOnMouseClicked(this::newProfile);
         mainMenuController.getQuit().setOnMouseClicked(this::closeGame);
         mainMenuController.getMOTD().setOnMouseClicked(this::showMOTD);
