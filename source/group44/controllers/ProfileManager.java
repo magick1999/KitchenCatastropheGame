@@ -153,6 +153,7 @@ public class ProfileManager {
 	 * @return an observable list of loaded profiles.
 	 */
 	public static ObservableList<Profile> load() {
+		ProfileManager.getProfiles().clear();
 		ProfileManager.load(Constants.FILE_PROFILES);
 		return ProfileManager.getProfiles();
 	}

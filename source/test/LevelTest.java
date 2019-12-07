@@ -34,7 +34,11 @@ public class LevelTest {
 	private static int PLAYER_VECTOR_X = 0;
 	private static int PLAYER_VECTOR_Y = 0;
 
+	private static String TELEPORTER_NAME = "Teleporter";
+
 	private static String PARSE_PATTERN_CELL = "%s,%d,%d,%s";
+	private static String PARSE_PATTERN_CELL_TITLE = "%s,%s,%d,%d,%s";
+	private static String PARSE_PATTERN_TELEPORTER_LINK = "%s,%d,%d,%d,%d";
 
 	private static String PARSE_PATTERN_DOOR = "%s,%s,%d,%d,%s,%s,%d";
 
@@ -52,6 +56,7 @@ public class LevelTest {
 	private static String PATH_IMAGE_WATER = BASE_PATH_IMAGE + "cells/water.png";
 	private static String PATH_IMAGE_FIRE = BASE_PATH_IMAGE + "cells/fire.png";
 	private static String PATH_IMAGE_GOAL = BASE_PATH_IMAGE + "cells/goal.png";
+	private static String PATH_IMAGE_TELEPORTER = BASE_PATH_IMAGE + "cells/teleporter.png";
 
 	private static String PATH_IMAGE_DOOR_KEY_BLUE = BASE_PATH_IMAGE + "cells/blueDoor.png";
 	private static String PATH_IMAGE_DOOR_KEY_GOLD = BASE_PATH_IMAGE + "cells/goldDoor.png";
@@ -79,6 +84,8 @@ public class LevelTest {
 		generateLevelFile03(LEVELS + "level_003.txt");
 		generateLevelFile04(LEVELS + "level_004.txt");
 		generateLevelFile05(LEVELS + "level_005.txt");
+
+		System.out.println("Levels generated");
 
 		if (true) {
 			for (LevelInfo info : LevelManager.getLevelInfos()) {
@@ -285,6 +292,10 @@ public class LevelTest {
 					printToken(writer, x, y); // Ground + Fire
 				} else if (x == 7 && y == 1) {
 					printToken(writer, x, y); // Ground + Token
+				} else if (x == 7 && y == 18) {
+
+					printTeleporter(writer, x, y); // Teleporter
+
 				} else if ((x == 8 || x == 9 || x == 10) && y != 9) {
 					printWall(writer, x, y); // Wall
 				} else if (x == 8 && y == 9) {
@@ -293,6 +304,10 @@ public class LevelTest {
 					printFireBoots(writer, x, y);
 				} else if (x == 10 && y == 9) {
 					printTokenDoor(writer, x, y, 2);
+				} else if (x == 14 && y == 4) {
+
+					printTeleporter(writer, x, y);
+
 				} else if (x == 18 && y == 18) {
 					printGoal(writer, x, y);
 				} else {
@@ -301,6 +316,9 @@ public class LevelTest {
 				writer.println(); // add NEW LINE
 			}
 		}
+
+		// Teleporter link
+		printTeleportersLink(writer, 7, 18, 14, 4);
 
 		writer.close();
 	}
@@ -399,10 +417,8 @@ public class LevelTest {
 					printFireBoots(writer, x, y);
 				} else if (x == 11 && y == 1) {
 					printGreenKey(writer, x, y);
-
 				} else if (x == 11 && y == 7) {
-					printStraightWalkingEnemy(writer, x, y, 1, 0); // STRAIGHT WALKING ENEMY - HERE HERE HERE HERE HERE HERE HERE HERE
-
+					printStraightWalkingEnemy(writer, x, y, 1, 0);
 				} else if ((x >= 11 && x <= 14) && (y == 2 || y == 8)) {
 					printWall(writer, x, y);
 				} else if (x == 12 && y >= 10 && y <= 17) {
@@ -420,6 +436,12 @@ public class LevelTest {
 					printWall(writer, x, y);
 				} else if (x == 16 && y == 18) {
 					printDumbTargetingEnemy(writer, x, y); // DUMB TARGETTING ENEMY
+				} else if (x == 18 && y == 14) {
+					printGreenKeyDoor(writer, x, y); // GREEN KEY DOOR
+				} else if (x == 18 && y == 15) {
+					printRedKey(writer, x, y); // RED KEY DOOR
+				} else if (x == 18 && y == 16) {
+					printRedKeyDoor(writer, x, y); // RED DOOR
 				} else if (x == 18 && y == 18) {
 					printGoal(writer, x, y);
 				} else {
@@ -464,9 +486,23 @@ public class LevelTest {
 				PATH_IMAGE_DOOR_KEY_GOLD, PATH_IMAGE_GROUND, KeyType.GOLD.getKeyCode()));
 	}
 
+	private static void printGreenKeyDoor(PrintWriter writer, int x, int y) {
+		writer.print(String.format(PARSE_PATTERN_DOOR, Constants.TYPE_KEY_DOOR, DOOR_KEY_GREEN, x, y,
+				PATH_IMAGE_DOOR_KEY_GREEN, PATH_IMAGE_GROUND, KeyType.GREEN.getKeyCode()));
+	}
+
+	private static void printRedKeyDoor(PrintWriter writer, int x, int y) {
+		writer.print(String.format(PARSE_PATTERN_DOOR, Constants.TYPE_KEY_DOOR, DOOR_KEY_RED, x, y,
+				PATH_IMAGE_DOOR_KEY_RED, PATH_IMAGE_GROUND, KeyType.RED.getKeyCode()));
+	}
+
 	private static void printTokenDoor(PrintWriter writer, int x, int y, int tokens) {
 		writer.print(String.format(PARSE_PATTERN_DOOR, Constants.TYPE_TOKEN_DOOR, DOOR_KEY_TOKEN, x, y,
 				PATH_IMAGE_DOOR_TOKEN, PATH_IMAGE_GROUND, tokens));
+	}
+
+	private static void printTeleporter(PrintWriter writer, int x, int y) {
+		writer.print(String.format(PARSE_PATTERN_CELL_TITLE, Constants.TYPE_TELEPORTER, TELEPORTER_NAME, x, y, PATH_IMAGE_TELEPORTER));
 	}
 
 	// Collectable Items
@@ -534,5 +570,10 @@ public class LevelTest {
 		printGround(writer, x, y);
 		writer.print(String.format(PARSE_PATTERN_PLAYER, Constants.TYPE_PLAYER, PLAYER_NAME, x, y, PLAYER_VECTOR_X,
 				PLAYER_VECTOR_Y, PATH_IMAGE_PLAYER));
+	}
+
+	// Others
+	private static void printTeleportersLink(PrintWriter writer, int x1, int y1, int x2, int y2) {
+		writer.print(String.format(PARSE_PATTERN_TELEPORTER_LINK, Constants.TYPE_TELEPORTER_LINK, x1, y1, x2, y2));
 	}
 }

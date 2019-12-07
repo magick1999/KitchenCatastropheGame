@@ -92,7 +92,7 @@ public class Record implements Comparable<Record> {
      */
     public String timeString() {
     	Date date = new Date(this.getTime());
-    	DateFormat formatter = new SimpleDateFormat("mm:ss");
+    	DateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS");
     	formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
     	return formatter.format(date);
     }

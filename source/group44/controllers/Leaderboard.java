@@ -67,7 +67,6 @@ public class Leaderboard {
 		for (Record item : Leaderboard.records) {
 			if (item.getProfile().getId() == profile.getId() && item.getLevelId() == levelId) {
 				record = item;
-				break;
 			}
 		}
 
@@ -180,6 +179,7 @@ public class Leaderboard {
 	 * @return an observable list of records.
 	 */
 	public static ObservableList<Record> load() {
+		Leaderboard.getAllRecords().clear();
 		Leaderboard.load(Constants.FILE_RECORDS);
 		return Leaderboard.getAllRecords();
 	}

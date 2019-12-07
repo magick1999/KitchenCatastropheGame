@@ -58,6 +58,7 @@ public class LevelManager {
 	 *            - directory containing all {@link Level} files
 	 */
 	private static void load(String directory) {
+		LevelManager.levelInfos.clear();
 		for (File item : LevelManager.getLevelFiles(new File(directory))) {
 			LevelInfo info = LevelManager.getLevelInfo(item);
 			if (info != null) {

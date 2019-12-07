@@ -24,6 +24,8 @@ import group44.models.LevelInfo;
  * @version 1.0
  */
 public class LevelParser {
+	private static final String ERROR_MESSAGE_TELEPORTER_NOT_FOUND = "%s,%d,%d";
+
 	/**
 	 * Parses level file and adds LevelObjects into level.
 	 *
@@ -80,45 +82,64 @@ public class LevelParser {
 	 */
 	private static void parseLevel(Level level, Scanner fileScanner) throws CollisionException, ParsingException {
 		while (fileScanner.hasNextLine()) {
-			Cell cell = parseEntry(level, new Scanner(fileScanner.nextLine()));
-			level.addCell(cell.getPositionX(), cell.getPositionY(), cell);
+			parseEntry(level, new Scanner(fileScanner.nextLine()));
 		}
 	}
 
 	/**
-	 * Parses Cell on the line.
+	 * Parses line entry and adds LevelObjects into level.
 	 *
 	 * @param level
-	 *            - the level where the Cell is located.
+	 *            - the level where the entry is located.
 	 * @param scanner
-	 *            - scanner with the serialised cell.
-	 *
-	 * @return the parsed {@link Cell}
+	 *            - scanner with the serialised entry.
 	 *
 	 * @throws ParsingException
 	 *             when trying to parse invalid data type.
+	 * @throws CollisionException
+	 *             when two cells are at the same position.
 	 */
-	private static Cell parseEntry(Level level, Scanner scanner) throws ParsingException {
+	private static void parseEntry(Level level, Scanner scanner) throws ParsingException, CollisionException {
 		scanner.useDelimiter(",");
 		String type = scanner.next();
 
+		Cell cell = null;
+
 		switch (type) {
 		case Constants.TYPE_WALL:
-			return parseWallEntry(level, scanner);
+			cell = parseWallEntry(level, scanner);
+			break;
 		case Constants.TYPE_GROUND:
-			return parseGroundEntry(level, scanner);
+			cell = parseGroundEntry(level, scanner);
+			break;
 		case Constants.TYPE_WATER:
-			return parseWaterEntry(level, scanner);
+			cell = parseWaterEntry(level, scanner);
+			break;
 		case Constants.TYPE_FIRE:
-			return parseFireEntry(level, scanner);
+			cell = parseFireEntry(level, scanner);
+			break;
 		case Constants.TYPE_GOAL:
-			return parseGoalEntry(level, scanner);
+			cell = parseGoalEntry(level, scanner);
+			break;
 		case Constants.TYPE_KEY_DOOR:
-			return parseKeyDoorEntry(level, scanner);
+			cell = parseKeyDoorEntry(level, scanner);
+			break;
 		case Constants.TYPE_TOKEN_DOOR:
-			return parseTokenDoorEntry(level, scanner);
-		default:
-			throw new ParsingException(scanner.nextLine());
+			cell = parseTokenDoorEntry(level, scanner);
+			break;
+		case Constants.TYPE_TELEPORTER:
+			cell = parseTeleporterEntry(level, scanner);
+			break;
+		case Constants.TYPE_TELEPORTER_LINK:
+			parseTeleporterLink(level, scanner);
+		}
+
+		if (cell != null) {
+			level.addCell(cell.getPositionX(), cell.getPositionY(), cell);
+		} else if (type.equals(Constants.TYPE_TELEPORTER_LINK)) {
+			// DO nothing
+		} else {
+			throw new ParsingException(type + " " + scanner.nextLine());
 		}
 	}
 
@@ -148,9 +169,9 @@ public class LevelParser {
 	 * @param scanner
 	 *            - scanner with the serialised cell.
 	 *
-	 * @return the serialised {@link Ground} as a type {@link Cell}.
+	 * @return the serialised {@link Ground} as a type of {@link StepableCell}.
 	 */
-	private static Cell parseGroundEntry(Level level, Scanner scanner) {
+	private static StepableCell parseGroundEntry(Level level, Scanner scanner) {
 		int positionX = scanner.nextInt();
 		int positionY = scanner.nextInt();
 		String imagePath = scanner.next();
@@ -189,28 +210,6 @@ public class LevelParser {
 	}
 
 	/**
-	 * Retrieves the Key Type.
-	 *
-	 * @param keyTypeID
-	 *            - the key ID, specific to Key Type.
-	 * @return - the Key Type.
-	 */
-	private static KeyType getKeyType(int keyTypeID) {
-		switch (keyTypeID) {
-		case 1:
-			return KeyType.RED;
-		case 2:
-			return KeyType.BLUE;
-		case 3:
-			return KeyType.GREEN;
-		case 4:
-			return KeyType.GOLD;
-		default:
-			return KeyType.RED;
-		}
-	}
-
-	/**
 	 * Parses the line into cell.
 	 *
 	 * @param level
@@ -218,9 +217,9 @@ public class LevelParser {
 	 * @param scanner
 	 *            - scanner with the serialised cell.
 	 *
-	 * @return the serialised {@link Water} as a type {@link Cell}.
+	 * @return the serialised {@link Water} as a type of {@link StepableCell}.
 	 */
-	private static Cell parseWaterEntry(Level level, Scanner scanner) {
+	private static StepableCell parseWaterEntry(Level level, Scanner scanner) {
 		int positionX = scanner.nextInt();
 		int positionY = scanner.nextInt();
 		String imagePath = scanner.next();
@@ -236,9 +235,9 @@ public class LevelParser {
 	 * @param scanner
 	 *            - scanner with the serialised cell.
 	 *
-	 * @return the serialised {@link Fire} as a type {@link Cell}.
+	 * @return the serialised {@link Fire} as a type of {@link StepableCell}.
 	 */
-	private static Cell parseFireEntry(Level level, Scanner scanner) {
+	private static StepableCell parseFireEntry(Level level, Scanner scanner) {
 		int positionX = scanner.nextInt();
 		int positionY = scanner.nextInt();
 		String imagePath = scanner.next();
@@ -254,9 +253,10 @@ public class LevelParser {
 	 * @param scanner
 	 *            - scanner with the serialised Cell.
 	 *
-	 * @return the serialised {@link Key Door} as a type {@link Cell}.
+	 * @return the serialised {@link Key Door} as a type of
+	 *         {@link StepableCell}.
 	 */
-	private static Cell parseKeyDoorEntry(Level level, Scanner scanner) {
+	private static StepableCell parseKeyDoorEntry(Level level, Scanner scanner) {
 		String title = scanner.next();
 		int positionX = scanner.nextInt();
 		int positionY = scanner.nextInt();
@@ -275,9 +275,10 @@ public class LevelParser {
 	 * @param scanner
 	 *            - scanner with the serialised Cell.
 	 *
-	 * @return the serialised {@link Token Door} as a type {@link Cell}.
+	 * @return the serialised {@link Token Door} as a type of
+	 *         {@link StepableCell}.
 	 */
-	private static Cell parseTokenDoorEntry(Level level, Scanner scanner) {
+	private static StepableCell parseTokenDoorEntry(Level level, Scanner scanner) {
 		String title = scanner.next();
 		int positionX = scanner.nextInt();
 		int positionY = scanner.nextInt();
@@ -296,14 +297,34 @@ public class LevelParser {
 	 * @param scanner
 	 *            - scanner with the serialised cell.
 	 *
-	 * @return the serialised {@link Goal} as a type {@link Cell}.
+	 * @return the serialised {@link Goal} as a type of {@link StepableCell}.
 	 */
-	private static Cell parseGoalEntry(Level level, Scanner scanner) {
+	private static StepableCell parseGoalEntry(Level level, Scanner scanner) {
 		int positionX = scanner.nextInt();
 		int positionY = scanner.nextInt();
 		String imagePath = scanner.next();
 
 		return new Goal(level, positionX, positionY, imagePath);
+	}
+
+	/**
+	 * Parses the line into cell.
+	 *
+	 * @param level
+	 *            - the level where the StepableCell is located.
+	 * @param scanner
+	 *            - scanner with the serialised cell.
+	 *
+	 * @return the serialised {@link Teleporter} as a type of
+	 *         {@link StepableCell}.
+	 */
+	private static StepableCell parseTeleporterEntry(Level level, Scanner scanner) {
+		String title = scanner.next();
+		int positionX = scanner.nextInt();
+		int positionY = scanner.nextInt();
+		String imagePath = scanner.next();
+
+		return new Teleporter(level, title, positionX, positionY, imagePath);
 	}
 
 	/**
@@ -454,5 +475,63 @@ public class LevelParser {
 		String imagePath = scanner.next();
 
 		return new Token(level, imagePath);
+	}
+
+	/**
+	 * Retrieves the Key Type.
+	 *
+	 * @param keyTypeID
+	 *            - the key ID, specific to Key Type.
+	 * @return - the Key Type.
+	 */
+	private static KeyType getKeyType(int keyTypeID) {
+		switch (keyTypeID) {
+		case 1:
+			return KeyType.RED;
+		case 2:
+			return KeyType.BLUE;
+		case 3:
+			return KeyType.GREEN;
+		case 4:
+			return KeyType.GOLD;
+		default:
+			return KeyType.RED;
+		}
+	}
+
+	/**
+	 * Links teleporters together.
+	 *
+	 * @param level
+	 *            - the level where the item is located.
+	 * @param scanner
+	 *            - scanner with the serialised token.
+	 * @throws ParsingException
+	 *             when Teleporter is not found.
+	 */
+	private static void parseTeleporterLink(Level level, Scanner scanner) throws ParsingException {
+		int x1 = scanner.nextInt();
+		int y1 = scanner.nextInt();
+
+		Cell cell01 = level.getGrid()[x1][y1];
+
+		if (cell01 instanceof Teleporter == false) {
+			throw new ParsingException(Constants.TYPE_TELEPORTER_LINK + "," + x1 + "," + y1 + "");
+		}
+
+		int x2 = scanner.nextInt();
+		int y2 = scanner.nextInt();
+
+		Cell cell02 = level.getGrid()[x2][y2];
+
+		if (cell02 instanceof Teleporter == false) {
+			throw new ParsingException(Constants.TYPE_TELEPORTER_LINK + "," + x2 + "," + y2 + "");
+		}
+
+		Teleporter teleporter01 = (Teleporter) cell01;
+		Teleporter teleporter02 = (Teleporter) cell02;
+
+		teleporter01.setLinkedTeleporter(teleporter02);
+		teleporter02.setLinkedTeleporter(teleporter01);
 	}
 }

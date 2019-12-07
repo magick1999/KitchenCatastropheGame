@@ -22,13 +22,19 @@ public class Teleporter extends StepableCell {
      * @param positionX        - The position X in the game.
      * @param positionY        - The position Y in the game.
      * @param imagePath        - Path to the Image representing {@link Teleporter} in the game.
-     * @param linkedTeleporter - The linked {@link Teleporter}.
      */
-    public Teleporter(Level level, String title, int positionX, int positionY, String imagePath,
-            Teleporter linkedTeleporter) {
+    public Teleporter(Level level, String title, int positionX, int positionY, String imagePath) {
         super(level, title, positionX, positionY, imagePath);
-        this.linkedTeleporter = linkedTeleporter;
     }
+
+    /**
+     * Links the teleporter with another instance of Teleporter.
+     *
+     * @param linkedTeleporter - the teleporter to link with.
+     */
+    public void setLinkedTeleporter(Teleporter linkedTeleporter) {
+		this.linkedTeleporter = linkedTeleporter;
+	}
 
     /**
      * Teleports the {@link MovableObject} to the linked teleporter.
@@ -37,7 +43,7 @@ public class Teleporter extends StepableCell {
      */
     @Override
     protected void onStepped(MovableObject object) {
-        if (this.linkedTeleporter.teleport(object)) {
+        if (this.teleport(object)) {
             this.stepOff();
         }
     }
