@@ -123,7 +123,7 @@ public class ProfileManager {
 	 */
 	private static Boolean exists(String username) {
 		for (Profile profile : ProfileManager.profiles) {
-			if (profile.getUsername() == username) {
+			if (profile.getUsername().equals(username)) {
 				return true;
 			}
 		}
