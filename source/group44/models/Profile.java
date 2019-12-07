@@ -57,6 +57,6 @@ public class Profile {
      */
     @Override
     public String toString() {
-        return this.getId() + "," + this.getUsername() + "," + this.getAchievedLevel();
+        return this.getId() + "," + this.getUsername();
     }
 }
