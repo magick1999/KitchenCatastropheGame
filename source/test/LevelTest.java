@@ -276,6 +276,8 @@ public class LevelTest {
 					printBlueKey(writer, x, y); // Ground + BlueKey
 				} else if (x == 1 && y == 18) {
 					printPlayer(writer, x, y); // Ground + Player
+				} else if (x == 2 && y == 11) {
+					printStraightWalkingEnemy(writer, x, y, 0, 1);
 				} else if (x == 3 && y == 1) {
 					printGoldKey(writer, x, y); // Ground + BlueKey
 				} else if (x == 4 && y == 9) {
@@ -292,22 +294,52 @@ public class LevelTest {
 					printToken(writer, x, y); // Ground + Fire
 				} else if (x == 7 && y == 1) {
 					printToken(writer, x, y); // Ground + Token
+				} else if (x == 7 && y == 10) {
+					printToken(writer, x, y); // Ground + Token
 				} else if (x == 7 && y == 18) {
-
 					printTeleporter(writer, x, y); // Teleporter
-
 				} else if ((x == 8 || x == 9 || x == 10) && y != 9) {
 					printWall(writer, x, y); // Wall
 				} else if (x == 8 && y == 9) {
-					printTokenDoor(writer, x, y, 1);
+					printTokenDoor(writer, x, y, 2);
 				} else if (x == 9 && y == 9) {
 					printFireBoots(writer, x, y);
 				} else if (x == 10 && y == 9) {
 					printTokenDoor(writer, x, y, 2);
+				} else if (x == 11 && y == 1) {
+					printRedKey(writer, x, y);
+				} else if (x == 12 && y == 2) {
+					printDumbTargetingEnemy(writer, x, y);
+				} else if (x == 12 && y == 3) {
+					printGreenKey(writer, x, y);
+				} else if (x == 13 && y >= 3 && y <= 16) {
+					printWall(writer, x, y);
+				} else if (x == 14 && y == 1) {
+					printFlippers(writer, x, y);
+				} else if (x == 14 && y == 3) {
+					printWall(writer, x, y);
 				} else if (x == 14 && y == 4) {
-
 					printTeleporter(writer, x, y);
-
+				} else if (x == 15 && y == 5) {
+					printFire(writer, x, y);
+				} else if (x == 15 && y >= 3 && y <= 18) {
+					printWall(writer, x, y);
+				} else if (x == 16 && y == 14) {
+					printRedKeyDoor(writer, x, y);
+				} else if (x >= 16 && x <= 18 && y == 15) {
+					printWater(writer, x, y);
+				} else if (x == 17 && y >= 12 && y <= 18 && y != 15) {
+					printWall(writer, x, y);
+				} else if (x == 18 && y == 1) {
+					printWallFollowingEnemy(writer, x, y);
+				} else if (x == 18 && y == 12) {
+					printWall(writer, x, y);
+				} else if (x == 18 && y == 13) {
+					printToken(writer, x, y);
+				} else if (x == 18 && y == 14) {
+					printGreenKeyDoor(writer, x, y);
+				} else if (x == 18 && y == 16) {
+					printTokenDoor(writer, x, y, 1);
 				} else if (x == 18 && y == 18) {
 					printGoal(writer, x, y);
 				} else {
@@ -435,7 +467,8 @@ public class LevelTest {
 				} else if (x == 17 && y >= 2 && y <= 18) {
 					printWall(writer, x, y);
 				} else if (x == 16 && y == 18) {
-					printDumbTargetingEnemy(writer, x, y); // DUMB TARGETTING ENEMY
+					printDumbTargetingEnemy(writer, x, y); // DUMB TARGETTING
+															// ENEMY
 				} else if (x == 18 && y == 14) {
 					printGreenKeyDoor(writer, x, y); // GREEN KEY DOOR
 				} else if (x == 18 && y == 15) {
@@ -502,7 +535,8 @@ public class LevelTest {
 	}
 
 	private static void printTeleporter(PrintWriter writer, int x, int y) {
-		writer.print(String.format(PARSE_PATTERN_CELL_TITLE, Constants.TYPE_TELEPORTER, TELEPORTER_NAME, x, y, PATH_IMAGE_TELEPORTER));
+		writer.print(String.format(PARSE_PATTERN_CELL_TITLE, Constants.TYPE_TELEPORTER, TELEPORTER_NAME, x, y,
+				PATH_IMAGE_TELEPORTER));
 	}
 
 	// Collectable Items
@@ -562,8 +596,8 @@ public class LevelTest {
 
 	private static void printDumbTargetingEnemy(PrintWriter writer, int x, int y) {
 		printGround(writer, x, y);
-		writer.print(String.format(PARSE_PATTERN_ENEMY, Constants.TYPE_DUMB_TARGETING_ENEMY,
-				ENEMY_NAME_DUMB_TARGETING, x, y, PATH_IMAGE_DUMB_TARGETTING_ENEMY));
+		writer.print(String.format(PARSE_PATTERN_ENEMY, Constants.TYPE_DUMB_TARGETING_ENEMY, ENEMY_NAME_DUMB_TARGETING,
+				x, y, PATH_IMAGE_DUMB_TARGETTING_ENEMY));
 	}
 
 	private static void printPlayer(PrintWriter writer, int x, int y) {
