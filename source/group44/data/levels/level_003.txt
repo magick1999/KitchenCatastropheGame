@@ -89,10 +89,10 @@ ground,1,11,group44/resources/cells/floor.png
 ground,1,12,group44/resources/cells/floor.png
 ground,1,13,group44/resources/cells/floor.png
 ground,1,14,group44/resources/cells/floor.png
-ground,1,15,group44/resources/cells/floor.png,key,2
+ground,1,15,group44/resources/cells/floor.png
 ground,1,16,group44/resources/cells/floor.png
 ground,1,17,group44/resources/cells/floor.png
-ground,1,18,group44/resources/cells/floor.png,player,Tomas,1,18,0,0,group44/resources/ChefDownWalk/Front1.png
+ground,1,18,group44/resources/cells/floor.png
 ground,2,1,group44/resources/cells/floor.png
 ground,2,2,group44/resources/cells/floor.png
 ground,2,3,group44/resources/cells/floor.png
@@ -101,9 +101,9 @@ ground,2,5,group44/resources/cells/floor.png
 ground,2,6,group44/resources/cells/floor.png
 ground,2,7,group44/resources/cells/floor.png
 ground,2,8,group44/resources/cells/floor.png
-ground,2,9,group44/resources/cells/floor.png
+ground,2,9,group44/resources/cells/floor.png,player,Tomas,2,9,0,0,group44/resources/ChefDownWalk/Front1.png
 ground,2,10,group44/resources/cells/floor.png
-ground,2,11,group44/resources/cells/floor.png,straightWalkingEnemy,Straight walking enemy,2,11,0,1,group44/resources/Enemies/Carrot/mrCarrotFront.png
+ground,2,11,group44/resources/cells/floor.png
 ground,2,12,group44/resources/cells/floor.png
 ground,2,13,group44/resources/cells/floor.png
 ground,2,14,group44/resources/cells/floor.png
@@ -111,7 +111,7 @@ ground,2,15,group44/resources/cells/floor.png
 ground,2,16,group44/resources/cells/floor.png
 ground,2,17,group44/resources/cells/floor.png
 ground,2,18,group44/resources/cells/floor.png
-ground,3,1,group44/resources/cells/floor.png,key,4
+ground,3,1,group44/resources/cells/floor.png
 ground,3,2,group44/resources/cells/floor.png
 ground,3,3,group44/resources/cells/floor.png
 ground,3,4,group44/resources/cells/floor.png
@@ -137,7 +137,7 @@ water,4,5,group44/resources/cells/water.png
 water,4,6,group44/resources/cells/water.png
 water,4,7,group44/resources/cells/water.png
 water,4,8,group44/resources/cells/water.png
-keyDoor,Blue door,4,9,group44/resources/cells/blueDoor.png,group44/resources/cells/floor.png,2
+ground,4,9,group44/resources/cells/floor.png
 water,4,10,group44/resources/cells/water.png
 water,4,11,group44/resources/cells/water.png
 water,4,12,group44/resources/cells/water.png
@@ -147,7 +147,7 @@ water,4,15,group44/resources/cells/water.png
 water,4,16,group44/resources/cells/water.png
 water,4,17,group44/resources/cells/water.png
 water,4,18,group44/resources/cells/water.png
-ground,5,1,group44/resources/cells/floor.png,token,group44/resources/cells/token.png
+fire,5,1,group44/resources/cells/fire.png
 fire,5,2,group44/resources/cells/fire.png
 fire,5,3,group44/resources/cells/fire.png
 fire,5,4,group44/resources/cells/fire.png
@@ -155,7 +155,7 @@ fire,5,5,group44/resources/cells/fire.png
 fire,5,6,group44/resources/cells/fire.png
 fire,5,7,group44/resources/cells/fire.png
 fire,5,8,group44/resources/cells/fire.png
-keyDoor,Gold door,5,9,group44/resources/cells/goldDoor.png,group44/resources/cells/floor.png,4
+ground,5,9,group44/resources/cells/floor.png
 fire,5,10,group44/resources/cells/fire.png
 fire,5,11,group44/resources/cells/fire.png
 fire,5,12,group44/resources/cells/fire.png
@@ -173,7 +173,7 @@ water,6,5,group44/resources/cells/water.png
 water,6,6,group44/resources/cells/water.png
 water,6,7,group44/resources/cells/water.png
 water,6,8,group44/resources/cells/water.png
-ground,6,9,group44/resources/cells/floor.png,token,group44/resources/cells/token.png
+ground,6,9,group44/resources/cells/floor.png
 water,6,10,group44/resources/cells/water.png
 water,6,11,group44/resources/cells/water.png
 water,6,12,group44/resources/cells/water.png
@@ -183,7 +183,7 @@ water,6,15,group44/resources/cells/water.png
 water,6,16,group44/resources/cells/water.png
 water,6,17,group44/resources/cells/water.png
 water,6,18,group44/resources/cells/water.png
-ground,7,1,group44/resources/cells/floor.png,token,group44/resources/cells/token.png
+ground,7,1,group44/resources/cells/floor.png,straightWalkingEnemy,Straight walking enemy,7,1,0,1,group44/resources/Enemies/Carrot/mrCarrotFront.png
 ground,7,2,group44/resources/cells/floor.png
 ground,7,3,group44/resources/cells/floor.png
 ground,7,4,group44/resources/cells/floor.png
@@ -192,15 +192,15 @@ ground,7,6,group44/resources/cells/floor.png
 ground,7,7,group44/resources/cells/floor.png
 ground,7,8,group44/resources/cells/floor.png
 ground,7,9,group44/resources/cells/floor.png
-ground,7,10,group44/resources/cells/floor.png,token,group44/resources/cells/token.png
-ground,7,11,group44/resources/cells/floor.png
+ground,7,10,group44/resources/cells/floor.png
+ground,7,11,group44/resources/cells/floor.png,token,group44/resources/cells/token.png
 ground,7,12,group44/resources/cells/floor.png
 ground,7,13,group44/resources/cells/floor.png
 ground,7,14,group44/resources/cells/floor.png
 ground,7,15,group44/resources/cells/floor.png
 ground,7,16,group44/resources/cells/floor.png
 ground,7,17,group44/resources/cells/floor.png
-teleporter,Teleporter,7,18,group44/resources/cells/teleporter.png
+ground,7,18,group44/resources/cells/floor.png
 wall,8,1,group44/resources/WallCounter.png
 wall,8,2,group44/resources/WallCounter.png
 wall,8,3,group44/resources/WallCounter.png
@@ -209,7 +209,7 @@ wall,8,5,group44/resources/WallCounter.png
 wall,8,6,group44/resources/WallCounter.png
 wall,8,7,group44/resources/WallCounter.png
 wall,8,8,group44/resources/WallCounter.png
-tokenDoor,Token door,8,9,group44/resources/cells/tokenDoor.png,group44/resources/cells/floor.png,2
+ground,8,9,group44/resources/cells/floor.png,token,group44/resources/cells/token.png
 wall,8,10,group44/resources/WallCounter.png
 wall,8,11,group44/resources/WallCounter.png
 wall,8,12,group44/resources/WallCounter.png
@@ -227,7 +227,7 @@ wall,9,5,group44/resources/WallCounter.png
 wall,9,6,group44/resources/WallCounter.png
 wall,9,7,group44/resources/WallCounter.png
 wall,9,8,group44/resources/WallCounter.png
-ground,9,9,group44/resources/cells/floor.png,fireBoots,group44/resources/cells/fireBoots.png
+ground,9,9,group44/resources/cells/floor.png
 wall,9,10,group44/resources/WallCounter.png
 wall,9,11,group44/resources/WallCounter.png
 wall,9,12,group44/resources/WallCounter.png
@@ -264,7 +264,7 @@ ground,11,6,group44/resources/cells/floor.png
 ground,11,7,group44/resources/cells/floor.png
 ground,11,8,group44/resources/cells/floor.png
 ground,11,9,group44/resources/cells/floor.png
-ground,11,10,group44/resources/cells/floor.png
+wall,11,10,group44/resources/WallCounter.png
 ground,11,11,group44/resources/cells/floor.png
 ground,11,12,group44/resources/cells/floor.png
 ground,11,13,group44/resources/cells/floor.png
@@ -272,17 +272,17 @@ ground,11,14,group44/resources/cells/floor.png
 ground,11,15,group44/resources/cells/floor.png
 ground,11,16,group44/resources/cells/floor.png
 ground,11,17,group44/resources/cells/floor.png
-ground,11,18,group44/resources/cells/floor.png
+ground,11,18,group44/resources/cells/floor.png,dumbTargetingEnemy,Dumb targeting enemy,11,18,group44/resources/Enemies/Pickle/mrPickleFront.png
 ground,12,1,group44/resources/cells/floor.png
-ground,12,2,group44/resources/cells/floor.png,dumbTargetingEnemy,Dumb targeting enemy,12,2,group44/resources/Enemies/Pickle/mrPickleFront.png
-ground,12,3,group44/resources/cells/floor.png,key,3
+ground,12,2,group44/resources/cells/floor.png
+ground,12,3,group44/resources/cells/floor.png
 ground,12,4,group44/resources/cells/floor.png
 ground,12,5,group44/resources/cells/floor.png
 ground,12,6,group44/resources/cells/floor.png
 ground,12,7,group44/resources/cells/floor.png
 ground,12,8,group44/resources/cells/floor.png
 ground,12,9,group44/resources/cells/floor.png
-ground,12,10,group44/resources/cells/floor.png
+wall,12,10,group44/resources/WallCounter.png
 ground,12,11,group44/resources/cells/floor.png
 ground,12,12,group44/resources/cells/floor.png
 ground,12,13,group44/resources/cells/floor.png
@@ -294,30 +294,30 @@ ground,12,18,group44/resources/cells/floor.png
 ground,13,1,group44/resources/cells/floor.png
 ground,13,2,group44/resources/cells/floor.png
 wall,13,3,group44/resources/WallCounter.png
-wall,13,4,group44/resources/WallCounter.png
-wall,13,5,group44/resources/WallCounter.png
-wall,13,6,group44/resources/WallCounter.png
-wall,13,7,group44/resources/WallCounter.png
-wall,13,8,group44/resources/WallCounter.png
-wall,13,9,group44/resources/WallCounter.png
-wall,13,10,group44/resources/WallCounter.png
-wall,13,11,group44/resources/WallCounter.png
-wall,13,12,group44/resources/WallCounter.png
-wall,13,13,group44/resources/WallCounter.png
-wall,13,14,group44/resources/WallCounter.png
-wall,13,15,group44/resources/WallCounter.png
-wall,13,16,group44/resources/WallCounter.png
+ground,13,4,group44/resources/cells/floor.png
+ground,13,5,group44/resources/cells/floor.png
+ground,13,6,group44/resources/cells/floor.png
+ground,13,7,group44/resources/cells/floor.png
+ground,13,8,group44/resources/cells/floor.png
+ground,13,9,group44/resources/cells/floor.png
+ground,13,10,group44/resources/cells/floor.png
+ground,13,11,group44/resources/cells/floor.png
+ground,13,12,group44/resources/cells/floor.png
+ground,13,13,group44/resources/cells/floor.png
+ground,13,14,group44/resources/cells/floor.png
+ground,13,15,group44/resources/cells/floor.png
+ground,13,16,group44/resources/cells/floor.png
 ground,13,17,group44/resources/cells/floor.png
 ground,13,18,group44/resources/cells/floor.png
 ground,14,1,group44/resources/cells/floor.png,flippers,group44/resources/cells/flippers.png
 ground,14,2,group44/resources/cells/floor.png
 wall,14,3,group44/resources/WallCounter.png
-teleporter,Teleporter,14,4,group44/resources/cells/teleporter.png
+ground,14,4,group44/resources/cells/floor.png
 ground,14,5,group44/resources/cells/floor.png
 ground,14,6,group44/resources/cells/floor.png
 ground,14,7,group44/resources/cells/floor.png
 ground,14,8,group44/resources/cells/floor.png
-ground,14,9,group44/resources/cells/floor.png
+ground,14,9,group44/resources/cells/floor.png,key,3
 ground,14,10,group44/resources/cells/floor.png
 ground,14,11,group44/resources/cells/floor.png
 ground,14,12,group44/resources/cells/floor.png
@@ -331,9 +331,9 @@ ground,15,1,group44/resources/cells/floor.png
 ground,15,2,group44/resources/cells/floor.png
 wall,15,3,group44/resources/WallCounter.png
 wall,15,4,group44/resources/WallCounter.png
-fire,15,5,group44/resources/cells/fire.png
-wall,15,6,group44/resources/WallCounter.png
-wall,15,7,group44/resources/WallCounter.png
+water,15,5,group44/resources/cells/water.png
+water,15,6,group44/resources/cells/water.png
+water,15,7,group44/resources/cells/water.png
 wall,15,8,group44/resources/WallCounter.png
 wall,15,9,group44/resources/WallCounter.png
 wall,15,10,group44/resources/WallCounter.png
@@ -356,13 +356,13 @@ ground,16,8,group44/resources/cells/floor.png
 ground,16,9,group44/resources/cells/floor.png
 ground,16,10,group44/resources/cells/floor.png
 ground,16,11,group44/resources/cells/floor.png
-ground,16,12,group44/resources/cells/floor.png
+keyDoor,Red door,16,12,group44/resources/cells/redDoor.png,group44/resources/cells/floor.png,1
 ground,16,13,group44/resources/cells/floor.png
-keyDoor,Red door,16,14,group44/resources/cells/redDoor.png,group44/resources/cells/floor.png,1
+ground,16,14,group44/resources/cells/floor.png,token,group44/resources/cells/token.png
 water,16,15,group44/resources/cells/water.png
-ground,16,16,group44/resources/cells/floor.png
-ground,16,17,group44/resources/cells/floor.png
-ground,16,18,group44/resources/cells/floor.png
+wall,16,16,group44/resources/WallCounter.png
+wall,16,17,group44/resources/WallCounter.png
+wall,16,18,group44/resources/WallCounter.png
 ground,17,1,group44/resources/cells/floor.png
 ground,17,2,group44/resources/cells/floor.png
 ground,17,3,group44/resources/cells/floor.png
@@ -393,10 +393,9 @@ ground,18,9,group44/resources/cells/floor.png
 ground,18,10,group44/resources/cells/floor.png
 ground,18,11,group44/resources/cells/floor.png
 wall,18,12,group44/resources/WallCounter.png
-ground,18,13,group44/resources/cells/floor.png,token,group44/resources/cells/token.png
-keyDoor,Green door,18,14,group44/resources/cells/greenDoor.png,group44/resources/cells/floor.png,3
+wall,18,13,group44/resources/WallCounter.png
+wall,18,14,group44/resources/WallCounter.png
 water,18,15,group44/resources/cells/water.png
 tokenDoor,Token door,18,16,group44/resources/cells/tokenDoor.png,group44/resources/cells/floor.png,1
 ground,18,17,group44/resources/cells/floor.png
 goal,18,18,group44/resources/cells/goal.png
-teleporterLink,7,18,14,4

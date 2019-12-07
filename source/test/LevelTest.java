@@ -83,7 +83,7 @@ public class LevelTest {
 
 		generateLevelFile01(LEVELS + "level_001.txt", 11, 11, 0);
 		generateLevelFile02(LEVELS + "level_002.txt", 0);
-		//generateLevelFile03(LEVELS + "level_003.txt", 0);
+		generateLevelFile03(LEVELS + "level_003.txt", 0);
 		//generateLevelFile04(LEVELS + "level_004.txt", 0);
 		// generateLevelFile05(LEVELS + "level_005.txt"); // LEVEL 04 - enemies
 
@@ -309,9 +309,6 @@ public class LevelTest {
 				writer.println(); // add NEW LINE
 			}
 		}
-
-		// Teleporter link
-		printTeleportersLink(writer, 7, 18, 14, 4);
 
 		writer.close();
 	}
