@@ -32,6 +32,11 @@ import java.util.Optional;
 import static group44.Constants.WINDOW_HEIGHT;
 import static group44.Constants.WINDOW_WIDTH;
 
+/**
+ *
+ * @author Mihai, Tomas Svejnoha
+ * @version 1.0
+ */
 public class GameScene {
 
     // The canvas in the GUI. This needs to be a global variable
@@ -57,7 +62,6 @@ public class GameScene {
     private boolean canMove = true;
     private Level currentLevel;
     private Profile currentProfile;
-    private boolean isInTop3 = false;
     //Clock
     private GTimer timer = new GTimer();
 
@@ -157,33 +161,44 @@ public class GameScene {
      * This method is called when the game has ended. It shows the top 3 times
      * and your time.
      */
-    private void showTimes(int option) {
+    private void showTimes(LevelFinishStatus status) {
         ButtonType levelSelector = new ButtonType("Level Selector", ButtonBar.ButtonData.OK_DONE);
         ButtonType mainMenu = new ButtonType("Main Menu", ButtonBar.ButtonData.OK_DONE);
         ButtonType restart = new ButtonType("Try Again", ButtonBar.ButtonData.OK_DONE);
-        Alert a1 = new Alert(AlertType.NONE,
-                "default Dialog", levelSelector, mainMenu, restart);
+        Alert a1 = new Alert(AlertType.NONE, "default Dialog", levelSelector, mainMenu, restart);
         a1.setHeight(400);
         a1.setWidth(500);
-        if (option == 1) {
+
+        if (status == LevelFinishStatus.GoalReached) {
             a1.setTitle("Congrats on finishing the level!");
-            ObservableList<Record> top3 = Leaderboard.getTopThreeRecords(currentLevel.getId());
-            for (int i = 0; i < 3; ++i) {
-                if (top3.get(i).equals(timer.getCurrentTimeTaken())) {
-                    isInTop3 = true;
-                }
-            }
+            Leaderboard.addOrUpdate(currentProfile.getId(), currentLevel.getId(), timer.getCurrentTimeTaken());
+            ObservableList<Record> top3Records = Leaderboard.getTopThreeRecords(currentLevel.getId());
+
+            // Is in TOP 3?
+            boolean isInTop3 = Leaderboard.isInTopThreeRecors(currentProfile.getId(), currentLevel.getId());
+
+            StringBuilder builder = new StringBuilder();
+            for (Record record : top3Records) {
+				builder.append(record.toString() + "\n");
+			}
+
             a1.setContentText("Top times and your time: \n");
             if (isInTop3) {
-                a1.setContentText("Top times and your time: \n"+top3.get(0)+"\n"+top3.get(1)+"\n"+top3.get(2)+"\n");
+                a1.setContentText(
+                		"Top times and your time: \n"
+                		+ builder.toString());
             }else{
-                a1.setContentText("Top times and your time: \n"+top3.get(0)+"\n"+top3.get(1)+"\n"+top3.get(2)+"\n"+timer.getCurrentTimeTaken()+" - "+currentProfile.getUsername());
+                a1.setContentText(
+                		"Top times and your time: \n"
+                		+ builder.toString()
+                		+ Leaderboard.getRecord(currentProfile.getId(), currentLevel.getId()));
             }
         }//Here add the times with append
         else {
             a1.setTitle("And then I took an arrow to the knee!");
             a1.setContentText("Just a suggestion: \n Practice makes it perfect! \n");//Here add the times with append }
         }
+
         canMove = false;
         Optional<ButtonType> result = a1.showAndWait();
         if (!result.isPresent()) {
@@ -240,9 +255,9 @@ public class GameScene {
      * should be sent as a parameter to store it. Then an alert with the top 3
      * times and the player time will show.
      */
-    private void endGame(int option) {
+    private void endGame() {
         timer.pauseTimer();
-        showTimes(option);
+        this.showTimes(this.currentLevel.getFinishStatus());
     }
 
     /**
@@ -284,24 +299,7 @@ public class GameScene {
         event.consume();
 
         if (this.currentLevel.isFinished()) {
-            this.levelFinished();
-
-        }
-    }
-
-    /**
-     * Shows dialogs based on reason to finish level.
-     */
-    private void levelFinished() {
-        // TODO: Update leaderboard
-        if (this.currentLevel.getFinishStatus() == LevelFinishStatus.GoalReached) {
-            this.endGame(1);
-        }
-        if (this.currentLevel.getFinishStatus() == LevelFinishStatus.PlayerDied) {
-            this.endGame(2);
-        }
-        if (this.currentLevel.getFinishStatus() == LevelFinishStatus.PlayerKilled) {
-            this.endGame(3);
+            this.endGame();
         }
     }
 }
