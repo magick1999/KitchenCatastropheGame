@@ -3,6 +3,7 @@ package group44.game.layoutControllers;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
@@ -18,6 +19,8 @@ public class MainGameWindowController {
     private StackPane root;
     @FXML
     private Canvas canvas;
+    @FXML
+    private Label timeLabel;
     @FXML
     private VBox menuBox;
     @FXML
@@ -77,6 +80,14 @@ public class MainGameWindowController {
 
     public VBox getMenuBox() {
         return menuBox;
+    }
+
+    public void setTimeLabel(Label timeLabel) {
+        this.timeLabel = timeLabel;
+    }
+
+    public Label getTimeLabel() {
+        return timeLabel;
     }
 
     public void setMovableObjects(Pane movableObjects) {

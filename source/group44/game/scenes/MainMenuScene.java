@@ -110,10 +110,14 @@ public class MainMenuScene {
             }
         });
     }
+    private void showMOTD(MouseEvent e){
+        new MOTDScene(primaryStage);
+    }
     private void setUpButtons(){
         profilesListener();
         mainMenuController.getPlay().setOnMouseClicked(this::pressPlay);
         mainMenuController.getNewProfile().setOnMouseClicked(this::newProfile);
         mainMenuController.getQuit().setOnMouseClicked(this::closeGame);
+        mainMenuController.getMOTD().setOnMouseClicked(this::showMOTD);
     }
 }

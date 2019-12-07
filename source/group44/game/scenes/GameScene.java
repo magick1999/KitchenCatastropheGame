@@ -1,12 +1,16 @@
 package group44.game.scenes;
 
+import group44.controllers.Leaderboard;
 import group44.controllers.LevelManager;
 import group44.exceptions.CollisionException;
 import group44.exceptions.ParsingException;
 import group44.game.Level;
 import group44.game.LevelFinishStatus;
 import group44.game.layoutControllers.MainGameWindowController;
+import group44.models.GTimer;
 import group44.models.Profile;
+import group44.models.Record;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -30,97 +34,101 @@ import static group44.Constants.WINDOW_WIDTH;
 
 public class GameScene {
 
-	// The canvas in the GUI. This needs to be a global variable
-	// (in this setup) as we need to access it in different methods.
-	private Canvas canvas;
+    // The canvas in the GUI. This needs to be a global variable
+    // (in this setup) as we need to access it in different methods.
+    private Canvas canvas;
 
-	// Loaded images
-	private Image player = new Image("group44/resources/ChefDownWalk/Front1.png");
+    // Loaded images
+    private Image player = new Image("group44/resources/ChefDownWalk/Front1.png");
 
-	// The controller associated with the specific fxml file.
-	private MainGameWindowController myController;
+    // The controller associated with the specific fxml file.
+    private MainGameWindowController myController;
 
 
-	// The player data.
-	private ImageView playerView = new ImageView();
+    // The player data.
+    private ImageView playerView = new ImageView();
 
-	// It showcases the orientation of the player.
-	private int orientation = 1;
-	// The window itself.
-	private Stage primaryStage;
-	// This boolean lets the player move only after it has finished the previous
-	// animation.
-	private boolean canMove = true;
-	private Level currentLevel;
-	private Profile currentProfile;
+    // It showcases the orientation of the player.
+    private int orientation = 1;
+    // The window itself.
+    private Stage primaryStage;
+    // This boolean lets the player move only after it has finished the previous
+    // animation.
+    private boolean canMove = true;
+    private Level currentLevel;
+    private Profile currentProfile;
+    private boolean isInTop3 = false;
+    //Clock
+    private GTimer timer = new GTimer();
 
-	/**
-	 * This is the main method that loads everything required to draw the scene.
-	 *
-	 * @param primaryStage
-	 *            represents the window where the stages are displayed
-	 */
-	public GameScene(Stage primaryStage, Level currentLevel, Profile currentProfile) {
-		this.primaryStage = primaryStage;
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/group44/game/layouts/MainGameWindow.fxml"));
-		try {
-			Parent root = fxmlLoader.load();
-			// Setting the stage and adding my custom style to it.
-			root.getStylesheets().add("group44/resources/application.css");
-			root.setId("root");
-			Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-			// Loading the controller
-			MainGameWindowController tempController = fxmlLoader.getController();
-			setController(tempController);
+    /**
+     * This is the main method that loads everything required to draw the scene.
+     *
+     * @param primaryStage represents the window where the stages are displayed
+     */
+    public GameScene(Stage primaryStage, Level currentLevel, Profile currentProfile) {
+        this.primaryStage = primaryStage;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/group44/game/layouts/MainGameWindow.fxml"));
+        try {
+            Parent root = fxmlLoader.load();
+            // Setting the stage and adding my custom style to it.
+            root.getStylesheets().add("group44/resources/application.css");
+            root.setId("root");
+            Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+            // Loading the controller
+            MainGameWindowController tempController = fxmlLoader.getController();
+            setController(tempController);
             this.currentLevel = currentLevel;
-			// Setting the canvas
-			setCanvas(myController.getCanvas());
-			// Adding the key listener to the scene.
-			scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> processKeyEvent(event));
-			drawGame();
-			// drawMovableObjects();
-			primaryStage.setScene(scene);
-			primaryStage.show();
-			this.currentProfile = currentProfile;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		primaryStage.setTitle("Kitchen Catastrophe");
-	}
+            // Setting the canvas
+            setCanvas(myController.getCanvas());
+            // Adding the key listener to the scene.
+            scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> processKeyEvent(event));
+            drawGame();
+            // drawMovableObjects();
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            this.currentProfile = currentProfile;
+            timer.startTimer(myController.getTimeLabel());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        primaryStage.setTitle("Kitchen Catastrophe");
+    }
 
-	/**
-	 * Adding the listeners to the menu buttons. It also makes the player unable
-	 * to move while the menu is closed. Here the time of the player needs to be
-	 * stopped aswell.
-	 */
-	private void setUpMenu() {
-		canMove = false;
-		myController.getResumeButton().setOnMouseClicked(this::setUpResume);
-		myController.getRestartButton().setOnMouseClicked(this::setUpRestart);
-		myController.getHomeButton().setOnMouseClicked(this::setUpHome);
-	}
+    /**
+     * Adding the listeners to the menu buttons. It also makes the player unable
+     * to move while the menu is closed. Here the time of the player needs to be
+     * stopped aswell.
+     */
+    private void setUpMenu() {
+        canMove = false;
+        timer.pauseTimer();
+        myController.getResumeButton().setOnMouseClicked(this::setUpResume);
+        myController.getRestartButton().setOnMouseClicked(this::setUpRestart);
+        myController.getHomeButton().setOnMouseClicked(this::setUpHome);
+    }
 
-	/**
-	 * Defining behaviour for the click on the resume button.Resumes the game
-	 * state and the time.
-	 *
-	 * @param event
-	 *            This is the event for the click on the resume button.
-	 */
-	private void setUpResume(MouseEvent event) {
-		myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
-		canMove = true;
-	}
+    /**
+     * Defining behaviour for the click on the resume button.Resumes the game
+     * state and the time.
+     *
+     * @param event This is the event for the click on the resume button.
+     */
+    private void setUpResume(MouseEvent event) {
+        timer.resumeTimer();
+        myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
+        canMove = true;
+    }
 
-	/**
-	 * Defining behaviour for the click on the restart button.Restarts the game
-	 * and the time.
-	 *
-	 * @param event
-	 *            This is the event for the click on the restart button.
-	 */
+    /**
+     * Defining behaviour for the click on the restart button.Restarts the game
+     * and the time.
+     *
+     * @param event This is the event for the click on the restart button.
+     */
     private void setUpRestart(MouseEvent event) {
-		// TODO: RESTART GAME
+        // TODO: RESTART GAME
+        timer.startTimer(myController.getTimeLabel());
         Level newLevel = null;
         try {
             newLevel = LevelManager.load(LevelManager.load().get(this.currentLevel.getId() - 1));
@@ -132,18 +140,18 @@ public class GameScene {
             e.printStackTrace();
         }
         new GameScene(this.primaryStage, newLevel, this.currentProfile);
-	}
+    }
 
-	/**
-	 * Defining behaviour for the click on the home button.Sends the player to
-	 * the home screen.
-	 *
-	 * @param event
-	 *            This is the event for the click on the restart button.
-	 */
-	private void setUpHome(MouseEvent event) {
-		new MainMenuScene(primaryStage);
-	}
+    /**
+     * Defining behaviour for the click on the home button.Sends the player to
+     * the home screen.
+     *
+     * @param event This is the event for the click on the restart button.
+     */
+    private void setUpHome(MouseEvent event) {
+        timer.stopTimer();
+        new MainMenuScene(primaryStage);
+    }
 
     /**
      * This method is called when the game has ended. It shows the top 3 times
@@ -159,7 +167,18 @@ public class GameScene {
         a1.setWidth(500);
         if (option == 1) {
             a1.setTitle("Congrats on finishing the level!");
+            ObservableList<Record> top3 = Leaderboard.getTopThreeRecords(currentLevel.getId());
+            for (int i = 0; i < 3; ++i) {
+                if (top3.get(i).equals(timer.getCurrentTimeTaken())) {
+                    isInTop3 = true;
+                }
+            }
             a1.setContentText("Top times and your time: \n");
+            if (isInTop3) {
+                a1.setContentText("Top times and your time: \n"+top3.get(0)+"\n"+top3.get(1)+"\n"+top3.get(2)+"\n");
+            }else{
+                a1.setContentText("Top times and your time: \n"+top3.get(0)+"\n"+top3.get(1)+"\n"+top3.get(2)+"\n"+timer.getCurrentTimeTaken()+" - "+currentProfile.getUsername());
+            }
         }//Here add the times with append
         else {
             a1.setTitle("And then I took an arrow to the knee!");
@@ -183,106 +202,106 @@ public class GameScene {
             }
         }
     }
-	/**
-	 * This method sets the globally available controller to the current
-	 * controller.
-	 *
-	 * @param tempController
-	 *            The current controller.
-	 */
-	private void setController(MainGameWindowController tempController) {
-		myController = tempController;
-	}
 
-	/**
-	 * This method sets the globally available canvas to the current canvas.
-	 *
-	 * @param canvas
-	 *            The current canvas.
-	 */
-	private void setCanvas(Canvas canvas) {
-		this.canvas = canvas;
-	}
+    /**
+     * This method sets the globally available controller to the current
+     * controller.
+     *
+     * @param tempController The current controller.
+     */
+    private void setController(MainGameWindowController tempController) {
+        myController = tempController;
+    }
 
-	/**
-	 * This method draws every non movable object onto the screen.
-	 */
-	private void drawGame() {
-		// Get the Graphic Context of the canvas. This is what we draw on.
-		GraphicsContext gc = canvas.getGraphicsContext2D();
+    /**
+     * This method sets the globally available canvas to the current canvas.
+     *
+     * @param canvas The current canvas.
+     */
+    private void setCanvas(Canvas canvas) {
+        this.canvas = canvas;
+    }
 
-		// Clear canvas
-		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+    /**
+     * This method draws every non movable object onto the screen.
+     */
+    private void drawGame() {
+        // Get the Graphic Context of the canvas. This is what we draw on.
+        GraphicsContext gc = canvas.getGraphicsContext2D();
 
-		currentLevel.draw(gc);
-	}
+        // Clear canvas
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-	/**
-	 * This method should be called when the game has ended. The player time
-	 * should be sent as a parameter to store it. Then an alert with the top 3
-	 * times and the player time will show.
-	 */
-	private void endGame(int option) {
-		showTimes(option);
-	}
+        currentLevel.draw(gc);
+    }
 
-	/**
-	 * This method handles the keyboard input.
-	 *
-	 * @param event
-	 *            Passes in the events from the keyboard.
-	 */
-	private void processKeyEvent(KeyEvent event) {
-		{
-			switch (event.getCode()) {
-			case ESCAPE: {
-				canMove = false;
-				// Escape key was pressed. So show the menu.
-				myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
-				// Setting up the menu controls.
-				setUpMenu();
-				break;
-			}
+    /**
+     * This method should be called when the game has ended. The player time
+     * should be sent as a parameter to store it. Then an alert with the top 3
+     * times and the player time will show.
+     */
+    private void endGame(int option) {
+        timer.pauseTimer();
+        showTimes(option);
+    }
 
-			// All keys going to the level
-			case UP:
-			case DOWN:
-			case LEFT:
-			case RIGHT:
-				this.currentLevel.keyDown(event);
-				break;
+    /**
+     * This method handles the keyboard input.
+     *
+     * @param event Passes in the events from the keyboard.
+     */
+    private void processKeyEvent(KeyEvent event) {
+        {
+            switch (event.getCode()) {
+                case ESCAPE: {
+                    canMove = false;
+                    timer.pauseTimer();
+                    // Escape key was pressed. So show the menu.
+                    myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
+                    // Setting up the menu controls.
+                    setUpMenu();
+                    break;
+                }
 
-			default:
-				// Do nothing
-				break;
-			}
-		}
+                // All keys going to the level
+                case UP:
+                case DOWN:
+                case LEFT:
+                case RIGHT:
+                    this.currentLevel.keyDown(event);
+                    break;
 
-		// Redraw game as the player may have moved.
-		drawGame();
-		// Consume the event. This means we mark it as dealt with. This stops
-		// other GUI nodes (buttons etc) responding to it.
-		event.consume();
+                default:
+                    // Do nothing
+                    break;
+            }
+        }
 
-		if (this.currentLevel.isFinished()) {
-			this.levelFinished();
+        // Redraw game as the player may have moved.
+        drawGame();
+        // Consume the event. This means we mark it as dealt with. This stops
+        // other GUI nodes (buttons etc) responding to it.
+        event.consume();
+
+        if (this.currentLevel.isFinished()) {
+            this.levelFinished();
 
         }
-	}
+    }
 
-	/**
-	 * Shows dialogs based on reason to finish level.
-	 */
-	private void levelFinished() {
-		// TODO: Update leaderboard
+    /**
+     * Shows dialogs based on reason to finish level.
+     */
+    private void levelFinished() {
+        // TODO: Update leaderboard
         if (this.currentLevel.getFinishStatus() == LevelFinishStatus.GoalReached) {
-			this.endGame(1);
+            this.endGame(1);
         }
         if (this.currentLevel.getFinishStatus() == LevelFinishStatus.PlayerDied) {
-			this.endGame(2);
+            this.endGame(2);
         }
         if (this.currentLevel.getFinishStatus() == LevelFinishStatus.PlayerKilled) {
-			this.endGame(3);
+            this.endGame(3);
         }
-	}
+    }
 }
