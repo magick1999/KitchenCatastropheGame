@@ -425,7 +425,7 @@ public class LevelTest {
 					printGreenKeyDoor(writer, x, y); // GREEN KEY DOOR
 				} else if (x == 18 && y == 15) {
 					printRedKey(writer, x, y); // RED KEY DOOR
-				} else if (x == 18 && y == 15) {
+				} else if (x == 18 && y == 16) {
 					printRedKeyDoor(writer, x, y); // RED DOOR
 				} else if (x == 18 && y == 18) {
 					printGoal(writer, x, y);

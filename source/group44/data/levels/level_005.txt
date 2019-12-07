@@ -396,6 +396,6 @@ ground,18,12,group44/resources/cells/floor.png
 ground,18,13,group44/resources/cells/floor.png
 keyDoor,Green door,18,14,group44/resources/cells/greenDoor.png,group44/resources/cells/floor.png,3
 ground,18,15,group44/resources/cells/floor.png,key,1
-ground,18,16,group44/resources/cells/floor.png
+keyDoor,Red door,18,16,group44/resources/cells/redDoor.png,group44/resources/cells/floor.png,1
 ground,18,17,group44/resources/cells/floor.png
 goal,18,18,group44/resources/cells/goal.png
