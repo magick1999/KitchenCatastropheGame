@@ -46,35 +46,39 @@ public class DumbTargetingEnemy extends Enemy {
 		int differenceX = Math.abs(this.getPositionX() - playerPosition.getX());
 		int differenceY = Math.abs(this.getPositionY() - playerPosition.getY());
 
-		if (this.getPositionX() - 1 == playerPosition.getX() && this.getPositionY() - 1 == playerPosition.getY()) {
+		if (differenceX == differenceY &&
+				this.getPositionX() > playerPosition.getX()
+				&& this.getPositionY() > playerPosition.getY()) {
 			if (this.isObstacle(this.getPositionX() - 1, this.getPositionY()) == false) {
 				this.setVelocityX(-1);
 			} else if (this.isObstacle(this.getPositionX(), this.getPositionY() - 1) == false) {
 				this.setVelocityY(-1);
 			}
-		} else if (this.getPositionX() - 1 == playerPosition.getX()
-				&& this.getPositionY() + 1 == playerPosition.getY()) {
+		} else if (differenceX == differenceY &&
+				this.getPositionX() > playerPosition.getX()
+				&& this.getPositionY() < playerPosition.getY()) {
 			if (this.isObstacle(this.getPositionX() - 1, this.getPositionY()) == false) {
 				this.setVelocityX(-1);
 			} else if (this.isObstacle(this.getPositionX(), this.getPositionY() + 1) == false) {
 				this.setVelocityY(1);
 			}
-		} else if (this.getPositionX() + 1 == playerPosition.getX()
-				&& this.getPositionY() - 1 == playerPosition.getY()) {
+		} else if (differenceX == differenceY &&
+				this.getPositionX() < playerPosition.getX()
+				&& this.getPositionY() > playerPosition.getY()) {
 			if (this.isObstacle(this.getPositionX() + 1, this.getPositionY()) == false) {
 				this.setVelocityX(1);
 			} else if (this.isObstacle(this.getPositionX(), this.getPositionY() - 1) == false) {
 				this.setVelocityY(-1);
 			}
-		} else if (this.getPositionX() + 1 == playerPosition.getX()
-				&& this.getPositionY() + 1 == playerPosition.getY()) {
+		} else if (differenceX == differenceY &&
+				this.getPositionX() < playerPosition.getX()
+				&& this.getPositionY() < playerPosition.getY()) {
 			if (this.isObstacle(this.getPositionX() + 1, this.getPositionY()) == false) {
 				this.setVelocityX(1);
 			} else if (this.isObstacle(this.getPositionX(), this.getPositionY() + 1) == false) {
 				this.setVelocityY(1);
 			}
-			
-			
+
 		} else if (differenceY == 0 || differenceX > differenceY) {
 			// On the same horizontal
 			if (playerPosition.getX() < this.getPositionX()) {
