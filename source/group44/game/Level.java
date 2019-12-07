@@ -55,7 +55,26 @@ public class Level {
 		} else {
 			this.displaySize = displaySize;
 		}
+		this.time = time;
 		this.enemies = new ArrayList<>();
+	}
+
+	/**
+	 * Returns the time taken by the player.
+	 *
+	 * @return the time taken.
+	 */
+	public long getTime() {
+		return time;
+	}
+
+	/**
+	 * Sets the time taken by the player.
+	 *
+	 * @param time - the time taken.
+	 */
+	public void setTime(long time) {
+		this.time = time;
 	}
 
 	/**
