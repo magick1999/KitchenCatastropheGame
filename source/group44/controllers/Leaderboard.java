@@ -67,7 +67,6 @@ public class Leaderboard {
 		for (Record item : Leaderboard.records) {
 			if (item.getProfile().getId() == profile.getId() && item.getLevelId() == levelId) {
 				record = item;
-				break;
 			}
 		}
 
