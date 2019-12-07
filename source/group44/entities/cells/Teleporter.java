@@ -43,7 +43,7 @@ public class Teleporter extends StepableCell {
      */
     @Override
     protected void onStepped(MovableObject object) {
-        if (this.linkedTeleporter.teleport(object)) {
+        if (this.teleport(object)) {
             this.stepOff();
         }
     }
