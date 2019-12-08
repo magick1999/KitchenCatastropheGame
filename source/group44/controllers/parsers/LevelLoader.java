@@ -18,12 +18,12 @@ import group44.game.Level;
 import group44.models.LevelInfo;
 
 /**
- * Parses the level file into {@link Level}.
+ * Loads and parses the level file into {@link Level}.
  *
- * @author Tomas Svejnoha, Amy Mason.
+ * @author Tomas Svejnoha, Amy Mason
  * @version 1.0
  */
-public class LevelParser {
+public class LevelLoader {
 	private static final String ERROR_MESSAGE_TELEPORTER_NOT_FOUND = "%s,%d,%d";
 
 	/**
