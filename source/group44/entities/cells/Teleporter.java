@@ -202,6 +202,11 @@ public class Teleporter extends StepableCell {
 		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
 		builder.append(this.getImagePath());
 
+		if (this.getMovableObject() != null) {
+			builder.append(",");
+			builder.append(this.getMovableObject().toString());
+		}
+
 		return builder.toString();
 	}
 }

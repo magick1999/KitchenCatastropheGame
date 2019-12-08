@@ -52,6 +52,11 @@ public class Fire extends StepableCell {
 		builder.append(String.format(PARSE_PATTERN, Constants.TYPE_FIRE, this.getPositionX(), this.getPositionY(),
 				this.getImagePath()));
 
+		if (this.getMovableObject() != null) {
+			builder.append(",");
+			builder.append(this.getMovableObject().toString());
+		}
+
 		return builder.toString();
 	}
 }

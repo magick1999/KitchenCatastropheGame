@@ -98,6 +98,11 @@ public class TokenDoor extends Door {
 		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
 		builder.append(this.tokensNeeded);
 
+		if (this.getMovableObject() != null) {
+			builder.append(",");
+			builder.append(this.getMovableObject().toString());
+		}
+
 		return builder.toString();
 	}
 }
