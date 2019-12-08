@@ -18,6 +18,7 @@ import javafx.collections.ObservableList;
  * @version 1.0
  */
 public class ProfileManager {
+    /** Collection of all user profiles. */
     private static ObservableList<Profile> profiles = FXCollections
             .observableArrayList(new ArrayList<>());
 
@@ -37,7 +38,7 @@ public class ProfileManager {
      *            - id to find.
      * @return {@link Profile} if match was found; otherwise null.
      */
-    public static Profile getProfile(int id) {
+    public static Profile getProfile(final int id) {
         Profile profile = null;
 
         for (Profile item : ProfileManager.profiles) {
@@ -56,7 +57,7 @@ public class ProfileManager {
      *            - username to find.
      * @return {@link Profile} if match is found; otherwise null.
      */
-    public static Profile getProfile(String username) {
+    public static Profile getProfile(final String username) {
         Profile profile = null;
 
         for (Profile item : ProfileManager.profiles) {
@@ -78,13 +79,13 @@ public class ProfileManager {
      *             if the username is already taken.
      * @return the created {@link Profile}.
      */
-    public static Profile register(String username)
+    public static Profile register(final String username)
             throws UsernameTakenException {
         if (ProfileManager.exists(username)) {
             throw new UsernameTakenException(username);
         } else {
-            int max_id = ProfileManager.getMaxId();
-            Profile profile = new Profile(++max_id, username);
+            int maxId = ProfileManager.getMaxId();
+            Profile profile = new Profile(++maxId, username);
             ProfileManager.profiles.add(profile);
 
             ProfileManager.save();
@@ -99,7 +100,7 @@ public class ProfileManager {
      * @param profileId
      *            - if of profile to delete.
      */
-    public static void delete(int profileId) {
+    public static void delete(final int profileId) {
         Profile profile = getProfile(profileId);
 
         if (profile != null) {
@@ -111,10 +112,10 @@ public class ProfileManager {
     /**
      * Deletes a profile by username.
      *
-     * @param profileId
+     * @param username
      *            - username of profile to delete.
      */
-    public static void delete(String username) {
+    public static void delete(final String username) {
         Profile profile = getProfile(username);
 
         if (profile != null) {
@@ -130,7 +131,7 @@ public class ProfileManager {
      *            - the username to check
      * @return true if the username is already taken; otherwise false
      */
-    private static Boolean exists(String username) {
+    private static Boolean exists(final String username) {
         for (Profile profile : ProfileManager.profiles) {
             if (profile.getUsername().equals(username)) {
                 return true;
@@ -172,9 +173,8 @@ public class ProfileManager {
      *
      * @param path
      *            - path where the file with profiles is located
-     * @return a list of loaded {@link Profile}s
      */
-    private static void load(String path) {
+    private static void load(final String path) {
         ArrayList<Profile> loadedProfiles = null;
         Scanner fileScanner = null;
         File file = new File(path);
@@ -253,7 +253,7 @@ public class ProfileManager {
      * @param path
      *            - path to the file where to store the profiles
      */
-    private static void save(String path) {
+    private static void save(final String path) {
         File file = new File(path);
         PrintWriter writer = null;
 
