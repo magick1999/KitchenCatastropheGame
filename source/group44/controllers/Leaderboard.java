@@ -20,10 +20,14 @@ import javafx.collections.ObservableList;
  * @version 1.0
  */
 public class Leaderboard {
+    /** Number of recods in top. */
+    private static final int TOP = 3;
+    /** All records. */
     private static ObservableList<Record> records = FXCollections
             .observableArrayList(new ArrayList<Record>());
-
+    /** Last requested level. */
     private static int currentLevel;
+    /** Top 3 records for the last requested level. */
     private static ObservableList<Record> top3RecordsForCurrentLevel = FXCollections
             .observableArrayList(new ArrayList<Record>());
 
@@ -103,7 +107,8 @@ public class Leaderboard {
         Collections.sort(levelRecords);
 
         Leaderboard.top3RecordsForCurrentLevel.clear();
-        int maxRecords = (levelRecords.size() < 3) ? levelRecords.size() : 3;
+        int maxRecords = (levelRecords.size() < TOP) ? levelRecords.size()
+                : TOP;
 
         for (int i = 0; i < maxRecords; i++) {
             Leaderboard.top3RecordsForCurrentLevel.add(levelRecords.get(i));
