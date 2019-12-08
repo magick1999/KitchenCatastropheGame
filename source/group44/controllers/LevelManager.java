@@ -233,8 +233,10 @@ public class LevelManager {
 	 *            - id of the profile.
 	 */
 	public static void deleteTempData(int levelId, int profileId) {
-		if (hasUnfinishedLevel(levelId, profileId)) {
+		LevelInfo info = getLevelInfoForFile(levelId, profileId);
 
+		if (info.getFile().exists()) {
+			info.getFile().delete();
 		}
 	}
 
@@ -248,7 +250,8 @@ public class LevelManager {
 	 * @return true if there is a level with id saved; otherwise false.
 	 */
 	public static boolean hasUnfinishedLevel(int levelId, int profileId) {
-		return false;
+		LevelInfo info = getLevelInfoForFile(levelId, profileId);
+		return info.getFile().exists();
 	}
 
 	/**
