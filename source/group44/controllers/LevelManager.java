@@ -2,6 +2,7 @@ package group44.controllers;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,6 +11,7 @@ import org.omg.CORBA.CODESET_INCOMPATIBLE;
 import group44.models.LevelInfo;
 import group44.Constants;
 import group44.controllers.parsers.LevelLoader;
+import group44.controllers.parsers.LevelSaver;
 import group44.exceptions.CollisionException;
 import group44.exceptions.ParsingException;
 import group44.game.Level;
@@ -21,8 +23,6 @@ import group44.game.Level;
  * @version 1.0
  */
 public class LevelManager {
-	private static final String LEVEL_TEMP_FILE_PATTERN = "%d-%d.txt"; // "LEVEL_ID-PROFILE_ID.txt"
-
 	private static final String LEVEL_FILE_PATTERN = "^level_[0-9]+\\.txt$";
 	private static final String ERROR_LEVELID_NOT_FOUND = "Unable to find level with id=%d.";
 	private static ArrayList<LevelInfo> levelInfos = new ArrayList<>();
@@ -197,9 +197,11 @@ public class LevelManager {
 	 *            - level to save.
 	 * @param profileId
 	 *            - profile id of the user.
+	 * @throws IOException
+	 *             when saving failed.
 	 */
-	public static void save(Level level, int profileId) {
-		throw new UnsupportedOperationException(); // TODO: Implement
+	public static void save(Level level, int profileId) throws IOException {
+		LevelSaver.save(level, profileId);
 	}
 
 	/**
@@ -263,7 +265,7 @@ public class LevelManager {
 	 * @return
 	 */
 	private static LevelInfo getLevelInfoForFile(int levelId, int profileId) {
-		String file = String.format(LEVEL_TEMP_FILE_PATTERN, levelId, profileId);
+		String file = String.format(Constants.FILE_LEVEL_TEMP_PATTERN, levelId, profileId);
 		return new LevelInfo(levelId, new File(Constants.FOLDER_LEVELS + file));
 	}
 }
