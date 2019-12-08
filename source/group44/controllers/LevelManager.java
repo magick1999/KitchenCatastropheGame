@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import org.omg.CORBA.CODESET_INCOMPATIBLE;
+
 import group44.models.LevelInfo;
 import group44.Constants;
 import group44.controllers.parsers.LevelParser;
@@ -19,6 +21,9 @@ import group44.game.Level;
  * @version 1.0
  */
 public class LevelManager {
+	private static final String LEVEL_TEMP_FILE_PATTERN = "%d-%d.txt"; // "LEVEL_ID-PROFILE_ID.txt"
+	private static final String LEVEL_HEADER_PATTERN = "%d,%d,%d,%d";
+
 	private static final String LEVEL_FILE_PATTERN = "^level_[0-9]+\\.txt$";
 	private static final String ERROR_LEVELID_NOT_FOUND = "Unable to find level with id=%d.";
 	private static ArrayList<LevelInfo> levelInfos = new ArrayList<>();
@@ -112,7 +117,7 @@ public class LevelManager {
 				int height = lineScanner.nextInt();
 				lineScanner.close();
 
-				levelInfo = new LevelInfo(id, width, height, file);
+				levelInfo = new LevelInfo(id, file);
 			}
 		} catch (Exception e) {
 			System.out.println("LevelManager: Error while loading file (" + file.getAbsolutePath()
@@ -205,10 +210,18 @@ public class LevelManager {
 	 *            - id of the level to load.
 	 * @param profileId
 	 *            - id of the user who saved the game.
-	 * @return
+	 * @return the loaded {@link Level}.
+	 *
+	 * @throws ParsingException
+	 *             when two cells are at the same position.
+	 * @throws CollisionException
+	 *             when trying to parse invalid data type.
+	 * @throws FileNotFoundException
+	 *             when level file is not found.
 	 */
-	public static Level resume(int levelId, int profileId) {
-		return null;
+	public static Level resume(int levelId, int profileId)
+			throws FileNotFoundException, CollisionException, ParsingException {
+		return LevelParser.parseLevel(getLevelInfoForFile(levelId, profileId));
 	}
 
 	/**
@@ -236,5 +249,19 @@ public class LevelManager {
 	 */
 	public static boolean hasUnfinishedLevel(int levelId, int profileId) {
 		return false;
+	}
+
+	/**
+	 * Returns a {@link LevelInfo} for
+	 *
+	 * @param levelId
+	 *            - id of the level we want to load.
+	 * @param profileId
+	 *            - id of the profile for which we want to load.
+	 * @return
+	 */
+	private static LevelInfo getLevelInfoForFile(int levelId, int profileId) {
+		String file = String.format(LEVEL_TEMP_FILE_PATTERN, levelId, profileId);
+		return new LevelInfo(levelId, new File(Constants.FOLDER_LEVELS + file));
 	}
 }

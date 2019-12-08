@@ -540,7 +540,8 @@ public class LevelParser {
 		Cell cell01 = level.getGrid()[x1][y1];
 
 		if (cell01 instanceof Teleporter == false) {
-			throw new ParsingException(Constants.TYPE_TELEPORTER_LINK + "," + x1 + "," + y1 + "");
+			throw new ParsingException(
+					String.format(ERROR_MESSAGE_TELEPORTER_NOT_FOUND, Constants.TYPE_TELEPORTER_LINK, x1, y1));
 		}
 
 		int x2 = scanner.nextInt();
@@ -549,7 +550,8 @@ public class LevelParser {
 		Cell cell02 = level.getGrid()[x2][y2];
 
 		if (cell02 instanceof Teleporter == false) {
-			throw new ParsingException(Constants.TYPE_TELEPORTER_LINK + "," + x2 + "," + y2 + "");
+			throw new ParsingException(
+					String.format(ERROR_MESSAGE_TELEPORTER_NOT_FOUND, Constants.TYPE_TELEPORTER_LINK, x2, y2));
 		}
 
 		Teleporter teleporter01 = (Teleporter) cell01;

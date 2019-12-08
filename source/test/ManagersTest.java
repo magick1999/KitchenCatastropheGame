@@ -69,8 +69,6 @@ public class ManagersTest {
 	private static void printLevelInfos(ArrayList<LevelInfo> infos) {
 		for (LevelInfo levelInfo : infos) {
 			System.out.println(levelInfo.getId());
-			System.out.println(levelInfo.getWidth());
-			System.out.println(levelInfo.getHeight());
 			System.out.println(levelInfo.getFile().getPath());
 			System.out.println();
 		}
