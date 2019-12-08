@@ -7,14 +7,15 @@ package group44.exceptions;
  * @version 1.0
  */
 public class ParsingException extends Exception {
-	private static final long serialVersionUID = -900351075811069764L;
+    private static final long serialVersionUID = -900351075811069764L;
 
-	/**
-	 * Creates a new instance of {@link ParsingException}.
-	 *
-	 * @param message - error message
-	 */
-	public ParsingException(String message) {
-		super(message);
-	}
+    /**
+     * Creates a new instance of {@link ParsingException}.
+     *
+     * @param message
+     *            - error message
+     */
+    public ParsingException(String message) {
+	super(message);
+    }
 }

@@ -1,18 +1,15 @@
 package group44.game.layoutControllers;
 
-import group44.controllers.ProfileManager;
 import group44.models.Profile;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
-
 public class MainMenuController {
-	private static final String PROFILES = "source/group44/data/profiles.txt";
+    private static final String PROFILES = "source/group44/data/profiles.txt";
 
     @FXML
     private BorderPane root;
@@ -35,73 +32,76 @@ public class MainMenuController {
     @FXML
     private ImageView logo;
 
-    public MainMenuController(){
+    public MainMenuController() {
 
     }
+
     @FXML
-    public void initialize(){
-        logo.setImage(new Image("/group44/resources/KitchenCatastrophe.png"));
+    public void initialize() {
+	logo.setImage(new Image("/group44/resources/KitchenCatastrophe.png"));
     }
+
     public void setRoot(BorderPane root) {
-        this.root = root;
+	this.root = root;
     }
 
     public BorderPane getRoot() {
-        return root;
+	return root;
     }
 
-    public void play(Button play){
-            this.play=play;
+    public void play(Button play) {
+	this.play = play;
     }
 
     public Button getPlay() {
-        return play;
+	return play;
     }
 
     public void setProfiles(ListView<Profile> profiles) {
-        this.profiles = profiles;
+	this.profiles = profiles;
     }
 
     public ListView<Profile> getProfiles() {
-        return profiles;
+	return profiles;
     }
 
     public void setNewProfile(Button newProfile) {
-        this.newProfile = newProfile;
+	this.newProfile = newProfile;
     }
 
     public Button getNewProfile() {
-        return newProfile;
+	return newProfile;
     }
 
     public void setLeaderboard(Button leaderboard) {
-        this.leaderboard = leaderboard;
+	this.leaderboard = leaderboard;
     }
 
     public Button getLeaderboard() {
-        return leaderboard;
+	return leaderboard;
     }
 
     public void setProfileSelection(Button profileSelection) {
-        this.profileSelection = profileSelection;
+	this.profileSelection = profileSelection;
     }
 
     public Button getProfileSelection() {
-        return profileSelection;
+	return profileSelection;
     }
 
     public void setMOTD(Button motd) {
-        this.motd = motd;
+	this.motd = motd;
     }
 
     public Button getMOTD() {
-        return motd;
+	return motd;
     }
+
     public void setQuit(Button quit) {
-    	this.quit=quit;
+	this.quit = quit;
     }
 
     public Button getQuit() {
-    	return this.quit;
+	return this.quit;
     }
 }

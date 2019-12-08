@@ -7,7 +7,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
-
 public class LevelSelectorController {
     @FXML
     private ImageView logo;
@@ -25,65 +24,68 @@ public class LevelSelectorController {
     private Button menu;
     @FXML
     private BorderPane root;
-    public LevelSelectorController(){
+
+    public LevelSelectorController() {
     }
+
     @FXML
-    public void initialize(){
-        logo.setImage(new Image("/group44/resources/KitchenCatastrophe.png"));
+    public void initialize() {
+	logo.setImage(new Image("/group44/resources/KitchenCatastrophe.png"));
     }
+
     public void setMenu(Button menu) {
-        this.menu = menu;
+	this.menu = menu;
     }
 
     public Button getMenu() {
-        return menu;
+	return menu;
     }
 
     public void setRoot(BorderPane root) {
-        this.root = root;
+	this.root = root;
     }
 
     public BorderPane getRoot() {
-        return root;
+	return root;
     }
 
     public void setLevelNum(Button levelNum) {
-        this.levelNum = levelNum;
+	this.levelNum = levelNum;
     }
 
     public Button getLevelNum() {
-        return levelNum;
+	return levelNum;
     }
 
     public void setLevelTimes(ListView levelTimes) {
-        this.levelTimes = levelTimes;
+	this.levelTimes = levelTimes;
     }
 
     public ListView getLevelTimes() {
-        return levelTimes;
+	return levelTimes;
     }
 
     public void setPlay(Button play) {
-        this.play = play;
+	this.play = play;
     }
 
     public Button getPlay() {
-        return play;
+	return play;
     }
 
     public void setPrevious(Button previous) {
-        this.previous = previous;
+	this.previous = previous;
     }
 
     public Button getPrevious() {
-        return previous;
+	return previous;
     }
 
     public void setNext(Button next) {
-        this.next = next;
+	this.next = next;
     }
 
     public Button getNext() {
-        return next;
+	return next;
     }
 }

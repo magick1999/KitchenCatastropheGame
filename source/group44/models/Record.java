@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import group44.controllers.Leaderboard;
+
 /**
  * Represents a Record in the {@link Leaderboard}.
  *
@@ -19,14 +21,17 @@ public class Record implements Comparable<Record> {
     /**
      * Creates a new istance of {@link Record}.
      *
-     * @param profile - {@link Profile} linked to the record
-     * @param levelId - Id of the associated {@link Level}
-     * @param time    - time taken to finish the level
+     * @param profile
+     *            - {@link Profile} linked to the record
+     * @param levelId
+     *            - Id of the associated {@link Level}
+     * @param time
+     *            - time taken to finish the level
      */
     public Record(Profile profile, int levelId, long time) {
-        this.profile = profile;
-        this.levelId = levelId;
-        this.setTime(time);
+	this.profile = profile;
+	this.levelId = levelId;
+	this.setTime(time);
     }
 
     /**
@@ -35,7 +40,7 @@ public class Record implements Comparable<Record> {
      * @return the associated profile
      */
     public Profile getProfile() {
-        return this.profile;
+	return this.profile;
     }
 
     /**
@@ -44,7 +49,7 @@ public class Record implements Comparable<Record> {
      * @return the level id
      */
     public int getLevelId() {
-        return this.levelId;
+	return this.levelId;
     }
 
     /**
@@ -53,26 +58,29 @@ public class Record implements Comparable<Record> {
      * @return the time taken
      */
     public long getTime() {
-        return this.time;
+	return this.time;
     }
 
     /**
      * Updates the time taken to finish the {@link Level}.
      *
-     * @param time - the new time taken
+     * @param time
+     *            - the new time taken
      */
     public void setTime(long time) {
-        this.time = time;
+	this.time = time;
     }
 
     /**
      * Compares {@link Record}s based on the time taken to finish the level.
      *
-     * @param o - the {@link Record} to compare
+     * @param o
+     *            - the {@link Record} to compare
      */
     @Override
     public int compareTo(Record o) {
-        return Long.compare(this.getTime(), o.getTime()); // TODO: Test this
+	return Long.compare(this.getTime(), o.getTime()); // TODO: Test
+							  // this
     }
 
     /**
@@ -82,7 +90,7 @@ public class Record implements Comparable<Record> {
      */
     @Override
     public String toString() {
-        return this.timeString() + " - " + this.getProfile().getUsername() ;
+	return this.timeString() + " - " + this.getProfile().getUsername();
     }
 
     /**
@@ -91,9 +99,9 @@ public class Record implements Comparable<Record> {
      * @return time in a format of mm:ss.
      */
     public String timeString() {
-    	Date date = new Date(this.getTime());
-    	DateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS");
-    	formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
-    	return formatter.format(date);
+	Date date = new Date(this.getTime());
+	DateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS");
+	formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+	return formatter.format(date);
     }
 }

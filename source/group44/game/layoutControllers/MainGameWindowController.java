@@ -4,9 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
-import javafx.scene.text.Font;
-
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 public class MainGameWindowController {
     @FXML
@@ -25,76 +25,77 @@ public class MainGameWindowController {
     private VBox menuBox;
     @FXML
     private Pane movableObjects;
-    public MainGameWindowController(){
+
+    public MainGameWindowController() {
 
     }
 
     @FXML
-    public void initialize(){
-        menuBox.setVisible(false);
+    public void initialize() {
+	menuBox.setVisible(false);
     }
 
     public Button getHomeButton() {
-        return homeButton;
+	return homeButton;
     }
 
     public void setHomeButton(Button homeButton) {
-        this.homeButton = homeButton;
+	this.homeButton = homeButton;
     }
 
     public void setCanvas(Canvas canvas) {
-        this.canvas = canvas;
+	this.canvas = canvas;
     }
 
-    public Canvas getCanvas(){
-        return canvas;
+    public Canvas getCanvas() {
+	return canvas;
     }
 
     public void setRoot(StackPane root) {
-        this.root = root;
+	this.root = root;
     }
 
     public StackPane getRoot() {
-        return root;
+	return root;
     }
 
     public void setRestartButton(Button restartButton) {
-        this.restartButton = restartButton;
+	this.restartButton = restartButton;
     }
 
     public Button getRestartButton() {
-        return restartButton;
+	return restartButton;
     }
 
     public void setResumeButton(Button resumeButton) {
-        this.resumeButton = resumeButton;
+	this.resumeButton = resumeButton;
     }
 
     public Button getResumeButton() {
-        return resumeButton;
+	return resumeButton;
     }
 
     public void setMenuBox(VBox menuBox) {
-        this.menuBox = menuBox;
+	this.menuBox = menuBox;
     }
 
     public VBox getMenuBox() {
-        return menuBox;
+	return menuBox;
     }
 
     public void setTimeLabel(Label timeLabel) {
-        this.timeLabel = timeLabel;
+	this.timeLabel = timeLabel;
     }
 
     public Label getTimeLabel() {
-        return timeLabel;
+	return timeLabel;
     }
 
     public void setMovableObjects(Pane movableObjects) {
-        this.movableObjects = movableObjects;
+	this.movableObjects = movableObjects;
     }
 
     public Pane getMovableObjects() {
-        return movableObjects;
+	return movableObjects;
     }
 }

@@ -15,35 +15,35 @@ import group44.game.Level;
  *
  */
 public class LevelSaver {
-	private static final String LEVEL_HEADER_PATTERN = "%d,%d,%d,%d";
+    private static final String LEVEL_HEADER_PATTERN = "%d,%d,%d,%d";
 
-	/**
-	 * Saves the level into file.
-	 *
-	 * @param level
-	 *            - the level to save.
-	 * @param path
-	 *            - path to the file.
-	 * @throws IOException
-	 *             when something goes terribly wrong.
-	 */
-	public static void save(Level level, String path) throws IOException {
-		File file = new File(path);
-		if (file.exists() == false) {
-			file.createNewFile();
-		}
-
-		PrintWriter writer = new PrintWriter(file);
-		writer.printf(LEVEL_HEADER_PATTERN + "\n", level.getId(), level.getGridWidth(), level.getGridHeight(),
-				level.getTime());
-
-		for (int x = 0; x < level.getGridWidth(); x++) {
-			for (int y = 0; y < level.getGridHeight(); y++) {
-				Cell cell = level.getGrid()[x][y];
-				writer.print(cell.toString() + "\n");
-			}
-		}
-
-		writer.close();
+    /**
+     * Saves the level into file.
+     *
+     * @param level
+     *            - the level to save.
+     * @param path
+     *            - path to the file.
+     * @throws IOException
+     *             when something goes terribly wrong.
+     */
+    public static void save(Level level, String path) throws IOException {
+	File file = new File(path);
+	if (file.exists() == false) {
+	    file.createNewFile();
 	}
+
+	PrintWriter writer = new PrintWriter(file);
+	writer.printf(LEVEL_HEADER_PATTERN + "\n", level.getId(),
+		level.getGridWidth(), level.getGridHeight(), level.getTime());
+
+	for (int x = 0; x < level.getGridWidth(); x++) {
+	    for (int y = 0; y < level.getGridHeight(); y++) {
+		Cell cell = level.getGrid()[x][y];
+		writer.print(cell.toString() + "\n");
+	    }
+	}
+
+	writer.close();
+    }
 }
