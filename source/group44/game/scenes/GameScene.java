@@ -53,14 +53,11 @@ public class GameScene {
     // The player data.
     private ImageView playerView = new ImageView();
 
-    // It showcases the orientation of the player.
-    private int orientation = 1;
     // The window itself.
     private Stage primaryStage;
-    // This boolean lets the player move only after it has finished the previous
-    // animation.
-    private boolean canMove = true;
+    //Current level displayed.
     private Level currentLevel;
+    //Current player.
     private Profile currentProfile;
     //Clock
     private GTimer timer = new GTimer();
@@ -87,8 +84,8 @@ public class GameScene {
             setCanvas(myController.getCanvas());
             // Adding the key listener to the scene.
             scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> processKeyEvent(event));
+            //Drawing the game
             drawGame();
-            // drawMovableObjects();
             primaryStage.setScene(scene);
             primaryStage.show();
             this.currentProfile = currentProfile;
@@ -105,7 +102,6 @@ public class GameScene {
      * stopped aswell.
      */
     private void setUpMenu() {
-        canMove = false;
         timer.pauseTimer();
         myController.getResumeButton().setOnMouseClicked(this::setUpResume);
         myController.getRestartButton().setOnMouseClicked(this::setUpRestart);
@@ -121,7 +117,6 @@ public class GameScene {
     private void setUpResume(MouseEvent event) {
         timer.resumeTimer();
         myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
-        canMove = true;
     }
 
     /**
@@ -199,7 +194,6 @@ public class GameScene {
             a1.setContentText("Just a suggestion: \n Practice makes it perfect! \n");//Here add the times with append }
         }
 
-        canMove = false;
         Optional<ButtonType> result = a1.showAndWait();
         if (!result.isPresent()) {
 
@@ -211,7 +205,7 @@ public class GameScene {
                     MainMenuScene ms = new MainMenuScene(primaryStage);
                 } else {
                     if (result.get() == restart) {
-                        setUpRestart(new MouseEvent(null, orientation, orientation, orientation, orientation, null, orientation, canMove, canMove, canMove, canMove, canMove, canMove, canMove, canMove, canMove, canMove, null));
+                        setUpRestart(new MouseEvent(null, 1, 1, 1, 1, null, 1, false, false, false, false, false, false, false, false, false, false, null));
                     }
                 }
             }
@@ -269,7 +263,6 @@ public class GameScene {
         {
             switch (event.getCode()) {
                 case ESCAPE: {
-                    canMove = false;
                     timer.pauseTimer();
                     // Escape key was pressed. So show the menu.
                     myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());

@@ -97,6 +97,10 @@ public class ProfileCreatorScene {
 
     }
 
+    /**
+     * This handles all the wrong username inputs.
+     * @param type is a variable that showcases the type of the error, true for username taken, false for blank name.
+     */
     private void usernameError(Boolean type) {
         ButtonType closeAlert = new ButtonType("Ok master chef, I have chosen my faith!", ButtonBar.ButtonData.OK_DONE);
         Alert a1 = new Alert(Alert.AlertType.NONE, "default Dialog", closeAlert);
@@ -130,6 +134,11 @@ public class ProfileCreatorScene {
             }
         }
     }
+
+    /**
+     * This method takes the player to the main menu.
+     * @param e This is the mouse event that triggers this action.
+     */
     private void backToMenu(MouseEvent e){
         new MainMenuScene(primaryStage);
     }
@@ -137,7 +146,7 @@ public class ProfileCreatorScene {
      * This method will be used for profile creation.
      * It also returns the user to the main menu.
      *
-     * @param event
+     * @param event This is the mouse event that triggers this action.
      */
     private void createProfile(MouseEvent event) {
         //Create new profile to display in the profile selector

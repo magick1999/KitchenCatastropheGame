@@ -29,6 +29,7 @@ public class LevelSelectorScene {
     private Stage primaryStage;
     private Integer currentLevelIndex;
     private Profile currentProfile;
+
     /*
      * This is the constructor that creates the scene, instantiates the controller
      * and sets up the listeners for the buttons on the screen.
@@ -46,18 +47,16 @@ public class LevelSelectorScene {
             //Instantiating the controller.
             LevelSelectorController tempController = fxmlLoader.getController();
             setController(tempController);
-            currentLevelIndex = Integer.parseInt(levelSelectorController.getLevelNum().getText().replaceAll("[A-Z a-z]", ""));
+            Leaderboard.load();
+            this.maxLevel = Math.min(LevelManager.load().size(), Leaderboard.getAchievedLevel(currentProfile.getId()) + 1);
+            currentLevelIndex = maxLevel;
+            this.currentProfile = currentProfile;
             //Adding the listeners for the buttons.
             setUpButtons();
             primaryStage.setScene(scene);
             primaryStage.show();
 
-            this.maxLevel = Math.min(Leaderboard.getAchievedLevel(currentProfile.getId()) + 1, LevelManager.load().size());
-            this.currentProfile = currentProfile;
 
-            if (currentLevelIndex.equals(maxLevel)) {
-                levelSelectorController.getNext().setVisible(false);
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -75,10 +74,7 @@ public class LevelSelectorScene {
 
     /**
      * This creates the game scene for the required level.
-     * When the level will be implemented here will be needed to pass the level
-     * as an argument to the game scene.
-     *
-     * @param e This is the event from the click on the level button/
+     * @param e This is the event from the click on the level button.
      */
     private void setLevelSelect(MouseEvent e) {
         try {
@@ -90,13 +86,17 @@ public class LevelSelectorScene {
     }
 
     /**
-     * This method creates listeners for each of the buttons
+     * This method sets the level to be played.
      */
     private void loadLevel() {
 
         levelSelectorController.getPlay().setOnMouseClicked(this::setLevelSelect);
     }
 
+    /**
+     * This method takes the player to the main menu.
+     * @param e is the mouse event that triggers this action.
+     */
     private void setMenu(MouseEvent e) {
         new MainMenuScene(primaryStage);
     }
@@ -109,6 +109,9 @@ public class LevelSelectorScene {
         setLevelNum(false);
     }
 
+    /**
+     * This sets the current level available to play.
+     */
     private void setLevelNum(boolean prevNext) {
         if (prevNext && currentLevelIndex < maxLevel) {
             levelSelectorController.getLevelNum().setText("Level " + (++currentLevelIndex).toString());
@@ -136,12 +139,26 @@ public class LevelSelectorScene {
 
     /**
      * This method creates listeners for all of the buttons on the scene.
-     * Listeners for back and forward need to be added.
+     * and sets the visibility of the previous and next buttons depending on the current level and max level.
      */
     private void setUpButtons() {
+        levelSelectorController.getNext().setVisible(false);
+        if (maxLevel == 1) {
+            levelSelectorController.getNext().setVisible(false);
+        } else {
+            if (maxLevel == LevelManager.load().size()) {
+                levelSelectorController.getLevelNum().setText("Level " + LevelManager.load().size());
+                levelSelectorController.getNext().setVisible(false);
+            } else {
+                levelSelectorController.getLevelNum().setText("Level " + currentLevelIndex);
+
+            }
+        }
         loadLevel();
         setTopTimes();
-        levelSelectorController.getPrevious().setVisible(false);
+        if (currentLevelIndex == 1) {
+            levelSelectorController.getPrevious().setVisible(false);
+        }
         levelSelectorController.getNext().setOnMouseClicked(this::setNext);
         levelSelectorController.getPrevious().setOnMouseClicked(this::setPrevious);
         levelSelectorController.getMenu().setOnMouseClicked(this::setMenu);
