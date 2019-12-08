@@ -11,12 +11,18 @@ import javafx.scene.image.Image;
  * @version 1.0
  */
 public abstract class LevelObject {
+    /** Title of the {@link LevelObject}. */
     private String title;
+    /** Path to the image representing the {@link LevelObject} in the game. */
     private String imagePath;
+    /** Image representing the {@link LevelObject} in the game. */
     private Image image;
+    /** {@link Level} where the {@link LevelObject} is located. */
     private Level level;
-    private int positionX; // Position X in the game array
-    private int positionY; // Position Y in the game array
+    /** Position X of the {@link LevelObject}. */
+    private int positionX;
+    /** Position Y of the {@link LevelObject}. */
+    private int positionY;
 
     /**
      * Creates a new {@link LevelObject}.
@@ -70,11 +76,11 @@ public abstract class LevelObject {
     /**
      * Sets the title of an object.
      *
-     * @param title
+     * @param newTitle
      *            - the title to set.
      */
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitle(String newTitle) {
+        this.title = newTitle;
     }
 
     /**

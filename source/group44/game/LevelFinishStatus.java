@@ -7,7 +7,10 @@ package group44.game;
  * @version 1.0
  */
 public enum LevelFinishStatus {
-    PlayerDied, // Player died on SteppableCell
-    PlayerKilled, // Player killed by Enemy
-    GoalReached // Player reached the goal
+    /** Player died on SteppableCell. */
+    PlayerDied,
+    /** Player killed by Enemy. */
+    PlayerKilled,
+    /** Player reached the goal. */
+    GoalReached
 }

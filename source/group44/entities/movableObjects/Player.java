@@ -29,7 +29,9 @@ import javafx.scene.input.KeyEvent;
  * @version 1.0
  */
 public class Player extends MovableObject {
+    /** Pattern for serialising Player into string. */
     private static final String TO_STRING_PATTERN = "%s,%s,%d,%d,%d,%d,%s";
+    /** All collectable items the player has collected. */
     private ArrayList<CollectableItem> inventory;
 
     /**
@@ -88,11 +90,8 @@ public class Player extends MovableObject {
                     this.setPosition(nextCell.getPositionX(),
                             nextCell.getPositionY());
                 }
-                this.onCellStepped(nextCell); // Does nothing
-                                              // for
-                                              // Teleporters
-                                              // =>
-                                              // safe
+                // Does nothing for Teleporters => safe
+                this.onCellStepped(nextCell);
             }
         }
     }

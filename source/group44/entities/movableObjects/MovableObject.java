@@ -15,7 +15,9 @@ import group44.game.LevelFinishStatus;
  * @version 1.0
  */
 public abstract class MovableObject extends LevelObject {
+    /** Velocity X of the object. */
     private int velocityX;
+    /** Velocity Y of the object. */
     private int velocityY;
 
     /**

@@ -14,8 +14,11 @@ import group44.controllers.Leaderboard;
  * @version 1.0
  */
 public class Record implements Comparable<Record> {
+    /** The profile. */
     private Profile profile;
+    /** The id of the level. */
     private int levelId;
+    /** The time taken. */
     private long time;
 
     /**
@@ -79,8 +82,7 @@ public class Record implements Comparable<Record> {
      */
     @Override
     public int compareTo(Record o) {
-        return Long.compare(this.getTime(), o.getTime()); // TODO: Test
-                                                          // this
+        return Long.compare(this.getTime(), o.getTime());
     }
 
     /**

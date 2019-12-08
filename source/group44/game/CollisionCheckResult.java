@@ -9,7 +9,9 @@ import group44.entities.LevelObject;
  * @version 1.0
  */
 public class CollisionCheckResult {
+    /** The colliding object. */
     private LevelObject collidingObject;
+    /** The collision type. */
     private CollisionCheckResultType type;
 
     /**
@@ -66,14 +68,19 @@ public class CollisionCheckResult {
     /**
      * Represents a result type of the collision.
      *
-     * @author Tomáš Švejnoha
+     * @author Tomas Svejnoha
      * @version 1.0
      */
     public enum CollisionCheckResultType {
+        /** The object does not collide. */
         Successful,
-
-        Enemy, Player,
-
-        MissingKey, NotEnoughTokens
+        /** The object collides with enemy. */
+        Enemy,
+        /** The object collides with player. */
+        Player,
+        /** The object collided with locked KeyDoor. */
+        MissingKey,
+        /** The object collided with locked TokenDoor. */
+        NotEnoughTokens
     }
 }
