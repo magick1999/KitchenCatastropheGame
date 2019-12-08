@@ -1,12 +1,12 @@
 package group44.entities.cells;
 
+import group44.Constants;
 import group44.entities.collectableItems.CollectableItem;
 import group44.entities.collectableItems.Key;
 import group44.entities.collectableItems.Key.KeyType;
 import group44.entities.movableObjects.MovableObject;
 import group44.game.CollisionCheckResult;
 import group44.game.Level;
-import javafx.scene.image.Image;
 import group44.game.CollisionCheckResult.CollisionCheckResultType;
 
 /**
@@ -23,15 +23,23 @@ public class KeyDoor extends Door {
 	 * This creates a new instance of {@link KeyDoor} and associates it with an
 	 * unlocking {@link KeyType}.
 	 *
-	 * @param level             - The {@link Level} where the {@link KeyDoor} is located.
-	 * @param title             - Title of the {@link Door}.
-	 * @param positionX         - Position X in the game.
-	 * @param positionY         - Position Y in the game.
-	 * @param lockedImagePath   - Path to the Image representing locked door in the game.
-	 * @param unlockedImagePath - Path to the Image representing unlocked door in the game.
-	 * @param unlockingKey      - key used to unlock the door.
+	 * @param level
+	 *            - The {@link Level} where the {@link KeyDoor} is located.
+	 * @param title
+	 *            - Title of the {@link Door}.
+	 * @param positionX
+	 *            - Position X in the game.
+	 * @param positionY
+	 *            - Position Y in the game.
+	 * @param lockedImagePath
+	 *            - Path to the Image representing locked door in the game.
+	 * @param unlockedImagePath
+	 *            - Path to the Image representing unlocked door in the game.
+	 * @param unlockingKey
+	 *            - key used to unlock the door.
 	 */
-	public KeyDoor(Level level, String title, int positionX, int positionY, String lockedImagePath, String unlockedImagePath, Key.KeyType unlockingKey) {
+	public KeyDoor(Level level, String title, int positionX, int positionY, String lockedImagePath,
+			String unlockedImagePath, Key.KeyType unlockingKey) {
 		super(level, title, positionX, positionY, lockedImagePath, unlockedImagePath);
 
 		this.unlockingKey = unlockingKey;
@@ -49,26 +57,30 @@ public class KeyDoor extends Door {
 	/**
 	 * Opens the door if the right Key is used.
 	 *
-	 * @param item - the Key to use.
+	 * @param item
+	 *            - the Key to use.
 	 * @return true if the door was opened; otherwise false.
 	 */
 	@Override
 	public boolean open(CollectableItem item) {
-		if (this.isOpen() == false && item instanceof Key && ((Key) item).getKeyCode() == this.unlockingKey.getKeyCode()) {
+		if (this.isOpen() == false && item instanceof Key
+				&& ((Key) item).getKeyCode() == this.unlockingKey.getKeyCode()) {
 			this.open();
 		}
 		return this.isOpen();
 	}
 
 	/**
-     * Places {@link MovableObject} on the {@link KeyDoor}.
-     * If then door is locked, {@link CollisionCheckResult} with the door as a colliding object is returned.
-     * Otherwise, returns a successful {@link CollisionCheckResult}.
-     *
-     * @param object - {@link MovableObject} that steps on the cell.
-     *
-     * @return a result of the step action in the {@link CollisionCheckResult}.
-     */
+	 * Places {@link MovableObject} on the {@link KeyDoor}. If then door is
+	 * locked, {@link CollisionCheckResult} with the door as a colliding object
+	 * is returned. Otherwise, returns a successful
+	 * {@link CollisionCheckResult}.
+	 *
+	 * @param object
+	 *            - {@link MovableObject} that steps on the cell.
+	 *
+	 * @return a result of the step action in the {@link CollisionCheckResult}.
+	 */
 	@Override
 	public CollisionCheckResult stepOn(MovableObject object) {
 		if (this.isOpen() == false) {
@@ -76,5 +88,31 @@ public class KeyDoor extends Door {
 		}
 		this.setMovableObject(object);
 		return new CollisionCheckResult(CollisionCheckResultType.Successful);
+	}
+
+	/**
+	 * Returns a string representation of the {@link KeyDoor}.
+	 *
+	 * @return a string representation of the {@link KeyDoor}.
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(Constants.TYPE_KEY_DOOR);
+		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+
+		builder.append(this.getTitle());
+		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+		builder.append(this.getPositionX());
+		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+		builder.append(this.getPositionY());
+		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+		builder.append(this.getImagePath());
+		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+		builder.append(this.getUnlockedImagePath());
+		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+		builder.append(this.getUnlockingKeyType());
+
+		return builder.toString();
 	}
 }
