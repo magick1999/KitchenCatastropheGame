@@ -20,8 +20,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -43,15 +41,8 @@ public class GameScene {
     // (in this setup) as we need to access it in different methods.
     private Canvas canvas;
 
-    // Loaded images
-    private Image player = new Image("group44/resources/ChefDownWalk/Front1.png");
-
     // The controller associated with the specific fxml file.
     private MainGameWindowController myController;
-
-
-    // The player data.
-    private ImageView playerView = new ImageView();
 
     // It showcases the orientation of the player.
     private int orientation = 1;
@@ -269,12 +260,19 @@ public class GameScene {
         {
             switch (event.getCode()) {
                 case ESCAPE: {
-                    canMove = false;
-                    timer.pauseTimer();
-                    // Escape key was pressed. So show the menu.
-                    myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
-                    // Setting up the menu controls.
-                    setUpMenu();
+                	if (canMove) {
+                		canMove = false;
+                        timer.pauseTimer();
+                        // Escape key was pressed. So show the menu.
+                        myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
+                        // Setting up the menu controls.
+                        setUpMenu();
+                	} else {
+                		timer.resumeTimer();
+                        myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
+                        canMove = true;
+                	}
+
                     break;
                 }
 
@@ -283,7 +281,9 @@ public class GameScene {
                 case DOWN:
                 case LEFT:
                 case RIGHT:
-                    this.currentLevel.keyDown(event);
+                	if (canMove) {
+    					this.currentLevel.keyDown(event);
+    				}
                     break;
 
                 default:
