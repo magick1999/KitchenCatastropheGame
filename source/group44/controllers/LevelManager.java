@@ -21,8 +21,11 @@ import group44.models.LevelInfo;
  * @version 1.0
  */
 public class LevelManager {
+    /** RegEx for files with levels. */
     private static final String LEVEL_FILE_PATTERN = "^level_[0-9]+\\.txt$";
+    /** Error message pattern when file is not found. */
     private static final String ERROR_LEVELID_NOT_FOUND = "Unable to find level with id=%d.";
+    /** Metadata about all levels. */
     private static ArrayList<LevelInfo> levelInfos = new ArrayList<>();
 
     /**
@@ -151,8 +154,8 @@ public class LevelManager {
     /**
      * Returns a loaded {@link Level}.
      *
-     * @param levelInfo
-     *            - information about the {@link Level} to load.
+     * @param levelId
+     *            - id of the level to load.
      * @return the loaded {@link Level}.
      *
      * @throws CollisionException
@@ -202,12 +205,12 @@ public class LevelManager {
      * @throws IOException
      *             when saving failed.
      */
-    public static void save(Level level, int profileId) throws IOException {
-        LevelSaver.save(level,
-                String.format(
-                        Constants.FOLDER_LEVELS
-                                + Constants.FILE_LEVEL_TEMP_PATTERN,
-                        level.getId(), profileId));
+    public static void save(Level level, final int profileId)
+            throws IOException {
+        String path = String.format(
+                Constants.FOLDER_LEVELS + Constants.FILE_LEVEL_TEMP_PATTERN,
+                level.getId(), profileId);
+        LevelSaver.save(level, path);
     }
 
     /**
@@ -262,13 +265,13 @@ public class LevelManager {
     }
 
     /**
-     * Returns a {@link LevelInfo} for
+     * Returns a {@link LevelInfo} for level.
      *
      * @param levelId
      *            - id of the level we want to load.
      * @param profileId
      *            - id of the profile for which we want to load.
-     * @return
+     * @return {@link LevelInfo} about the level.
      */
     private static LevelInfo getLevelInfoForFile(int levelId, int profileId) {
         String file = String.format(Constants.FILE_LEVEL_TEMP_PATTERN, levelId,
