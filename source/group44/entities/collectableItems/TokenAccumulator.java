@@ -2,6 +2,7 @@ package group44.entities.collectableItems;
 
 import java.util.ArrayList;
 
+import group44.Constants;
 import group44.exceptions.NotEnoughTokensException;
 
 /**
@@ -93,7 +94,7 @@ public class TokenAccumulator extends CollectableItem {
 				builder.append(accumulatedTokens.get(0).toString());
 
 				for (int i = 1; i < accumulatedTokens.size(); i++) {
-					builder.append(",");
+					builder.append(Constants.LEVEL_OBJECT_DELIMITER);
 					builder.append(accumulatedTokens.get(i).toString());
 				}
 			}

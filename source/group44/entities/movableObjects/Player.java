@@ -311,8 +311,15 @@ public class Player extends MovableObject {
 				this.getPositionY(), this.getVelocityX(), this.getVelocityY(), this.getImagePath()));
 
 		for (CollectableItem collectableItem : inventory) {
-			builder.append(",");
-			builder.append(collectableItem.toString());
+			if (collectableItem instanceof TokenAccumulator) {
+				if (((TokenAccumulator) collectableItem).getTokensCount() > 0) {
+					builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+					builder.append(collectableItem.toString());
+				}
+			} else {
+				builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+				builder.append(collectableItem.toString());
+			}
 		}
 
 		return builder.toString();
