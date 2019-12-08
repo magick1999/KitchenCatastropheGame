@@ -17,6 +17,7 @@ import group44.game.Level;
  * @version 1.0
  */
 public class TokenDoor extends Door {
+    /** Number of Tokens needed to open the door. */
     private int tokensNeeded;
 
     /**

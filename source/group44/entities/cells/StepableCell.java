@@ -15,8 +15,8 @@ import javafx.scene.canvas.GraphicsContext;
  * @version 1.0
  */
 public abstract class StepableCell extends Cell {
-    private MovableObject movableObject; // MovableObject standing on the
-                                         // cell
+    /** MovableObject standing on the. */
+    private MovableObject movableObject;
 
     /**
      * Creates a new {@link StepableCell}.

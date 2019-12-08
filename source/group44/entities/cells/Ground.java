@@ -14,6 +14,7 @@ import javafx.scene.canvas.GraphicsContext;
  * @version 1.0
  */
 public class Ground extends StepableCell {
+    /** Collectable item placed on the Ground. */
     private CollectableItem collectableItem;
 
     /**

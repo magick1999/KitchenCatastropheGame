@@ -17,6 +17,7 @@ import group44.game.Level;
  * @version 1.0
  */
 public class KeyDoor extends Door {
+    /** Unlocking key for the door. */
     private Key.KeyType unlockingKey;
 
     /**

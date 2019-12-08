@@ -13,6 +13,7 @@ import group44.game.Level;
  * @version 1.0
  */
 public class Teleporter extends StepableCell {
+    /** Linked teleporter. */
     private Teleporter linkedTeleporter;
 
     /**

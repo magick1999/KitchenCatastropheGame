@@ -10,6 +10,7 @@ import group44.game.Level;
  * @version 1.0
  */
 public class Key extends CollectableItem {
+    /** Type of the key needed to open the door. */
     private KeyType keyType;
 
     /**
@@ -53,13 +54,20 @@ public class Key extends CollectableItem {
      * KeyCode and image path.
      */
     public enum KeyType {
-        RED(1, "Red key", "group44/resources/keys/red.png"), BLUE(2, "Blue key",
-                "group44/resources/keys/blue.png"), GREEN(3, "Green key",
-                        "group44/resources/keys/green.png"), GOLD(4, "Gold key",
-                                "group44/resources/keys/yellow.png");
+        /** Red key. */
+        RED(1, "Red key", "group44/resources/keys/red.png"),
+        /** Blue key. */
+        BLUE(2, "Blue key", "group44/resources/keys/blue.png"),
+        /** Green key. */
+        GREEN(3, "Green key", "group44/resources/keys/green.png"),
+        /** Gold key. */
+        GOLD(4, "Gold key", "group44/resources/keys/yellow.png");
 
-        private int code; // used to unlock the door (binary operation)
+        /** Id of the key. */
+        private int code;
+        /** Title of the key. */
         private String title;
+        /** Image path of the key. */
         private String imagePath;
 
         KeyType(int code, String title, String imagePath) {
