@@ -10,6 +10,7 @@ import group44.game.Level;
  * @version 1.0
  */
 public abstract class Cell extends LevelObject {
+    static final String PARSE_PATTERN = "%s,%d,%d,%s";
 
     /**
      * Creates a new {@link Cell}.

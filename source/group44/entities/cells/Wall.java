@@ -11,7 +11,6 @@ import group44.game.Level;
  * @version 1.0
  */
 public class Wall extends Cell {
-    private static final String PARSE_PATTERN = "%s,%d,%d,%s";
 
     /**
      * Creates a new instance of {@link Wall}.
