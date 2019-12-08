@@ -125,8 +125,11 @@ public class GameScene {
 	 *            This is the event for the click on the restart button.
 	 */
 	private void setUpRestart(MouseEvent event) {
-		// TODO: RESTART GAME
 		timer.startTimer(myController.getTimeLabel(), 0);
+
+		// Delete all temp files
+		LevelManager.deleteTempData(this.currentLevel.getId(), this.currentProfile.getId());
+
 		Level newLevel = null;
 		try {
 			newLevel = LevelManager.load(this.currentLevel.getId()); // TODO: @Bogdan Mihai - TESTING
@@ -150,6 +153,7 @@ public class GameScene {
 	private void setUpHome(MouseEvent event) {
 		timer.stopTimer();
 		try {
+			this.currentLevel.setTime(timer.getCurrentTimeTaken());
 			LevelManager.save(this.currentLevel, this.currentProfile.getId());
 		} catch (IOException e) {
 			// TODO: @Bogdan Mihai - REVIEW
