@@ -12,10 +12,14 @@ import group44.game.Level;
  *
  * @author Tomas Svejnoha
  * @version 1.0
- *
  */
-public class LevelSaver {
+public final class LevelSaver {
+    /** Header pattern of the Level file. */
     private static final String LEVEL_HEADER_PATTERN = "%d,%d,%d,%d";
+
+    private LevelSaver() {
+
+    }
 
     /**
      * Saves the level into file.
@@ -29,7 +33,7 @@ public class LevelSaver {
      */
     public static void save(Level level, String path) throws IOException {
         File file = new File(path);
-        if (file.exists() == false) {
+        if (!file.exists()) {
             file.createNewFile();
         }
 

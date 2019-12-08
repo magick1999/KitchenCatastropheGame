@@ -38,6 +38,7 @@ import group44.models.LevelInfo;
  * @version 1.0
  */
 public class LevelLoader {
+    /** Pattern for a teleporter not found. */
     private static final String ERROR_MESSAGE_TELEPORTER_NOT_FOUND = "%s,%d,%d";
 
     /**
@@ -155,9 +156,7 @@ public class LevelLoader {
 
         if (cell != null) {
             level.addCell(cell.getPositionX(), cell.getPositionY(), cell);
-        } else if (type.equals(Constants.TYPE_TELEPORTER_LINK)) {
-            // DO nothing
-        } else {
+        } else if (!type.equals(Constants.TYPE_TELEPORTER_LINK)) {
             throw new ParsingException(type + " " + scanner.nextLine());
         }
     }
@@ -730,7 +729,7 @@ public class LevelLoader {
 
         Cell cell01 = level.getGrid()[x1][y1];
 
-        if (cell01 instanceof Teleporter == false) {
+        if (!(cell01 instanceof Teleporter)) {
             throw new ParsingException(
                     String.format(ERROR_MESSAGE_TELEPORTER_NOT_FOUND,
                             Constants.TYPE_TELEPORTER_LINK, x1, y1));
@@ -741,7 +740,7 @@ public class LevelLoader {
 
         Cell cell02 = level.getGrid()[x2][y2];
 
-        if (cell02 instanceof Teleporter == false) {
+        if (!(cell02 instanceof Teleporter)) {
             throw new ParsingException(
                     String.format(ERROR_MESSAGE_TELEPORTER_NOT_FOUND,
                             Constants.TYPE_TELEPORTER_LINK, x2, y2));

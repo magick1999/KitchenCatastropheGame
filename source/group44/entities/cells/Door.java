@@ -12,8 +12,11 @@ import javafx.scene.image.Image;
  * @version 1.0
  */
 public abstract class Door extends StepableCell {
+    /** Is open? */
     private boolean isOpen;
+    /** Path to the image representing unlocked door. */
     private String unlockedImagePath;
+    /** Image representing unlocked door. */
     private Image unlockedImage;
 
     /**

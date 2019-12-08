@@ -1,17 +1,17 @@
 package group44.controllers.parsers;
 
-/**
- * The class for getting the Message of the day.
- *
- * @author Jordan Price
- * @version 1.0
- *
- */
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * The class for getting the Message of the day.
+ *
+ * @author Jordan Price, Tomas Svejnoha
+ * @version 1.0
+ *
+ */
 public class MOTDParser {
 
     /**
@@ -20,24 +20,13 @@ public class MOTDParser {
      * @return message The decoded message of the day
      */
     public static String getMOTD() {
-        String code = getHtml("http://cswebcat.swan.ac.uk/puzzle");// Passes
-                                                                   // url
-                                                                   // to
-                                                                   // getHTML
-        String decoded = decode(code);// decodes the code given from the
-                                      // URL
+        // Passes URL to getHTML
+        String code = getHtml("http://cswebcat.swan.ac.uk/puzzle");
+        // decodes the code given from the
+        String decoded = decode(code);
+        // Passes the URL and the decoded code to the checker web-site.
         String message = getHtml(
-                "http://cswebcat.swan.ac.uk/message?solution=" + decoded);// passes
-                                                                          // the
-                                                                          // url
-                                                                          // and
-                                                                          // the
-                                                                          // decoded
-                                                                          // code
-                                                                          // to
-                                                                          // the
-                                                                          // checker
-                                                                          // website.
+                "http://cswebcat.swan.ac.uk/message?solution=" + decoded);
         return message;
 
     }
@@ -50,33 +39,25 @@ public class MOTDParser {
      * @return output - the output that the BurfferedReader has given.
      *
      */
-    private static String getHtml(String website) {
+    private static String getHtml(final String website) {
         String output = null; // Creates a default output
         try {
             StringBuilder result = new StringBuilder();
-            URL url = new URL(website); // Encodes the passes in
-                                        // string as a URL
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection(); // Opens
-                                                                               // the
-                                                                               // connection
-                                                                               // to
-                                                                               // the
-                                                                               // website
-            conn.setRequestMethod("GET"); // Tells the website that
-                                          // we're GETTING
-                                          // information
-            BufferedReader rd = new BufferedReader(
-                    new InputStreamReader(conn.getInputStream()));// Creates
-                                                                  // a
-                                                                  // reader
+            // Encodes the passes in string as a URL
+            URL url = new URL(website);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(conn.getInputStream()));
             String line;
-            // Reads the website
-            while ((line = rd.readLine()) != null) {
+            // Reads the web-site
+            while ((line = bufferedReader.readLine()) != null) {
                 result.append(line);
             }
-            rd.close(); // Closes the reader
-            output = result.toString(); // Changes the output to
-                                        // string.
+            bufferedReader.close();
+            output = result.toString();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,30 +83,28 @@ public class MOTDParser {
                                                      // the character
                                                      // array
             char c = message.charAt(i);
-            if ((i & 1) == 0) {// If even
+            if ((i & 1) == 0) { // If even
                 if (c == 90) {
-                    messageChars[i] = 65;// Loop from Z back
-                                         // to A
+                    // Loop from Z back to A
+                    messageChars[i] = 65;
                 } else {
-                    messageChars[i] = c += 1;// Increase
-                                             // character
-                                             // value
-                                             // by 1
+                    // Increase character value by 1
+                    messageChars[i] = c += 1;
                 }
             } else {
-                if (c == 65) {// Loop from A back to Z
+                if (c == 65) {
+                    // Loop from A back to Z
                     messageChars[i] = 90;
                 } else {
-                    messageChars[i] = c -= 1;// Decrease
-                                             // character
-                                             // value
-                                             // by 1
+                    // Decrease character value by 1
+                    messageChars[i] = c -= 1;
                 }
             }
         }
-        message = String.valueOf(messageChars);// Converts from
-                                               // character array back
-                                               // to a string.
+        // Converts from
+        // character array back
+        // to a string.
+        message = String.valueOf(messageChars);
 
         return message;
     }
