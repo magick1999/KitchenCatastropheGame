@@ -327,11 +327,11 @@ public class LevelTest {
 
 				if (x == 1 && y == 18) {
 					printPlayer(writer, x, y); // Ground + Player
-				} else if ((x == 4 || x == 6) && (y != 9 || y != 3)) {
+				} else if ((x == 4 || x == 6) && (y != 9 && y != 3)) {
 					printWater(writer, x, y); // Water
-				} else if (x == 5 && y != 9) {
+				} else if (x == 5 && (y != 9 && y != 3)) {
 					printFire(writer, x, y); // Fire
-				} else if (x == 7 && y == 16) {
+				} else if (x == 7 && y == 18) {
 					printTeleporter(writer, x, y);
 				} else if ((x >= 8 && x <= 10) && y != 9) {
 					printWall(writer, x, y); // Wall
@@ -360,7 +360,7 @@ public class LevelTest {
 			}
 		}
 
-		printTeleportersLink(writer, 7, 16, 11, 7);
+		printTeleportersLink(writer, 7, 18, 11, 7);
 
 		writer.close();
 	}

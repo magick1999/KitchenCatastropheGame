@@ -131,13 +131,13 @@ ground,3,17,group44/resources/cells/floor.png
 ground,3,18,group44/resources/cells/floor.png
 water,4,1,group44/resources/cells/water.png
 water,4,2,group44/resources/cells/water.png
-water,4,3,group44/resources/cells/water.png
+ground,4,3,group44/resources/cells/floor.png
 water,4,4,group44/resources/cells/water.png
 water,4,5,group44/resources/cells/water.png
 water,4,6,group44/resources/cells/water.png
 water,4,7,group44/resources/cells/water.png
 water,4,8,group44/resources/cells/water.png
-water,4,9,group44/resources/cells/water.png
+ground,4,9,group44/resources/cells/floor.png
 water,4,10,group44/resources/cells/water.png
 water,4,11,group44/resources/cells/water.png
 water,4,12,group44/resources/cells/water.png
@@ -149,7 +149,7 @@ water,4,17,group44/resources/cells/water.png
 water,4,18,group44/resources/cells/water.png
 fire,5,1,group44/resources/cells/fire.png
 fire,5,2,group44/resources/cells/fire.png
-fire,5,3,group44/resources/cells/fire.png
+ground,5,3,group44/resources/cells/floor.png
 fire,5,4,group44/resources/cells/fire.png
 fire,5,5,group44/resources/cells/fire.png
 fire,5,6,group44/resources/cells/fire.png
@@ -167,13 +167,13 @@ fire,5,17,group44/resources/cells/fire.png
 fire,5,18,group44/resources/cells/fire.png
 water,6,1,group44/resources/cells/water.png
 water,6,2,group44/resources/cells/water.png
-water,6,3,group44/resources/cells/water.png
+ground,6,3,group44/resources/cells/floor.png
 water,6,4,group44/resources/cells/water.png
 water,6,5,group44/resources/cells/water.png
 water,6,6,group44/resources/cells/water.png
 water,6,7,group44/resources/cells/water.png
 water,6,8,group44/resources/cells/water.png
-water,6,9,group44/resources/cells/water.png
+ground,6,9,group44/resources/cells/floor.png
 water,6,10,group44/resources/cells/water.png
 water,6,11,group44/resources/cells/water.png
 water,6,12,group44/resources/cells/water.png
@@ -198,9 +198,9 @@ ground,7,12,group44/resources/cells/floor.png
 ground,7,13,group44/resources/cells/floor.png
 ground,7,14,group44/resources/cells/floor.png
 ground,7,15,group44/resources/cells/floor.png
-teleporter,Teleporter,7,16,group44/resources/cells/teleporter.png
+ground,7,16,group44/resources/cells/floor.png
 ground,7,17,group44/resources/cells/floor.png
-ground,7,18,group44/resources/cells/floor.png
+teleporter,Teleporter,7,18,group44/resources/cells/teleporter.png
 wall,8,1,group44/resources/WallCounter.png
 wall,8,2,group44/resources/WallCounter.png
 wall,8,3,group44/resources/WallCounter.png
@@ -399,4 +399,4 @@ ground,18,15,group44/resources/cells/floor.png
 ground,18,16,group44/resources/cells/floor.png,smartTargetingEnemy,Smart targeting enemy,18,16,group44/resources/Enemies/Egg/mrEggFront.png
 ground,18,17,group44/resources/cells/floor.png
 goal,18,18,group44/resources/cells/goal.png
-teleporterLink,7,16,11,7
+teleporterLink,7,18,11,7
