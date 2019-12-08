@@ -1,21 +1,18 @@
 package group44.game.scenes;
 
 import group44.controllers.ProfileManager;
+import group44.game.layoutControllers.MainMenuController;
 import group44.models.Profile;
-import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListCell;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import static group44.Constants.WINDOW_HEIGHT;
 import static group44.Constants.WINDOW_WIDTH;
-
-import group44.game.layoutControllers.MainMenuController;
 /**
  * This class displays the main menu and handles all the redirecting of the player to the desired scenes.
  * It also allows the player to select the desired profile.
@@ -116,6 +113,7 @@ public class MainMenuScene {
     }
     private void setUpButtons(){
         profilesListener();
+        mainMenuController.getPlay().setOnMouseClicked(this::pressPlay);
         mainMenuController.getNewProfile().setOnMouseClicked(this::newProfile);
         mainMenuController.getQuit().setOnMouseClicked(this::closeGame);
         mainMenuController.getMOTD().setOnMouseClicked(this::showMOTD);
