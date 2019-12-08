@@ -14,7 +14,6 @@ import javafx.scene.canvas.GraphicsContext;
  * @version 1.0
  */
 public class Ground extends StepableCell {
-	private static final String PARSE_PATTERN = "%s,%d,%d,%s";
 	private static final String CELL_NAME = "Ground";
 
 	private CollectableItem collectableItem;
