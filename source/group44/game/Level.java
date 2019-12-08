@@ -18,16 +18,28 @@ import javafx.scene.input.KeyEvent;
  * @version 1.0
  */
 public class Level {
-    private final static String ERROR_DISPLAY_SIZE_ILLEGAL_ARGUMENT_EXCEPTION = "The displaySize must be odd and >= 3.";
-    private final static String ERROR_COLLISION_EXCEPTION = "Unable to place %s in the grid [%d][%d].";
+    /** Error message pattern when display size is invalid. */
+    private static final String ERROR_DISPLAY_SIZE_ILLEGAL_ARGUMENT_EXCEPTION = "The displaySize must be odd and >= 3.";
+    /** Error message pattern when collision occurs. */
+    private static final String ERROR_COLLISION_EXCEPTION = "Unable to place %s in the grid [%d][%d].";
+    /** The minimum display size allowed. */
+    private static final int MIN_DISPLAY_SIZE = 3;
 
+    /** Level id. */
     private int id;
+    /** 2D game array. */
     private Cell[][] grid; // The 2D game array
+    /** How many cells on X and Y display. */
     private int displaySize; // The size of the grid displayed
+    /** The game player. */
     private Player player;
+    /** The game enemies. */
     private ArrayList<Enemy> enemies;
+    /** Indicates whether the level is finished or not. */
     private boolean isFinished;
+    /** Indicates under which circumstances the level finished. */
     private LevelFinishStatus finishStatus;
+    /** The time taken by the player. */
     private long time;
 
     /**
@@ -51,7 +63,7 @@ public class Level {
             int time) {
         this.id = id;
         this.grid = new Cell[gridWidth][gridHeight];
-        if (displaySize < 3 || displaySize > gridWidth
+        if (displaySize < MIN_DISPLAY_SIZE || displaySize > gridWidth
                 || displaySize > gridHeight || displaySize % 2 != 1) {
             throw new IllegalArgumentException(
                     Level.ERROR_DISPLAY_SIZE_ILLEGAL_ARGUMENT_EXCEPTION);

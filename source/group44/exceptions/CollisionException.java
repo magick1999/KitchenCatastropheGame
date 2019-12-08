@@ -2,7 +2,7 @@ package group44.exceptions;
 
 /**
  * Represents an exception when collision occurs.
- * 
+ *
  * @author Tomas Svejnoha
  * @version 1.0
  */

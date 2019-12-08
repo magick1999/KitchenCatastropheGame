@@ -9,7 +9,9 @@ import group44.controllers.Leaderboard;
  * @version 1.0
  */
 public class Profile {
+    /** The profile id. */
     private int id;
+    /** The username. */
     private String username;
 
     /**

@@ -12,8 +12,12 @@ import group44.exceptions.NotEnoughTokensException;
  * @version 1.0
  */
 public class TokenAccumulator extends CollectableItem {
+    /**
+     * String error pattern when user tries to use more coins than collected.
+     */
     private static final String EXCEPTION_NOT_ENOUGH_TOKENS_EXCEPTION_MESSAGE = "User tried to use more tokens than were collected.";
 
+    /** Accumulated tokens. */
     private ArrayList<Token> accumulatedTokens;
 
     /**

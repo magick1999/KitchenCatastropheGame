@@ -15,7 +15,9 @@ import group44.game.Level;
  * @version 1.0
  */
 public class SmartTargetingEnemy extends Enemy {
+    /** Array used to compute the shortest path in the array. */
     private CellPathInfo[][] cellPathInfos;
+    /** Indicates whether the meta-data array was initialised. */
     private boolean isInitialised;
 
     /**
@@ -118,9 +120,9 @@ public class SmartTargetingEnemy extends Enemy {
     /**
      * Finds the shortest path to the player in the game.
      *
-     * @param targeX
+     * @param targetX
      *            - position X of the player.
-     * @param targeY
+     * @param targetY
      *            - position Y of the player.
      * @return true there is a path; otherwise false.
      */
@@ -259,6 +261,7 @@ public class SmartTargetingEnemy extends Enemy {
      *
      * @return - the string representation of a Smart Targeting Enemy.
      */
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 

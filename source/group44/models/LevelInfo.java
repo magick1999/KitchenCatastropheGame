@@ -11,7 +11,9 @@ import group44.game.Level;
  * @version 1.0
  */
 public class LevelInfo {
+    /** The level id. */
     private int id;
+    /** The file containing the level definition. */
     private File file;
 
     /**

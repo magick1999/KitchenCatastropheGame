@@ -11,11 +11,13 @@ import group44.entities.movableObjects.SmartTargetingEnemy;
  * @version 1.0
  */
 public class CellPathInfo {
-    private int x; // position X
-    private int y; // position Y
-    private long cost; // how many steps to that cell; negative number mean
-                       // not
-                       // reacheable
+    /** Position X. */
+    private int x; //
+    /** Position Y. */
+    private int y; //
+    /** How many steps to that cell; negative number mean not reacheable. */
+    private long cost;
+    /** Parent cell. */
     private CellPathInfo parent;
 
     /**
