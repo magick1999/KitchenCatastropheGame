@@ -19,14 +19,6 @@ public final class Constants {
     public static final int CANVAS_WIDTH = 725;
     public static final int CANVAS_HEIGHT = 550;
 
-    // The size of each cell
-    public static int GRID_CELL_WIDTH = 60;
-    public static int GRID_CELL_HEIGHT = 60;
-
-    // Drawing constants
-    public static int LEVEL_DISPLAY_SIZE = 7; // Must be odd and greater or
-                                              // equal 3
-
     public static final String LEVEL_OBJECT_DELIMITER = ",";
 
     // Parsing constants
@@ -59,4 +51,13 @@ public final class Constants {
     public static final String TITLE_TOKEN_ACCUMULATOR = "Token Accumulator";
     public static final String TITLE_WALL = "Wall";
     public static final String TITLE_WATER = "Water";
+
+    // The size of each cell
+    public static final int GRID_CELL_WIDTH = 60;
+    public static final int GRID_CELL_HEIGHT = 60;
+
+    // Drawing constants
+    public static final int LEVEL_DISPLAY_SIZE = 7; // Must be odd and greater
+                                                    // or equal 3
+
 }
