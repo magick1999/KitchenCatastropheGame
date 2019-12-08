@@ -201,7 +201,7 @@ public class LevelManager {
 	 *             when saving failed.
 	 */
 	public static void save(Level level, int profileId) throws IOException {
-		LevelSaver.save(level, profileId);
+		LevelSaver.save(level, String.format(Constants.FOLDER_LEVELS + Constants.FILE_LEVEL_TEMP_PATTERN, level.getId(), profileId));
 	}
 
 	/**
