@@ -3,8 +3,7 @@ package group44.entities.movableObjects;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import group44.entities.cells.Cell;
-import group44.entities.cells.StepableCell;
+import group44.Constants;
 import group44.entities.movableObjects.smartTargetingEnemy.CellPathInfo;
 import group44.game.CollisionCheckResult;
 import group44.game.Level;
@@ -22,11 +21,16 @@ public class SmartTargetingEnemy extends Enemy {
 	/**
 	 * Creates a new instance of {@link SmartTargetingEnemy}.
 	 *
-	 * @param level     - level where the {@link SmartTargetingEnemy} is located.
-	 * @param title     - title of the enemy.
-	 * @param positionX - position X in the game.
-	 * @param positionY - position Y in the game.
-	 * @param imagePath - path to the image representing the enemy in the game.
+	 * @param level
+	 *            - level where the {@link SmartTargetingEnemy} is located.
+	 * @param title
+	 *            - title of the enemy.
+	 * @param positionX
+	 *            - position X in the game.
+	 * @param positionY
+	 *            - position Y in the game.
+	 * @param imagePath
+	 *            - path to the image representing the enemy in the game.
 	 */
 	public SmartTargetingEnemy(Level level, String title, int positionX, int positionY, String imagePath) {
 		super(level, title, positionX, positionY, 0, 0, imagePath);
@@ -107,8 +111,10 @@ public class SmartTargetingEnemy extends Enemy {
 	/**
 	 * Finds the shortest path to the player in the game.
 	 *
-	 * @param targeX - position X of the player.
-	 * @param targeY - position Y of the player.
+	 * @param targeX
+	 *            - position X of the player.
+	 * @param targeY
+	 *            - position Y of the player.
 	 * @return true there is a path; otherwise false.
 	 */
 	private boolean calculateCosts(int targetX, int targetY) {
@@ -175,8 +181,10 @@ public class SmartTargetingEnemy extends Enemy {
 	/**
 	 * Returns the next cell to step by the the {@link SmartTargetingEnemy}.
 	 *
-	 * @param targetX - position X of the player.
-	 * @param targetY - position Y of the player.
+	 * @param targetX
+	 *            - position X of the player.
+	 * @param targetY
+	 *            - position Y of the player.
 	 * @return the next cell to step.
 	 */
 	private CellPathInfo nextCellToStep(int targetX, int targetY) {
@@ -190,8 +198,8 @@ public class SmartTargetingEnemy extends Enemy {
 	}
 
 	/**
-	 * Chooses valid direction of the next move. The {@link SmartTargetingEnemy} is
-	 * not necessarily getting closer to the player.
+	 * Chooses valid direction of the next move. The {@link SmartTargetingEnemy}
+	 * is not necessarily getting closer to the player.
 	 */
 	private void chooseDirection() {
 		// LEFT
@@ -215,7 +223,8 @@ public class SmartTargetingEnemy extends Enemy {
 	/**
 	 * Method executed when enemy collides with another LevelObject.
 	 *
-	 * @param result - information about the collision.
+	 * @param result
+	 *            - information about the collision.
 	 */
 	@Override
 	protected void onCollided(CollisionCheckResult result) {
@@ -226,11 +235,22 @@ public class SmartTargetingEnemy extends Enemy {
 
 	/**
 	 * Returns a string representation of a Smart Targeting Enemy.
-	 * 
+	 *
 	 * @return - the string representation of a Smart Targeting Enemy.
 	 */
 	public String toString() {
-		return this.getLevel() + "," + this.getTitle() + "," + this.getPositionX() + "," + this.getPositionY() + ","
-				+ this.getImagePath();
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(Constants.TYPE_SMART_TARGETING_ENEMY);
+		sb.append(Constants.LEVEL_OBJECT_DELIMITER);
+		sb.append(this.getTitle());
+		sb.append(Constants.LEVEL_OBJECT_DELIMITER);
+		sb.append(this.getPositionX());
+		sb.append(Constants.LEVEL_OBJECT_DELIMITER);
+		sb.append(this.getPositionY());
+		sb.append(Constants.LEVEL_OBJECT_DELIMITER);
+		sb.append(this.getImagePath());
+
+		return sb.toString();
 	}
 }
