@@ -4,7 +4,9 @@ import group44.entities.LevelObject;
 import group44.entities.cells.Cell;
 import group44.entities.cells.Door;
 import group44.entities.cells.Fire;
+import group44.entities.cells.Goal;
 import group44.entities.cells.StepableCell;
+import group44.entities.cells.Teleporter;
 import group44.entities.cells.Wall;
 import group44.entities.cells.Water;
 import group44.game.CollisionCheckResult;
@@ -58,7 +60,8 @@ public abstract class Enemy extends MovableObject {
 		StepableCell nextCell = this.getNextStepableCellInVelocity(this, this.getVelocityX(), this.getVelocityY());
 
 		// Check if the move can be done; if not, do not move
-		if (nextCell != null && !this.isObstacle(this.getPositionX() + this.getVelocityX(), this.getPositionY() + this.getVelocityY())) {
+		if (nextCell != null && !this.isObstacle(this.getPositionX() + this.getVelocityX(),
+				this.getPositionY() + this.getVelocityY())) {
 			CollisionCheckResult collisionResult = nextCell.stepOn(this);
 			if (collisionResult.isColliding()) {
 				// Colliding; stepOn was NOT successful
@@ -114,6 +117,7 @@ public abstract class Enemy extends MovableObject {
 		Cell[][] cells = this.getLevel().getGrid();
 
 		if (cells[x][y] instanceof Wall || cells[x][y] instanceof Water || cells[x][y] instanceof Fire
+				|| cells[x][y] instanceof Goal || cells[x][y] instanceof Teleporter
 				|| (cells[x][y] instanceof Door && ((Door) cells[x][y]).isOpen() == false)) {
 			return true;
 

@@ -66,17 +66,17 @@ public class SmartTargetingEnemy extends Enemy {
 		int targetY = this.getLevel().getPlayer().getPositionY();
 
 		// Calculate cost to the target cell
-		this.calculateCosts(targetX, targetY);
+		boolean found = this.calculateCosts(targetX, targetY);
 
-		// Get next cell to step
-		CellPathInfo nextCell = this.nextCellToStep(targetX, targetY);
+		if (found) {
+			// Get next cell to step
+			CellPathInfo nextCell = this.nextCellToStep(targetX, targetY);
 
-		// Reset velocity
-		this.setVelocityX(0);
-		this.setVelocityY(0);
+			// Reset velocity
+			this.setVelocityX(0);
+			this.setVelocityY(0);
 
-		// Set velocity
-		if (nextCell != null) {
+			// Set velocity
 			if (nextCell.getX() < this.getPositionX() && nextCell.getY() == this.getPositionY()) {
 				// GO LEFT
 				this.setVelocityX(-1);
@@ -116,8 +116,9 @@ public class SmartTargetingEnemy extends Enemy {
 	 *            - position X of the player.
 	 * @param targeY
 	 *            - position Y of the player.
+	 * @return true there is a path; otherwise false.
 	 */
-	private void calculateCosts(int targeX, int targeY) {
+	private boolean calculateCosts(int targeX, int targeY) {
 		Queue<CellPathInfo> queue = new LinkedList<>();
 		boolean isReached = false;
 
@@ -134,8 +135,9 @@ public class SmartTargetingEnemy extends Enemy {
 			if (isReached == false && this.isObstacle(currentCell.getX() - 1, currentCell.getY()) == false) {
 				CellPathInfo left = this.cellPathInfos[currentCell.getX() - 1][currentCell.getY()];
 				if (left != currentCell.getParent()) {
-					left.setParent(currentCell);
-					queue.add(left);
+					if (left.setParent(currentCell)) {
+						queue.add(left);
+					}
 				}
 			}
 			// RIGHT
@@ -143,8 +145,9 @@ public class SmartTargetingEnemy extends Enemy {
 
 				CellPathInfo right = this.cellPathInfos[currentCell.getX() + 1][currentCell.getY()];
 				if (right != currentCell.getParent()) {
-					right.setParent(currentCell);
-					queue.add(right);
+					if (right.setParent(currentCell)) {
+						queue.add(right);
+					}
 				}
 			}
 			// TOP
@@ -152,8 +155,9 @@ public class SmartTargetingEnemy extends Enemy {
 
 				CellPathInfo top = this.cellPathInfos[currentCell.getX()][currentCell.getY() - 1];
 				if (top != currentCell.getParent()) {
-					top.setParent(currentCell);
-					queue.add(top);
+					if (top.setParent(currentCell)) {
+						queue.add(top);
+					}
 				}
 			}
 			// BOTTOM
@@ -161,11 +165,18 @@ public class SmartTargetingEnemy extends Enemy {
 
 				CellPathInfo bottom = this.cellPathInfos[currentCell.getX()][currentCell.getY() + 1];
 				if (bottom != currentCell.getParent()) {
-					bottom.setParent(currentCell);
-					queue.add(bottom);
+					if (bottom.setParent(currentCell)) {
+						queue.add(bottom);
+					}
 				}
 			}
+
+			if (isReached) {
+				queue.clear();
+			}
 		}
+
+		return isReached;
 	}
 
 	/**
@@ -180,7 +191,7 @@ public class SmartTargetingEnemy extends Enemy {
 			currentCell = currentCell.getParent();
 		}
 
-		return currentCell.getParent();
+		return currentCell;
 	}
 
 	/**

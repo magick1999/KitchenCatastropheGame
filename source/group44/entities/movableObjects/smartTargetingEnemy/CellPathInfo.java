@@ -87,12 +87,18 @@ public class CellPathInfo {
 
 	/**
 	 * Sets parent if the path is better.
+	 *
+	 * @param newParent - the possible new parent.
+	 * @return true if the parent was accepted; otherwise false.
 	 */
-	public void setParent(CellPathInfo newParent) {
+	public boolean setParent(CellPathInfo newParent) {
 		// NO PARENT SO FAR or BETTER PATH FOUND
 		if ((this.parent == null) || (newParent.getCost() < this.parent.getCost())) {
 			this.parent = newParent;
 			this.setCost(newParent.getCost() + 1);
+			return true;
 		}
+
+		return false;
 	}
 }
