@@ -44,8 +44,8 @@ public class GameScene {
     // The controller associated with the specific fxml file.
     private MainGameWindowController myController;
 
-    // It showcases the orientation of the player.
-    private int orientation = 1;
+    private boolean canMove = true;
+
     // The window itself.
     private Stage primaryStage;
     //Current level displayed.
@@ -95,6 +95,7 @@ public class GameScene {
      * stopped aswell.
      */
     private void setUpMenu() {
+    	this.canMove = false;
         timer.pauseTimer();
         myController.getResumeButton().setOnMouseClicked(this::setUpResume);
         myController.getRestartButton().setOnMouseClicked(this::setUpRestart);
@@ -110,6 +111,7 @@ public class GameScene {
     private void setUpResume(MouseEvent event) {
         timer.resumeTimer();
         myController.getMenuBox().setVisible(!myController.getMenuBox().isVisible());
+        this.canMove = true;
     }
 
     /**
@@ -187,6 +189,7 @@ public class GameScene {
             a1.setContentText("Just a suggestion: \n Practice makes it perfect! \n");//Here add the times with append }
         }
 
+        canMove = false;
         Optional<ButtonType> result = a1.showAndWait();
         if (!result.isPresent()) {
 
@@ -198,7 +201,7 @@ public class GameScene {
                     MainMenuScene ms = new MainMenuScene(primaryStage);
                 } else {
                     if (result.get() == restart) {
-                        setUpRestart(new MouseEvent(null, 1, 1, 1, 1, null, 1, false, false, false, false, false, false, false, false, false, false, null));
+                        setUpRestart(new MouseEvent(null, 1, 1, 1, 1, null, 1, canMove, canMove, canMove, canMove, canMove, canMove, canMove, canMove, canMove, canMove	, null));
                     }
                 }
             }
