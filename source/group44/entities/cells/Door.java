@@ -36,6 +36,7 @@ public abstract class Door extends StepableCell {
 			String unlockedImagePath) {
 		super(level, title, positionX, positionY, lockedImagePath);
 
+		this.unlockedImagePath = unlockedImagePath;
 		this.unlockedImage = new Image(unlockedImagePath, true);
 	}
 
