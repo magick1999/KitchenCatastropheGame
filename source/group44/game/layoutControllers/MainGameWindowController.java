@@ -8,9 +8,14 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
 /**
+ * @author Bogdan
  * This class does the fxml injection of the widgets from the main game window layout in the code.
  * It also contains the appropriate getters and setters for the widgets.
  */
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+
 public class MainGameWindowController {
     @FXML
     private Button homeButton;
@@ -28,12 +33,13 @@ public class MainGameWindowController {
     private VBox menuBox;
     @FXML
     private Pane movableObjects;
-    public MainGameWindowController(){
+
+    public MainGameWindowController() {
 
     }
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         menuBox.setVisible(false);
     }
 
@@ -49,7 +55,7 @@ public class MainGameWindowController {
         this.canvas = canvas;
     }
 
-    public Canvas getCanvas(){
+    public Canvas getCanvas() {
         return canvas;
     }
 

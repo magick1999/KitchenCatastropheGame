@@ -7,8 +7,18 @@
 
 }
 
-.label{
+#motd{
     -fx-font-family: "Helvetica";
+    -fx-font-size: 12pt;
+    -fx-font-weight: bold;
+    -fx-position: center;
+}
+
+#title{
+    -fx-underline: true;
+    -fx-font-size: 20pt;
+    -fx-font-family: "Helvetica";
+    -fx-text-fill: lightgreen;
     -fx-font-weight: bold;
 }
 
@@ -56,4 +66,18 @@
     -fx-height: 100;
     -fx-pref-height: 300;
     -fx-pref-width: 200;
+}
+
+#timeTitle{
+    -fx-font-weight: bold;
+    -fx-font-family: "Helvetica";
+}
+
+#timer{
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: black;
+    -fx-border-width: 3;
+    -fx-background-color: lightgreen;
+    -fx-font-family: "Helvetica";
 }

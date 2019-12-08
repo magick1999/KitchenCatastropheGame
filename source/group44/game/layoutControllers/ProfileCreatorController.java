@@ -8,9 +8,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 /**
+ * @author Bogdan
  * This class does the fxml injection of the widgets from the profile creator layout in the code.
  * It also contains the appropriate getters and setters for the widgets.
  */
+
 public class ProfileCreatorController {
     @FXML
     private BorderPane root;
@@ -24,12 +26,15 @@ public class ProfileCreatorController {
     private ImageView logo;
     @FXML
     private Button back;
-    public ProfileCreatorController(){
+
+    public ProfileCreatorController() {
     }
+
     @FXML
-    public void initialize(){
+    public void initialize() {
         logo.setImage(new Image("/group44/resources/KitchenCatastrophe.png"));
     }
+
     public void setRoot(BorderPane root) {
         this.root = root;
     }

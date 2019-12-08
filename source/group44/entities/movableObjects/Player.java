@@ -2,6 +2,7 @@ package group44.entities.movableObjects;
 
 import java.util.ArrayList;
 
+import group44.Constants;
 import group44.entities.LevelObject;
 import group44.entities.cells.Fire;
 import group44.entities.cells.Ground;
@@ -13,9 +14,9 @@ import group44.entities.collectableItems.CollectableItem;
 import group44.entities.collectableItems.FireBoots;
 import group44.entities.collectableItems.Flippers;
 import group44.entities.collectableItems.Key;
+import group44.entities.collectableItems.Key.KeyType;
 import group44.entities.collectableItems.Token;
 import group44.entities.collectableItems.TokenAccumulator;
-import group44.entities.collectableItems.Key.KeyType;
 import group44.game.CollisionCheckResult;
 import group44.game.CollisionCheckResult.CollisionCheckResultType;
 import group44.game.Level;
@@ -28,24 +29,35 @@ import javafx.scene.input.KeyEvent;
  * @version 1.0
  */
 public class Player extends MovableObject {
+    /** Pattern for serialising Player into string. */
+    private static final String TO_STRING_PATTERN = "%s,%s,%d,%d,%d,%d,%s";
+    /** All collectable items the player has collected. */
     private ArrayList<CollectableItem> inventory;
 
     /**
-     * Creates a new instance of {@link Player} at specific position in a specific
-     * {@link Level}.
+     * Creates a new instance of {@link Player} at specific position in a
+     * specific {@link Level}.
      *
-     * @param level     - The {@link Level} where the {@link Player} is located.
-     * @param name      - The name of the {@link Player}.
-     * @param positionX - Position X of the {@link Player}.
-     * @param positionY - Position Y of the {@link Player}.
-     * @param velocityX - Velocity X of the {@link Player}.
-     * @param velocityY - Velocity Y of the {@link Player}.
-     * @param imagePath - Path to the Image representing the {@link Player} on the
-     *                  screen.
+     * @param level
+     *            - The {@link Level} where the {@link Player} is located.
+     * @param name
+     *            - The name of the {@link Player}.
+     * @param positionX
+     *            - Position X of the {@link Player}.
+     * @param positionY
+     *            - Position Y of the {@link Player}.
+     * @param velocityX
+     *            - Velocity X of the {@link Player}.
+     * @param velocityY
+     *            - Velocity Y of the {@link Player}.
+     * @param imagePath
+     *            - Path to the Image representing the {@link Player} on the
+     *            screen.
      */
-    public Player(Level level, String name, int positionX, int positionY, int velocityX, int velocityY,
-            String imagePath) {
-        super(level, name, positionX, positionY, velocityX, velocityY, imagePath);
+    public Player(Level level, String name, int positionX, int positionY,
+            int velocityX, int velocityY, String imagePath) {
+        super(level, name, positionX, positionY, velocityX, velocityY,
+                imagePath);
 
         this.inventory = new ArrayList<>();
         this.inventory.add(new TokenAccumulator());
@@ -56,8 +68,10 @@ public class Player extends MovableObject {
      */
     @Override
     public void move() {
-        StepableCell currentCell = this.getStepableCellAtMovableObjectPosition(this);
-        StepableCell nextCell = this.getNextStepableCellInVelocity(this, this.getVelocityX(), this.getVelocityY());
+        StepableCell currentCell = this
+                .getStepableCellAtMovableObjectPosition(this);
+        StepableCell nextCell = this.getNextStepableCellInVelocity(this,
+                this.getVelocityX(), this.getVelocityY());
 
         // Check if the move can be done; if not, do not move
         if (nextCell != null) {
@@ -69,11 +83,15 @@ public class Player extends MovableObject {
                 // Not colliding; stepOn was successful
                 currentCell.stepOff();
 
-                // If the movableObject on the nextCell is not equal to this => Teleporter - position is already set
+                // If the movableObject on the nextCell is not
+                // equal to this =>
+                // Teleporter - position is already set
                 if (nextCell.getMovableObject() == this) {
-                	this.setPosition(nextCell.getPositionX(), nextCell.getPositionY());
+                    this.setPosition(nextCell.getPositionX(),
+                            nextCell.getPositionY());
                 }
-                this.onCellStepped(nextCell); // Does nothing for Teleporters => safe
+                // Does nothing for Teleporters => safe
+                this.onCellStepped(nextCell);
             }
         }
     }
@@ -82,88 +100,99 @@ public class Player extends MovableObject {
      * Method invoked after the {@link Player} collided with another
      * {@link LevelObject}.
      *
-     * @param result - the {@link CollisionCheckResult}.
+     * @param result
+     *            - the {@link CollisionCheckResult}.
      */
     @Override
     protected void onCollided(CollisionCheckResult result) {
-    	switch (result.getType()) {
-    	case Enemy:
-    		Enemy enemy = (Enemy) result.getCollidingObject();
-    		enemy.onCollided(new CollisionCheckResult(CollisionCheckResultType.Player, this));
-    		break;
-		case MissingKey:
-			if (this.tryToOpenKeyDoor(result)) {
-				this.move();
-			}
-			break;
-		case NotEnoughTokens:
-			if (this.tryToOpenTokenDoor(result)) {
-				this.move();
-			}
-			break;
-		default:
-			break;
-		}
+        switch (result.getType()) {
+        case Enemy:
+            Enemy enemy = (Enemy) result.getCollidingObject();
+            enemy.onCollided(new CollisionCheckResult(
+                    CollisionCheckResultType.Player, this));
+            break;
+        case MissingKey:
+            if (this.tryToOpenKeyDoor(result)) {
+                this.move();
+            }
+            break;
+        case NotEnoughTokens:
+            if (this.tryToOpenTokenDoor(result)) {
+                this.move();
+            }
+            break;
+        default:
+            break;
+        }
     }
 
     /**
      * Tries to open {@link KeyDoor}.
      *
-     * @param result - collision result.
+     * @param result
+     *            - collision result.
      * @return true if the door are open; otherwise false.
      */
     private boolean tryToOpenKeyDoor(CollisionCheckResult result) {
-    	KeyDoor door = (KeyDoor) result.getCollidingObject();
-    	Key key = this.getKey(door.getUnlockingKeyType());
+        KeyDoor door = (KeyDoor) result.getCollidingObject();
+        Key key = this.getKey(door.getUnlockingKeyType());
 
-    	if (key != null) {
-    		door.open(key);
-    	}
+        if (key != null) {
+            door.open(key);
+        }
 
-    	return door.isOpen();
+        return door.isOpen();
     }
 
     /**
      * Returns a key of a specific type if player has it in inventory.
      *
-     * @param type - type of the key to find.
+     * @param type
+     *            - type of the key to find.
      * @return the key if found; otherwise null.
      */
     private Key getKey(KeyType type) {
-    	for (CollectableItem collectableItem : this.inventory) {
-			if (collectableItem instanceof Key && ((Key) collectableItem).getKeyCode() == type.getKeyCode()) {
-				return (Key) collectableItem;
-			}
-		}
-    	return null;
+        for (CollectableItem collectableItem : this.inventory) {
+            if (collectableItem instanceof Key && ((Key) collectableItem)
+                    .getKeyCode() == type.getKeyCode()) {
+                return (Key) collectableItem;
+            }
+        }
+        return null;
     }
 
     /**
      * Tries to open {@link TokenDoor}.
      *
-     * @param result - collision result.
+     * @param result
+     *            - collision result.
      * @return true if the door are open; otherwise false.
      */
     private boolean tryToOpenTokenDoor(CollisionCheckResult result) {
-    	TokenDoor door = (TokenDoor) result.getCollidingObject();
-    	return door.open(this.getTokenAccumulator());
+        TokenDoor door = (TokenDoor) result.getCollidingObject();
+        return door.open(this.getTokenAccumulator());
     }
 
     /**
      * If the {@link StepableCell} is an instance of {@link Ground}, the
      * {@link Player} will collect any {@link CollectableItem} on the cell.
      *
-     * @param cell - {@link StepableCell} the {@link Player} stepped on.
+     * @param cell
+     *            - {@link StepableCell} the {@link Player} stepped on.
      */
     private void onCellStepped(StepableCell cell) {
         if (cell instanceof Ground) {
             Ground ground = ((Ground) cell);
             if (ground.hasCollectableItem()) {
-                CollectableItem item = ground.collect(); // Collect the CollectableItem if the is any
+                // Collect the CollectableItem if the is any
+                CollectableItem item = ground.collect();
                 if (item instanceof Token) {
-                    this.getTokenAccumulator().addToken((Token) item); // If token, add to TokenAccumulator
+                    // If token, add to TokenAccumulator
+                    this.getTokenAccumulator().addToken((Token) item);
                 } else {
-                    this.inventory.add(item); // else, add to inventory
+                    this.inventory.add(item); // else, add
+                                              // to
+                                              // inventory
                 }
             }
         }
@@ -173,7 +202,8 @@ public class Player extends MovableObject {
      * Method executed when some other {@link LevelObject} tries to kill the
      * {@link Player}. The player will die if he can't protect himself.
      *
-     * @param object - the {@link LevelObject} trying to kill the {@link Player}.
+     * @param object
+     *            - the {@link LevelObject} trying to kill the {@link Player}.
      */
     @Override
     public void die(LevelObject object) {
@@ -217,7 +247,8 @@ public class Player extends MovableObject {
     /**
      * Sets the velocity of the {@link Player} based on the arrow pressed.
      *
-     * @param event - the {@link KeyEvent}.
+     * @param event
+     *            - the {@link KeyEvent}.
      */
     public void keyDown(KeyEvent event) {
         switch (event.getCode()) {
@@ -237,15 +268,15 @@ public class Player extends MovableObject {
             this.setVelocityX(0);
             this.setVelocityY(1);
             break;
-		default:
-			break;
+        default:
+            break;
         }
     }
 
     /**
-     * Returns a {@link TokenAccumulator} from the inventory the {@link Player} has.
-     * The method creates one and adds it to the inventory if {@link Player} does
-     * not have it.
+     * Returns a {@link TokenAccumulator} from the inventory the {@link Player}
+     * has. The method creates one and adds it to the inventory if
+     * {@link Player} does not have it.
      *
      * @return the {@link TokenAccumulator}.
      */
@@ -259,5 +290,46 @@ public class Player extends MovableObject {
         TokenAccumulator accumulator = new TokenAccumulator();
         this.inventory.add(accumulator);
         return accumulator;
+    }
+
+    /**
+     * Adds {@link CollectableItem} to the inventory.
+     *
+     * @param item
+     *            - the collectable item.
+     */
+    public void addToInventory(CollectableItem item) {
+        if (item instanceof TokenAccumulator) {
+            this.getTokenAccumulator().addToken((Token) item);
+        } else {
+            this.inventory.add(item);
+        }
+    }
+
+    /**
+     * Returns a string representation of the player.
+     *
+     * @return string representation of the player.
+     */
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(String.format(TO_STRING_PATTERN, Constants.TYPE_PLAYER,
+                this.getTitle(), this.getPositionX(), this.getPositionY(),
+                this.getVelocityX(), this.getVelocityY(), this.getImagePath()));
+
+        for (CollectableItem collectableItem : inventory) {
+            if (collectableItem instanceof TokenAccumulator) {
+                if (((TokenAccumulator) collectableItem).getTokensCount() > 0) {
+                    builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+                    builder.append(collectableItem.toString());
+                }
+            } else {
+                builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+                builder.append(collectableItem.toString());
+            }
+        }
+
+        return builder.toString();
     }
 }

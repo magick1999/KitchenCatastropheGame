@@ -9,26 +9,32 @@ import group44.entities.LevelObject;
  * @version 1.0
  */
 public class CollisionCheckResult {
+    /** The colliding object. */
     private LevelObject collidingObject;
+    /** The collision type. */
     private CollisionCheckResultType type;
 
     /**
      * Creates a new instance of {@link CollisionCheckResult}.
      *
-     * @param type - {@link CollisionCheckResultType} of the collision.
+     * @param type
+     *            - {@link CollisionCheckResultType} of the collision.
      */
     public CollisionCheckResult(CollisionCheckResultType type) {
-    	this.type = type;
+        this.type = type;
     }
 
     /**
      * Creates a new instance of {@link CollisionCheckResult}.
      *
-     * @param type - {@link CollisionCheckResultType} of the collision.
-     * @param collidingObject - the colliding {@link LevelObject}.
+     * @param type
+     *            - {@link CollisionCheckResultType} of the collision.
+     * @param collidingObject
+     *            - the colliding {@link LevelObject}.
      */
-    public CollisionCheckResult(CollisionCheckResultType type, LevelObject collidingObject) {
-    	this(type);
+    public CollisionCheckResult(CollisionCheckResultType type,
+            LevelObject collidingObject) {
+        this(type);
         this.collidingObject = collidingObject;
     }
 
@@ -38,7 +44,7 @@ public class CollisionCheckResult {
      * @return true if the object is colliding; false otherwise.
      */
     public Boolean isColliding() {
-    	return this.type != CollisionCheckResultType.Successful;
+        return this.type != CollisionCheckResultType.Successful;
     }
 
     /**
@@ -56,22 +62,25 @@ public class CollisionCheckResult {
      * @return the {@link CollisionCheckResultType}.
      */
     public CollisionCheckResultType getType() {
-    	return this.type;
+        return this.type;
     }
 
     /**
      * Represents a result type of the collision.
      *
-     * @author Tomáš Švejnoha
+     * @author Tomas Svejnoha
      * @version 1.0
      */
     public enum CollisionCheckResultType {
-    	Successful,
-
-    	Enemy,
-    	Player,
-
-    	MissingKey,
-    	NotEnoughTokens
+        /** The object does not collide. */
+        Successful,
+        /** The object collides with enemy. */
+        Enemy,
+        /** The object collides with player. */
+        Player,
+        /** The object collided with locked KeyDoor. */
+        MissingKey,
+        /** The object collided with locked TokenDoor. */
+        NotEnoughTokens
     }
 }

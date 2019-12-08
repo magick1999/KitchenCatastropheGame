@@ -14,9 +14,11 @@ public abstract class CollectableItem extends LevelObject {
     /**
      * Creates a new {@link CollectableItem}.
      *
-     * @param level     - The {@link Level} where the {@link CollectableItem} is
-     *                  located.
-     * @param title     - Title of the {@link CollectableItem}.
+     * @param level
+     *            - The {@link Level} where the {@link CollectableItem} is
+     *            located.
+     * @param title
+     *            - Title of the {@link CollectableItem}.
      */
     public CollectableItem(Level level, String title) {
         super(level, title, 0, 0);
@@ -25,11 +27,14 @@ public abstract class CollectableItem extends LevelObject {
     /**
      * Creates a new {@link CollectableItem}.
      *
-     * @param level     - The {@link Level} where the {@link CollectableItem} is
-     *                  located.
-     * @param title     - Title of the {@link CollectableItem}.
-     * @param imagePath - Path the the Image representing {@link CollectableItem} in
-     *                  the game.
+     * @param level
+     *            - The {@link Level} where the {@link CollectableItem} is
+     *            located.
+     * @param title
+     *            - Title of the {@link CollectableItem}.
+     * @param imagePath
+     *            - Path the the Image representing {@link CollectableItem} in
+     *            the game.
      */
     public CollectableItem(Level level, String title, String imagePath) {
         super(level, title, 0, 0, imagePath);

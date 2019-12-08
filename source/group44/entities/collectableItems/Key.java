@@ -1,5 +1,6 @@
 package group44.entities.collectableItems;
 
+import group44.Constants;
 import group44.game.Level;
 
 /**
@@ -9,13 +10,16 @@ import group44.game.Level;
  * @version 1.0
  */
 public class Key extends CollectableItem {
+    /** Type of the key needed to open the door. */
     private KeyType keyType;
 
     /**
      * Creates a new instance of {@link Key} of specific colour type.
      *
-     * @param level     - The {@link Level} where the {@link Key} is located.
-     * @param type      - Colour type of the {@link Key}.
+     * @param level
+     *            - The {@link Level} where the {@link Key} is located.
+     * @param type
+     *            - Colour type of the {@link Key}.
      */
     public Key(Level level, KeyType type) {
         super(level, type.getTitle(), type.getImagePath());
@@ -32,16 +36,38 @@ public class Key extends CollectableItem {
     }
 
     /**
+     * Returns a string representation of a {@link Key}.
+     *
+     * @return a string representation of a {@link Key}.
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(Constants.TYPE_KEY);
+        sb.append(Constants.LEVEL_OBJECT_DELIMITER);
+        sb.append(this.getKeyCode());
+        return sb.toString();
+    }
+
+    /**
      * Represents all possible types of a {@link Key}. {@link KeyType} contains
      * KeyCode and image path.
      */
     public enum KeyType {
-        RED(1, "Red key", "group44/resources/keys/red.png"), BLUE(2, "Blue key", "group44/resources/keys/blue.png"),
+        /** Red key. */
+        RED(1, "Red key", "group44/resources/keys/red.png"),
+        /** Blue key. */
+        BLUE(2, "Blue key", "group44/resources/keys/blue.png"),
+        /** Green key. */
         GREEN(3, "Green key", "group44/resources/keys/green.png"),
+        /** Gold key. */
         GOLD(4, "Gold key", "group44/resources/keys/yellow.png");
 
-        private int code; // used to unlock the door (binary operation)
+        /** Id of the key. */
+        private int code;
+        /** Title of the key. */
         private String title;
+        /** Image path of the key. */
         private String imagePath;
 
         KeyType(int code, String title, String imagePath) {

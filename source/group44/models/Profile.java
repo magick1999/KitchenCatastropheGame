@@ -9,14 +9,18 @@ import group44.controllers.Leaderboard;
  * @version 1.0
  */
 public class Profile {
+    /** The profile id. */
     private int id;
+    /** The username. */
     private String username;
 
     /**
      * Creates a new instance of {@link Profile}.
      *
-     * @param id       - Id of the new profile
-     * @param username - the username
+     * @param id
+     *            - Id of the new profile
+     * @param username
+     *            - the username
      */
     public Profile(int id, String username) {
         this.id = id;
