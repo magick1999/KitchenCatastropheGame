@@ -14,8 +14,6 @@ import javafx.scene.canvas.GraphicsContext;
  * @version 1.0
  */
 public class Ground extends StepableCell {
-	private static final String CELL_NAME = "Ground";
-
 	private CollectableItem collectableItem;
 
 	/**
@@ -32,7 +30,7 @@ public class Ground extends StepableCell {
 	 *            - Path to the Image representing {@link Ground} in the game.
 	 */
 	public Ground(Level level, int positionX, int positionY, String imagePath) {
-		super(level, CELL_NAME, positionX, positionY, imagePath);
+		super(level, Constants.TITLE_GROUND, positionX, positionY, imagePath);
 	}
 
 	/**
@@ -71,7 +69,7 @@ public class Ground extends StepableCell {
 	 *            - The {@link MovableObject} on the cell.
 	 */
 	public Ground(Level level, int positionX, int positionY, String imagePath, MovableObject steppedItem) {
-		super(level, CELL_NAME, positionX, positionY, imagePath, steppedItem);
+		super(level, Constants.TITLE_GROUND, positionX, positionY, imagePath, steppedItem);
 	}
 
 	/**
@@ -135,9 +133,9 @@ public class Ground extends StepableCell {
 	}
 
 	/**
-	 * Returns a String representation of the Ground.
+	 * Returns a String representation of the {@link Ground}.
 	 *
-	 * @return the string representation of the ground.
+	 * @return the string representation of the {@link Ground}.
 	 */
 	@Override
 	public String toString() {

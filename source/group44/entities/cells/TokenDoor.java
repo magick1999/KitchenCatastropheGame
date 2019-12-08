@@ -1,5 +1,6 @@
 package group44.entities.cells;
 
+import group44.Constants;
 import group44.entities.collectableItems.CollectableItem;
 import group44.entities.collectableItems.Key;
 import group44.entities.collectableItems.TokenAccumulator;
@@ -72,5 +73,31 @@ public class TokenDoor extends Door {
 		}
 		this.setMovableObject(object);
 		return new CollisionCheckResult(CollisionCheckResultType.Successful);
+	}
+
+	/**
+	 * Returns a string representation of the {@link TokenDoor}.
+	 *
+	 * @return a string representation of the {@link TokenDoor}.
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+
+		builder.append(Constants.TYPE_TOKEN_DOOR);
+		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+		builder.append(this.getTitle());
+		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+		builder.append(this.getPositionX());
+		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+		builder.append(this.getPositionY());
+		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+		builder.append(this.getImagePath());
+		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+		builder.append(this.getUnlockedImagePath());
+		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+		builder.append(this.tokensNeeded);
+
+		return builder.toString();
 	}
 }

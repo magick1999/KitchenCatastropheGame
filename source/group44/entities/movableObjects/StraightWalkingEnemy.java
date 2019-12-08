@@ -1,5 +1,6 @@
 package group44.entities.movableObjects;
 
+import group44.Constants;
 import group44.entities.cells.Ground;
 import group44.entities.cells.StepableCell;
 import group44.game.CollisionCheckResult;
@@ -58,11 +59,26 @@ public class StraightWalkingEnemy extends Enemy {
 
 	/**
 	 * Returns the string representation of a Straight Walking Enemy.
-	 * 
-	 * @return - the string representation of a Staight Walking Enemy.
+	 *
+	 * @return - the string representation of a Straight Walking Enemy.
 	 */
 	public String toString() {
-		return this.getLevel() + "," + this.getTitle() + "," + this.getPositionX() + "," + this.getPositionY() + ","
-				+ this.getImagePath();
+		StringBuilder builder = new StringBuilder();
+		builder.append(Constants.TYPE_STRAIGHT_WALKING_ENEMY);
+		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+
+		builder.append(this.getTitle());
+		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+		builder.append(this.getPositionX());
+		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+		builder.append(this.getPositionY());
+		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+		builder.append(this.getVelocityX());
+		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+		builder.append(this.getVelocityY());
+		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+		builder.append(this.getImagePath());
+
+		return builder.toString();
 	}
 }

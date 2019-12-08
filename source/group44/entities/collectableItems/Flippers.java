@@ -1,5 +1,6 @@
 package group44.entities.collectableItems;
 
+import group44.Constants;
 import group44.game.Level;
 
 /**
@@ -17,6 +18,16 @@ public class Flippers extends CollectableItem {
      *                  game.
      */
     public Flippers(Level level, String imagePath) {
-        super(level, "Flippers", imagePath);
+        super(level, Constants.TITLE_FLIPPERS, imagePath);
+    }
+
+    /**
+	 * Returns a String representation of the {@link Flippers}.
+	 *
+	 * @return the string representation of the {@link Flippers}.
+	 */
+    @Override
+    public String toString() {
+    	return Constants.TYPE_FLIPPERS + Constants.LEVEL_OBJECT_DELIMITER + this.getImagePath();
     }
 }

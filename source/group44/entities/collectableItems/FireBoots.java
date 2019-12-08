@@ -1,5 +1,6 @@
 package group44.entities.collectableItems;
 
+import group44.Constants;
 import group44.game.Level;
 
 /**
@@ -17,6 +18,16 @@ public class FireBoots extends CollectableItem {
      *                  game.
      */
     public FireBoots(Level level, String imagePath) {
-        super(level, "Fireboots", imagePath);
+        super(level, Constants.TITLE_FIREBOOTS, imagePath);
+    }
+
+    /**
+	 * Returns a String representation of the {@link FireBoots}.
+	 *
+	 * @return the string representation of the {@link FireBoots}.
+	 */
+    @Override
+    public String toString() {
+    	return Constants.TYPE_FIRE_BOOTS + Constants.LEVEL_OBJECT_DELIMITER + this.getImagePath();
     }
 }

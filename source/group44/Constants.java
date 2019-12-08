@@ -50,5 +50,13 @@ public final class Constants {
 	public static final String TYPE_TELEPORTER_LINK = "teleporterLink";
 
 	// Titles
+	public static final String TITLE_FIRE = "Fire";
+	public static final String TITLE_FIREBOOTS = "Fireboots";
+	public static final String TITLE_FLIPPERS = "Flippers";
+	public static final String TITLE_GOAL = "Goal";
+	public static final String TITLE_GROUND = "Ground";
 	public static final String TITLE_TOKEN = "Token";
+	public static final String TITLE_TOKEN_ACCUMULATOR = "Token Accumulator";
+	public static final String TITLE_WALL = "Wall";
+	public static final String TITLE_WATER = "Water";
 }

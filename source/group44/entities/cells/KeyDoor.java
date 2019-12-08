@@ -111,7 +111,7 @@ public class KeyDoor extends Door {
 		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
 		builder.append(this.getUnlockedImagePath());
 		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
-		builder.append(this.getUnlockingKeyType());
+		builder.append(this.getUnlockingKeyType().getKeyCode());
 
 		return builder.toString();
 	}

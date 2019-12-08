@@ -26,7 +26,7 @@ public class Goal extends StepableCell {
 	 *            - Path to the Image representing {@link Goal} in the game.
 	 */
 	public Goal(Level level, int positionX, int positionY, String imagePath) {
-		super(level, "Goal", positionX, positionY, imagePath);
+		super(level, Constants.TITLE_GOAL, positionX, positionY, imagePath);
 	}
 
 	/**
@@ -41,9 +41,9 @@ public class Goal extends StepableCell {
 	}
 
 	/**
-	 * Returns a String representation of the Ground.
+	 * Returns a String representation of the {@link Goal}.
 	 *
-	 * @return the string representation of the ground.
+	 * @return the string representation of the {@link Goal}.
 	 */
 	@Override
 	public String toString() {

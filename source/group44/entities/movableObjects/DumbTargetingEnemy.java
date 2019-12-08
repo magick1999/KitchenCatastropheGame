@@ -1,5 +1,6 @@
 package group44.entities.movableObjects;
 
+import group44.Constants;
 import group44.game.CollisionCheckResult;
 import group44.game.Level;
 import group44.game.Position;
@@ -16,13 +17,18 @@ public class DumbTargetingEnemy extends Enemy {
 	/**
 	 * Creates a new instance of {@link DumbTargetingEnemy}.
 	 *
-	 * @param level     - the {@link Level} where the {@link DumbTargetingEnemy} is
-	 *                  located.
-	 * @param name      - name of the {@link DumbTargetingEnemy}.
-	 * @param positionX - position X in the game.
-	 * @param positionY - position Y in the game.
-	 * @param imagePath - path to the Image representing the
-	 *                  {@link DumbTargetingEnemy}.
+	 * @param level
+	 *            - the {@link Level} where the {@link DumbTargetingEnemy} is
+	 *            located.
+	 * @param name
+	 *            - name of the {@link DumbTargetingEnemy}.
+	 * @param positionX
+	 *            - position X in the game.
+	 * @param positionY
+	 *            - position Y in the game.
+	 * @param imagePath
+	 *            - path to the Image representing the
+	 *            {@link DumbTargetingEnemy}.
 	 */
 	public DumbTargetingEnemy(Level level, String name, int positionX, int positionY, String imagePath) {
 		super(level, name, positionX, positionY, 0, 0, imagePath);
@@ -89,7 +95,8 @@ public class DumbTargetingEnemy extends Enemy {
 	/**
 	 * Interacts with the colliding {@link MovableObject}.
 	 *
-	 * @param result - the {@link CollisionCheckResult} with the collision status.
+	 * @param result
+	 *            - the {@link CollisionCheckResult} with the collision status.
 	 */
 	@Override
 	protected void onCollided(CollisionCheckResult result) {
@@ -100,11 +107,27 @@ public class DumbTargetingEnemy extends Enemy {
 
 	/**
 	 * Returns a string representation of a Dumb Targeting Enemy.
-	 * 
+	 *
 	 * @return - the string repsesentation of a Dumb Targeting Enemy.
 	 */
 	public String toString() {
-		return this.getLevel() + "," + this.getTitle() + "," + this.getPositionX() + "," + this.getPositionY() + ","
-				+ this.getImagePath();
+		StringBuilder builder = new StringBuilder();
+
+		builder.append(Constants.TYPE_DUMB_TARGETING_ENEMY);
+		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+
+		builder.append(this.getTitle());
+		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+
+		builder.append(this.getPositionX());
+		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+
+		builder.append(this.getPositionY());
+		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+
+		builder.append(this.getImagePath());
+		builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+
+		return builder.toString();
 	}
 }

@@ -243,6 +243,7 @@ public class SmartTargetingEnemy extends Enemy {
 
 		sb.append(Constants.TYPE_SMART_TARGETING_ENEMY);
 		sb.append(Constants.LEVEL_OBJECT_DELIMITER);
+
 		sb.append(this.getTitle());
 		sb.append(Constants.LEVEL_OBJECT_DELIMITER);
 		sb.append(this.getPositionX());

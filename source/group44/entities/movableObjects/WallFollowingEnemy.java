@@ -1,5 +1,6 @@
 package group44.entities.movableObjects;
 
+import group44.Constants;
 import group44.entities.LevelObject;
 import group44.entities.cells.Ground;
 import group44.game.CollisionCheckResult;
@@ -16,13 +17,18 @@ public class WallFollowingEnemy extends Enemy {
 	/**
 	 * Creates a new instance of {@link WallFollowingEnemy}.
 	 *
-	 * @param level     - The {@link Level} where the {@link WallFollowingEnemy} is
-	 *                  located.
-	 * @param name      - Name of the {@link WallFollowingEnemy}.
-	 * @param positionX - Position X of the {@link WallFollowingEnemy}.
-	 * @param positionY - Position Y of the {@link WallFollowingEnemy}.
-	 * @param imagePath - Path to the Image representing the
-	 *                  {@link WallFollowingEnemy} on the screen.
+	 * @param level
+	 *            - The {@link Level} where the {@link WallFollowingEnemy} is
+	 *            located.
+	 * @param name
+	 *            - Name of the {@link WallFollowingEnemy}.
+	 * @param positionX
+	 *            - Position X of the {@link WallFollowingEnemy}.
+	 * @param positionY
+	 *            - Position Y of the {@link WallFollowingEnemy}.
+	 * @param imagePath
+	 *            - Path to the Image representing the
+	 *            {@link WallFollowingEnemy} on the screen.
 	 */
 	public WallFollowingEnemy(Level level, String name, int positionX, int positionY, String imagePath) {
 		super(level, name, positionX, positionY, 0, 0, imagePath);
@@ -32,7 +38,8 @@ public class WallFollowingEnemy extends Enemy {
 	 * Method invoked after the {@link WallFollowingEnemy} collided with another
 	 * {@link MovableObject}.
 	 *
-	 * @param result - the {@link CollisionCheckResult} with the collision status.
+	 * @param result
+	 *            - the {@link CollisionCheckResult} with the collision status.
 	 */
 	@Override
 	protected void onCollided(CollisionCheckResult result) {
@@ -111,7 +118,8 @@ public class WallFollowingEnemy extends Enemy {
 	}
 
 	/**
-	 * Tries to set the velocity if the {@link WallFollowingEnemy} is not moving.
+	 * Tries to set the velocity if the {@link WallFollowingEnemy} is not
+	 * moving.
 	 */
 	private void tryToSetVelocity() {
 		if (this.isObstacleTop()) {
@@ -172,8 +180,8 @@ public class WallFollowingEnemy extends Enemy {
 	}
 
 	/**
-	 * Indicates whether the {@link WallFollowingEnemy} has an obstacle on the left
-	 * side.
+	 * Indicates whether the {@link WallFollowingEnemy} has an obstacle on the
+	 * left side.
 	 *
 	 * @return true if yes; otherwise false.
 	 */
@@ -184,8 +192,8 @@ public class WallFollowingEnemy extends Enemy {
 	}
 
 	/**
-	 * Indicates whether the {@link WallFollowingEnemy} has an obstacle on the right
-	 * side.
+	 * Indicates whether the {@link WallFollowingEnemy} has an obstacle on the
+	 * right side.
 	 *
 	 * @return true if yes; otherwise false.
 	 */
@@ -196,7 +204,8 @@ public class WallFollowingEnemy extends Enemy {
 	}
 
 	/**
-	 * Indicates whether the {@link WallFollowingEnemy} has an obstacle above it.
+	 * Indicates whether the {@link WallFollowingEnemy} has an obstacle above
+	 * it.
 	 *
 	 * @return true if yes; otherwise false.
 	 */
@@ -207,7 +216,8 @@ public class WallFollowingEnemy extends Enemy {
 	}
 
 	/**
-	 * Indicates whether the {@link WallFollowingEnemy} has an obstacle below it.
+	 * Indicates whether the {@link WallFollowingEnemy} has an obstacle below
+	 * it.
 	 *
 	 * @return true if yes; otherwise false.
 	 */
@@ -267,11 +277,23 @@ public class WallFollowingEnemy extends Enemy {
 
 	/**
 	 * Return a string representation of a Wall Following Enemy.
-	 * 
-	 * @return the string represtions of the enemy.
+	 *
+	 * @return the string representation of the enemy.
 	 */
 	public String toString() {
-		return this.getLevel() + "," + this.getTitle() + "," + this.getPositionX() + "," + this.getPositionY() + ","
-				+ this.getPositionY() + "," + this.getImagePath();
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(Constants.TYPE_WALL_FOLLOWING_ENEMY);
+		sb.append(Constants.LEVEL_OBJECT_DELIMITER);
+
+		sb.append(this.getTitle());
+		sb.append(Constants.LEVEL_OBJECT_DELIMITER);
+		sb.append(this.getPositionX());
+		sb.append(Constants.LEVEL_OBJECT_DELIMITER);
+		sb.append(this.getPositionY());
+		sb.append(Constants.LEVEL_OBJECT_DELIMITER);
+		sb.append(this.getImagePath());
+
+		return sb.toString();
 	}
 }
