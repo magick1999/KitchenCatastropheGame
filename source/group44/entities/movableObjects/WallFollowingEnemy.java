@@ -16,18 +16,13 @@ public class WallFollowingEnemy extends Enemy {
 	/**
 	 * Creates a new instance of {@link WallFollowingEnemy}.
 	 *
-	 * @param level
-	 *            - The {@link Level} where the {@link WallFollowingEnemy} is
-	 *            located.
-	 * @param name
-	 *            - Name of the {@link WallFollowingEnemy}.
-	 * @param positionX
-	 *            - Position X of the {@link WallFollowingEnemy}.
-	 * @param positionY
-	 *            - Position Y of the {@link WallFollowingEnemy}.
-	 * @param imagePath
-	 *            - Path to the Image representing the
-	 *            {@link WallFollowingEnemy} on the screen.
+	 * @param level     - The {@link Level} where the {@link WallFollowingEnemy} is
+	 *                  located.
+	 * @param name      - Name of the {@link WallFollowingEnemy}.
+	 * @param positionX - Position X of the {@link WallFollowingEnemy}.
+	 * @param positionY - Position Y of the {@link WallFollowingEnemy}.
+	 * @param imagePath - Path to the Image representing the
+	 *                  {@link WallFollowingEnemy} on the screen.
 	 */
 	public WallFollowingEnemy(Level level, String name, int positionX, int positionY, String imagePath) {
 		super(level, name, positionX, positionY, 0, 0, imagePath);
@@ -116,8 +111,7 @@ public class WallFollowingEnemy extends Enemy {
 	}
 
 	/**
-	 * Tries to set the velocity if the {@link WallFollowingEnemy} is not
-	 * moving.
+	 * Tries to set the velocity if the {@link WallFollowingEnemy} is not moving.
 	 */
 	private void tryToSetVelocity() {
 		if (this.isObstacleTop()) {
@@ -178,8 +172,8 @@ public class WallFollowingEnemy extends Enemy {
 	}
 
 	/**
-	 * Indicates whether the {@link WallFollowingEnemy} has an obstacle on the
-	 * left side.
+	 * Indicates whether the {@link WallFollowingEnemy} has an obstacle on the left
+	 * side.
 	 *
 	 * @return true if yes; otherwise false.
 	 */
@@ -190,8 +184,8 @@ public class WallFollowingEnemy extends Enemy {
 	}
 
 	/**
-	 * Indicates whether the {@link WallFollowingEnemy} has an obstacle on the
-	 * right side.
+	 * Indicates whether the {@link WallFollowingEnemy} has an obstacle on the right
+	 * side.
 	 *
 	 * @return true if yes; otherwise false.
 	 */
@@ -202,8 +196,7 @@ public class WallFollowingEnemy extends Enemy {
 	}
 
 	/**
-	 * Indicates whether the {@link WallFollowingEnemy} has an obstacle above
-	 * it.
+	 * Indicates whether the {@link WallFollowingEnemy} has an obstacle above it.
 	 *
 	 * @return true if yes; otherwise false.
 	 */
@@ -214,8 +207,7 @@ public class WallFollowingEnemy extends Enemy {
 	}
 
 	/**
-	 * Indicates whether the {@link WallFollowingEnemy} has an obstacle below
-	 * it.
+	 * Indicates whether the {@link WallFollowingEnemy} has an obstacle below it.
 	 *
 	 * @return true if yes; otherwise false.
 	 */
@@ -271,5 +263,15 @@ public class WallFollowingEnemy extends Enemy {
 		LevelObject[][] map = this.getLevel().getGrid();
 		LevelObject cell = map[this.getPositionX() + 1][this.getPositionY() + 1];
 		return (cell instanceof Ground) == false;
+	}
+
+	/**
+	 * Return a string representation of a Wall Following Enemy.
+	 * 
+	 * @return the string represtions of the enemy.
+	 */
+	public String toString() {
+		return this.getLevel() + "," + this.getTitle() + "," + this.getPositionX() + "," + this.getPositionY() + ","
+				+ this.getPositionY() + "," + this.getImagePath();
 	}
 }
