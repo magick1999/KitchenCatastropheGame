@@ -3,7 +3,6 @@ package group44.entities.collectableItems;
 import java.util.ArrayList;
 
 import group44.exceptions.NotEnoughTokensException;
-import javafx.scene.canvas.GraphicsContext;
 
 /**
  * Represents an accumulator for {@link Token}s.
