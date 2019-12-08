@@ -22,16 +22,11 @@ public class SmartTargetingEnemy extends Enemy {
 	/**
 	 * Creates a new instance of {@link SmartTargetingEnemy}.
 	 *
-	 * @param level
-	 *            - level where the {@link SmartTargetingEnemy} is located.
-	 * @param title
-	 *            - title of the enemy.
-	 * @param positionX
-	 *            - position X in the game.
-	 * @param positionY
-	 *            - position Y in the game.
-	 * @param imagePath
-	 *            - path to the image representing the enemy in the game.
+	 * @param level     - level where the {@link SmartTargetingEnemy} is located.
+	 * @param title     - title of the enemy.
+	 * @param positionX - position X in the game.
+	 * @param positionY - position Y in the game.
+	 * @param imagePath - path to the image representing the enemy in the game.
 	 */
 	public SmartTargetingEnemy(Level level, String title, int positionX, int positionY, String imagePath) {
 		super(level, title, positionX, positionY, 0, 0, imagePath);
@@ -112,10 +107,8 @@ public class SmartTargetingEnemy extends Enemy {
 	/**
 	 * Finds the shortest path to the player in the game.
 	 *
-	 * @param targeX
-	 *            - position X of the player.
-	 * @param targeY
-	 *            - position Y of the player.
+	 * @param targeX - position X of the player.
+	 * @param targeY - position Y of the player.
 	 * @return true there is a path; otherwise false.
 	 */
 	private boolean calculateCosts(int targetX, int targetY) {
@@ -182,10 +175,8 @@ public class SmartTargetingEnemy extends Enemy {
 	/**
 	 * Returns the next cell to step by the the {@link SmartTargetingEnemy}.
 	 *
-	 * @param targetX
-	 *            - position X of the player.
-	 * @param targetY
-	 *            - position Y of the player.
+	 * @param targetX - position X of the player.
+	 * @param targetY - position Y of the player.
 	 * @return the next cell to step.
 	 */
 	private CellPathInfo nextCellToStep(int targetX, int targetY) {
@@ -199,8 +190,8 @@ public class SmartTargetingEnemy extends Enemy {
 	}
 
 	/**
-	 * Chooses valid direction of the next move. The {@link SmartTargetingEnemy}
-	 * is not necessarily getting closer to the player.
+	 * Chooses valid direction of the next move. The {@link SmartTargetingEnemy} is
+	 * not necessarily getting closer to the player.
 	 */
 	private void chooseDirection() {
 		// LEFT
@@ -224,13 +215,22 @@ public class SmartTargetingEnemy extends Enemy {
 	/**
 	 * Method executed when enemy collides with another LevelObject.
 	 *
-	 * @param result
-	 *            - information about the collision.
+	 * @param result - information about the collision.
 	 */
 	@Override
 	protected void onCollided(CollisionCheckResult result) {
 		if (result.getCollidingObject() instanceof Player) {
 			((Player) result.getCollidingObject()).die(this);
 		}
+	}
+
+	/**
+	 * Returns a string representation of a Smart Targeting Enemy.
+	 * 
+	 * @return - the string representation of a Smart Targeting Enemy.
+	 */
+	public String toString() {
+		return this.getLevel() + "," + this.getTitle() + "," + this.getPositionX() + "," + this.getPositionY() + ","
+				+ this.getImagePath();
 	}
 }
