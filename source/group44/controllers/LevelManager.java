@@ -173,7 +173,8 @@ public class LevelManager {
 	/**
 	 * Looks for a level with id in the loaded levels.
 	 *
-	 * @param id - id of a level to load.
+	 * @param id
+	 *            - id of a level to load.
 	 * @return the {@link LevelInfo} for the level with id.
 	 */
 	private static LevelInfo getLevelInfo(int id) {
@@ -183,5 +184,57 @@ public class LevelManager {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * Saves the current state of the level.
+	 *
+	 * @param level
+	 *            - level to save.
+	 * @param profileId
+	 *            - profile id of the user.
+	 */
+	public static void save(Level level, int profileId) {
+
+	}
+
+	/**
+	 * Loads the saved level.
+	 *
+	 * @param levelId
+	 *            - id of the level to load.
+	 * @param profileId
+	 *            - id of the user who saved the game.
+	 * @return
+	 */
+	public static Level resume(int levelId, int profileId) {
+		return null;
+	}
+
+	/**
+	 * Deletes saved level for profile id.
+	 *
+	 * @param levelId
+	 *            - id of the level.
+	 * @param profileId
+	 *            - id of the profile.
+	 */
+	public static void deleteTempData(int levelId, int profileId) {
+		if (hasUnfinishedLevel(levelId, profileId)) {
+
+		}
+	}
+
+	/**
+	 * Indicates whether the player has an unfinished level with id.
+	 *
+	 * @param levelId
+	 *            - id of the level.
+	 * @param profileId
+	 *            - id of the profile.
+	 * @return true if there is a level with id saved; otherwise false.
+	 */
+	public static boolean hasUnfinishedLevel(int levelId, int profileId) {
+		return false;
 	}
 }
