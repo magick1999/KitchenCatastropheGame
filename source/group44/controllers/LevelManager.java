@@ -9,7 +9,7 @@ import org.omg.CORBA.CODESET_INCOMPATIBLE;
 
 import group44.models.LevelInfo;
 import group44.Constants;
-import group44.controllers.parsers.LevelParser;
+import group44.controllers.parsers.LevelLoader;
 import group44.exceptions.CollisionException;
 import group44.exceptions.ParsingException;
 import group44.game.Level;
@@ -22,7 +22,6 @@ import group44.game.Level;
  */
 public class LevelManager {
 	private static final String LEVEL_TEMP_FILE_PATTERN = "%d-%d.txt"; // "LEVEL_ID-PROFILE_ID.txt"
-	private static final String LEVEL_HEADER_PATTERN = "%d,%d,%d,%d";
 
 	private static final String LEVEL_FILE_PATTERN = "^level_[0-9]+\\.txt$";
 	private static final String ERROR_LEVELID_NOT_FOUND = "Unable to find level with id=%d.";
@@ -145,7 +144,7 @@ public class LevelManager {
 	 *             when level file is not found.
 	 */
 	public static Level load(LevelInfo levelInfo) throws FileNotFoundException, CollisionException, ParsingException {
-		return LevelParser.parseLevel(levelInfo);
+		return LevelLoader.parseLevel(levelInfo);
 	}
 
 	/**
@@ -172,7 +171,7 @@ public class LevelManager {
 			throw new IllegalArgumentException(String.format(ERROR_LEVELID_NOT_FOUND, levelId));
 		}
 
-		return LevelParser.parseLevel(levelInfo);
+		return LevelLoader.parseLevel(levelInfo);
 	}
 
 	/**
@@ -200,7 +199,7 @@ public class LevelManager {
 	 *            - profile id of the user.
 	 */
 	public static void save(Level level, int profileId) {
-
+		throw new UnsupportedOperationException(); // TODO: Implement
 	}
 
 	/**
@@ -221,7 +220,7 @@ public class LevelManager {
 	 */
 	public static Level resume(int levelId, int profileId)
 			throws FileNotFoundException, CollisionException, ParsingException {
-		return LevelParser.parseLevel(getLevelInfoForFile(levelId, profileId));
+		return LevelLoader.parseLevel(getLevelInfoForFile(levelId, profileId));
 	}
 
 	/**
