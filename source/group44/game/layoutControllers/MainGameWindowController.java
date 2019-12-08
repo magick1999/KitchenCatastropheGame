@@ -4,6 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+
+/**
+ * @author Bogdan
+ * This class does the fxml injection of the widgets from the main game window layout in the code.
+ * It also contains the appropriate getters and setters for the widgets.
+ */
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
