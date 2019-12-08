@@ -227,7 +227,29 @@ public class LevelLoader {
 		int positionY = scanner.nextInt();
 		String imagePath = scanner.next();
 
-		return new Water(level, positionX, positionY, imagePath);
+		MovableObject movableObject = null;
+		if (scanner.hasNext()) {
+			String type = scanner.next();
+
+			if (type.equals(Constants.TYPE_PLAYER)) {
+				movableObject = parsePlayerEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_DUMB_TARGETING_ENEMY)) {
+				movableObject = parseDumbTargetingEnemyEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_STRAIGHT_WALKING_ENEMY)) {
+				movableObject = parseStraightWalkingEnemyEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_WALL_FOLLOWING_ENEMY)) {
+				movableObject = parseWallFollowingEnemyEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_SMART_TARGETING_ENEMY)) {
+				movableObject = parseSmartTargetingEnemyEntry(level, scanner);
+			}
+		}
+
+		StepableCell stepableCell = new Water(level, positionX, positionY, imagePath);
+
+		if (movableObject != null) {
+			stepableCell.stepOn(movableObject);
+		}
+		return stepableCell;
 	}
 
 	/**
@@ -245,7 +267,29 @@ public class LevelLoader {
 		int positionY = scanner.nextInt();
 		String imagePath = scanner.next();
 
-		return new Fire(level, positionX, positionY, imagePath);
+		MovableObject movableObject = null;
+		if (scanner.hasNext()) {
+			String type = scanner.next();
+
+			if (type.equals(Constants.TYPE_PLAYER)) {
+				movableObject = parsePlayerEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_DUMB_TARGETING_ENEMY)) {
+				movableObject = parseDumbTargetingEnemyEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_STRAIGHT_WALKING_ENEMY)) {
+				movableObject = parseStraightWalkingEnemyEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_WALL_FOLLOWING_ENEMY)) {
+				movableObject = parseWallFollowingEnemyEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_SMART_TARGETING_ENEMY)) {
+				movableObject = parseSmartTargetingEnemyEntry(level, scanner);
+			}
+		}
+
+		StepableCell stepableCell = new Fire(level, positionX, positionY, imagePath);
+
+		if (movableObject != null) {
+			stepableCell.stepOn(movableObject);
+		}
+		return stepableCell;
 	}
 
 	/**
@@ -267,7 +311,30 @@ public class LevelLoader {
 		String unlockedImagePath = scanner.next();
 		KeyType unlockingKey = getKeyType(scanner.nextInt());
 
-		return new KeyDoor(level, title, positionX, positionY, lockedImagePath, unlockedImagePath, unlockingKey);
+		MovableObject movableObject = null;
+		if (scanner.hasNext()) {
+			String type = scanner.next();
+
+			if (type.equals(Constants.TYPE_PLAYER)) {
+				movableObject = parsePlayerEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_DUMB_TARGETING_ENEMY)) {
+				movableObject = parseDumbTargetingEnemyEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_STRAIGHT_WALKING_ENEMY)) {
+				movableObject = parseStraightWalkingEnemyEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_WALL_FOLLOWING_ENEMY)) {
+				movableObject = parseWallFollowingEnemyEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_SMART_TARGETING_ENEMY)) {
+				movableObject = parseSmartTargetingEnemyEntry(level, scanner);
+			}
+		}
+
+		StepableCell stepableCell = new KeyDoor(level, title, positionX, positionY, lockedImagePath, unlockedImagePath,
+				unlockingKey);
+
+		if (movableObject != null) {
+			stepableCell.stepOn(movableObject);
+		}
+		return stepableCell;
 	}
 
 	/**
@@ -289,7 +356,29 @@ public class LevelLoader {
 		String unlockedImagePath = scanner.next();
 		int tokensNeeded = scanner.nextInt();
 
-		return new TokenDoor(level, title, positionX, positionY, lockedImagePath, unlockedImagePath, tokensNeeded);
+		MovableObject movableObject = null;
+		if (scanner.hasNext()) {
+			String type = scanner.next();
+
+			if (type.equals(Constants.TYPE_PLAYER)) {
+				movableObject = parsePlayerEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_DUMB_TARGETING_ENEMY)) {
+				movableObject = parseDumbTargetingEnemyEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_STRAIGHT_WALKING_ENEMY)) {
+				movableObject = parseStraightWalkingEnemyEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_WALL_FOLLOWING_ENEMY)) {
+				movableObject = parseWallFollowingEnemyEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_SMART_TARGETING_ENEMY)) {
+				movableObject = parseSmartTargetingEnemyEntry(level, scanner);
+			}
+		}
+
+		StepableCell stepableCell = new TokenDoor(level, title, positionX, positionY, lockedImagePath, unlockedImagePath, tokensNeeded);
+
+		if (movableObject != null) {
+			stepableCell.stepOn(movableObject);
+		}
+		return stepableCell;
 	}
 
 	/**
@@ -307,7 +396,29 @@ public class LevelLoader {
 		int positionY = scanner.nextInt();
 		String imagePath = scanner.next();
 
-		return new Goal(level, positionX, positionY, imagePath);
+		MovableObject movableObject = null;
+		if (scanner.hasNext()) {
+			String type = scanner.next();
+
+			if (type.equals(Constants.TYPE_PLAYER)) {
+				movableObject = parsePlayerEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_DUMB_TARGETING_ENEMY)) {
+				movableObject = parseDumbTargetingEnemyEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_STRAIGHT_WALKING_ENEMY)) {
+				movableObject = parseStraightWalkingEnemyEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_WALL_FOLLOWING_ENEMY)) {
+				movableObject = parseWallFollowingEnemyEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_SMART_TARGETING_ENEMY)) {
+				movableObject = parseSmartTargetingEnemyEntry(level, scanner);
+			}
+		}
+
+		StepableCell stepableCell = new Goal(level, positionX, positionY, imagePath);
+
+		if (movableObject != null) {
+			stepableCell.stepOn(movableObject);
+		}
+		return stepableCell;
 	}
 
 	/**
@@ -327,7 +438,29 @@ public class LevelLoader {
 		int positionY = scanner.nextInt();
 		String imagePath = scanner.next();
 
-		return new Teleporter(level, title, positionX, positionY, imagePath);
+		MovableObject movableObject = null;
+		if (scanner.hasNext()) {
+			String type = scanner.next();
+
+			if (type.equals(Constants.TYPE_PLAYER)) {
+				movableObject = parsePlayerEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_DUMB_TARGETING_ENEMY)) {
+				movableObject = parseDumbTargetingEnemyEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_STRAIGHT_WALKING_ENEMY)) {
+				movableObject = parseStraightWalkingEnemyEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_WALL_FOLLOWING_ENEMY)) {
+				movableObject = parseWallFollowingEnemyEntry(level, scanner);
+			} else if (type.equals(Constants.TYPE_SMART_TARGETING_ENEMY)) {
+				movableObject = parseSmartTargetingEnemyEntry(level, scanner);
+			}
+		}
+
+		StepableCell stepableCell = new Teleporter(level, title, positionX, positionY, imagePath);
+
+		if (movableObject != null) {
+			stepableCell.stepOn(movableObject);
+		}
+		return stepableCell;
 	}
 
 	/**
