@@ -1,5 +1,6 @@
 package group44.entities.cells;
 
+import group44.Constants;
 import group44.entities.movableObjects.MovableObject;
 import group44.game.Level;
 import group44.game.LevelFinishStatus;
@@ -37,5 +38,20 @@ public class Goal extends StepableCell {
 	@Override
 	protected void onStepped(MovableObject object) {
 		this.getLevel().finish(LevelFinishStatus.GoalReached);
+	}
+
+	/**
+	 * Returns a String representation of the Ground.
+	 *
+	 * @return the string representation of the ground.
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+
+		builder.append(String.format(PARSE_PATTERN, Constants.TYPE_GOAL, this.getPositionX(), this.getPositionY(),
+				this.getImagePath()));
+
+		return builder.toString();
 	}
 }
