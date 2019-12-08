@@ -7,6 +7,11 @@
 
 }
 
+.label{
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: bold;
+}
+
 .button{
     -fx-background-image: url("../resources/Buttons/green_button1.png");
     -fx-pref-width: 130px;
