@@ -4,7 +4,7 @@ import group44.controllers.Leaderboard;
 
 /**
  * Represents a user profile.
- * 
+ *
  * @author Tomas Svejnoha
  * @version 1.0
  */
@@ -14,9 +14,11 @@ public class Profile {
 
     /**
      * Creates a new instance of {@link Profile}.
-     * 
-     * @param id       - Id of the new profile
-     * @param username - the username
+     *
+     * @param id
+     *            - Id of the new profile
+     * @param username
+     *            - the username
      */
     public Profile(int id, String username) {
         this.id = id;
@@ -25,7 +27,7 @@ public class Profile {
 
     /**
      * Returns the {@link Profile} id.
-     * 
+     *
      * @return the profile id
      */
     public int getId() {
@@ -34,7 +36,7 @@ public class Profile {
 
     /**
      * Returns the username of the {@link Profile}.
-     * 
+     *
      * @return username of the profile
      */
     public String getUsername() {
@@ -43,20 +45,20 @@ public class Profile {
 
     /**
      * Returns the Id of the level the user achieved.
-     * 
+     *
      * @return the level id
      */
     public int getAchievedLevel() {
-        return Leaderboard.getAchievedLevel(this);
+        return Leaderboard.getAchievedLevel(this.getId());
     }
 
     /**
      * Returns a string representation of the profile.
-     * 
+     *
      * @return {@link Profile} converted to {@link String}
      */
     @Override
     public String toString() {
-        return this.getId() + "," + this.getUsername() + "," + this.getAchievedLevel();
+        return this.getId() + "," + this.getUsername();
     }
 }

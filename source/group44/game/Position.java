@@ -13,8 +13,10 @@ public class Position {
     /**
      * Creates a new instatnce of {@link Position}.
      * 
-     * @param x - the X coordinate
-     * @param y - the Y coordinate
+     * @param x
+     *            - the X coordinate
+     * @param y
+     *            - the Y coordinate
      */
     public Position(int x, int y) {
         this.x = x;

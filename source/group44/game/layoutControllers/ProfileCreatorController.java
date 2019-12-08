@@ -2,14 +2,10 @@ package group44.game.layoutControllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-
-import javax.xml.soap.Text;
-
 
 public class ProfileCreatorController {
     @FXML
@@ -22,12 +18,17 @@ public class ProfileCreatorController {
     private Button confirm;
     @FXML
     private ImageView logo;
-    public ProfileCreatorController(){
-    }
     @FXML
-    public void initialize(){
-        logo.setImage(new Image("/group44/resources/kitchenLogo.png"));
+    private Button back;
+
+    public ProfileCreatorController() {
     }
+
+    @FXML
+    public void initialize() {
+        logo.setImage(new Image("/group44/resources/KitchenCatastrophe.png"));
+    }
+
     public void setRoot(BorderPane root) {
         this.root = root;
     }
@@ -68,5 +69,11 @@ public class ProfileCreatorController {
         return logo;
     }
 
+    public void setBack(Button back) {
+        this.back = back;
+    }
 
+    public Button getBack() {
+        return back;
+    }
 }

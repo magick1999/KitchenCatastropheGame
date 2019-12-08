@@ -1,27 +1,23 @@
 package group44.game;
 
-import group44.entities.Cell;
-import group44.entities.Door;
-import group44.entities.Ground;
-import group44.entities.LevelObject;
-import group44.entities.MovableObject;
-import group44.entities.Player;
-import group44.entities.StepableCell;
-import group44.entities.Wall;
+import java.util.ArrayList;
+
+import group44.entities.cells.Cell;
+import group44.entities.cells.StepableCell;
+import group44.entities.movableObjects.Enemy;
+import group44.entities.movableObjects.MovableObject;
+import group44.entities.movableObjects.Player;
 import group44.exceptions.CollisionException;
-import group44.game.interfaces.IKeyReactive;
-import group44.game.interfaces.ILevel;
-import group44.game.interfaces.ITimeReactive;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 
 /**
  * Level maintains all data and event handling in the game.
- * 
+ *
  * @author Tomas Svejnoha
  * @version 1.0
  */
-public class Level implements ILevel {
+public class Level {
     private final static String ERROR_DISPLAY_SIZE_ILLEGAL_ARGUMENT_EXCEPTION = "The displaySize must be odd and >= 3.";
     private final static String ERROR_COLLISION_EXCEPTION = "Unable to place %s in the grid [%d][%d].";
 
@@ -29,30 +25,83 @@ public class Level implements ILevel {
     private Cell[][] grid; // The 2D game array
     private int displaySize; // The size of the grid displayed
     private Player player;
+    private ArrayList<Enemy> enemies;
+    private boolean isFinished;
+    private LevelFinishStatus finishStatus;
+    private long time;
 
     /**
      * Creates a new instance of {@link Level}.
-     * 
-     * @param id          - the Id of the level
-     * @param gridWidth   - width of the 2D array
-     * @param gridHeight  - height of the 2D array
-     * @param displaySize - size of the grid displayed on screen
-     * @throws IllegalArgumentException If the display size is less than 3, is not
-     *                                  odd, or exceeds a size of a grid.
+     *
+     * @param id
+     *            - the Id of the level
+     * @param gridWidth
+     *            - width of the 2D array
+     * @param gridHeight
+     *            - height of the 2D array
+     * @param displaySize
+     *            - size of the grid displayed on screen
+     * @param time
+     *            - time taken to play the level
+     * @throws IllegalArgumentException
+     *             If the display size is less than 3, is not odd, or exceeds a
+     *             size of a grid.
      */
-    public Level(int id, int gridWidth, int gridHeight, int displaySize) {
+    public Level(int id, int gridWidth, int gridHeight, int displaySize,
+            int time) {
         this.id = id;
         this.grid = new Cell[gridWidth][gridHeight];
-        if (displaySize < 3 || displaySize > gridWidth || displaySize > gridHeight || displaySize % 2 != 1) {
-            throw new IllegalArgumentException(Level.ERROR_DISPLAY_SIZE_ILLEGAL_ARGUMENT_EXCEPTION);
+        if (displaySize < 3 || displaySize > gridWidth
+                || displaySize > gridHeight || displaySize % 2 != 1) {
+            throw new IllegalArgumentException(
+                    Level.ERROR_DISPLAY_SIZE_ILLEGAL_ARGUMENT_EXCEPTION);
         } else {
             this.displaySize = displaySize;
         }
+        this.time = time;
+        this.enemies = new ArrayList<>();
+    }
+
+    /**
+     * Returns the time taken by the player.
+     *
+     * @return the time taken.
+     */
+    public long getTime() {
+        return time;
+    }
+
+    /**
+     * Sets the time taken by the player.
+     *
+     * @param time
+     *            - the time taken.
+     */
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    /**
+     * Indicates whether the player finished the level.
+     *
+     * @return true if finished; otherwise false.
+     */
+    public boolean isFinished() {
+        return this.isFinished;
+    }
+
+    /**
+     * Returns the status under which the level finished.
+     *
+     * @return the finish status.
+     */
+    public LevelFinishStatus getFinishStatus() {
+        return this.finishStatus;
     }
 
     /**
      * Returns the Id of the {@link Level}.
-     * 
+     *
      * @return the level id
      */
     public int getId() {
@@ -60,45 +109,22 @@ public class Level implements ILevel {
     }
 
     /**
-     * Checks whether the object is colliding or not.
-     * 
-     * @param obj - object for to check the collision.
-     * 
-     * @return result of the collision check.
-     */
-    public CollisionCheckResult checkCollision(LevelObject obj) {
-        Cell cell = this.grid[obj.getPositionX()][obj.getPositionY()];
-
-        if (cell instanceof Wall) {
-            return new CollisionCheckResult(cell);
-        } else if (cell instanceof Door && ((Door) cell).isOpen() == false) {
-            return new CollisionCheckResult(cell);
-        } else if (cell instanceof Ground) {
-            Ground ground = (Ground) cell;
-            if (ground.isSteppedOn() == true && ground.getMovableObject() != obj) {
-                return new CollisionCheckResult(ground.getMovableObject());
-            }
-        }
-        return new CollisionCheckResult(null);
-    }
-
-    /**
      * Returns a 2D array with all {@link Cell} in the {@link Level}.
-     * 
+     *
      * @return 2D array of {@link Cell}s
      */
     public Cell[][] getGrid() {
         /*
-         * The only class we will possibly use this method is the SmartTargetingEnemy.
-         * Using some kind of repository does not make sence as the SmartTargetingEnemy
-         * should decide on its own.
+         * The only class we will possibly use this method is the
+         * SmartTargetingEnemy. Using some kind of repository does not make
+         * sence as the SmartTargetingEnemy should decide on its own.
          */
         return this.grid;
     }
 
     /**
      * Returns a width of the game.
-     * 
+     *
      * @return width of the game
      */
     public int getGridWidth() {
@@ -107,7 +133,7 @@ public class Level implements ILevel {
 
     /**
      * Returns a height of the game.
-     * 
+     *
      * @return height of the game
      */
     public int getGridHeight() {
@@ -116,41 +142,69 @@ public class Level implements ILevel {
 
     /**
      * Adds {@link Cell} in the grid to the specific location.
-     * 
-     * @param x    - position X of the {@link Cell}
-     * @param y    - position Y of the {@link Cell}
-     * @param cell - the {@link Cell} to place in the grid
-     * @throws CollisionException when trying to rewrite existing cell in the grid
+     *
+     * @param x
+     *            - position X of the {@link Cell}
+     * @param y
+     *            - position Y of the {@link Cell}
+     * @param cell
+     *            - the {@link Cell} to place in the grid
+     * @throws CollisionException
+     *             when trying to rewrite existing cell in the grid
      */
     public void addCell(int x, int y, Cell cell) throws CollisionException {
         if (this.grid[x][y] != null) {
-            throw new CollisionException(String.format(Level.ERROR_COLLISION_EXCEPTION, cell.getTitle(), x, y));
+            throw new CollisionException(String.format(
+                    Level.ERROR_COLLISION_EXCEPTION, cell.getTitle(), x, y));
         }
 
         this.grid[x][y] = cell;
         if (cell instanceof StepableCell) {
-            MovableObject object = ((StepableCell) cell).getMovableObject();
+            StepableCell stepableCell = ((StepableCell) cell);
+            MovableObject object = stepableCell.getMovableObject();
             if (object instanceof Player) {
                 this.player = (Player) object;
+            }
+            if (object instanceof Enemy) {
+                this.enemies.add((Enemy) object);
             }
         }
     }
 
     /**
+     * Returns the instance of {@link Player} in the game.
+     *
+     * @return the player.
+     */
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    /**
+     * Returns all enemies in the game.
+     *
+     * @return list of enemies.
+     */
+    public ArrayList<Enemy> getEnemies() {
+        return this.enemies;
+    }
+
+    /**
      * Returns a current position of the {@link Player}.
-     * 
+     *
      * @return the {@link Player}'s position
      */
     public Position getPlayerPosition() {
-        return new Position(this.player.getPositionX(), this.player.getPositionY());
+        return new Position(this.player.getPositionX(),
+                this.player.getPositionY());
     }
 
     /**
      * Draws the cell in the active game area.
-     * 
-     * @param gc - {@link GraphicsContext} to which the game is drawn
+     *
+     * @param gc
+     *            - {@link GraphicsContext} to which the game is drawn
      */
-    @Override
     public void draw(GraphicsContext gc) {
         double cellWidth = gc.getCanvas().getWidth() / this.displaySize;
         double cellHeight = gc.getCanvas().getHeight() / this.displaySize;
@@ -158,54 +212,49 @@ public class Level implements ILevel {
 
         Area activeArea = this.getActiveArea();
 
-        for (int x = activeArea.getX1(); x <= activeArea.getX2(); x++) {
-            for (int y = activeArea.getY1(); y <= activeArea.getY2(); y++) {
-                this.grid[x][y].draw(gc, x * cellSize, y * cellSize, cellSize, cellSize);
+        Cell[][] area = getActiveAreaCell(activeArea);
+        int areaWidth = area.length;
+        int areaHeight = area[0].length;
+
+        for (int x = 0; x < areaWidth; x++) {
+            for (int y = 0; y < areaHeight; y++) {
+
+                Cell cell = area[x][y];
+                if (cell != null) {
+                    cell.draw(gc, x * cellSize, y * cellSize, cellSize,
+                            cellSize);
+                }
             }
         }
     }
 
     /**
-     * Passes the {@link KeyEvent} to the {@link Player}.
-     * 
-     * @param event - the {@link KeyEvent}
+     * Passes the {@link KeyEvent} to the {@link Player}. Also moves all
+     * enemies.
+     *
+     * @param event
+     *            - the {@link KeyEvent}
      */
-    @Override
     public void keyDown(KeyEvent event) {
-        if (this.grid[this.player.getPositionX()][this.player.getPositionY()] instanceof IKeyReactive) {
-            ((IKeyReactive) this.grid[this.player.getPositionX()][this.player.getPositionY()]).keyDown(event);
+        if (this.isFinished == false) {
+            this.player.keyDown(event);
+            this.player.move();
+            this.moveEnemies();
         }
     }
 
     /**
-     * Invokes timeTick method on all {@link Cell}s in the active game area
-     * implementing {@link group44.game.interfaces.ITimeReactive}.
+     * Moves all enemies in the game.
      */
-    @Override
-    public void timeTick() {
-        Area activeArea = this.getActiveArea();
-
-        for (int x = activeArea.getX1(); x < activeArea.getX2(); x++) {
-            for (int y = activeArea.getY1(); y < activeArea.getY2(); y++) {
-                if (this.grid[x][y] instanceof ITimeReactive) {
-                    ((ITimeReactive) this.grid[x][y]).timeTick();
-                }
-                if (this.grid[x][y] instanceof StepableCell) {
-                    StepableCell cell = (StepableCell) this.grid[x][y];
-                    if (cell.isSteppedOn()) {
-                        MovableObject movableObject = cell.getMovableObject();
-                        if (movableObject instanceof ITimeReactive) {
-                            ((ITimeReactive) movableObject).timeTick();
-                        }
-                    }
-                }
-            }
+    private void moveEnemies() {
+        for (Enemy enemy : this.enemies) {
+            enemy.move();
         }
     }
 
     /**
      * Returns the active {@link Area} of the game.
-     * 
+     *
      * @return the active area of the game
      */
     private Area getActiveArea() {
@@ -225,7 +274,36 @@ public class Level implements ILevel {
             centerY = (this.grid[1].length - 1) - this.displaySize / 2;
         }
 
-        return new Area(centerX - this.displaySize / 2, centerY - this.displaySize / 2, centerX + this.displaySize / 2,
+        return new Area(centerX - this.displaySize / 2,
+                centerY - this.displaySize / 2, centerX + this.displaySize / 2,
                 centerY + this.displaySize / 2);
+    }
+
+    private Cell[][] getActiveAreaCell(Area activeArea) {
+        Cell[][] array = new Cell[this.displaySize][this.displaySize];
+
+        int width = activeArea.getX2() - activeArea.getX1();
+        int height = activeArea.getY2() - activeArea.getY1();
+
+        for (int x = 0; x < width + 1; x++) {
+            for (int y = 0; y < height + 1; y++) {
+                array[x][y] = this.grid[x + activeArea.getX1()][y
+                        + activeArea.getY1()];
+            }
+        }
+
+        return array;
+    }
+
+    /**
+     * Finished the current level.
+     *
+     * @param status
+     *            - level finish status.
+     */
+    public void finish(LevelFinishStatus status) {
+        System.out.println("Level.finish()");
+        this.isFinished = true;
+        this.finishStatus = status;
     }
 }

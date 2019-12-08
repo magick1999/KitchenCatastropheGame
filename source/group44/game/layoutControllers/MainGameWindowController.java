@@ -3,9 +3,10 @@ package group44.game.layoutControllers;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
-import javafx.scene.layout.*;
-import javafx.scene.text.Font;
-
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 public class MainGameWindowController {
     @FXML
@@ -19,15 +20,18 @@ public class MainGameWindowController {
     @FXML
     private Canvas canvas;
     @FXML
+    private Label timeLabel;
+    @FXML
     private VBox menuBox;
     @FXML
     private Pane movableObjects;
-    public MainGameWindowController(){
+
+    public MainGameWindowController() {
 
     }
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         menuBox.setVisible(false);
     }
 
@@ -43,7 +47,7 @@ public class MainGameWindowController {
         this.canvas = canvas;
     }
 
-    public Canvas getCanvas(){
+    public Canvas getCanvas() {
         return canvas;
     }
 
@@ -77,6 +81,14 @@ public class MainGameWindowController {
 
     public VBox getMenuBox() {
         return menuBox;
+    }
+
+    public void setTimeLabel(Label timeLabel) {
+        this.timeLabel = timeLabel;
+    }
+
+    public Label getTimeLabel() {
+        return timeLabel;
     }
 
     public void setMovableObjects(Pane movableObjects) {
