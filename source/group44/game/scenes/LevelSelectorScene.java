@@ -29,6 +29,7 @@ public class LevelSelectorScene {
     private Stage primaryStage;
     private Integer currentLevelIndex;
     private Profile currentProfile;
+
     /*
      * This is the constructor that creates the scene, instantiates the controller
      * and sets up the listeners for the buttons on the screen.
@@ -46,18 +47,16 @@ public class LevelSelectorScene {
             //Instantiating the controller.
             LevelSelectorController tempController = fxmlLoader.getController();
             setController(tempController);
-            currentLevelIndex = Integer.parseInt(levelSelectorController.getLevelNum().getText().replaceAll("[A-Z a-z]", ""));
+            Leaderboard.load();
+            this.maxLevel = Math.min(LevelManager.load().size(), Leaderboard.getAchievedLevel(currentProfile.getId()) + 1);
+            currentLevelIndex = maxLevel ;
+            this.currentProfile = currentProfile;
             //Adding the listeners for the buttons.
             setUpButtons();
             primaryStage.setScene(scene);
             primaryStage.show();
 
-            this.maxLevel = Math.min(Leaderboard.getAchievedLevel(currentProfile.getId()) + 1, LevelManager.load().size());
-            this.currentProfile = currentProfile;
 
-            if (currentLevelIndex.equals(maxLevel)) {
-                levelSelectorController.getNext().setVisible(false);
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -139,9 +138,24 @@ public class LevelSelectorScene {
      * Listeners for back and forward need to be added.
      */
     private void setUpButtons() {
+        levelSelectorController.getNext().setVisible(false);
+        if (maxLevel == 1) {
+            levelSelectorController.getNext().setVisible(false);
+        } else {
+            if (maxLevel == LevelManager.load().size()) {
+                levelSelectorController.getLevelNum().setText("Level " + LevelManager.load().size());
+                levelSelectorController.getNext().setVisible(false);
+            }
+            else {
+                levelSelectorController.getLevelNum().setText("Level " + currentLevelIndex);
+
+            }
+        }
         loadLevel();
         setTopTimes();
-        levelSelectorController.getPrevious().setVisible(false);
+        if(currentLevelIndex == 1){
+            levelSelectorController.getPrevious().setVisible(false);
+        }
         levelSelectorController.getNext().setOnMouseClicked(this::setNext);
         levelSelectorController.getPrevious().setOnMouseClicked(this::setPrevious);
         levelSelectorController.getMenu().setOnMouseClicked(this::setMenu);

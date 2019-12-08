@@ -113,7 +113,6 @@ public class MainMenuScene {
     }
     private void setUpButtons(){
         profilesListener();
-        mainMenuController.getPlay().setOnMouseClicked(this::pressPlay);
         mainMenuController.getNewProfile().setOnMouseClicked(this::newProfile);
         mainMenuController.getQuit().setOnMouseClicked(this::closeGame);
         mainMenuController.getMOTD().setOnMouseClicked(this::showMOTD);
