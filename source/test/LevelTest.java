@@ -17,8 +17,10 @@ import javafx.embed.swing.JFXPanel;
 public class LevelTest {
 	private static final String LEVELS = "source/group44/data/levels/";
 
+	private static String FILE_HEADER_PATTERN = "%d,%d,%d,%d";
 	private static int WIDTH = 20;
 	private static int HEIGHT = 20;
+	private static int TIME = 0;
 
 	private static String DOOR_KEY_BLUE = "Blue door";
 	private static String DOOR_KEY_GOLD = "Gold door";
@@ -26,6 +28,7 @@ public class LevelTest {
 	private static String DOOR_KEY_RED = "Red door";
 	private static String DOOR_KEY_TOKEN = "Token door";
 
+	private static String ENEMY_NAME_SMART_TARGETING = "Smart targeting enemy";
 	private static String ENEMY_NAME_WALL_FOLLOWING = "Wall following enemy";
 	private static String ENEMY_NAME_STRAIGHT_WALKING = "Straight walking enemy";
 	private static String ENEMY_NAME_DUMB_TARGETING = "Dumb targeting enemy";
@@ -71,6 +74,7 @@ public class LevelTest {
 
 	private static String PATH_IMAGE_PLAYER = BASE_PATH_IMAGE + "ChefDownWalk/Front1.png";
 
+	private static String PATH_IMAGE_SMART_TARGETING_ENEMY = BASE_PATH_IMAGE + "Enemies/Egg/mrEggFront.png";
 	private static String PATH_IMAGE_WALL_FOLLOWING_ENEMY = BASE_PATH_IMAGE + "Enemies/Hotdog/mrHotDogFront.png";
 	private static String PATH_IMAGE_STRAIGHT_WALKING_ENEMY = BASE_PATH_IMAGE + "Enemies/Carrot/mrCarrotFront.png";
 	private static String PATH_IMAGE_DUMB_TARGETTING_ENEMY = BASE_PATH_IMAGE + "Enemies/Pickle/mrPickleFront.png";
@@ -79,11 +83,10 @@ public class LevelTest {
 			throws FileNotFoundException, IllegalArgumentException, CollisionException, ParsingException {
 		JFXPanel jfxPanel = new JFXPanel();
 
-		generateLevelFile01(LEVELS + "level_001.txt");
-		generateLevelFile02(LEVELS + "level_002.txt");
-		generateLevelFile03(LEVELS + "level_003.txt");
-		generateLevelFile04(LEVELS + "level_004.txt");
-		generateLevelFile05(LEVELS + "level_005.txt");
+		generateLevelFile01(LEVELS + "level_001.txt", 11, 11, 0);
+		generateLevelFile02(LEVELS + "level_002.txt", 0);
+		generateLevelFile03(LEVELS + "level_003.txt", 0);
+		generateLevelFile04(LEVELS + "level_004.txt", 0);
 
 		System.out.println("Levels generated");
 
@@ -100,327 +103,242 @@ public class LevelTest {
 		}
 	}
 
-	private static void generateBorders(PrintWriter writer) {
+	private static void generateBorders(PrintWriter writer, int width, int height) {
 		// TOP BORDER
-		for (int x = 0; x < WIDTH; x++) {
+		for (int x = 0; x < width; x++) {
 			printWall(writer, x, 0);
 			writer.println();
 		}
 
 		// BOTTOM BORDER
-		for (int x = 0; x < WIDTH; x++) {
-			printWall(writer, x, HEIGHT - 1);
+		for (int x = 0; x < width; x++) {
+			printWall(writer, x, height - 1);
 			writer.println();
 		}
 
 		// LEFT BORDER
-		for (int y = 1; y < WIDTH - 1; y++) {
+		for (int y = 1; y < width - 1; y++) {
 			printWall(writer, 0, y);
 			writer.println();
 		}
 
 		// RIGHT BORDER
-		for (int y = 1; y < WIDTH - 1; y++) {
-			printWall(writer, HEIGHT - 1, y);
+		for (int y = 1; y < width - 1; y++) {
+			printWall(writer, height - 1, y);
 			writer.println();
 		}
 	}
 
-	public static void generateLevelFile01(String path) throws FileNotFoundException {
+	public static void generateLevelFile01(String path, int width, int height, int time) throws FileNotFoundException {
 		int id = 1;
 
 		PrintWriter writer = new PrintWriter(path);
 
-		writer.println(String.format("%d,%d,%d", id, WIDTH, HEIGHT));
-		generateBorders(writer);
+		writer.println(String.format(FILE_HEADER_PATTERN, id, width, height, time));
+		generateBorders(writer, width, height);
 
-		// GROUND [1,1]-[3,18]
-		for (int x = 1; x < 4; x++) {
-			for (int y = 1; y < HEIGHT - 1; y++) {
-				writer.print(String.format(PARSE_PATTERN_CELL, Constants.TYPE_GROUND, x, y, PATH_IMAGE_GROUND)); // GROUND
-
+		for (int x = 1; x < width - 1; x++) {
+			for (int y = 1; y < height - 1; y++) {
 				if (x == 1 && y == 1) {
-					// ADD PLAYER
-					writer.println(String.format(PARSE_PATTERN_PLAYER, Constants.TYPE_PLAYER, PLAYER_NAME, x, y,
-							PLAYER_VECTOR_X, PLAYER_VECTOR_Y, PATH_IMAGE_PLAYER));
-					continue;
-				}
-				writer.println(); // add NEW LINE
-			}
-		}
-
-		// WATER,FIRE,WATER
-		for (int x = 4; x < 7; x++) {
-			for (int y = 1; y < HEIGHT - 1; y++) {
-				if (y == 9) {
-					writer.println(String.format(PARSE_PATTERN_CELL, Constants.TYPE_GROUND, x, y, PATH_IMAGE_GROUND));
-					continue;
-				}
-				if (x == 5) {
-					writer.println(String.format(PARSE_PATTERN_CELL, Constants.TYPE_FIRE, x, y, PATH_IMAGE_FIRE));
+					printPlayer(writer, x, y);
+				} else if ((x == 4 || x == 6) && height / 2 != y) {
+					printWater(writer, x, y);
+				} else if ((x == 5) && height / 2 != y) {
+					printFire(writer, x, y);
+				} else if (x == 9 && y == 9) {
+					printGoal(writer, x, y);
 				} else {
-					writer.println(String.format(PARSE_PATTERN_CELL, Constants.TYPE_WATER, x, y, PATH_IMAGE_WATER));
+					printGround(writer, x, y);
 				}
-			}
-		}
 
-		// GROUND [7,1]-[18,18]
-		for (int x = 7; x < WIDTH - 1; x++) {
-			for (int y = 1; y < HEIGHT - 1; y++) {
-				// GOAL
-				if (x == 18 && y == 18) {
-					writer.println(String.format(PARSE_PATTERN_CELL, Constants.TYPE_GOAL, x, y, PATH_IMAGE_GOAL));
-					continue;
-				}
-				writer.println(String.format(PARSE_PATTERN_CELL, Constants.TYPE_GROUND, x, y, PATH_IMAGE_GROUND));
+				writer.println(); // add NEW LINE
 			}
 		}
 
 		writer.close();
 	}
 
-	public static void generateLevelFile02(String path) throws FileNotFoundException {
+	public static void generateLevelFile02(String path, int time) throws FileNotFoundException {
 		int id = 2;
 
 		PrintWriter writer = new PrintWriter(path);
 
-		writer.println(String.format("%d,%d,%d", id, WIDTH, HEIGHT));
-		generateBorders(writer);
+		writer.println(String.format(FILE_HEADER_PATTERN, id, WIDTH, HEIGHT, TIME));
+		generateBorders(writer, WIDTH, HEIGHT);
 
-		// GROUND [1,1]-[3,18]
-		for (int x = 1; x < 4; x++) {
+		for (int x = 1; x < WIDTH - 1; x++) {
 			for (int y = 1; y < HEIGHT - 1; y++) {
-				writer.print(String.format(PARSE_PATTERN_CELL, Constants.TYPE_GROUND, x, y, PATH_IMAGE_GROUND)); // GROUND
 
-				if (x == 1 && y == 1) {
-					// ADD PLAYER
-					writer.println(String.format(PARSE_PATTERN_PLAYER, Constants.TYPE_PLAYER, PLAYER_NAME, x, y,
-							PLAYER_VECTOR_X, PLAYER_VECTOR_Y, PATH_IMAGE_PLAYER));
-					continue;
-				} else if (x == 1 && y == 3) {
-					writer.println(String.format(PARSE_PATTERN_COLLECTABLE_KEY, Constants.TYPE_KEY,
-							KeyType.BLUE.getKeyCode()));
-					continue;
-				} else if (x == 1 && y == 4) {
-					writer.println(String.format(PARSE_PATTERN_COLLECTABLE_KEY, Constants.TYPE_KEY,
-							KeyType.GOLD.getKeyCode()));
-					continue;
+				if (x == 1 && y == 9) {
+					printBlueKey(writer, x, y); // Ground + BlueKey
 				} else if (x == 1 && y == 18) {
-					writer.println(String.format(PARSE_PATTERN_COLLECTABLE_NOTKEYS, Constants.TYPE_FLIPPERS,
-							PATH_IMAGE_COLLECATBLE_FLIPPERS));
-					continue;
-				} else if (x == 3 && y == 18) {
-					writer.println(String.format(PARSE_PATTERN_COLLECTABLE_NOTKEYS, Constants.TYPE_FIRE_BOOTS,
-							PATH_IMAGE_COLLECATBLE_FIRE_BOOTS));
-					continue;
+					printPlayer(writer, x, y); // Ground + Player
+				} else if (x == 3 && y == 7) {
+					printGoldKey(writer, x, y); // Ground + BlueKey
+				} else if (x == 4 && y == 9) {
+					printBlueKeyDoor(writer, x, y); // Blue Key Door
+				} else if ((x == 4 || x == 6) && y != 9) {
+					printWater(writer, x, y); // Water
+				} else if (x == 5 && y == 6) {
+					printToken(writer, x, y); // Token
+				} else if (x == 5 && y == 9) {
+					printGoldKeyDoor(writer, x, y); // Gold Key Door
+				} else if (x == 5 && y != 9) {
+					printFire(writer, x, y); // Fire
+				} else if (x == 6 && y == 9) {
+					printToken(writer, x, y); // Token
+				} else if (x == 7 && y == 1) {
+					printToken(writer, x, y); // Ground + Token
+				} else if (x == 7 && y == 10) {
+					printToken(writer, x, y); // Ground + Token
+				} else if ((x == 8 || x == 9 || x == 10) && y != 9) {
+					printWall(writer, x, y); // Wall
+				} else if (x == 8 && y == 9) {
+					printTokenDoor(writer, x, y, 2);
+				} else if (x == 9 && y == 9) {
+					printFireBoots(writer, x, y);
+				} else if (x == 10 && y == 9) {
+					printTokenDoor(writer, x, y, 2);
+				} else if (x == 11 && y == 1) {
+					printRedKey(writer, x, y);
+				} else if (x == 12 && y >= 3 && y <= 16) {
+					printWall(writer, x, y);
+				} else if (x >= 13 && x <= 15 && y >= 3 && y <= 4) {
+					printWall(writer, x, y);
+				} else if (x == 13 && y == 5) {
+					printGreenKey(writer, x, y);
+				} else if (x == 14 && y == 1) {
+					printFlippers(writer, x, y);
+				} else if (x == 15 && y == 5) {
+					printFire(writer, x, y);
+				} else if (x == 15 && y >= 6 && y <= 18) {
+					printWall(writer, x, y);
+				} else if (x == 16 && y == 14) {
+					printRedKeyDoor(writer, x, y);
+				} else if (x >= 16 && x <= 18 && y == 15) {
+					printWater(writer, x, y);
+				} else if (x == 17 && y >= 12 && y <= 18 && y != 15) {
+					printWall(writer, x, y);
+				} else if (x == 18 && y == 12) {
+					printWall(writer, x, y);
+				} else if (x == 18 && y == 13) {
+					printToken(writer, x, y);
+				} else if (x == 18 && y == 14) {
+					printGreenKeyDoor(writer, x, y);
+				} else if (x == 18 && y == 16) {
+					printTokenDoor(writer, x, y, 1);
+				} else if (x == 18 && y == 18) {
+					printGoal(writer, x, y);
+				} else {
+					printGround(writer, x, y); // GROUND
 				}
 				writer.println(); // add NEW LINE
-			}
-		}
-
-		// WATER,FIRE,WATER + KEY DOORS
-		for (int x = 4; x < 7; x++) {
-			for (int y = 1; y < HEIGHT - 1; y++) {
-				if (x == 4 && y == 9) {
-					// BLUE DOOR
-					// PARSE_PATTERN_DOOR_KEY = "%s,%s,%d,%d,%s,%s,%d";
-					writer.println(String.format(PARSE_PATTERN_DOOR, Constants.TYPE_KEY_DOOR, DOOR_KEY_BLUE, x, y,
-							PATH_IMAGE_DOOR_KEY_BLUE, PATH_IMAGE_GROUND, KeyType.BLUE.getKeyCode()));
-					continue;
-				} else if (x == 5 && y == 9) {
-					// BLUE DOOR
-					writer.println(String.format(PARSE_PATTERN_DOOR, Constants.TYPE_KEY_DOOR, DOOR_KEY_GOLD, x, y,
-							PATH_IMAGE_DOOR_KEY_GOLD, PATH_IMAGE_GROUND, KeyType.GOLD.getKeyCode()));
-					continue;
-				} else if (y == 9) {
-					writer.println(String.format(PARSE_PATTERN_CELL, Constants.TYPE_GROUND, x, y, PATH_IMAGE_GROUND));
-					continue;
-				}
-
-				if (x == 5) {
-					writer.println(String.format(PARSE_PATTERN_CELL, Constants.TYPE_FIRE, x, y, PATH_IMAGE_FIRE));
-				} else {
-					writer.println(String.format(PARSE_PATTERN_CELL, Constants.TYPE_WATER, x, y, PATH_IMAGE_WATER));
-				}
-			}
-		}
-
-		// GROUND [7,1]-[18,18]
-		for (int x = 7; x < WIDTH - 1; x++) {
-			for (int y = 1; y < HEIGHT - 1; y++) {
-				// GOAL
-				if (x == 18 && y == 18) {
-					writer.println(String.format(PARSE_PATTERN_CELL, Constants.TYPE_GOAL, x, y, PATH_IMAGE_GOAL));
-					continue;
-				}
-				writer.println(String.format(PARSE_PATTERN_CELL, Constants.TYPE_GROUND, x, y, PATH_IMAGE_GROUND));
 			}
 		}
 
 		writer.close();
 	}
 
-	public static void generateLevelFile03(String path) throws FileNotFoundException {
+	public static void generateLevelFile03(String path, int time) throws FileNotFoundException {
 		int id = 3;
 
 		PrintWriter writer = new PrintWriter(path);
 
-		writer.println(String.format("%d,%d,%d", id, WIDTH, HEIGHT));
-		generateBorders(writer);
+		writer.println(String.format(FILE_HEADER_PATTERN, id, WIDTH, HEIGHT, time));
+		generateBorders(writer, WIDTH, HEIGHT);
 
 		// GROUND [1,1]-[3,18]
 		for (int x = 1; x < WIDTH - 1; x++) {
 			for (int y = 1; y < HEIGHT - 1; y++) {
 
-				if (x == 1 && y == 15) {
-					printBlueKey(writer, x, y); // Ground + BlueKey
-				} else if (x == 1 && y == 18) {
-					printPlayer(writer, x, y); // Ground + Player
-				} else if (x == 3 && y == 1) {
-					printGoldKey(writer, x, y); // Ground + BlueKey
-				} else if (x == 4 && y == 9) {
-					printBlueKeyDoor(writer, x, y); // Blue Key Door
+				if (x == 2 && y == 9) {
+					printPlayer(writer, x, y);
 				} else if ((x == 4 || x == 6) && y != 9) {
 					printWater(writer, x, y); // Water
-				} else if (x == 5 && y == 1) {
-					printToken(writer, x, y); // Token
-				} else if (x == 5 && y == 9) {
-					printGoldKeyDoor(writer, x, y); // Gold Key Door
 				} else if (x == 5 && y != 9) {
 					printFire(writer, x, y); // Fire
-				} else if (x == 6 && y == 9) {
-					printToken(writer, x, y); // Ground + Fire
 				} else if (x == 7 && y == 1) {
+					printStraightWalkingEnemy(writer, x, y, 0, 1);
+				} else if (x == 7 && y == 11) {
 					printToken(writer, x, y); // Ground + Token
-				} else if (x == 7 && y == 18) {
-
-					printTeleporter(writer, x, y); // Teleporter
-
-				} else if ((x == 8 || x == 9 || x == 10) && y != 9) {
-					printWall(writer, x, y); // Wall
 				} else if (x == 8 && y == 9) {
-					printTokenDoor(writer, x, y, 1);
-				} else if (x == 9 && y == 9) {
-					printFireBoots(writer, x, y);
+					printToken(writer, x, y); // Ground + Token
 				} else if (x == 10 && y == 9) {
 					printTokenDoor(writer, x, y, 2);
-				} else if (x == 14 && y == 4) {
-
-					printTeleporter(writer, x, y);
-
-				} else if (x == 18 && y == 18) {
-					printGoal(writer, x, y);
-				} else {
-					printGround(writer, x, y); // GROUND
-				}
-				writer.println(); // add NEW LINE
-			}
-		}
-
-		// Teleporter link
-		printTeleportersLink(writer, 7, 18, 14, 4);
-
-		writer.close();
-	}
-
-	public static void generateLevelFile04(String path) throws FileNotFoundException {
-		int id = 4;
-
-		PrintWriter writer = new PrintWriter(path);
-
-		writer.println(String.format("%d,%d,%d", id, WIDTH, HEIGHT));
-		generateBorders(writer);
-
-		// GROUND [1,1]-[3,18]
-		for (int x = 1; x < WIDTH - 1; x++) {
-			for (int y = 1; y < HEIGHT - 1; y++) {
-
-				if (x == 1 && y == 15) {
-					printBlueKey(writer, x, y); // Ground + BlueKey
-				} else if (x == 1 && y == 18) {
-					printPlayer(writer, x, y); // Ground + Player
-				} else if (x == 3 && y == 1) {
-					printGoldKey(writer, x, y); // Ground + BlueKey
-				} else if (x == 4 && y == 9) {
-					printBlueKeyDoor(writer, x, y); // Blue Key Door
-				} else if ((x == 4 || x == 6) && y != 9) {
-					printWater(writer, x, y); // Water
-				} else if (x == 5 && y == 1) {
-					printToken(writer, x, y); // Token
-				} else if (x == 5 && y == 9) {
-					printGoldKeyDoor(writer, x, y); // Gold Key Door
-				} else if (x == 5 && y != 9) {
-					printFire(writer, x, y); // Fire
-				} else if (x == 6 && y == 9) {
-					printToken(writer, x, y); // Ground + Fire
-				} else if (x == 7 && y == 1) {
-					printToken(writer, x, y); // Ground + Token
-				} else if ((x == 8 || x == 9 || x == 10) && y != 9) {
+				} else if ((x >= 8 && x <= 10) && y != 9) {
 					printWall(writer, x, y); // Wall
-				} else if (x == 8 && y == 9) {
-					printTokenDoor(writer, x, y, 1);
-				} else if (x == 9 && y == 9) {
-					printFireBoots(writer, x, y);
-				} else if (x == 10 && y == 9) {
-					printTokenDoor(writer, x, y, 2);
-				} else if (x == 15 && y == 1) {
-					printWallFollowingEnemy(writer, x, y); // Wall following
-															// enemy
-				} else if (x == 18 && y == 18) {
-					printGoal(writer, x, y);
-				} else {
-					printGround(writer, x, y); // GROUND
-				}
-				writer.println(); // add NEW LINE
-			}
-		}
-
-		writer.close();
-	}
-
-	public static void generateLevelFile05(String path) throws FileNotFoundException {
-		int id = 5;
-		PrintWriter writer = new PrintWriter(path);
-
-		writer.println(String.format("%d,%d,%d", id, WIDTH, HEIGHT));
-		generateBorders(writer);
-
-		// GROUND [1,1]-[3,18]
-		for (int x = 1; x < WIDTH - 1; x++) {
-			for (int y = 1; y < HEIGHT - 1; y++) {
-
-				if (x == 1 && y == 15) {
-					printBlueKey(writer, x, y); // Ground + BlueKey
-				} else if (x == 1 && y == 18) {
-					printPlayer(writer, x, y); // Ground + Player
-				} else if (x == 3 && y == 1) {
-					printGoldKey(writer, x, y); // Ground + BlueKey
-				} else if (x == 4 && y == 9) {
-					printBlueKeyDoor(writer, x, y); // Blue Key Door
-				} else if ((x == 4 || x == 6) && y != 9) {
-					printWater(writer, x, y); // Water
-				} else if (x == 5 && y == 1) {
-					printToken(writer, x, y); // Token
-				} else if (x == 5 && y == 9) {
-					printGoldKeyDoor(writer, x, y); // Gold Key Door
-				} else if (x == 5 && y != 9) {
-					printFire(writer, x, y); // Fire
-				} else if (x == 6 && y == 9) {
-					printToken(writer, x, y); // Ground + Fire
-				} else if (x == 7 && y == 1) {
-					printToken(writer, x, y); // Ground + Token
-				} else if ((x == 8 || x == 9 || x == 10) && y != 9) {
-					printWall(writer, x, y); // Wall
-				} else if (x == 8 && y == 9) {
-					printTokenDoor(writer, x, y, 1);
-				} else if (x == 9 && y == 9) {
-					printFireBoots(writer, x, y);
 				} else if (x == 11 && y == 1) {
+					printRedKey(writer, x, y);
+				} else if (x == 11 && y == 18) {
+					printDumbTargetingEnemy(writer, x, y);
+				} else if (x >= 11 && x <= 12 && y == 10) {
+					printWall(writer, x, y);
+				} else if (x >= 13 && x <= 14 && y == 3) {
+					printWall(writer, x, y);
+				} else if (x == 14 && y == 1) {
+					printFlippers(writer, x, y);
+				} else if (x == 14 && y == 9) {
 					printGreenKey(writer, x, y);
-				} else if (x == 11 && y == 7) {
-					printStraightWalkingEnemy(writer, x, y, 1, 0);
+				} else if (x == 15 && y >= 3 && y <= 4) {
+					printWall(writer, x, y);
+				} else if (x == 15 && y >= 5 && y <= 7) {
+					printWater(writer, x, y);
+				} else if (x == 15 && y >= 7 && y <= 18) {
+					printWall(writer, x, y);
+				} else if (x == 16 && y == 12) {
+					printRedKeyDoor(writer, x, y);
+				} else if (x == 16 && y == 14) {
+					printToken(writer, x, y);
+				} else if (x >= 16 && x <= 18 && y == 15) {
+					printWater(writer, x, y);
+				} else if (x == 16 && y >= 16 && y <= 18) {
+					printWall(writer, x, y);
+				} else if (x == 18 && y >= 12 && y <= 14) {
+					printWall(writer, x, y);
+				} else if (x == 17 && y >= 12 && y <= 18 && y != 15) {
+					printWall(writer, x, y);
+				} else if (x == 18 && y == 1) {
+					printWallFollowingEnemy(writer, x, y);
+
+				} else if (x == 18 && y == 16) {
+					printTokenDoor(writer, x, y, 1);
+				} else if (x == 18 && y == 18) {
+					printGoal(writer, x, y);
+				} else {
+					printGround(writer, x, y); // GROUND
+				}
+				writer.println(); // add NEW LINE
+			}
+		}
+
+		writer.close();
+	}
+
+	public static void generateLevelFile04(String path, int time) throws FileNotFoundException {
+		int id = 4;
+		PrintWriter writer = new PrintWriter(path);
+
+		writer.println(String.format(FILE_HEADER_PATTERN, id, WIDTH, HEIGHT, time));
+		generateBorders(writer, WIDTH, HEIGHT);
+
+		// GROUND [1,1]-[3,18]
+		for (int x = 1; x < WIDTH - 1; x++) {
+			for (int y = 1; y < HEIGHT - 1; y++) {
+
+				if (x == 1 && y == 18) {
+					printPlayer(writer, x, y); // Ground + Player
+				} else if ((x == 4 || x == 6) && (y != 9 && y != 3)) {
+					printWater(writer, x, y); // Water
+				} else if (x == 5 && (y != 9 && y != 3)) {
+					printFire(writer, x, y); // Fire
+				} else if (x == 7 && y == 18) {
+					printTeleporter(writer, x, y);
+				} else if ((x >= 8 && x <= 10) && y != 9) {
+					printWall(writer, x, y); // Wall
 				} else if ((x >= 11 && x <= 14) && (y == 2 || y == 8)) {
 					printWall(writer, x, y);
+				} else if (x == 11 && y == 7) {
+					printTeleporter(writer, x, y);
 				} else if (x == 12 && y >= 10 && y <= 17) {
 					printWall(writer, x, y);
 				} else if ((x == 12 || x == 14) && y == 5) {
@@ -429,19 +347,10 @@ public class LevelTest {
 					printFire(writer, x, y);
 				} else if (x >= 13 && x <= 16 && y == 10) {
 					printWall(writer, x, y);
-				} else if (x == 15 && y == 1) {
-					printWallFollowingEnemy(writer, x, y); // Wall following
-															// enemy
 				} else if (x == 17 && y >= 2 && y <= 18) {
 					printWall(writer, x, y);
-				} else if (x == 16 && y == 18) {
-					printDumbTargetingEnemy(writer, x, y); // DUMB TARGETTING ENEMY
-				} else if (x == 18 && y == 14) {
-					printGreenKeyDoor(writer, x, y); // GREEN KEY DOOR
-				} else if (x == 18 && y == 15) {
-					printRedKey(writer, x, y); // RED KEY DOOR
 				} else if (x == 18 && y == 16) {
-					printRedKeyDoor(writer, x, y); // RED DOOR
+					printSmartTargetingEnemy(writer, x, y);
 				} else if (x == 18 && y == 18) {
 					printGoal(writer, x, y);
 				} else {
@@ -450,6 +359,8 @@ public class LevelTest {
 				writer.println(); // add NEW LINE
 			}
 		}
+
+		printTeleportersLink(writer, 7, 18, 11, 7);
 
 		writer.close();
 	}
@@ -502,7 +413,8 @@ public class LevelTest {
 	}
 
 	private static void printTeleporter(PrintWriter writer, int x, int y) {
-		writer.print(String.format(PARSE_PATTERN_CELL_TITLE, Constants.TYPE_TELEPORTER, TELEPORTER_NAME, x, y, PATH_IMAGE_TELEPORTER));
+		writer.print(String.format(PARSE_PATTERN_CELL_TITLE, Constants.TYPE_TELEPORTER, TELEPORTER_NAME, x, y,
+				PATH_IMAGE_TELEPORTER));
 	}
 
 	// Collectable Items
@@ -553,6 +465,13 @@ public class LevelTest {
 				x, y, PATH_IMAGE_WALL_FOLLOWING_ENEMY));
 	}
 
+	// ENEMY_NAME_SMART_TARGETING
+	private static void printSmartTargetingEnemy(PrintWriter writer, int x, int y) {
+		printGround(writer, x, y);
+		writer.print(String.format(PARSE_PATTERN_ENEMY, Constants.TYPE_SMART_TARGETING_ENEMY,
+				ENEMY_NAME_SMART_TARGETING, x, y, PATH_IMAGE_SMART_TARGETING_ENEMY));
+	}
+
 	private static void printStraightWalkingEnemy(PrintWriter writer, int x, int y, int vx, int vy) {
 		// ",%s,%s,%d,%d,%d,%d,%s"
 		printGround(writer, x, y);
@@ -562,8 +481,8 @@ public class LevelTest {
 
 	private static void printDumbTargetingEnemy(PrintWriter writer, int x, int y) {
 		printGround(writer, x, y);
-		writer.print(String.format(PARSE_PATTERN_ENEMY, Constants.TYPE_DUMB_TARGETING_ENEMY,
-				ENEMY_NAME_DUMB_TARGETING, x, y, PATH_IMAGE_DUMB_TARGETTING_ENEMY));
+		writer.print(String.format(PARSE_PATTERN_ENEMY, Constants.TYPE_DUMB_TARGETING_ENEMY, ENEMY_NAME_DUMB_TARGETING,
+				x, y, PATH_IMAGE_DUMB_TARGETTING_ENEMY));
 	}
 
 	private static void printPlayer(PrintWriter writer, int x, int y) {

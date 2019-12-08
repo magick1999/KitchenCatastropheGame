@@ -64,8 +64,9 @@ public class Teleporter extends StepableCell {
                     LevelObject levelObject = surroudingArea[x][y];
 
                     if (levelObject instanceof Ground && ((Ground) surroudingArea[x][y]).isSteppedOn() == false) {
-                        ((Ground) surroudingArea[x][y]).stepOn(object);
-                        object.setPosition(x, y);
+                    	StepableCell stepableCell = (Ground) surroudingArea[x][y];
+                        stepableCell.stepOn(object);
+                        object.setPosition(stepableCell.getPositionX(), stepableCell.getPositionY());
                         return true;
                     }
                 }
@@ -157,7 +158,7 @@ public class Teleporter extends StepableCell {
 
             for (int x = 0; x < 3; x++) {
                 for (int y = 0; y < 3; y++) {
-                    area[x][y] = grid[this.getPositionX() - 1 + x][this.getPositionY() - 1 + y];
+                    area[x][y] = grid[object.getPositionX() - 1 + x][object.getPositionY() - 1 + y];
                 }
             }
         }

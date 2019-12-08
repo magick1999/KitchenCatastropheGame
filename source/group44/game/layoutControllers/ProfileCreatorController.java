@@ -2,7 +2,6 @@ package group44.game.layoutControllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -26,7 +25,7 @@ public class ProfileCreatorController {
     }
     @FXML
     public void initialize(){
-        logo.setImage(new Image("/group44/resources/kitchenLogo.png"));
+        logo.setImage(new Image("/group44/resources/KitchenCatastrophe.png"));
     }
     public void setRoot(BorderPane root) {
         this.root = root;

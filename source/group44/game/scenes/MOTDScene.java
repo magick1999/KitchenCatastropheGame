@@ -30,8 +30,8 @@ public class MOTDScene {
         try {
             Parent root = fxmlLoader.load();
             //Setting the stage and adding custom style to it.
-            root.getStylesheets().add("resources/application.css");
-            root.setId("pane");
+            root.getStylesheets().add("/group44/resources/application.css");
+            root.setId("root");
             Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
             MOTDController tempController = fxmlLoader.getController();
             setController(tempController);

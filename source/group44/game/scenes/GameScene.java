@@ -92,7 +92,7 @@ public class GameScene {
             primaryStage.setScene(scene);
             primaryStage.show();
             this.currentProfile = currentProfile;
-            timer.startTimer(myController.getTimeLabel());
+            timer.startTimer(myController.getTimeLabel(), currentLevel.getTime());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -132,7 +132,7 @@ public class GameScene {
      */
     private void setUpRestart(MouseEvent event) {
         // TODO: RESTART GAME
-        timer.startTimer(myController.getTimeLabel());
+        timer.startTimer(myController.getTimeLabel(), 0);
         Level newLevel = null;
         try {
             newLevel = LevelManager.load(LevelManager.load().get(this.currentLevel.getId() - 1));
