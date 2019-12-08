@@ -1,5 +1,6 @@
 package group44.entities.cells;
 
+import group44.Constants;
 import group44.entities.movableObjects.MovableObject;
 import group44.game.Level;
 
@@ -10,6 +11,7 @@ import group44.game.Level;
  * @version 1.0
  */
 public class Water extends StepableCell {
+    private static final String PARSE_PATTERN = "%s,%d,%d,%s";
 
     /**
      * Creates a new instance of {@link Water}.
@@ -32,5 +34,20 @@ public class Water extends StepableCell {
     @Override
     protected void onStepped(MovableObject object) {
         object.die(this);
+    }
+
+    /**
+     * Returns a String representation of the Ground.
+     *
+     * @return the string representation of the ground.
+     */
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append(String.format(PARSE_PATTERN, Constants.TYPE_WALL, this.getPositionX(), this.getPositionY(),
+                this.getImagePath()));
+
+        return builder.toString();
     }
 }
