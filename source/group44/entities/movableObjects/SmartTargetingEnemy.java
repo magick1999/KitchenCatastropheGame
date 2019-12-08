@@ -118,7 +118,7 @@ public class SmartTargetingEnemy extends Enemy {
 	 *            - position Y of the player.
 	 * @return true there is a path; otherwise false.
 	 */
-	private boolean calculateCosts(int targeX, int targeY) {
+	private boolean calculateCosts(int targetX, int targetY) {
 		Queue<CellPathInfo> queue = new LinkedList<>();
 		boolean isReached = false;
 
@@ -129,7 +129,7 @@ public class SmartTargetingEnemy extends Enemy {
 		while (queue.isEmpty() == false) {
 			currentCell = queue.poll();
 
-			isReached = (currentCell.getX() == targeX) && (currentCell.getY() == targeY);
+			isReached = (currentCell.getX() == targetX) && (currentCell.getY() == targetY);
 
 			// LEFT
 			if (isReached == false && this.isObstacle(currentCell.getX() - 1, currentCell.getY()) == false) {
@@ -182,6 +182,10 @@ public class SmartTargetingEnemy extends Enemy {
 	/**
 	 * Returns the next cell to step by the the {@link SmartTargetingEnemy}.
 	 *
+	 * @param targetX
+	 *            - position X of the player.
+	 * @param targetY
+	 *            - position Y of the player.
 	 * @return the next cell to step.
 	 */
 	private CellPathInfo nextCellToStep(int targetX, int targetY) {
@@ -195,7 +199,8 @@ public class SmartTargetingEnemy extends Enemy {
 	}
 
 	/**
-	 * Chooses valid direction of the next move.
+	 * Chooses valid direction of the next move. The {@link SmartTargetingEnemy}
+	 * is not necessarily getting closer to the player.
 	 */
 	private void chooseDirection() {
 		// LEFT

@@ -21,7 +21,7 @@ public class CellPathInfo {
 	 * Creates a new instance of {@link CellPathInfo}.
 	 *
 	 * @param cell
-	 *            - cell
+	 *            - the cell which we want to describe.
 	 */
 	public CellPathInfo(Cell cell) {
 		this.x = cell.getPositionX();
@@ -41,7 +41,7 @@ public class CellPathInfo {
 	/**
 	 * Returns position X of the cell described.
 	 *
-	 * @return x.
+	 * @return the position X.
 	 */
 	public int getX() {
 		return x;
@@ -50,7 +50,7 @@ public class CellPathInfo {
 	/**
 	 * Returns position Y of the cell described.
 	 *
-	 * @return y.
+	 * @return the position Y.
 	 */
 	public int getY() {
 		return y;
@@ -70,7 +70,7 @@ public class CellPathInfo {
 	/**
 	 * Returns the cost (number of steps needed to reach the cell).
 	 *
-	 * @return cost.
+	 * @return the cost.
 	 */
 	public long getCost() {
 		return cost;
