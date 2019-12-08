@@ -1,11 +1,16 @@
 package group44.game.scenes;
 
 import group44.game.layoutControllers.MOTDController;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import static group44.Constants.WINDOW_HEIGHT;
 import static group44.Constants.WINDOW_WIDTH;
@@ -38,10 +43,13 @@ public class MOTDScene {
             primaryStage.setScene(scene);
             primaryStage.show();
             setUpControls();
+            refreshMOTD();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     /**
      * Sets the globally available controller.
      * @param motdController the controller for this class.
@@ -49,13 +57,14 @@ public class MOTDScene {
     private void setController(MOTDController motdController){
         this.motdController = motdController;
     }
+
     /**
      * This adds listeners for the buttons on the scene.
      */
     private void setUpControls(){
-        motdController.getMOTDRefresh().setOnMouseClicked(this::refreshMOTD);
         motdController.getBack().setOnMouseClicked(this::backToTheMenu);
     }
+
     /**
      * This returns the player to the MainMenuScene.
      * @param event
@@ -63,7 +72,22 @@ public class MOTDScene {
     private void backToTheMenu(MouseEvent event){
         new MainMenuScene(primaryStage);
     }
-    private void refreshMOTD(MouseEvent event) {
-        motdController.getMOTDRefresh();
+
+    private void refreshMOTD() {
+        Timeline timer = new Timeline(new KeyFrame(
+                Duration.ZERO,
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        motdController.getMOTDRefresh();
+                    }
+                }
+        ),
+                new KeyFrame(
+                        Duration.seconds(1)
+                )
+        );
+        timer.setCycleCount(Timeline.INDEFINITE);
+        timer.play();
     }
 }
