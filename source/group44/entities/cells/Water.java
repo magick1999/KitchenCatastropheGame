@@ -26,7 +26,7 @@ public class Water extends StepableCell {
      *            game.
      */
     public Water(Level level, int positionX, int positionY, String imagePath) {
-	super(level, Constants.TITLE_WATER, positionX, positionY, imagePath);
+        super(level, Constants.TITLE_WATER, positionX, positionY, imagePath);
     }
 
     /**
@@ -38,7 +38,7 @@ public class Water extends StepableCell {
      */
     @Override
     protected void onStepped(MovableObject object) {
-	object.die(this);
+        object.die(this);
     }
 
     /**
@@ -48,16 +48,16 @@ public class Water extends StepableCell {
      */
     @Override
     public String toString() {
-	StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
 
-	builder.append(String.format(PARSE_PATTERN, Constants.TYPE_WATER,
-		this.getPositionX(), this.getPositionY(), this.getImagePath()));
+        builder.append(String.format(PARSE_PATTERN, Constants.TYPE_WATER,
+                this.getPositionX(), this.getPositionY(), this.getImagePath()));
 
-	if (this.getMovableObject() != null) {
-	    builder.append(",");
-	    builder.append(this.getMovableObject().toString());
-	}
+        if (this.getMovableObject() != null) {
+            builder.append(",");
+            builder.append(this.getMovableObject().toString());
+        }
 
-	return builder.toString();
+        return builder.toString();
     }
 }

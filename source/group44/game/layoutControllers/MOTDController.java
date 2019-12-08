@@ -12,12 +12,12 @@ public class MOTDController {
     private Button back;
 
     public void getMOTDRefresh() {
-	this.motd.setText(MOTDParser.getMOTD());// Sets label to the
-						// MOTD
+        this.motd.setText(MOTDParser.getMOTD());// Sets label to the
+                                                // MOTD
     }
 
     public Button getBack() {
-	return back;
+        return back;
     }
 
 }

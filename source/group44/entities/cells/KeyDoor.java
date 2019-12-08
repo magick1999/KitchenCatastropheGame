@@ -39,12 +39,12 @@ public class KeyDoor extends Door {
      *            - key used to unlock the door.
      */
     public KeyDoor(Level level, String title, int positionX, int positionY,
-	    String lockedImagePath, String unlockedImagePath,
-	    Key.KeyType unlockingKey) {
-	super(level, title, positionX, positionY, lockedImagePath,
-		unlockedImagePath);
+            String lockedImagePath, String unlockedImagePath,
+            Key.KeyType unlockingKey) {
+        super(level, title, positionX, positionY, lockedImagePath,
+                unlockedImagePath);
 
-	this.unlockingKey = unlockingKey;
+        this.unlockingKey = unlockingKey;
     }
 
     /**
@@ -53,7 +53,7 @@ public class KeyDoor extends Door {
      * @return the unlocking key type.
      */
     public KeyType getUnlockingKeyType() {
-	return this.unlockingKey;
+        return this.unlockingKey;
     }
 
     /**
@@ -65,11 +65,11 @@ public class KeyDoor extends Door {
      */
     @Override
     public boolean open(CollectableItem item) {
-	if (this.isOpen() == false && item instanceof Key && ((Key) item)
-		.getKeyCode() == this.unlockingKey.getKeyCode()) {
-	    this.open();
-	}
-	return this.isOpen();
+        if (this.isOpen() == false && item instanceof Key && ((Key) item)
+                .getKeyCode() == this.unlockingKey.getKeyCode()) {
+            this.open();
+        }
+        return this.isOpen();
     }
 
     /**
@@ -85,12 +85,12 @@ public class KeyDoor extends Door {
      */
     @Override
     public CollisionCheckResult stepOn(MovableObject object) {
-	if (this.isOpen() == false) {
-	    return new CollisionCheckResult(CollisionCheckResultType.MissingKey,
-		    this);
-	}
-	this.setMovableObject(object);
-	return new CollisionCheckResult(CollisionCheckResultType.Successful);
+        if (this.isOpen() == false) {
+            return new CollisionCheckResult(CollisionCheckResultType.MissingKey,
+                    this);
+        }
+        this.setMovableObject(object);
+        return new CollisionCheckResult(CollisionCheckResultType.Successful);
     }
 
     /**
@@ -100,27 +100,27 @@ public class KeyDoor extends Door {
      */
     @Override
     public String toString() {
-	StringBuilder builder = new StringBuilder();
-	builder.append(Constants.TYPE_KEY_DOOR);
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        StringBuilder builder = new StringBuilder();
+        builder.append(Constants.TYPE_KEY_DOOR);
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
 
-	builder.append(this.getTitle());
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
-	builder.append(this.getPositionX());
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
-	builder.append(this.getPositionY());
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
-	builder.append(this.getImagePath());
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
-	builder.append(this.getUnlockedImagePath());
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
-	builder.append(this.getUnlockingKeyType().getKeyCode());
+        builder.append(this.getTitle());
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.getPositionX());
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.getPositionY());
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.getImagePath());
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.getUnlockedImagePath());
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.getUnlockingKeyType().getKeyCode());
 
-	if (this.getMovableObject() != null) {
-	    builder.append(",");
-	    builder.append(this.getMovableObject().toString());
-	}
+        if (this.getMovableObject() != null) {
+            builder.append(",");
+            builder.append(this.getMovableObject().toString());
+        }
 
-	return builder.toString();
+        return builder.toString();
     }
 }

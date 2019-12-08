@@ -28,22 +28,22 @@ public class LevelSaver {
      *             when something goes terribly wrong.
      */
     public static void save(Level level, String path) throws IOException {
-	File file = new File(path);
-	if (file.exists() == false) {
-	    file.createNewFile();
-	}
+        File file = new File(path);
+        if (file.exists() == false) {
+            file.createNewFile();
+        }
 
-	PrintWriter writer = new PrintWriter(file);
-	writer.printf(LEVEL_HEADER_PATTERN + "\n", level.getId(),
-		level.getGridWidth(), level.getGridHeight(), level.getTime());
+        PrintWriter writer = new PrintWriter(file);
+        writer.printf(LEVEL_HEADER_PATTERN + "\n", level.getId(),
+                level.getGridWidth(), level.getGridHeight(), level.getTime());
 
-	for (int x = 0; x < level.getGridWidth(); x++) {
-	    for (int y = 0; y < level.getGridHeight(); y++) {
-		Cell cell = level.getGrid()[x][y];
-		writer.print(cell.toString() + "\n");
-	    }
-	}
+        for (int x = 0; x < level.getGridWidth(); x++) {
+            for (int y = 0; y < level.getGridHeight(); y++) {
+                Cell cell = level.getGrid()[x][y];
+                writer.print(cell.toString() + "\n");
+            }
+        }
 
-	writer.close();
+        writer.close();
     }
 }

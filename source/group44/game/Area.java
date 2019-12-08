@@ -25,10 +25,10 @@ public class Area {
      *            - The Y of the second coordinate
      */
     public Area(int x1, int y1, int x2, int y2) {
-	this.x1 = x1;
-	this.y1 = y1;
-	this.x2 = x2;
-	this.y2 = y2;
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x2;
+        this.y2 = y2;
     }
 
     /**
@@ -37,7 +37,7 @@ public class Area {
      * @return the X1 coordinate
      */
     public int getX1() {
-	return this.x1;
+        return this.x1;
     }
 
     /**
@@ -46,7 +46,7 @@ public class Area {
      * @return the X2 coordinate
      */
     public int getX2() {
-	return this.x2;
+        return this.x2;
     }
 
     /**
@@ -55,7 +55,7 @@ public class Area {
      * @return the Y1 coordinate
      */
     public int getY1() {
-	return this.y1;
+        return this.y1;
     }
 
     /**
@@ -64,6 +64,6 @@ public class Area {
      * @return the Y2 coordinate
      */
     public int getY2() {
-	return this.y2;
+        return this.y2;
     }
 }

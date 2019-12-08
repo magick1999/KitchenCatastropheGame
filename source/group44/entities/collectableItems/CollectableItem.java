@@ -21,7 +21,7 @@ public abstract class CollectableItem extends LevelObject {
      *            - Title of the {@link CollectableItem}.
      */
     public CollectableItem(Level level, String title) {
-	super(level, title, 0, 0);
+        super(level, title, 0, 0);
     }
 
     /**
@@ -37,6 +37,6 @@ public abstract class CollectableItem extends LevelObject {
      *            the game.
      */
     public CollectableItem(Level level, String title, String imagePath) {
-	super(level, title, 0, 0, imagePath);
+        super(level, title, 0, 0, imagePath);
     }
 }

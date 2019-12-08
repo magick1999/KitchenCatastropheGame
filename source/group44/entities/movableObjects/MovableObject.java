@@ -39,11 +39,11 @@ public abstract class MovableObject extends LevelObject {
      *            game.
      */
     public MovableObject(Level level, String title, int positionX,
-	    int positionY, int velocityX, int velocityY, String imagePath) {
-	super(level, title, positionX, positionY, imagePath);
+            int positionY, int velocityX, int velocityY, String imagePath) {
+        super(level, title, positionX, positionY, imagePath);
 
-	this.setVelocityX(velocityX);
-	this.setVelocityY(velocityY);
+        this.setVelocityX(velocityX);
+        this.setVelocityY(velocityY);
     }
 
     /**
@@ -52,7 +52,7 @@ public abstract class MovableObject extends LevelObject {
      * @return velocity X.
      */
     public int getVelocityX() {
-	return this.velocityX;
+        return this.velocityX;
     }
 
     /**
@@ -62,7 +62,7 @@ public abstract class MovableObject extends LevelObject {
      *            - velocity X.
      */
     public void setVelocityX(int vx) {
-	this.velocityX = vx;
+        this.velocityX = vx;
     }
 
     /**
@@ -71,7 +71,7 @@ public abstract class MovableObject extends LevelObject {
      * @return velocity Y.
      */
     public int getVelocityY() {
-	return this.velocityY;
+        return this.velocityY;
     }
 
     /**
@@ -81,7 +81,7 @@ public abstract class MovableObject extends LevelObject {
      *            - velocity Y.
      */
     public void setVelocityY(int vy) {
-	this.velocityY = vy;
+        this.velocityY = vy;
     }
 
     /**
@@ -92,19 +92,19 @@ public abstract class MovableObject extends LevelObject {
      *            {@link MovableObject}.
      */
     public void die(LevelObject object) {
-	// Remove MovableObject from the grid
-	((StepableCell) this.getLevel().getGrid()[this.getPositionX()][this
-		.getPositionY()]).stepOff();
-	if (this instanceof Player) {
-	    if (object instanceof MovableObject) {
-		this.getLevel().finish(LevelFinishStatus.PlayerKilled);
-	    } else {
-		this.getLevel().finish(LevelFinishStatus.PlayerDied);
-	    }
+        // Remove MovableObject from the grid
+        ((StepableCell) this.getLevel().getGrid()[this.getPositionX()][this
+                .getPositionY()]).stepOff();
+        if (this instanceof Player) {
+            if (object instanceof MovableObject) {
+                this.getLevel().finish(LevelFinishStatus.PlayerKilled);
+            } else {
+                this.getLevel().finish(LevelFinishStatus.PlayerDied);
+            }
 
-	} else if (this instanceof Enemy) {
-	    this.getLevel().getEnemies().remove(this);
-	}
+        } else if (this instanceof Enemy) {
+            this.getLevel().getEnemies().remove(this);
+        }
     }
 
     /**
@@ -122,14 +122,14 @@ public abstract class MovableObject extends LevelObject {
      *         otherwise null
      */
     protected StepableCell getStepableCellAtMovableObjectPosition(
-	    MovableObject object) {
-	Cell[][] grid = this.getLevel().getGrid();
-	if (grid[object.getPositionX()][object
-		.getPositionY()] instanceof StepableCell) {
-	    return (StepableCell) grid[object.getPositionX()][object
-		    .getPositionY()];
-	}
-	return null;
+            MovableObject object) {
+        Cell[][] grid = this.getLevel().getGrid();
+        if (grid[object.getPositionX()][object
+                .getPositionY()] instanceof StepableCell) {
+            return (StepableCell) grid[object.getPositionX()][object
+                    .getPositionY()];
+        }
+        return null;
     }
 
     /**
@@ -146,25 +146,25 @@ public abstract class MovableObject extends LevelObject {
      *         on; null if {@link Wall} or out of range.
      */
     protected StepableCell getNextStepableCellInVelocity(MovableObject object,
-	    int velocityX, int velocityY) {
-	Cell[][] grid = this.getLevel().getGrid();
-	StepableCell cell = this.getStepableCellAtMovableObjectPosition(object);
+            int velocityX, int velocityY) {
+        Cell[][] grid = this.getLevel().getGrid();
+        StepableCell cell = this.getStepableCellAtMovableObjectPosition(object);
 
-	// Next position based on current position and velocity
-	int nextCellIndexX = cell.getPositionX() + velocityX;
-	int nextCellIndexY = cell.getPositionY() + velocityY;
+        // Next position based on current position and velocity
+        int nextCellIndexX = cell.getPositionX() + velocityX;
+        int nextCellIndexY = cell.getPositionY() + velocityY;
 
-	// Return StepableCell if the next step is in the boundaries of
-	// the grid;
-	// otherwise null
-	if (0 <= nextCellIndexX
-		&& nextCellIndexX < this.getLevel().getGridWidth()
-		&& 0 <= nextCellIndexY
-		&& nextCellIndexY < this.getLevel().getGridHeight()
-		&& grid[nextCellIndexX][nextCellIndexY] instanceof StepableCell) {
-	    return (StepableCell) grid[nextCellIndexX][nextCellIndexY];
-	}
-	return null;
+        // Return StepableCell if the next step is in the boundaries of
+        // the grid;
+        // otherwise null
+        if (0 <= nextCellIndexX
+                && nextCellIndexX < this.getLevel().getGridWidth()
+                && 0 <= nextCellIndexY
+                && nextCellIndexY < this.getLevel().getGridHeight()
+                && grid[nextCellIndexX][nextCellIndexY] instanceof StepableCell) {
+            return (StepableCell) grid[nextCellIndexX][nextCellIndexY];
+        }
+        return null;
     }
 
     /**

@@ -39,73 +39,73 @@ public class GTimer {
      *            resume or start time of the level.
      */
     public void startTimer(Label time, long startTime) { // TODO: EDIT HERE
-	formatter.setTimeZone(TimeZone.getTimeZone("GMT"));
-	prevTime = new Date();
-	timing = true;
-	currentTimeTaken = startTime;
-	TimerTask timerTask = new TimerTask() {
+        formatter.setTimeZone(TimeZone.getTimeZone("GMT"));
+        prevTime = new Date();
+        timing = true;
+        currentTimeTaken = startTime;
+        TimerTask timerTask = new TimerTask() {
 
-	    @Override
-	    public void run() {
-		// Checks if timing is true
-		if (timing == true) {
-		    currentTime = new Date();// takes the
-					     // current
-					     // time
-		    // Finds difference between current time
-		    // and the previous
-		    // time and adds it to the running total
-		    // time
-		    currentTimeTaken += (currentTime.getTime()
-			    - prevTime.getTime());
-		    prevTime = currentTime;// Sets the
-					   // current time
-					   // to the
-					   // previous time
-		    String output = formatter.format(currentTimeTaken);// Sets
-								       // the
-								       // formatted
-								       // output
-								       // of
-								       // the
-								       // time
+            @Override
+            public void run() {
+                // Checks if timing is true
+                if (timing == true) {
+                    currentTime = new Date();// takes the
+                                             // current
+                                             // time
+                    // Finds difference between current time
+                    // and the previous
+                    // time and adds it to the running total
+                    // time
+                    currentTimeTaken += (currentTime.getTime()
+                            - prevTime.getTime());
+                    prevTime = currentTime;// Sets the
+                                           // current time
+                                           // to the
+                                           // previous time
+                    String output = formatter.format(currentTimeTaken);// Sets
+                                                                       // the
+                                                                       // formatted
+                                                                       // output
+                                                                       // of
+                                                                       // the
+                                                                       // time
 
-		    // Tells javafx thread to update the
-		    // label with the new
-		    // output ASAP
-		    Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-			    time.setText(output);
-			}
-		    });
+                    // Tells javafx thread to update the
+                    // label with the new
+                    // output ASAP
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            time.setText(output);
+                        }
+                    });
 
-		}
-	    }
-	};
+                }
+            }
+        };
 
-	// Starts the timer.
-	timer.scheduleAtFixedRate(timerTask, 0, 100);// this line starts
-						     // the
-						     // timer at the
-						     // same
-						     // time its
-						     // executed
+        // Starts the timer.
+        timer.scheduleAtFixedRate(timerTask, 0, 100);// this line starts
+                                                     // the
+                                                     // timer at the
+                                                     // same
+                                                     // time its
+                                                     // executed
     }
 
     /**
      * This method pauses the timer.
      */
     public void pauseTimer() {
-	timing = false;
+        timing = false;
     }
 
     /**
      * This method resumes the timer.
      */
     public void resumeTimer() {
-	prevTime = new Date();
-	timing = true;
+        prevTime = new Date();
+        timing = true;
 
     }
 
@@ -113,9 +113,9 @@ public class GTimer {
      * This method stops the timer.
      */
     public void stopTimer() {
-	timing = false;
-	timer.cancel();
-	// Need a call here to send to leaderboard or profile?
+        timing = false;
+        timer.cancel();
+        // Need a call here to send to leaderboard or profile?
 
     }
 
@@ -125,6 +125,6 @@ public class GTimer {
      * @return the time taken.
      */
     public static long getCurrentTimeTaken() {
-	return currentTimeTaken;
+        return currentTimeTaken;
     }
 }

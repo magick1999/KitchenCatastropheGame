@@ -27,7 +27,7 @@ public abstract class Cell extends LevelObject {
      *            - Path to the Image representing the {@link Cell} in the game.
      */
     public Cell(Level level, String title, int positionX, int positionY,
-	    String imagePath) {
-	super(level, title, positionX, positionY, imagePath);
+            String imagePath) {
+        super(level, title, positionX, positionY, imagePath);
     }
 }

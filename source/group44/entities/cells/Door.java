@@ -33,11 +33,11 @@ public abstract class Door extends StepableCell {
      *            - Path to the Image representing unlocked door in the game.
      */
     public Door(Level level, String title, int positionX, int positionY,
-	    String lockedImagePath, String unlockedImagePath) {
-	super(level, title, positionX, positionY, lockedImagePath);
+            String lockedImagePath, String unlockedImagePath) {
+        super(level, title, positionX, positionY, lockedImagePath);
 
-	this.unlockedImagePath = unlockedImagePath;
-	this.unlockedImage = new Image(unlockedImagePath, true);
+        this.unlockedImagePath = unlockedImagePath;
+        this.unlockedImage = new Image(unlockedImagePath, true);
     }
 
     /**
@@ -46,7 +46,7 @@ public abstract class Door extends StepableCell {
      * @return a path to the image representing the unlocked door in the game.
      */
     protected String getUnlockedImagePath() {
-	return this.unlockedImagePath;
+        return this.unlockedImagePath;
     }
 
     /**
@@ -64,15 +64,15 @@ public abstract class Door extends StepableCell {
      * @return true if the door is open, otherwise false.
      */
     public boolean isOpen() {
-	return this.isOpen;
+        return this.isOpen;
     }
 
     /**
      * Changes the state of the door to open.
      */
     protected void open() {
-	this.isOpen = true;
-	this.setImage(this.unlockedImage);
+        this.isOpen = true;
+        this.setImage(this.unlockedImage);
     }
 
     /**

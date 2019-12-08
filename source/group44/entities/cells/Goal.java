@@ -26,7 +26,7 @@ public class Goal extends StepableCell {
      *            - Path to the Image representing {@link Goal} in the game.
      */
     public Goal(Level level, int positionX, int positionY, String imagePath) {
-	super(level, Constants.TITLE_GOAL, positionX, positionY, imagePath);
+        super(level, Constants.TITLE_GOAL, positionX, positionY, imagePath);
     }
 
     /**
@@ -37,7 +37,7 @@ public class Goal extends StepableCell {
      */
     @Override
     protected void onStepped(MovableObject object) {
-	this.getLevel().finish(LevelFinishStatus.GoalReached);
+        this.getLevel().finish(LevelFinishStatus.GoalReached);
     }
 
     /**
@@ -47,16 +47,16 @@ public class Goal extends StepableCell {
      */
     @Override
     public String toString() {
-	StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
 
-	builder.append(String.format(PARSE_PATTERN, Constants.TYPE_GOAL,
-		this.getPositionX(), this.getPositionY(), this.getImagePath()));
+        builder.append(String.format(PARSE_PATTERN, Constants.TYPE_GOAL,
+                this.getPositionX(), this.getPositionY(), this.getImagePath()));
 
-	if (this.getMovableObject() != null) {
-	    builder.append(",");
-	    builder.append(this.getMovableObject().toString());
-	}
+        if (this.getMovableObject() != null) {
+            builder.append(",");
+            builder.append(this.getMovableObject().toString());
+        }
 
-	return builder.toString();
+        return builder.toString();
     }
 }

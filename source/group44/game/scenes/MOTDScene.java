@@ -35,25 +35,25 @@ public class MOTDScene {
      * @param primaryStage
      */
     public MOTDScene(Stage primaryStage) {
-	FXMLLoader fxmlLoader = new FXMLLoader(
-		getClass().getResource("/group44/game/layouts/motd.fxml"));
-	this.primaryStage = primaryStage;
-	try {
-	    Parent root = fxmlLoader.load();
-	    // Setting the stage and adding custom style to it.
-	    root.getStylesheets().add("/group44/resources/application.css");
-	    root.setId("root");
-	    Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-	    MOTDController tempController = fxmlLoader.getController();
-	    setController(tempController);
-	    primaryStage.setScene(scene);
-	    primaryStage.show();
-	    setUpControls();
-	    refreshMOTD();
+        FXMLLoader fxmlLoader = new FXMLLoader(
+                getClass().getResource("/group44/game/layouts/motd.fxml"));
+        this.primaryStage = primaryStage;
+        try {
+            Parent root = fxmlLoader.load();
+            // Setting the stage and adding custom style to it.
+            root.getStylesheets().add("/group44/resources/application.css");
+            root.setId("root");
+            Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+            MOTDController tempController = fxmlLoader.getController();
+            setController(tempController);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            setUpControls();
+            refreshMOTD();
 
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -63,14 +63,14 @@ public class MOTDScene {
      *            the controller for this class.
      */
     private void setController(MOTDController motdController) {
-	this.motdController = motdController;
+        this.motdController = motdController;
     }
 
     /**
      * This adds listeners for the buttons on the scene.
      */
     private void setUpControls() {
-	motdController.getBack().setOnMouseClicked(this::backToTheMenu);
+        motdController.getBack().setOnMouseClicked(this::backToTheMenu);
     }
 
     /**
@@ -79,18 +79,18 @@ public class MOTDScene {
      * @param event
      */
     private void backToTheMenu(MouseEvent event) {
-	new MainMenuScene(primaryStage);
+        new MainMenuScene(primaryStage);
     }
 
     private void refreshMOTD() {
-	Timeline timer = new Timeline(
-		new KeyFrame(Duration.ZERO, new EventHandler<ActionEvent>() {
-		    @Override
-		    public void handle(ActionEvent actionEvent) {
-			motdController.getMOTDRefresh();
-		    }
-		}), new KeyFrame(Duration.seconds(1)));
-	timer.setCycleCount(Timeline.INDEFINITE);
-	timer.play();
+        Timeline timer = new Timeline(
+                new KeyFrame(Duration.ZERO, new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        motdController.getMOTDRefresh();
+                    }
+                }), new KeyFrame(Duration.seconds(1)));
+        timer.setCycleCount(Timeline.INDEFINITE);
+        timer.play();
     }
 }

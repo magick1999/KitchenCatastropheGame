@@ -35,9 +35,9 @@ public class StraightWalkingEnemy extends Enemy {
      *            {@link StraightWalkingEnemy} on the screen.
      */
     public StraightWalkingEnemy(Level level, String name, int positionX,
-	    int positionY, int velocityX, int velocityY, String imagePath) {
-	super(level, name, positionX, positionY, velocityX, velocityY,
-		imagePath);
+            int positionY, int velocityX, int velocityY, String imagePath) {
+        super(level, name, positionX, positionY, velocityX, velocityY,
+                imagePath);
     }
 
     /**
@@ -46,11 +46,11 @@ public class StraightWalkingEnemy extends Enemy {
      */
     @Override
     protected void computeVelocity() {
-	StepableCell stepableCell = this.getNextStepableCellInVelocity(this,
-		this.getVelocityX(), this.getVelocityY());
-	if ((stepableCell instanceof Ground) == false) {
-	    this.turnAround();
-	}
+        StepableCell stepableCell = this.getNextStepableCellInVelocity(this,
+                this.getVelocityX(), this.getVelocityY());
+        if ((stepableCell instanceof Ground) == false) {
+            this.turnAround();
+        }
     }
 
     /**
@@ -61,11 +61,11 @@ public class StraightWalkingEnemy extends Enemy {
      */
     @Override
     protected void onCollided(CollisionCheckResult result) {
-	if (result.getCollidingObject() instanceof Player) {
-	    ((Player) result.getCollidingObject()).die(this);
-	} else {
-	    this.turnAround();
-	}
+        if (result.getCollidingObject() instanceof Player) {
+            ((Player) result.getCollidingObject()).die(this);
+        } else {
+            this.turnAround();
+        }
     }
 
     /**
@@ -74,22 +74,22 @@ public class StraightWalkingEnemy extends Enemy {
      * @return - the string representation of a Straight Walking Enemy.
      */
     public String toString() {
-	StringBuilder builder = new StringBuilder();
-	builder.append(Constants.TYPE_STRAIGHT_WALKING_ENEMY);
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        StringBuilder builder = new StringBuilder();
+        builder.append(Constants.TYPE_STRAIGHT_WALKING_ENEMY);
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
 
-	builder.append(this.getTitle());
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
-	builder.append(this.getPositionX());
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
-	builder.append(this.getPositionY());
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
-	builder.append(this.getVelocityX());
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
-	builder.append(this.getVelocityY());
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
-	builder.append(this.getImagePath());
+        builder.append(this.getTitle());
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.getPositionX());
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.getPositionY());
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.getVelocityX());
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.getVelocityY());
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.getImagePath());
 
-	return builder.toString();
+        return builder.toString();
     }
 }

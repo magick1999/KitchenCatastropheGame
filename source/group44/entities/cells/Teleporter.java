@@ -32,8 +32,8 @@ public class Teleporter extends StepableCell {
      *            game.
      */
     public Teleporter(Level level, String title, int positionX, int positionY,
-	    String imagePath) {
-	super(level, title, positionX, positionY, imagePath);
+            String imagePath) {
+        super(level, title, positionX, positionY, imagePath);
     }
 
     /**
@@ -43,7 +43,7 @@ public class Teleporter extends StepableCell {
      *            - the teleporter to link with.
      */
     public void setLinkedTeleporter(Teleporter linkedTeleporter) {
-	this.linkedTeleporter = linkedTeleporter;
+        this.linkedTeleporter = linkedTeleporter;
     }
 
     /**
@@ -55,9 +55,9 @@ public class Teleporter extends StepableCell {
      */
     @Override
     protected void onStepped(MovableObject object) {
-	if (this.teleport(object)) {
-	    this.stepOff();
-	}
+        if (this.teleport(object)) {
+            this.stepOff();
+        }
     }
 
     /**
@@ -69,27 +69,27 @@ public class Teleporter extends StepableCell {
      * @return true if the teleportation was successful; false otherwise.
      */
     private Boolean teleport(MovableObject object) {
-	if (this.linkedTeleporter != null) {
-	    LevelObject[][] surroudingArea = this
-		    .getSurroundingArea(this.linkedTeleporter);
+        if (this.linkedTeleporter != null) {
+            LevelObject[][] surroudingArea = this
+                    .getSurroundingArea(this.linkedTeleporter);
 
-	    for (int x = 0; x < surroudingArea.length; x++) {
-		for (int y = 0; y < surroudingArea[0].length; y++) {
-		    LevelObject levelObject = surroudingArea[x][y];
+            for (int x = 0; x < surroudingArea.length; x++) {
+                for (int y = 0; y < surroudingArea[0].length; y++) {
+                    LevelObject levelObject = surroudingArea[x][y];
 
-		    if (levelObject instanceof Ground
-			    && ((Ground) surroudingArea[x][y])
-				    .isSteppedOn() == false) {
-			StepableCell stepableCell = (Ground) surroudingArea[x][y];
-			stepableCell.stepOn(object);
-			object.setPosition(stepableCell.getPositionX(),
-				stepableCell.getPositionY());
-			return true;
-		    }
-		}
-	    }
-	}
-	return false;
+                    if (levelObject instanceof Ground
+                            && ((Ground) surroudingArea[x][y])
+                                    .isSteppedOn() == false) {
+                        StepableCell stepableCell = (Ground) surroudingArea[x][y];
+                        stepableCell.stepOn(object);
+                        object.setPosition(stepableCell.getPositionX(),
+                                stepableCell.getPositionY());
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -102,94 +102,94 @@ public class Teleporter extends StepableCell {
      *         a parameter.
      */
     private LevelObject[][] getSurroundingArea(LevelObject object) {
-	int gridWidth = this.getLevel().getGridWidth();
-	int gridHeight = this.getLevel().getGridHeight();
+        int gridWidth = this.getLevel().getGridWidth();
+        int gridHeight = this.getLevel().getGridHeight();
 
-	LevelObject[][] grid = this.getLevel().getGrid();
-	LevelObject[][] area;
+        LevelObject[][] grid = this.getLevel().getGrid();
+        LevelObject[][] area;
 
-	if (object.getPositionX() == 0 && object.getPositionY() == 0) {
-	    area = new LevelObject[2][2];
+        if (object.getPositionX() == 0 && object.getPositionY() == 0) {
+            area = new LevelObject[2][2];
 
-	    for (int x = 0; x < 2; x++) {
-		for (int y = 0; y < 2; y++) {
-		    area[x][y] = grid[x][y];
-		}
-	    }
-	} else if (object.getPositionX() == 0
-		&& object.getPositionY() == gridHeight - 1) {
-	    area = new LevelObject[2][2];
+            for (int x = 0; x < 2; x++) {
+                for (int y = 0; y < 2; y++) {
+                    area[x][y] = grid[x][y];
+                }
+            }
+        } else if (object.getPositionX() == 0
+                && object.getPositionY() == gridHeight - 1) {
+            area = new LevelObject[2][2];
 
-	    for (int x = 0; x < 2; x++) {
-		for (int y = 0; y < 2; y++) {
-		    area[x][y] = grid[x][gridHeight - 2 + y];
-		}
-	    }
-	} else if (object.getPositionX() == gridWidth - 1
-		&& object.getPositionY() == gridHeight - 1) {
-	    area = new LevelObject[2][2];
+            for (int x = 0; x < 2; x++) {
+                for (int y = 0; y < 2; y++) {
+                    area[x][y] = grid[x][gridHeight - 2 + y];
+                }
+            }
+        } else if (object.getPositionX() == gridWidth - 1
+                && object.getPositionY() == gridHeight - 1) {
+            area = new LevelObject[2][2];
 
-	    for (int x = 0; x < 2; x++) {
-		for (int y = 0; y < 2; y++) {
-		    area[x][y] = grid[gridWidth - 2 + x][gridHeight - 2 + y];
-		}
-	    }
-	} else if (object.getPositionX() == gridWidth - 1
-		&& object.getPositionY() == 0) {
-	    area = new LevelObject[2][2];
+            for (int x = 0; x < 2; x++) {
+                for (int y = 0; y < 2; y++) {
+                    area[x][y] = grid[gridWidth - 2 + x][gridHeight - 2 + y];
+                }
+            }
+        } else if (object.getPositionX() == gridWidth - 1
+                && object.getPositionY() == 0) {
+            area = new LevelObject[2][2];
 
-	    for (int x = 0; x < 2; x++) {
-		for (int y = 0; y < 2; y++) {
-		    area[x][y] = grid[gridWidth - 2 + x][y];
-		}
-	    }
-	} else if (object.getPositionX() == 0) {
-	    area = new LevelObject[2][3];
+            for (int x = 0; x < 2; x++) {
+                for (int y = 0; y < 2; y++) {
+                    area[x][y] = grid[gridWidth - 2 + x][y];
+                }
+            }
+        } else if (object.getPositionX() == 0) {
+            area = new LevelObject[2][3];
 
-	    for (int x = 0; x < 2; x++) {
-		for (int y = 0; y < 3; y++) {
-		    area[x][y] = grid[x][object.getPositionY() - 1 + y];
-		}
-	    }
-	} else if (object.getPositionX() == gridWidth - 1) {
-	    area = new LevelObject[2][3];
+            for (int x = 0; x < 2; x++) {
+                for (int y = 0; y < 3; y++) {
+                    area[x][y] = grid[x][object.getPositionY() - 1 + y];
+                }
+            }
+        } else if (object.getPositionX() == gridWidth - 1) {
+            area = new LevelObject[2][3];
 
-	    for (int x = 0; x < 2; x++) {
-		for (int y = 0; y < 3; y++) {
-		    area[x][y] = grid[object.getPositionX() - 1
-			    + x][object.getPositionY() - 1 + y];
-		}
-	    }
-	} else if (object.getPositionY() == 0) {
-	    area = new LevelObject[3][2];
+            for (int x = 0; x < 2; x++) {
+                for (int y = 0; y < 3; y++) {
+                    area[x][y] = grid[object.getPositionX() - 1
+                            + x][object.getPositionY() - 1 + y];
+                }
+            }
+        } else if (object.getPositionY() == 0) {
+            area = new LevelObject[3][2];
 
-	    for (int x = 0; x < 3; x++) {
-		for (int y = 0; y < 2; y++) {
-		    area[x][y] = grid[object.getPositionX() - 1 + x][object
-			    .getPositionY() + y];
-		}
-	    }
-	} else if (object.getPositionY() == gridHeight - 1) {
-	    area = new LevelObject[3][2];
+            for (int x = 0; x < 3; x++) {
+                for (int y = 0; y < 2; y++) {
+                    area[x][y] = grid[object.getPositionX() - 1 + x][object
+                            .getPositionY() + y];
+                }
+            }
+        } else if (object.getPositionY() == gridHeight - 1) {
+            area = new LevelObject[3][2];
 
-	    for (int x = 0; x < 3; x++) {
-		for (int y = 0; y < 2; y++) {
-		    area[x][y] = grid[object.getPositionX() - 1
-			    + x][object.getPositionY() - 1 + y];
-		}
-	    }
-	} else {
-	    area = new LevelObject[3][3];
+            for (int x = 0; x < 3; x++) {
+                for (int y = 0; y < 2; y++) {
+                    area[x][y] = grid[object.getPositionX() - 1
+                            + x][object.getPositionY() - 1 + y];
+                }
+            }
+        } else {
+            area = new LevelObject[3][3];
 
-	    for (int x = 0; x < 3; x++) {
-		for (int y = 0; y < 3; y++) {
-		    area[x][y] = grid[object.getPositionX() - 1
-			    + x][object.getPositionY() - 1 + y];
-		}
-	    }
-	}
+            for (int x = 0; x < 3; x++) {
+                for (int y = 0; y < 3; y++) {
+                    area[x][y] = grid[object.getPositionX() - 1
+                            + x][object.getPositionY() - 1 + y];
+                }
+            }
+        }
 
-	return area;
+        return area;
     }
 
     /**
@@ -199,26 +199,26 @@ public class Teleporter extends StepableCell {
      */
     @Override
     public String toString() {
-	StringBuilder builder = new StringBuilder();
-	builder.append(Constants.TYPE_TELEPORTER);
+        StringBuilder builder = new StringBuilder();
+        builder.append(Constants.TYPE_TELEPORTER);
 
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
-	builder.append(this.getTitle());
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.getTitle());
 
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
-	builder.append(this.getPositionX());
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.getPositionX());
 
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
-	builder.append(this.getPositionY());
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.getPositionY());
 
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
-	builder.append(this.getImagePath());
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.getImagePath());
 
-	if (this.getMovableObject() != null) {
-	    builder.append(",");
-	    builder.append(this.getMovableObject().toString());
-	}
+        if (this.getMovableObject() != null) {
+            builder.append(",");
+            builder.append(this.getMovableObject().toString());
+        }
 
-	return builder.toString();
+        return builder.toString();
     }
 }

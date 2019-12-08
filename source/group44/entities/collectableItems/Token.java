@@ -21,7 +21,7 @@ public class Token extends CollectableItem {
      *            game.
      */
     public Token(Level level, String imagePath) {
-	super(level, Constants.TITLE_TOKEN, imagePath);
+        super(level, Constants.TITLE_TOKEN, imagePath);
     }
 
     /**
@@ -31,10 +31,10 @@ public class Token extends CollectableItem {
      */
     @Override
     public String toString() {
-	StringBuilder sb = new StringBuilder();
-	sb.append(Constants.TYPE_TOKEN);
-	sb.append(Constants.LEVEL_OBJECT_DELIMITER);
-	sb.append(this.getImagePath());
-	return sb.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(Constants.TYPE_TOKEN);
+        sb.append(Constants.LEVEL_OBJECT_DELIMITER);
+        sb.append(this.getImagePath());
+        return sb.toString();
     }
 }

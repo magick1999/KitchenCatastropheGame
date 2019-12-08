@@ -29,9 +29,9 @@ public class Record implements Comparable<Record> {
      *            - time taken to finish the level
      */
     public Record(Profile profile, int levelId, long time) {
-	this.profile = profile;
-	this.levelId = levelId;
-	this.setTime(time);
+        this.profile = profile;
+        this.levelId = levelId;
+        this.setTime(time);
     }
 
     /**
@@ -40,7 +40,7 @@ public class Record implements Comparable<Record> {
      * @return the associated profile
      */
     public Profile getProfile() {
-	return this.profile;
+        return this.profile;
     }
 
     /**
@@ -49,7 +49,7 @@ public class Record implements Comparable<Record> {
      * @return the level id
      */
     public int getLevelId() {
-	return this.levelId;
+        return this.levelId;
     }
 
     /**
@@ -58,7 +58,7 @@ public class Record implements Comparable<Record> {
      * @return the time taken
      */
     public long getTime() {
-	return this.time;
+        return this.time;
     }
 
     /**
@@ -68,7 +68,7 @@ public class Record implements Comparable<Record> {
      *            - the new time taken
      */
     public void setTime(long time) {
-	this.time = time;
+        this.time = time;
     }
 
     /**
@@ -79,8 +79,8 @@ public class Record implements Comparable<Record> {
      */
     @Override
     public int compareTo(Record o) {
-	return Long.compare(this.getTime(), o.getTime()); // TODO: Test
-							  // this
+        return Long.compare(this.getTime(), o.getTime()); // TODO: Test
+                                                          // this
     }
 
     /**
@@ -90,7 +90,7 @@ public class Record implements Comparable<Record> {
      */
     @Override
     public String toString() {
-	return this.timeString() + " - " + this.getProfile().getUsername();
+        return this.timeString() + " - " + this.getProfile().getUsername();
     }
 
     /**
@@ -99,9 +99,9 @@ public class Record implements Comparable<Record> {
      * @return time in a format of mm:ss.
      */
     public String timeString() {
-	Date date = new Date(this.getTime());
-	DateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS");
-	formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
-	return formatter.format(date);
+        Date date = new Date(this.getTime());
+        DateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS");
+        formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+        return formatter.format(date);
     }
 }

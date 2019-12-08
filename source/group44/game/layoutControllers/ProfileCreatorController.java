@@ -26,54 +26,54 @@ public class ProfileCreatorController {
 
     @FXML
     public void initialize() {
-	logo.setImage(new Image("/group44/resources/KitchenCatastrophe.png"));
+        logo.setImage(new Image("/group44/resources/KitchenCatastrophe.png"));
     }
 
     public void setRoot(BorderPane root) {
-	this.root = root;
+        this.root = root;
     }
 
     public BorderPane getRoot() {
-	return root;
+        return root;
     }
 
     public void setLeftVBox(VBox leftVBox) {
-	this.leftVBox = leftVBox;
+        this.leftVBox = leftVBox;
     }
 
     public VBox getLeftVBox() {
-	return leftVBox;
+        return leftVBox;
     }
 
     public void setCenterVBox(VBox centralVBox) {
-	this.centerVBox = centralVBox;
+        this.centerVBox = centralVBox;
     }
 
     public VBox getCenterVBox() {
-	return centerVBox;
+        return centerVBox;
     }
 
     public void setConfirm(Button confirm) {
-	this.confirm = confirm;
+        this.confirm = confirm;
     }
 
     public Button getConfirm() {
-	return confirm;
+        return confirm;
     }
 
     public void setLogo(ImageView logo) {
-	this.logo = logo;
+        this.logo = logo;
     }
 
     public ImageView getLogo() {
-	return logo;
+        return logo;
     }
 
     public void setBack(Button back) {
-	this.back = back;
+        this.back = back;
     }
 
     public Button getBack() {
-	return back;
+        return back;
     }
 }

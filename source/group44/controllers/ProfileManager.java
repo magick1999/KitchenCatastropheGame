@@ -19,7 +19,7 @@ import javafx.collections.ObservableList;
  */
 public class ProfileManager {
     private static ObservableList<Profile> profiles = FXCollections
-	    .observableArrayList(new ArrayList<>());
+            .observableArrayList(new ArrayList<>());
 
     /**
      * Returns an {@link ObservableList} of profiles.
@@ -27,7 +27,7 @@ public class ProfileManager {
      * @return an observable list of profiles.
      */
     public static ObservableList<Profile> getProfiles() {
-	return ProfileManager.profiles;
+        return ProfileManager.profiles;
     }
 
     /**
@@ -38,15 +38,15 @@ public class ProfileManager {
      * @return {@link Profile} if match was found; otherwise null.
      */
     public static Profile getProfile(int id) {
-	Profile profile = null;
+        Profile profile = null;
 
-	for (Profile item : ProfileManager.profiles) {
-	    if (item.getId() == id) {
-		profile = item;
-	    }
-	}
+        for (Profile item : ProfileManager.profiles) {
+            if (item.getId() == id) {
+                profile = item;
+            }
+        }
 
-	return profile;
+        return profile;
     }
 
     /**
@@ -57,15 +57,15 @@ public class ProfileManager {
      * @return {@link Profile} if match is found; otherwise null.
      */
     public static Profile getProfile(String username) {
-	Profile profile = null;
+        Profile profile = null;
 
-	for (Profile item : ProfileManager.profiles) {
-	    if (item.getUsername().equals(username)) {
-		profile = item;
-	    }
-	}
+        for (Profile item : ProfileManager.profiles) {
+            if (item.getUsername().equals(username)) {
+                profile = item;
+            }
+        }
 
-	return profile;
+        return profile;
     }
 
     /**
@@ -79,18 +79,18 @@ public class ProfileManager {
      * @return the created {@link Profile}.
      */
     public static Profile register(String username)
-	    throws UsernameTakenException {
-	if (ProfileManager.exists(username)) {
-	    throw new UsernameTakenException(username);
-	} else {
-	    int max_id = ProfileManager.getMaxId();
-	    Profile profile = new Profile(++max_id, username);
-	    ProfileManager.profiles.add(profile);
+            throws UsernameTakenException {
+        if (ProfileManager.exists(username)) {
+            throw new UsernameTakenException(username);
+        } else {
+            int max_id = ProfileManager.getMaxId();
+            Profile profile = new Profile(++max_id, username);
+            ProfileManager.profiles.add(profile);
 
-	    ProfileManager.save();
+            ProfileManager.save();
 
-	    return profile;
-	}
+            return profile;
+        }
     }
 
     /**
@@ -100,12 +100,12 @@ public class ProfileManager {
      *            - if of profile to delete.
      */
     public static void delete(int profileId) {
-	Profile profile = getProfile(profileId);
+        Profile profile = getProfile(profileId);
 
-	if (profile != null) {
-	    ProfileManager.profiles.remove(profile);
-	    ProfileManager.save();
-	}
+        if (profile != null) {
+            ProfileManager.profiles.remove(profile);
+            ProfileManager.save();
+        }
     }
 
     /**
@@ -115,12 +115,12 @@ public class ProfileManager {
      *            - username of profile to delete.
      */
     public static void delete(String username) {
-	Profile profile = getProfile(username);
+        Profile profile = getProfile(username);
 
-	if (profile != null) {
-	    ProfileManager.profiles.remove(profile);
-	    ProfileManager.save();
-	}
+        if (profile != null) {
+            ProfileManager.profiles.remove(profile);
+            ProfileManager.save();
+        }
     }
 
     /**
@@ -131,12 +131,12 @@ public class ProfileManager {
      * @return true if the username is already taken; otherwise false
      */
     private static Boolean exists(String username) {
-	for (Profile profile : ProfileManager.profiles) {
-	    if (profile.getUsername().equals(username)) {
-		return true;
-	    }
-	}
-	return false;
+        for (Profile profile : ProfileManager.profiles) {
+            if (profile.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -145,15 +145,15 @@ public class ProfileManager {
      * @return the maximum id
      */
     private static int getMaxId() {
-	int maxId = 0;
+        int maxId = 0;
 
-	for (Profile profile : ProfileManager.profiles) {
-	    if (maxId < profile.getId()) {
-		maxId = profile.getId();
-	    }
-	}
+        for (Profile profile : ProfileManager.profiles) {
+            if (maxId < profile.getId()) {
+                maxId = profile.getId();
+            }
+        }
 
-	return maxId;
+        return maxId;
     }
 
     /**
@@ -162,9 +162,9 @@ public class ProfileManager {
      * @return an observable list of loaded profiles.
      */
     public static ObservableList<Profile> load() {
-	ProfileManager.getProfiles().clear();
-	ProfileManager.load(Constants.FILE_PROFILES);
-	return ProfileManager.getProfiles();
+        ProfileManager.getProfiles().clear();
+        ProfileManager.load(Constants.FILE_PROFILES);
+        return ProfileManager.getProfiles();
     }
 
     /**
@@ -175,24 +175,24 @@ public class ProfileManager {
      * @return a list of loaded {@link Profile}s
      */
     private static void load(String path) {
-	ArrayList<Profile> loadedProfiles = null;
-	Scanner fileScanner = null;
-	File file = new File(path);
+        ArrayList<Profile> loadedProfiles = null;
+        Scanner fileScanner = null;
+        File file = new File(path);
 
-	try {
-	    fileScanner = new Scanner(file);
-	    loadedProfiles = ProfileManager.load(fileScanner);
-	} catch (Exception e) {
-	    System.out.println("File (" + path + ") with profiles not found!");
-	    loadedProfiles = new ArrayList<Profile>();
-	} finally {
-	    if (fileScanner != null) {
-		fileScanner.close();
-	    }
-	    for (Profile item : loadedProfiles) {
-		ProfileManager.profiles.add(item);
-	    }
-	}
+        try {
+            fileScanner = new Scanner(file);
+            loadedProfiles = ProfileManager.load(fileScanner);
+        } catch (Exception e) {
+            System.out.println("File (" + path + ") with profiles not found!");
+            loadedProfiles = new ArrayList<Profile>();
+        } finally {
+            if (fileScanner != null) {
+                fileScanner.close();
+            }
+            for (Profile item : loadedProfiles) {
+                ProfileManager.profiles.add(item);
+            }
+        }
     }
 
     /**
@@ -203,17 +203,17 @@ public class ProfileManager {
      * @return a list of loaded {@link Profile}s
      */
     private static ArrayList<Profile> load(Scanner fileScanner) {
-	ArrayList<Profile> loadedProfiles = new ArrayList<>();
+        ArrayList<Profile> loadedProfiles = new ArrayList<>();
 
-	while (fileScanner.hasNextLine()) {
-	    Profile p = ProfileManager
-		    .parseProfile(new Scanner(fileScanner.nextLine()));
-	    if (p != null) {
-		loadedProfiles.add(p);
-	    }
-	}
+        while (fileScanner.hasNextLine()) {
+            Profile p = ProfileManager
+                    .parseProfile(new Scanner(fileScanner.nextLine()));
+            if (p != null) {
+                loadedProfiles.add(p);
+            }
+        }
 
-	return loadedProfiles;
+        return loadedProfiles;
     }
 
     /**
@@ -225,26 +225,26 @@ public class ProfileManager {
      *         some exception
      */
     private static Profile parseProfile(Scanner scanner) {
-	Profile newProfile = null;
-	scanner.useDelimiter(",");
+        Profile newProfile = null;
+        scanner.useDelimiter(",");
 
-	try {
-	    int id = scanner.nextInt();
-	    String username = scanner.next();
+        try {
+            int id = scanner.nextInt();
+            String username = scanner.next();
 
-	    newProfile = new Profile(id, username);
-	} catch (Exception e) {
-	    System.out.println("Unable to parse a Profile.\n" + e.getMessage());
-	}
+            newProfile = new Profile(id, username);
+        } catch (Exception e) {
+            System.out.println("Unable to parse a Profile.\n" + e.getMessage());
+        }
 
-	return newProfile;
+        return newProfile;
     }
 
     /**
      * Saves the profiles to the default file.
      */
     public static void save() {
-	ProfileManager.save(Constants.FILE_PROFILES);
+        ProfileManager.save(Constants.FILE_PROFILES);
     }
 
     /**
@@ -254,19 +254,19 @@ public class ProfileManager {
      *            - path to the file where to store the profiles
      */
     private static void save(String path) {
-	File file = new File(path);
-	PrintWriter writer = null;
+        File file = new File(path);
+        PrintWriter writer = null;
 
-	try {
-	    writer = new PrintWriter(file);
-	    ProfileManager.save(writer);
-	} catch (Exception e) {
-	    System.out.println("Unable to save profiles.\n" + e.getMessage());
-	} finally {
-	    if (writer != null) {
-		writer.close();
-	    }
-	}
+        try {
+            writer = new PrintWriter(file);
+            ProfileManager.save(writer);
+        } catch (Exception e) {
+            System.out.println("Unable to save profiles.\n" + e.getMessage());
+        } finally {
+            if (writer != null) {
+                writer.close();
+            }
+        }
     }
 
     /**
@@ -276,8 +276,8 @@ public class ProfileManager {
      *            - {@link PrintWriter} to use when saving profiles
      */
     private static void save(PrintWriter writer) {
-	for (Profile profile : ProfileManager.profiles) {
-	    writer.println(profile.toString());
-	}
+        for (Profile profile : ProfileManager.profiles) {
+            writer.println(profile.toString());
+        }
     }
 }

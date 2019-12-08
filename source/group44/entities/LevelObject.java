@@ -31,10 +31,10 @@ public abstract class LevelObject {
      *            - Position Y in the game.
      */
     public LevelObject(Level level, String title, int positionX,
-	    int positionY) {
-	this.level = level;
-	this.setTitle(title);
-	this.setPosition(positionX, positionY);
+            int positionY) {
+        this.level = level;
+        this.setTitle(title);
+        this.setPosition(positionX, positionY);
     }
 
     /**
@@ -52,10 +52,10 @@ public abstract class LevelObject {
      *            - Image path of the instance.
      */
     public LevelObject(Level level, String title, int positionX, int positionY,
-	    String imagePath) {
-	this(level, title, positionX, positionY);
-	this.imagePath = imagePath;
-	this.setImage(new Image(imagePath));
+            String imagePath) {
+        this(level, title, positionX, positionY);
+        this.imagePath = imagePath;
+        this.setImage(new Image(imagePath));
     }
 
     /**
@@ -64,7 +64,7 @@ public abstract class LevelObject {
      * @return the title of the object.
      */
     public String getTitle() {
-	return this.title;
+        return this.title;
     }
 
     /**
@@ -74,7 +74,7 @@ public abstract class LevelObject {
      *            - the title to set.
      */
     public void setTitle(String title) {
-	this.title = title;
+        this.title = title;
     }
 
     /**
@@ -83,7 +83,7 @@ public abstract class LevelObject {
      * @return the image path.
      */
     protected String getImagePath() {
-	return this.imagePath;
+        return this.imagePath;
     }
 
     /**
@@ -92,7 +92,7 @@ public abstract class LevelObject {
      * @return the image of the object.
      */
     public Image getImage() {
-	return this.image;
+        return this.image;
     }
 
     /**
@@ -102,7 +102,7 @@ public abstract class LevelObject {
      *            - the image.
      */
     public void setImage(Image image) {
-	this.image = image;
+        this.image = image;
     }
 
     /**
@@ -111,7 +111,7 @@ public abstract class LevelObject {
      * @return the {@link Level}.
      */
     public Level getLevel() {
-	return this.level;
+        return this.level;
     }
 
     /**
@@ -120,7 +120,7 @@ public abstract class LevelObject {
      * @return the x coordinate of an object.
      */
     public int getPositionX() {
-	return this.positionX;
+        return this.positionX;
     }
 
     /**
@@ -129,7 +129,7 @@ public abstract class LevelObject {
      * @return the y coordinate of an object.
      */
     public int getPositionY() {
-	return this.positionY;
+        return this.positionY;
     }
 
     /**
@@ -141,8 +141,8 @@ public abstract class LevelObject {
      *            - Y coordinate.
      */
     public void setPosition(int x, int y) {
-	this.positionX = x;
-	this.positionY = y;
+        this.positionX = x;
+        this.positionY = y;
     }
 
     /**
@@ -165,9 +165,9 @@ public abstract class LevelObject {
      *            {@link GraphicsContext}.
      */
     public void draw(GraphicsContext gc, double x, double y, double width,
-	    double height) {
-	if (this.getImage() != null) {
-	    gc.drawImage(this.getImage(), x, y, width, height);
-	}
+            double height) {
+        if (this.getImage() != null) {
+            gc.drawImage(this.getImage(), x, y, width, height);
+        }
     }
 }

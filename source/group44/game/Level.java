@@ -48,18 +48,18 @@ public class Level {
      *             size of a grid.
      */
     public Level(int id, int gridWidth, int gridHeight, int displaySize,
-	    int time) {
-	this.id = id;
-	this.grid = new Cell[gridWidth][gridHeight];
-	if (displaySize < 3 || displaySize > gridWidth
-		|| displaySize > gridHeight || displaySize % 2 != 1) {
-	    throw new IllegalArgumentException(
-		    Level.ERROR_DISPLAY_SIZE_ILLEGAL_ARGUMENT_EXCEPTION);
-	} else {
-	    this.displaySize = displaySize;
-	}
-	this.time = time;
-	this.enemies = new ArrayList<>();
+            int time) {
+        this.id = id;
+        this.grid = new Cell[gridWidth][gridHeight];
+        if (displaySize < 3 || displaySize > gridWidth
+                || displaySize > gridHeight || displaySize % 2 != 1) {
+            throw new IllegalArgumentException(
+                    Level.ERROR_DISPLAY_SIZE_ILLEGAL_ARGUMENT_EXCEPTION);
+        } else {
+            this.displaySize = displaySize;
+        }
+        this.time = time;
+        this.enemies = new ArrayList<>();
     }
 
     /**
@@ -68,7 +68,7 @@ public class Level {
      * @return the time taken.
      */
     public long getTime() {
-	return time;
+        return time;
     }
 
     /**
@@ -78,7 +78,7 @@ public class Level {
      *            - the time taken.
      */
     public void setTime(long time) {
-	this.time = time;
+        this.time = time;
     }
 
     /**
@@ -87,7 +87,7 @@ public class Level {
      * @return true if finished; otherwise false.
      */
     public boolean isFinished() {
-	return this.isFinished;
+        return this.isFinished;
     }
 
     /**
@@ -96,7 +96,7 @@ public class Level {
      * @return the finish status.
      */
     public LevelFinishStatus getFinishStatus() {
-	return this.finishStatus;
+        return this.finishStatus;
     }
 
     /**
@@ -105,7 +105,7 @@ public class Level {
      * @return the level id
      */
     public int getId() {
-	return this.id;
+        return this.id;
     }
 
     /**
@@ -114,12 +114,12 @@ public class Level {
      * @return 2D array of {@link Cell}s
      */
     public Cell[][] getGrid() {
-	/*
-	 * The only class we will possibly use this method is the
-	 * SmartTargetingEnemy. Using some kind of repository does not make
-	 * sence as the SmartTargetingEnemy should decide on its own.
-	 */
-	return this.grid;
+        /*
+         * The only class we will possibly use this method is the
+         * SmartTargetingEnemy. Using some kind of repository does not make
+         * sence as the SmartTargetingEnemy should decide on its own.
+         */
+        return this.grid;
     }
 
     /**
@@ -128,7 +128,7 @@ public class Level {
      * @return width of the game
      */
     public int getGridWidth() {
-	return this.grid.length;
+        return this.grid.length;
     }
 
     /**
@@ -137,7 +137,7 @@ public class Level {
      * @return height of the game
      */
     public int getGridHeight() {
-	return this.grid[0].length;
+        return this.grid[0].length;
     }
 
     /**
@@ -153,22 +153,22 @@ public class Level {
      *             when trying to rewrite existing cell in the grid
      */
     public void addCell(int x, int y, Cell cell) throws CollisionException {
-	if (this.grid[x][y] != null) {
-	    throw new CollisionException(String.format(
-		    Level.ERROR_COLLISION_EXCEPTION, cell.getTitle(), x, y));
-	}
+        if (this.grid[x][y] != null) {
+            throw new CollisionException(String.format(
+                    Level.ERROR_COLLISION_EXCEPTION, cell.getTitle(), x, y));
+        }
 
-	this.grid[x][y] = cell;
-	if (cell instanceof StepableCell) {
-	    StepableCell stepableCell = ((StepableCell) cell);
-	    MovableObject object = stepableCell.getMovableObject();
-	    if (object instanceof Player) {
-		this.player = (Player) object;
-	    }
-	    if (object instanceof Enemy) {
-		this.enemies.add((Enemy) object);
-	    }
-	}
+        this.grid[x][y] = cell;
+        if (cell instanceof StepableCell) {
+            StepableCell stepableCell = ((StepableCell) cell);
+            MovableObject object = stepableCell.getMovableObject();
+            if (object instanceof Player) {
+                this.player = (Player) object;
+            }
+            if (object instanceof Enemy) {
+                this.enemies.add((Enemy) object);
+            }
+        }
     }
 
     /**
@@ -177,7 +177,7 @@ public class Level {
      * @return the player.
      */
     public Player getPlayer() {
-	return this.player;
+        return this.player;
     }
 
     /**
@@ -186,7 +186,7 @@ public class Level {
      * @return list of enemies.
      */
     public ArrayList<Enemy> getEnemies() {
-	return this.enemies;
+        return this.enemies;
     }
 
     /**
@@ -195,8 +195,8 @@ public class Level {
      * @return the {@link Player}'s position
      */
     public Position getPlayerPosition() {
-	return new Position(this.player.getPositionX(),
-		this.player.getPositionY());
+        return new Position(this.player.getPositionX(),
+                this.player.getPositionY());
     }
 
     /**
@@ -206,26 +206,26 @@ public class Level {
      *            - {@link GraphicsContext} to which the game is drawn
      */
     public void draw(GraphicsContext gc) {
-	double cellWidth = gc.getCanvas().getWidth() / this.displaySize;
-	double cellHeight = gc.getCanvas().getHeight() / this.displaySize;
-	double cellSize = Math.min(cellWidth, cellHeight);
+        double cellWidth = gc.getCanvas().getWidth() / this.displaySize;
+        double cellHeight = gc.getCanvas().getHeight() / this.displaySize;
+        double cellSize = Math.min(cellWidth, cellHeight);
 
-	Area activeArea = this.getActiveArea();
+        Area activeArea = this.getActiveArea();
 
-	Cell[][] area = getActiveAreaCell(activeArea);
-	int areaWidth = area.length;
-	int areaHeight = area[0].length;
+        Cell[][] area = getActiveAreaCell(activeArea);
+        int areaWidth = area.length;
+        int areaHeight = area[0].length;
 
-	for (int x = 0; x < areaWidth; x++) {
-	    for (int y = 0; y < areaHeight; y++) {
+        for (int x = 0; x < areaWidth; x++) {
+            for (int y = 0; y < areaHeight; y++) {
 
-		Cell cell = area[x][y];
-		if (cell != null) {
-		    cell.draw(gc, x * cellSize, y * cellSize, cellSize,
-			    cellSize);
-		}
-	    }
-	}
+                Cell cell = area[x][y];
+                if (cell != null) {
+                    cell.draw(gc, x * cellSize, y * cellSize, cellSize,
+                            cellSize);
+                }
+            }
+        }
     }
 
     /**
@@ -236,20 +236,20 @@ public class Level {
      *            - the {@link KeyEvent}
      */
     public void keyDown(KeyEvent event) {
-	if (this.isFinished == false) {
-	    this.player.keyDown(event);
-	    this.player.move();
-	    this.moveEnemies();
-	}
+        if (this.isFinished == false) {
+            this.player.keyDown(event);
+            this.player.move();
+            this.moveEnemies();
+        }
     }
 
     /**
      * Moves all enemies in the game.
      */
     private void moveEnemies() {
-	for (Enemy enemy : this.enemies) {
-	    enemy.move();
-	}
+        for (Enemy enemy : this.enemies) {
+            enemy.move();
+        }
     }
 
     /**
@@ -258,41 +258,41 @@ public class Level {
      * @return the active area of the game
      */
     private Area getActiveArea() {
-	int centerX = this.player.getPositionX();
-	int centerY = this.player.getPositionY();
+        int centerX = this.player.getPositionX();
+        int centerY = this.player.getPositionY();
 
-	if (centerX < this.displaySize / 2) {
-	    centerX = this.displaySize / 2;
-	}
-	if (centerY < this.displaySize / 2) {
-	    centerY = this.displaySize / 2;
-	}
-	if (centerX > (this.grid[0].length - 1) - this.displaySize / 2) {
-	    centerX = (this.grid[0].length - 1) - this.displaySize / 2;
-	}
-	if (centerY > (this.grid[1].length - 1) - this.displaySize / 2) {
-	    centerY = (this.grid[1].length - 1) - this.displaySize / 2;
-	}
+        if (centerX < this.displaySize / 2) {
+            centerX = this.displaySize / 2;
+        }
+        if (centerY < this.displaySize / 2) {
+            centerY = this.displaySize / 2;
+        }
+        if (centerX > (this.grid[0].length - 1) - this.displaySize / 2) {
+            centerX = (this.grid[0].length - 1) - this.displaySize / 2;
+        }
+        if (centerY > (this.grid[1].length - 1) - this.displaySize / 2) {
+            centerY = (this.grid[1].length - 1) - this.displaySize / 2;
+        }
 
-	return new Area(centerX - this.displaySize / 2,
-		centerY - this.displaySize / 2, centerX + this.displaySize / 2,
-		centerY + this.displaySize / 2);
+        return new Area(centerX - this.displaySize / 2,
+                centerY - this.displaySize / 2, centerX + this.displaySize / 2,
+                centerY + this.displaySize / 2);
     }
 
     private Cell[][] getActiveAreaCell(Area activeArea) {
-	Cell[][] array = new Cell[this.displaySize][this.displaySize];
+        Cell[][] array = new Cell[this.displaySize][this.displaySize];
 
-	int width = activeArea.getX2() - activeArea.getX1();
-	int height = activeArea.getY2() - activeArea.getY1();
+        int width = activeArea.getX2() - activeArea.getX1();
+        int height = activeArea.getY2() - activeArea.getY1();
 
-	for (int x = 0; x < width + 1; x++) {
-	    for (int y = 0; y < height + 1; y++) {
-		array[x][y] = this.grid[x + activeArea.getX1()][y
-			+ activeArea.getY1()];
-	    }
-	}
+        for (int x = 0; x < width + 1; x++) {
+            for (int y = 0; y < height + 1; y++) {
+                array[x][y] = this.grid[x + activeArea.getX1()][y
+                        + activeArea.getY1()];
+            }
+        }
 
-	return array;
+        return array;
     }
 
     /**
@@ -302,8 +302,8 @@ public class Level {
      *            - level finish status.
      */
     public void finish(LevelFinishStatus status) {
-	System.out.println("Level.finish()");
-	this.isFinished = true;
-	this.finishStatus = status;
+        System.out.println("Level.finish()");
+        this.isFinished = true;
+        this.finishStatus = status;
     }
 }

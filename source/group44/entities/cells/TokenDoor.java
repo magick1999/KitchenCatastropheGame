@@ -39,12 +39,12 @@ public class TokenDoor extends Door {
      *            - number of tokens needed to open the door.
      */
     public TokenDoor(Level level, String title, int positionX, int positionY,
-	    String lockedImagePath, String unlockedImagePath,
-	    int tokensNeeded) {
-	super(level, title, positionX, positionY, lockedImagePath,
-		unlockedImagePath);
+            String lockedImagePath, String unlockedImagePath,
+            int tokensNeeded) {
+        super(level, title, positionX, positionY, lockedImagePath,
+                unlockedImagePath);
 
-	this.tokensNeeded = tokensNeeded;
+        this.tokensNeeded = tokensNeeded;
     }
 
     /**
@@ -57,18 +57,18 @@ public class TokenDoor extends Door {
      */
     @Override
     public boolean open(CollectableItem item) {
-	if (this.isOpen() == false && item instanceof TokenAccumulator
-		&& ((TokenAccumulator) item)
-			.getTokensCount() >= this.tokensNeeded) {
-	    try {
-		((TokenAccumulator) item).use(this.tokensNeeded);
-		this.open();
-	    } catch (Exception e) {
-		return false;
-	    }
-	}
+        if (this.isOpen() == false && item instanceof TokenAccumulator
+                && ((TokenAccumulator) item)
+                        .getTokensCount() >= this.tokensNeeded) {
+            try {
+                ((TokenAccumulator) item).use(this.tokensNeeded);
+                this.open();
+            } catch (Exception e) {
+                return false;
+            }
+        }
 
-	return this.isOpen();
+        return this.isOpen();
     }
 
     /**
@@ -85,12 +85,12 @@ public class TokenDoor extends Door {
      */
     @Override
     public CollisionCheckResult stepOn(MovableObject object) {
-	if (this.isOpen() == false) {
-	    return new CollisionCheckResult(
-		    CollisionCheckResultType.NotEnoughTokens, this);
-	}
-	this.setMovableObject(object);
-	return new CollisionCheckResult(CollisionCheckResultType.Successful);
+        if (this.isOpen() == false) {
+            return new CollisionCheckResult(
+                    CollisionCheckResultType.NotEnoughTokens, this);
+        }
+        this.setMovableObject(object);
+        return new CollisionCheckResult(CollisionCheckResultType.Successful);
     }
 
     /**
@@ -100,27 +100,27 @@ public class TokenDoor extends Door {
      */
     @Override
     public String toString() {
-	StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
 
-	builder.append(Constants.TYPE_TOKEN_DOOR);
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
-	builder.append(this.getTitle());
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
-	builder.append(this.getPositionX());
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
-	builder.append(this.getPositionY());
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
-	builder.append(this.getImagePath());
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
-	builder.append(this.getUnlockedImagePath());
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
-	builder.append(this.tokensNeeded);
+        builder.append(Constants.TYPE_TOKEN_DOOR);
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.getTitle());
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.getPositionX());
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.getPositionY());
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.getImagePath());
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.getUnlockedImagePath());
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.tokensNeeded);
 
-	if (this.getMovableObject() != null) {
-	    builder.append(",");
-	    builder.append(this.getMovableObject().toString());
-	}
+        if (this.getMovableObject() != null) {
+            builder.append(",");
+            builder.append(this.getMovableObject().toString());
+        }
 
-	return builder.toString();
+        return builder.toString();
     }
 }

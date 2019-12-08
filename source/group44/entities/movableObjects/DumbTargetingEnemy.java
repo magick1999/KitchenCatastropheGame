@@ -31,8 +31,8 @@ public class DumbTargetingEnemy extends Enemy {
      *            {@link DumbTargetingEnemy}.
      */
     public DumbTargetingEnemy(Level level, String name, int positionX,
-	    int positionY, String imagePath) {
-	super(level, name, positionX, positionY, 0, 0, imagePath);
+            int positionY, String imagePath) {
+        super(level, name, positionX, positionY, 0, 0, imagePath);
     }
 
     /**
@@ -40,69 +40,69 @@ public class DumbTargetingEnemy extends Enemy {
      */
     @Override
     protected void computeVelocity() {
-	this.setVelocityX(0);
-	this.setVelocityY(0);
+        this.setVelocityX(0);
+        this.setVelocityY(0);
 
-	Position playerPosition = this.getLevel().getPlayerPosition();
+        Position playerPosition = this.getLevel().getPlayerPosition();
 
-	int differenceX = Math.abs(this.getPositionX() - playerPosition.getX());
-	int differenceY = Math.abs(this.getPositionY() - playerPosition.getY());
+        int differenceX = Math.abs(this.getPositionX() - playerPosition.getX());
+        int differenceY = Math.abs(this.getPositionY() - playerPosition.getY());
 
-	if (differenceX == differenceY
-		&& this.getPositionX() > playerPosition.getX()
-		&& this.getPositionY() > playerPosition.getY()) {
-	    if (this.isObstacle(this.getPositionX() - 1,
-		    this.getPositionY()) == false) {
-		this.setVelocityX(-1);
-	    } else if (this.isObstacle(this.getPositionX(),
-		    this.getPositionY() - 1) == false) {
-		this.setVelocityY(-1);
-	    }
-	} else if (differenceX == differenceY
-		&& this.getPositionX() > playerPosition.getX()
-		&& this.getPositionY() < playerPosition.getY()) {
-	    if (this.isObstacle(this.getPositionX() - 1,
-		    this.getPositionY()) == false) {
-		this.setVelocityX(-1);
-	    } else if (this.isObstacle(this.getPositionX(),
-		    this.getPositionY() + 1) == false) {
-		this.setVelocityY(1);
-	    }
-	} else if (differenceX == differenceY
-		&& this.getPositionX() < playerPosition.getX()
-		&& this.getPositionY() > playerPosition.getY()) {
-	    if (this.isObstacle(this.getPositionX() + 1,
-		    this.getPositionY()) == false) {
-		this.setVelocityX(1);
-	    } else if (this.isObstacle(this.getPositionX(),
-		    this.getPositionY() - 1) == false) {
-		this.setVelocityY(-1);
-	    }
-	} else if (differenceX == differenceY
-		&& this.getPositionX() < playerPosition.getX()
-		&& this.getPositionY() < playerPosition.getY()) {
-	    if (this.isObstacle(this.getPositionX() + 1,
-		    this.getPositionY()) == false) {
-		this.setVelocityX(1);
-	    } else if (this.isObstacle(this.getPositionX(),
-		    this.getPositionY() + 1) == false) {
-		this.setVelocityY(1);
-	    }
+        if (differenceX == differenceY
+                && this.getPositionX() > playerPosition.getX()
+                && this.getPositionY() > playerPosition.getY()) {
+            if (this.isObstacle(this.getPositionX() - 1,
+                    this.getPositionY()) == false) {
+                this.setVelocityX(-1);
+            } else if (this.isObstacle(this.getPositionX(),
+                    this.getPositionY() - 1) == false) {
+                this.setVelocityY(-1);
+            }
+        } else if (differenceX == differenceY
+                && this.getPositionX() > playerPosition.getX()
+                && this.getPositionY() < playerPosition.getY()) {
+            if (this.isObstacle(this.getPositionX() - 1,
+                    this.getPositionY()) == false) {
+                this.setVelocityX(-1);
+            } else if (this.isObstacle(this.getPositionX(),
+                    this.getPositionY() + 1) == false) {
+                this.setVelocityY(1);
+            }
+        } else if (differenceX == differenceY
+                && this.getPositionX() < playerPosition.getX()
+                && this.getPositionY() > playerPosition.getY()) {
+            if (this.isObstacle(this.getPositionX() + 1,
+                    this.getPositionY()) == false) {
+                this.setVelocityX(1);
+            } else if (this.isObstacle(this.getPositionX(),
+                    this.getPositionY() - 1) == false) {
+                this.setVelocityY(-1);
+            }
+        } else if (differenceX == differenceY
+                && this.getPositionX() < playerPosition.getX()
+                && this.getPositionY() < playerPosition.getY()) {
+            if (this.isObstacle(this.getPositionX() + 1,
+                    this.getPositionY()) == false) {
+                this.setVelocityX(1);
+            } else if (this.isObstacle(this.getPositionX(),
+                    this.getPositionY() + 1) == false) {
+                this.setVelocityY(1);
+            }
 
-	} else if (differenceY == 0 || differenceX > differenceY) {
-	    // On the same horizontal
-	    if (playerPosition.getX() < this.getPositionX()) {
-		this.setVelocityX(-1);
-	    } else {
-		this.setVelocityX(1);
-	    }
-	} else if (differenceX == 0 || differenceY > differenceX) {
-	    if (playerPosition.getY() < this.getPositionY()) {
-		this.setVelocityY(-1);
-	    } else {
-		this.setVelocityY(1);
-	    }
-	}
+        } else if (differenceY == 0 || differenceX > differenceY) {
+            // On the same horizontal
+            if (playerPosition.getX() < this.getPositionX()) {
+                this.setVelocityX(-1);
+            } else {
+                this.setVelocityX(1);
+            }
+        } else if (differenceX == 0 || differenceY > differenceX) {
+            if (playerPosition.getY() < this.getPositionY()) {
+                this.setVelocityY(-1);
+            } else {
+                this.setVelocityY(1);
+            }
+        }
     }
 
     /**
@@ -113,9 +113,9 @@ public class DumbTargetingEnemy extends Enemy {
      */
     @Override
     protected void onCollided(CollisionCheckResult result) {
-	if (result.getCollidingObject() instanceof Player) {
-	    ((Player) result.getCollidingObject()).die(this);
-	}
+        if (result.getCollidingObject() instanceof Player) {
+            ((Player) result.getCollidingObject()).die(this);
+        }
     }
 
     /**
@@ -124,23 +124,23 @@ public class DumbTargetingEnemy extends Enemy {
      * @return - the string repsesentation of a Dumb Targeting Enemy.
      */
     public String toString() {
-	StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
 
-	builder.append(Constants.TYPE_DUMB_TARGETING_ENEMY);
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(Constants.TYPE_DUMB_TARGETING_ENEMY);
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
 
-	builder.append(this.getTitle());
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.getTitle());
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
 
-	builder.append(this.getPositionX());
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.getPositionX());
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
 
-	builder.append(this.getPositionY());
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.getPositionY());
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
 
-	builder.append(this.getImagePath());
-	builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+        builder.append(this.getImagePath());
+        builder.append(Constants.LEVEL_OBJECT_DELIMITER);
 
-	return builder.toString();
+        return builder.toString();
     }
 }

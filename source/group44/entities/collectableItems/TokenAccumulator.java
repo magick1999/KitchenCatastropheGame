@@ -20,8 +20,8 @@ public class TokenAccumulator extends CollectableItem {
      * Creates a new instance of {@link TokenAccumulator}.
      */
     public TokenAccumulator() {
-	super(null, Constants.TITLE_TOKEN_ACCUMULATOR);
-	this.accumulatedTokens = new ArrayList<>();
+        super(null, Constants.TITLE_TOKEN_ACCUMULATOR);
+        this.accumulatedTokens = new ArrayList<>();
     }
 
     /**
@@ -31,9 +31,9 @@ public class TokenAccumulator extends CollectableItem {
      *            - the collected {@link Token}.
      */
     public void addToken(Token token) {
-	if (this.isCollected(token) == false) {
-	    this.accumulatedTokens.add(token);
-	}
+        if (this.isCollected(token) == false) {
+            this.accumulatedTokens.add(token);
+        }
     }
 
     /**
@@ -44,12 +44,12 @@ public class TokenAccumulator extends CollectableItem {
      * @return true if the token is already collected, false otherwise.
      */
     private boolean isCollected(Token token) {
-	for (Token item : this.accumulatedTokens) {
-	    if (item == token) {
-		return true;
-	    }
-	}
-	return false;
+        for (Token item : this.accumulatedTokens) {
+            if (item == token) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -61,13 +61,13 @@ public class TokenAccumulator extends CollectableItem {
      *             if user tried to use more tokens than were collected.
      */
     public void use(int count) throws NotEnoughTokensException {
-	if (this.getTokensCount() < count) {
-	    throw new NotEnoughTokensException(
-		    TokenAccumulator.EXCEPTION_NOT_ENOUGH_TOKENS_EXCEPTION_MESSAGE);
-	}
-	for (int i = 0; i < count; i++) {
-	    this.accumulatedTokens.remove(0);
-	}
+        if (this.getTokensCount() < count) {
+            throw new NotEnoughTokensException(
+                    TokenAccumulator.EXCEPTION_NOT_ENOUGH_TOKENS_EXCEPTION_MESSAGE);
+        }
+        for (int i = 0; i < count; i++) {
+            this.accumulatedTokens.remove(0);
+        }
     }
 
     /**
@@ -76,7 +76,7 @@ public class TokenAccumulator extends CollectableItem {
      * @return number of tokens.
      */
     public int getTokensCount() {
-	return this.accumulatedTokens.size();
+        return this.accumulatedTokens.size();
     }
 
     /**
@@ -86,21 +86,21 @@ public class TokenAccumulator extends CollectableItem {
      */
     @Override
     public String toString() {
-	StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
 
-	if (accumulatedTokens.size() > 0) {
-	    if (accumulatedTokens.size() == 1) {
-		builder.append(accumulatedTokens.get(0).toString());
-	    } else {
-		builder.append(accumulatedTokens.get(0).toString());
+        if (accumulatedTokens.size() > 0) {
+            if (accumulatedTokens.size() == 1) {
+                builder.append(accumulatedTokens.get(0).toString());
+            } else {
+                builder.append(accumulatedTokens.get(0).toString());
 
-		for (int i = 1; i < accumulatedTokens.size(); i++) {
-		    builder.append(Constants.LEVEL_OBJECT_DELIMITER);
-		    builder.append(accumulatedTokens.get(i).toString());
-		}
-	    }
-	}
+                for (int i = 1; i < accumulatedTokens.size(); i++) {
+                    builder.append(Constants.LEVEL_OBJECT_DELIMITER);
+                    builder.append(accumulatedTokens.get(i).toString());
+                }
+            }
+        }
 
-	return builder.toString();
+        return builder.toString();
     }
 }

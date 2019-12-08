@@ -24,7 +24,7 @@ public class Wall extends Cell {
      *            - Path to the Image representing {@link Wall} in the game.
      */
     public Wall(Level level, int positionX, int positionY, String imagePath) {
-	super(level, Constants.TITLE_WALL, positionX, positionY, imagePath);
+        super(level, Constants.TITLE_WALL, positionX, positionY, imagePath);
     }
 
     /**
@@ -34,11 +34,11 @@ public class Wall extends Cell {
      */
     @Override
     public String toString() {
-	StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
 
-	builder.append(String.format(PARSE_PATTERN, Constants.TYPE_WALL,
-		this.getPositionX(), this.getPositionY(), this.getImagePath()));
+        builder.append(String.format(PARSE_PATTERN, Constants.TYPE_WALL,
+                this.getPositionX(), this.getPositionY(), this.getImagePath()));
 
-	return builder.toString();
+        return builder.toString();
     }
 }

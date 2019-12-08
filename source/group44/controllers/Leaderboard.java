@@ -21,11 +21,11 @@ import javafx.collections.ObservableList;
  */
 public class Leaderboard {
     private static ObservableList<Record> records = FXCollections
-	    .observableArrayList(new ArrayList<Record>());
+            .observableArrayList(new ArrayList<Record>());
 
     private static int currentLevel;
     private static ObservableList<Record> top3RecordsForCurrentLevel = FXCollections
-	    .observableArrayList(new ArrayList<Record>());
+            .observableArrayList(new ArrayList<Record>());
 
     /**
      * Returns an {@link ObservableList} of records.
@@ -33,7 +33,7 @@ public class Leaderboard {
      * @return profiles
      */
     public static ObservableList<Record> getAllRecords() {
-	return Leaderboard.records;
+        return Leaderboard.records;
     }
 
     /**
@@ -48,8 +48,8 @@ public class Leaderboard {
      *            - time taken to finish the {@link Level}.
      */
     public static void addOrUpdate(int profileId, int levelId, long time) {
-	Leaderboard.addOrUpdate(ProfileManager.getProfile(profileId), levelId,
-		time);
+        Leaderboard.addOrUpdate(ProfileManager.getProfile(profileId), levelId,
+                time);
     }
 
     /**
@@ -64,23 +64,23 @@ public class Leaderboard {
      *            - time taken to finish the {@link Level}
      */
     private static void addOrUpdate(Profile profile, int levelId, long time) {
-	Record record = null;
+        Record record = null;
 
-	for (Record item : Leaderboard.records) {
-	    if (item.getProfile().getId() == profile.getId()
-		    && item.getLevelId() == levelId) {
-		record = item;
-	    }
-	}
+        for (Record item : Leaderboard.records) {
+            if (item.getProfile().getId() == profile.getId()
+                    && item.getLevelId() == levelId) {
+                record = item;
+            }
+        }
 
-	if (record == null) {
-	    Leaderboard.records.add(new Record(profile, levelId, time));
-	} else if (record.getTime() > time) {
-	    record.setTime(time);
-	}
+        if (record == null) {
+            Leaderboard.records.add(new Record(profile, levelId, time));
+        } else if (record.getTime() > time) {
+            record.setTime(time);
+        }
 
-	Leaderboard.save();
-	Leaderboard.refresh();
+        Leaderboard.save();
+        Leaderboard.refresh();
     }
 
     /**
@@ -91,25 +91,25 @@ public class Leaderboard {
      * @return an observable list of up to 3 top records.
      */
     public static ObservableList<Record> getTopThreeRecords(int levelId) {
-	Leaderboard.currentLevel = levelId;
+        Leaderboard.currentLevel = levelId;
 
-	ArrayList<Record> levelRecords = new ArrayList<>();
+        ArrayList<Record> levelRecords = new ArrayList<>();
 
-	for (Record item : Leaderboard.records) {
-	    if (item.getLevelId() == Leaderboard.currentLevel) {
-		levelRecords.add(item);
-	    }
-	}
-	Collections.sort(levelRecords);
+        for (Record item : Leaderboard.records) {
+            if (item.getLevelId() == Leaderboard.currentLevel) {
+                levelRecords.add(item);
+            }
+        }
+        Collections.sort(levelRecords);
 
-	Leaderboard.top3RecordsForCurrentLevel.clear();
-	int maxRecords = (levelRecords.size() < 3) ? levelRecords.size() : 3;
+        Leaderboard.top3RecordsForCurrentLevel.clear();
+        int maxRecords = (levelRecords.size() < 3) ? levelRecords.size() : 3;
 
-	for (int i = 0; i < maxRecords; i++) {
-	    Leaderboard.top3RecordsForCurrentLevel.add(levelRecords.get(i));
-	}
+        for (int i = 0; i < maxRecords; i++) {
+            Leaderboard.top3RecordsForCurrentLevel.add(levelRecords.get(i));
+        }
 
-	return Leaderboard.top3RecordsForCurrentLevel;
+        return Leaderboard.top3RecordsForCurrentLevel;
     }
 
     /**
@@ -122,12 +122,12 @@ public class Leaderboard {
      * @return true if user is in top 3; otherwise false.
      */
     public static boolean isInTopThreeRecors(int profileId, int levelId) {
-	for (Record item : Leaderboard.getTopThreeRecords(levelId)) {
-	    if (item.getProfile().getId() == profileId) {
-		return true;
-	    }
-	}
-	return false;
+        for (Record item : Leaderboard.getTopThreeRecords(levelId)) {
+            if (item.getProfile().getId() == profileId) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -140,13 +140,13 @@ public class Leaderboard {
      * @return
      */
     public static Record getRecord(int profileId, int levelId) {
-	for (Record record : Leaderboard.records) {
-	    if (record.getProfile().getId() == profileId
-		    && record.getLevelId() == levelId) {
-		return record;
-	    }
-	}
-	return null;
+        for (Record record : Leaderboard.records) {
+            if (record.getProfile().getId() == profileId
+                    && record.getLevelId() == levelId) {
+                return record;
+            }
+        }
+        return null;
     }
 
     /**
@@ -157,24 +157,24 @@ public class Leaderboard {
      * @return the id of the highest level; 0 if user did not finish any level.
      */
     public static int getAchievedLevel(int profileId) {
-	int level = 0;
+        int level = 0;
 
-	for (Record record : Leaderboard.records) {
-	    if (record.getProfile().getId() == profileId) {
-		if (level < record.getLevelId()) {
-		    level = record.getLevelId();
-		}
-	    }
-	}
+        for (Record record : Leaderboard.records) {
+            if (record.getProfile().getId() == profileId) {
+                if (level < record.getLevelId()) {
+                    level = record.getLevelId();
+                }
+            }
+        }
 
-	return level;
+        return level;
     }
 
     /**
      * Refreshes the best times for the current level.
      */
     private static void refresh() {
-	Leaderboard.getTopThreeRecords(Leaderboard.currentLevel);
+        Leaderboard.getTopThreeRecords(Leaderboard.currentLevel);
     }
 
     /**
@@ -183,9 +183,9 @@ public class Leaderboard {
      * @return an observable list of records.
      */
     public static ObservableList<Record> load() {
-	Leaderboard.getAllRecords().clear();
-	Leaderboard.load(Constants.FILE_RECORDS);
-	return Leaderboard.getAllRecords();
+        Leaderboard.getAllRecords().clear();
+        Leaderboard.load(Constants.FILE_RECORDS);
+        return Leaderboard.getAllRecords();
     }
 
     /**
@@ -195,25 +195,25 @@ public class Leaderboard {
      *            - path to a file with records
      */
     private static void load(String path) {
-	ArrayList<Record> loadedRecords = null;
-	Scanner fileScanner = null;
-	File file = new File(path);
+        ArrayList<Record> loadedRecords = null;
+        Scanner fileScanner = null;
+        File file = new File(path);
 
-	try {
-	    fileScanner = new Scanner(file);
-	    loadedRecords = Leaderboard.load(fileScanner);
-	} catch (Exception e) {
-	    System.out.println(
-		    "Failed to load records from file (" + path + ").");
-	    loadedRecords = new ArrayList<Record>();
-	} finally {
-	    if (fileScanner != null) {
-		fileScanner.close();
-	    }
-	    for (Record item : loadedRecords) {
-		Leaderboard.records.add(item);
-	    }
-	}
+        try {
+            fileScanner = new Scanner(file);
+            loadedRecords = Leaderboard.load(fileScanner);
+        } catch (Exception e) {
+            System.out.println(
+                    "Failed to load records from file (" + path + ").");
+            loadedRecords = new ArrayList<Record>();
+        } finally {
+            if (fileScanner != null) {
+                fileScanner.close();
+            }
+            for (Record item : loadedRecords) {
+                Leaderboard.records.add(item);
+            }
+        }
     }
 
     /**
@@ -224,17 +224,17 @@ public class Leaderboard {
      * @return a list of loaded {@link Record}s
      */
     private static ArrayList<Record> load(Scanner fileScanner) {
-	ArrayList<Record> loadedRecords = new ArrayList<>();
+        ArrayList<Record> loadedRecords = new ArrayList<>();
 
-	while (fileScanner.hasNextLine()) {
-	    Record r = Leaderboard
-		    .parseRecord(new Scanner(fileScanner.nextLine()));
-	    if (r != null) {
-		loadedRecords.add(r);
-	    }
-	}
+        while (fileScanner.hasNextLine()) {
+            Record r = Leaderboard
+                    .parseRecord(new Scanner(fileScanner.nextLine()));
+            if (r != null) {
+                loadedRecords.add(r);
+            }
+        }
 
-	return loadedRecords;
+        return loadedRecords;
     }
 
     /**
@@ -246,33 +246,33 @@ public class Leaderboard {
      *         not found
      */
     private static Record parseRecord(Scanner scanner) {
-	Record record = null;
-	scanner.useDelimiter(",");
+        Record record = null;
+        scanner.useDelimiter(",");
 
-	try {
-	    int profileId = scanner.nextInt();
-	    int levelId = scanner.nextInt();
-	    long time = scanner.nextLong();
+        try {
+            int profileId = scanner.nextInt();
+            int levelId = scanner.nextInt();
+            long time = scanner.nextLong();
 
-	    Profile profile = ProfileManager.getProfile(profileId);
-	    if (profile != null) {
-		record = new Record(profile, levelId, time);
-	    } else {
-		System.out.println("Unable to parse a Record. Profile(id="
-			+ profileId + ") not found!");
-	    }
-	} catch (Exception e) {
-	    System.out.println("Unable to parse a Profile.\n" + e.getMessage());
-	}
+            Profile profile = ProfileManager.getProfile(profileId);
+            if (profile != null) {
+                record = new Record(profile, levelId, time);
+            } else {
+                System.out.println("Unable to parse a Record. Profile(id="
+                        + profileId + ") not found!");
+            }
+        } catch (Exception e) {
+            System.out.println("Unable to parse a Profile.\n" + e.getMessage());
+        }
 
-	return record;
+        return record;
     }
 
     /**
      * Saves the records in the {@link Leaderboard} to the default file.
      */
     public static void save() {
-	save(Constants.FILE_RECORDS);
+        save(Constants.FILE_RECORDS);
     }
 
     /**
@@ -282,19 +282,19 @@ public class Leaderboard {
      *            - path to the file where to store the profiles
      */
     private static void save(String path) {
-	File file = new File(path);
-	PrintWriter writer = null;
+        File file = new File(path);
+        PrintWriter writer = null;
 
-	try {
-	    writer = new PrintWriter(file);
-	    Leaderboard.save(writer);
-	} catch (Exception e) {
-	    System.out.println("Unable to save records.\n" + e.getMessage());
-	} finally {
-	    if (writer != null) {
-		writer.close();
-	    }
-	}
+        try {
+            writer = new PrintWriter(file);
+            Leaderboard.save(writer);
+        } catch (Exception e) {
+            System.out.println("Unable to save records.\n" + e.getMessage());
+        } finally {
+            if (writer != null) {
+                writer.close();
+            }
+        }
     }
 
     /**
@@ -304,9 +304,9 @@ public class Leaderboard {
      *            - {@link PrintWriter} to use when saving r cords
      */
     private static void save(PrintWriter writer) {
-	for (Record record : Leaderboard.records) {
-	    writer.println(serialiseRecord(record));
-	}
+        for (Record record : Leaderboard.records) {
+            writer.println(serialiseRecord(record));
+        }
     }
 
     /**
@@ -318,7 +318,7 @@ public class Leaderboard {
      * @return a string representation of a record
      */
     private static String serialiseRecord(Record record) {
-	return record.getProfile().getId() + "," + record.getLevelId() + ","
-		+ record.getTime();
+        return record.getProfile().getId() + "," + record.getLevelId() + ","
+                + record.getTime();
     }
 }

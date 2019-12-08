@@ -33,23 +33,23 @@ public class SmartTargetingEnemy extends Enemy {
      *            - path to the image representing the enemy in the game.
      */
     public SmartTargetingEnemy(Level level, String title, int positionX,
-	    int positionY, String imagePath) {
-	super(level, title, positionX, positionY, 0, 0, imagePath);
+            int positionY, String imagePath) {
+        super(level, title, positionX, positionY, 0, 0, imagePath);
 
-	this.cellPathInfos = new CellPathInfo[level.getGridWidth()][level
-		.getGridHeight()];
+        this.cellPathInfos = new CellPathInfo[level.getGridWidth()][level
+                .getGridHeight()];
     }
 
     /**
      * Initialises the values for the instance.
      */
     private void initialise() {
-	for (int x = 0; x < cellPathInfos.length; x++) {
-	    for (int y = 0; y < cellPathInfos[0].length; y++) {
-		this.cellPathInfos[x][y] = new CellPathInfo(
-			this.getLevel().getGrid()[x][y]);
-	    }
-	}
+        for (int x = 0; x < cellPathInfos.length; x++) {
+            for (int y = 0; y < cellPathInfos[0].length; y++) {
+                this.cellPathInfos[x][y] = new CellPathInfo(
+                        this.getLevel().getGrid()[x][y]);
+            }
+        }
     }
 
     /**
@@ -57,50 +57,50 @@ public class SmartTargetingEnemy extends Enemy {
      */
     @Override
     protected void computeVelocity() {
-	if (this.isInitialised == false) {
-	    this.initialise();
-	    this.isInitialised = true;
-	}
+        if (this.isInitialised == false) {
+            this.initialise();
+            this.isInitialised = true;
+        }
 
-	this.resetCellInfos();
+        this.resetCellInfos();
 
-	int targetX = this.getLevel().getPlayer().getPositionX();
-	int targetY = this.getLevel().getPlayer().getPositionY();
+        int targetX = this.getLevel().getPlayer().getPositionX();
+        int targetY = this.getLevel().getPlayer().getPositionY();
 
-	// Calculate cost to the target cell
-	boolean found = this.calculateCosts(targetX, targetY);
+        // Calculate cost to the target cell
+        boolean found = this.calculateCosts(targetX, targetY);
 
-	if (found) {
-	    // Get next cell to step
-	    CellPathInfo nextCell = this.nextCellToStep(targetX, targetY);
+        if (found) {
+            // Get next cell to step
+            CellPathInfo nextCell = this.nextCellToStep(targetX, targetY);
 
-	    // Reset velocity
-	    this.setVelocityX(0);
-	    this.setVelocityY(0);
+            // Reset velocity
+            this.setVelocityX(0);
+            this.setVelocityY(0);
 
-	    // Set velocity
-	    if (nextCell.getX() < this.getPositionX()
-		    && nextCell.getY() == this.getPositionY()) {
-		// GO LEFT
-		this.setVelocityX(-1);
-	    } else if (nextCell.getX() > this.getPositionX()
-		    && nextCell.getY() == this.getPositionY()) {
-		// GO RIGHT
-		this.setVelocityX(1);
-	    } else if (nextCell.getX() == this.getPositionX()
-		    && nextCell.getY() < this.getPositionY()) {
-		// GO UP
-		this.setVelocityY(-1);
-	    } else if (nextCell.getX() == this.getPositionX()
-		    && nextCell.getY() > this.getPositionY()) {
-		// GO DOWN
-		this.setVelocityY(1);
-	    }
-	} else {
-	    // Choose valid direction for the next move.
-	    // Not getting closer to the player.
-	    this.chooseDirection();
-	}
+            // Set velocity
+            if (nextCell.getX() < this.getPositionX()
+                    && nextCell.getY() == this.getPositionY()) {
+                // GO LEFT
+                this.setVelocityX(-1);
+            } else if (nextCell.getX() > this.getPositionX()
+                    && nextCell.getY() == this.getPositionY()) {
+                // GO RIGHT
+                this.setVelocityX(1);
+            } else if (nextCell.getX() == this.getPositionX()
+                    && nextCell.getY() < this.getPositionY()) {
+                // GO UP
+                this.setVelocityY(-1);
+            } else if (nextCell.getX() == this.getPositionX()
+                    && nextCell.getY() > this.getPositionY()) {
+                // GO DOWN
+                this.setVelocityY(1);
+            }
+        } else {
+            // Choose valid direction for the next move.
+            // Not getting closer to the player.
+            this.chooseDirection();
+        }
 
     }
 
@@ -108,11 +108,11 @@ public class SmartTargetingEnemy extends Enemy {
      * Sets the {@link CellPathInfo}s to the default state.
      */
     private void resetCellInfos() {
-	for (int x = 0; x < cellPathInfos.length; x++) {
-	    for (int y = 0; y < cellPathInfos[0].length; y++) {
-		this.cellPathInfos[x][y].reset();
-	    }
-	}
+        for (int x = 0; x < cellPathInfos.length; x++) {
+            for (int y = 0; y < cellPathInfos[0].length; y++) {
+                this.cellPathInfos[x][y].reset();
+            }
+        }
     }
 
     /**
@@ -125,74 +125,74 @@ public class SmartTargetingEnemy extends Enemy {
      * @return true there is a path; otherwise false.
      */
     private boolean calculateCosts(int targetX, int targetY) {
-	Queue<CellPathInfo> queue = new LinkedList<>();
-	boolean isReached = false;
+        Queue<CellPathInfo> queue = new LinkedList<>();
+        boolean isReached = false;
 
-	CellPathInfo currentCell = this.cellPathInfos[this.getPositionX()][this
-		.getPositionY()];
-	currentCell.setCost(0); // JUST FIRST CELL!!! - DANGEROUS METHOD
-	queue.add(currentCell);
+        CellPathInfo currentCell = this.cellPathInfos[this.getPositionX()][this
+                .getPositionY()];
+        currentCell.setCost(0); // JUST FIRST CELL!!! - DANGEROUS METHOD
+        queue.add(currentCell);
 
-	while (queue.isEmpty() == false) {
-	    currentCell = queue.poll();
+        while (queue.isEmpty() == false) {
+            currentCell = queue.poll();
 
-	    isReached = (currentCell.getX() == targetX)
-		    && (currentCell.getY() == targetY);
+            isReached = (currentCell.getX() == targetX)
+                    && (currentCell.getY() == targetY);
 
-	    // LEFT
-	    if (isReached == false && this.isObstacle(currentCell.getX() - 1,
-		    currentCell.getY()) == false) {
-		CellPathInfo left = this.cellPathInfos[currentCell.getX()
-			- 1][currentCell.getY()];
-		if (left != currentCell.getParent()) {
-		    if (left.setParent(currentCell)) {
-			queue.add(left);
-		    }
-		}
-	    }
-	    // RIGHT
-	    if (isReached == false && this.isObstacle(currentCell.getX() + 1,
-		    currentCell.getY()) == false) {
+            // LEFT
+            if (isReached == false && this.isObstacle(currentCell.getX() - 1,
+                    currentCell.getY()) == false) {
+                CellPathInfo left = this.cellPathInfos[currentCell.getX()
+                        - 1][currentCell.getY()];
+                if (left != currentCell.getParent()) {
+                    if (left.setParent(currentCell)) {
+                        queue.add(left);
+                    }
+                }
+            }
+            // RIGHT
+            if (isReached == false && this.isObstacle(currentCell.getX() + 1,
+                    currentCell.getY()) == false) {
 
-		CellPathInfo right = this.cellPathInfos[currentCell.getX()
-			+ 1][currentCell.getY()];
-		if (right != currentCell.getParent()) {
-		    if (right.setParent(currentCell)) {
-			queue.add(right);
-		    }
-		}
-	    }
-	    // TOP
-	    if (isReached == false && this.isObstacle(currentCell.getX(),
-		    currentCell.getY() - 1) == false) {
+                CellPathInfo right = this.cellPathInfos[currentCell.getX()
+                        + 1][currentCell.getY()];
+                if (right != currentCell.getParent()) {
+                    if (right.setParent(currentCell)) {
+                        queue.add(right);
+                    }
+                }
+            }
+            // TOP
+            if (isReached == false && this.isObstacle(currentCell.getX(),
+                    currentCell.getY() - 1) == false) {
 
-		CellPathInfo top = this.cellPathInfos[currentCell
-			.getX()][currentCell.getY() - 1];
-		if (top != currentCell.getParent()) {
-		    if (top.setParent(currentCell)) {
-			queue.add(top);
-		    }
-		}
-	    }
-	    // BOTTOM
-	    if (isReached == false && this.isObstacle(currentCell.getX(),
-		    currentCell.getY() + 1) == false) {
+                CellPathInfo top = this.cellPathInfos[currentCell
+                        .getX()][currentCell.getY() - 1];
+                if (top != currentCell.getParent()) {
+                    if (top.setParent(currentCell)) {
+                        queue.add(top);
+                    }
+                }
+            }
+            // BOTTOM
+            if (isReached == false && this.isObstacle(currentCell.getX(),
+                    currentCell.getY() + 1) == false) {
 
-		CellPathInfo bottom = this.cellPathInfos[currentCell
-			.getX()][currentCell.getY() + 1];
-		if (bottom != currentCell.getParent()) {
-		    if (bottom.setParent(currentCell)) {
-			queue.add(bottom);
-		    }
-		}
-	    }
+                CellPathInfo bottom = this.cellPathInfos[currentCell
+                        .getX()][currentCell.getY() + 1];
+                if (bottom != currentCell.getParent()) {
+                    if (bottom.setParent(currentCell)) {
+                        queue.add(bottom);
+                    }
+                }
+            }
 
-	    if (isReached) {
-		queue.clear();
-	    }
-	}
+            if (isReached) {
+                queue.clear();
+            }
+        }
 
-	return isReached;
+        return isReached;
     }
 
     /**
@@ -205,13 +205,13 @@ public class SmartTargetingEnemy extends Enemy {
      * @return the next cell to step.
      */
     private CellPathInfo nextCellToStep(int targetX, int targetY) {
-	CellPathInfo currentCell = this.cellPathInfos[targetX][targetY];
+        CellPathInfo currentCell = this.cellPathInfos[targetX][targetY];
 
-	while (currentCell.getParent().getParent() != null) {
-	    currentCell = currentCell.getParent();
-	}
+        while (currentCell.getParent().getParent() != null) {
+            currentCell = currentCell.getParent();
+        }
 
-	return currentCell;
+        return currentCell;
     }
 
     /**
@@ -219,26 +219,26 @@ public class SmartTargetingEnemy extends Enemy {
      * is not necessarily getting closer to the player.
      */
     private void chooseDirection() {
-	// LEFT
-	if (this.isObstacle(this.getPositionX() - 1,
-		this.getPositionY()) == false) {
-	    this.setVelocityX(-1);
-	}
-	// RIGHT
-	if (this.isObstacle(this.getPositionX() + 1,
-		this.getPositionY()) == false) {
-	    this.setVelocityX(1);
-	}
-	// TOP
-	if (this.isObstacle(this.getPositionX(),
-		this.getPositionY() - 1) == false) {
-	    this.setVelocityY(-1);
-	}
-	// BOTTOM
-	if (this.isObstacle(this.getPositionX(),
-		this.getPositionY() + 1) == false) {
-	    this.setVelocityY(1);
-	}
+        // LEFT
+        if (this.isObstacle(this.getPositionX() - 1,
+                this.getPositionY()) == false) {
+            this.setVelocityX(-1);
+        }
+        // RIGHT
+        if (this.isObstacle(this.getPositionX() + 1,
+                this.getPositionY()) == false) {
+            this.setVelocityX(1);
+        }
+        // TOP
+        if (this.isObstacle(this.getPositionX(),
+                this.getPositionY() - 1) == false) {
+            this.setVelocityY(-1);
+        }
+        // BOTTOM
+        if (this.isObstacle(this.getPositionX(),
+                this.getPositionY() + 1) == false) {
+            this.setVelocityY(1);
+        }
     }
 
     /**
@@ -249,9 +249,9 @@ public class SmartTargetingEnemy extends Enemy {
      */
     @Override
     protected void onCollided(CollisionCheckResult result) {
-	if (result.getCollidingObject() instanceof Player) {
-	    ((Player) result.getCollidingObject()).die(this);
-	}
+        if (result.getCollidingObject() instanceof Player) {
+            ((Player) result.getCollidingObject()).die(this);
+        }
     }
 
     /**
@@ -260,19 +260,19 @@ public class SmartTargetingEnemy extends Enemy {
      * @return - the string representation of a Smart Targeting Enemy.
      */
     public String toString() {
-	StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
 
-	sb.append(Constants.TYPE_SMART_TARGETING_ENEMY);
-	sb.append(Constants.LEVEL_OBJECT_DELIMITER);
+        sb.append(Constants.TYPE_SMART_TARGETING_ENEMY);
+        sb.append(Constants.LEVEL_OBJECT_DELIMITER);
 
-	sb.append(this.getTitle());
-	sb.append(Constants.LEVEL_OBJECT_DELIMITER);
-	sb.append(this.getPositionX());
-	sb.append(Constants.LEVEL_OBJECT_DELIMITER);
-	sb.append(this.getPositionY());
-	sb.append(Constants.LEVEL_OBJECT_DELIMITER);
-	sb.append(this.getImagePath());
+        sb.append(this.getTitle());
+        sb.append(Constants.LEVEL_OBJECT_DELIMITER);
+        sb.append(this.getPositionX());
+        sb.append(Constants.LEVEL_OBJECT_DELIMITER);
+        sb.append(this.getPositionY());
+        sb.append(Constants.LEVEL_OBJECT_DELIMITER);
+        sb.append(this.getImagePath());
 
-	return sb.toString();
+        return sb.toString();
     }
 }

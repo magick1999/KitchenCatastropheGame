@@ -38,27 +38,27 @@ public class MainMenuScene {
      *            is the stage where the scene will be displayed.
      */
     public MainMenuScene(Stage primaryStage) {
-	// Load the FXML file.
-	FXMLLoader fxmlLoader = new FXMLLoader(
-		getClass().getResource("/group44/game/layouts/mainMenu.fxml"));
-	this.primaryStage = primaryStage;
-	try {
-	    // Setting the root.
-	    Parent root = fxmlLoader.load();
-	    // Setting the stage and adding my custom style to it.
-	    root.getStylesheets().add("group44/resources/application.css");
-	    root.setId("root");
-	    Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-	    MainMenuController tempController = fxmlLoader.getController();
-	    setController(tempController);
-	    // Adding the listeners for the buttons on the scene.
-	    setUpButtons();
-	    primaryStage.setScene(scene);
-	    primaryStage.show();
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
-	primaryStage.setTitle("Kitchen Catastrophe");
+        // Load the FXML file.
+        FXMLLoader fxmlLoader = new FXMLLoader(
+                getClass().getResource("/group44/game/layouts/mainMenu.fxml"));
+        this.primaryStage = primaryStage;
+        try {
+            // Setting the root.
+            Parent root = fxmlLoader.load();
+            // Setting the stage and adding my custom style to it.
+            root.getStylesheets().add("group44/resources/application.css");
+            root.setId("root");
+            Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+            MainMenuController tempController = fxmlLoader.getController();
+            setController(tempController);
+            // Adding the listeners for the buttons on the scene.
+            setUpButtons();
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        primaryStage.setTitle("Kitchen Catastrophe");
 
     }
 
@@ -70,7 +70,7 @@ public class MainMenuScene {
      *            The current controller.
      */
     private void setController(MainMenuController mainMenuController) {
-	this.mainMenuController = mainMenuController;
+        this.mainMenuController = mainMenuController;
     }
 
     /**
@@ -80,7 +80,7 @@ public class MainMenuScene {
      *            The mouse event created by the press on the play button.
      */
     private void pressPlay(MouseEvent e) {
-	new LevelSelectorScene(primaryStage, currentProfile);
+        new LevelSelectorScene(primaryStage, currentProfile);
     }
 
     /**
@@ -91,7 +91,7 @@ public class MainMenuScene {
      *            button.
      */
     private void newProfile(MouseEvent e) {
-	new ProfileCreatorScene(primaryStage);
+        new ProfileCreatorScene(primaryStage);
     }
 
     /**
@@ -106,45 +106,45 @@ public class MainMenuScene {
      * needs a listener, will add that in a future commit.
      */
     private void closeGame(MouseEvent e) {
-	primaryStage.close();
+        primaryStage.close();
     }
 
     private void profilesListener() {
-	mainMenuController.getProfiles()
-		.setCellFactory(param -> new ListCell<Profile>() {
-		    @Override
-		    protected void updateItem(Profile item, boolean empty) {
-			super.updateItem(item, empty);
+        mainMenuController.getProfiles()
+                .setCellFactory(param -> new ListCell<Profile>() {
+                    @Override
+                    protected void updateItem(Profile item, boolean empty) {
+                        super.updateItem(item, empty);
 
-			if (empty || item == null
-				|| item.getUsername() == null) {
-			    setText(null);
-			} else {
-			    setText(item.getUsername());
-			}
-		    }
-		});
-	mainMenuController.getProfiles().setItems(ProfileManager.load());
-	mainMenuController.getProfiles()
-		.setOnMouseClicked(new EventHandler<MouseEvent>() {
-		    @Override
-		    public void handle(MouseEvent event) {
-			mainMenuController.getPlay().setOnMouseClicked(
-				MainMenuScene.this::pressPlay);
-			currentProfile = mainMenuController.getProfiles()
-				.getSelectionModel().getSelectedItem();
-		    }
-		});
+                        if (empty || item == null
+                                || item.getUsername() == null) {
+                            setText(null);
+                        } else {
+                            setText(item.getUsername());
+                        }
+                    }
+                });
+        mainMenuController.getProfiles().setItems(ProfileManager.load());
+        mainMenuController.getProfiles()
+                .setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        mainMenuController.getPlay().setOnMouseClicked(
+                                MainMenuScene.this::pressPlay);
+                        currentProfile = mainMenuController.getProfiles()
+                                .getSelectionModel().getSelectedItem();
+                    }
+                });
     }
 
     private void showMOTD(MouseEvent e) {
-	new MOTDScene(primaryStage);
+        new MOTDScene(primaryStage);
     }
 
     private void setUpButtons() {
-	profilesListener();
-	mainMenuController.getNewProfile().setOnMouseClicked(this::newProfile);
-	mainMenuController.getQuit().setOnMouseClicked(this::closeGame);
-	mainMenuController.getMOTD().setOnMouseClicked(this::showMOTD);
+        profilesListener();
+        mainMenuController.getNewProfile().setOnMouseClicked(this::newProfile);
+        mainMenuController.getQuit().setOnMouseClicked(this::closeGame);
+        mainMenuController.getMOTD().setOnMouseClicked(this::showMOTD);
     }
 }

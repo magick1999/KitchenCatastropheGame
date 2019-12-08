@@ -40,9 +40,9 @@ public abstract class Enemy extends MovableObject {
      *            screen.
      */
     public Enemy(Level level, String title, int positionX, int positionY,
-	    int velocityX, int velocityY, String imagePath) {
-	super(level, title, positionX, positionY, velocityX, velocityY,
-		imagePath);
+            int velocityX, int velocityY, String imagePath) {
+        super(level, title, positionX, positionY, velocityX, velocityY,
+                imagePath);
     }
 
     /**
@@ -55,34 +55,34 @@ public abstract class Enemy extends MovableObject {
      */
     @Override
     public void move() {
-	this.computeVelocity();
+        this.computeVelocity();
 
-	StepableCell currentCell = this
-		.getStepableCellAtMovableObjectPosition(this);
-	StepableCell nextCell = this.getNextStepableCellInVelocity(this,
-		this.getVelocityX(), this.getVelocityY());
+        StepableCell currentCell = this
+                .getStepableCellAtMovableObjectPosition(this);
+        StepableCell nextCell = this.getNextStepableCellInVelocity(this,
+                this.getVelocityX(), this.getVelocityY());
 
-	// Check if the move can be done; if not, do not move
-	if (nextCell != null
-		&& !this.isObstacle(this.getPositionX() + this.getVelocityX(),
-			this.getPositionY() + this.getVelocityY())) {
-	    CollisionCheckResult collisionResult = nextCell.stepOn(this);
-	    if (collisionResult.isColliding()) {
-		// Colliding; stepOn was NOT successful
-		this.onCollided(collisionResult);
-	    } else {
-		// Not colliding; stepOn was successful
-		currentCell.stepOff();
+        // Check if the move can be done; if not, do not move
+        if (nextCell != null
+                && !this.isObstacle(this.getPositionX() + this.getVelocityX(),
+                        this.getPositionY() + this.getVelocityY())) {
+            CollisionCheckResult collisionResult = nextCell.stepOn(this);
+            if (collisionResult.isColliding()) {
+                // Colliding; stepOn was NOT successful
+                this.onCollided(collisionResult);
+            } else {
+                // Not colliding; stepOn was successful
+                currentCell.stepOff();
 
-		// If the movableObject on the nextCell is not
-		// equal to this =>
-		// Teleporter - position is already set
-		if (nextCell.getMovableObject() == this) {
-		    this.setPosition(nextCell.getPositionX(),
-			    nextCell.getPositionY());
-		}
-	    }
-	}
+                // If the movableObject on the nextCell is not
+                // equal to this =>
+                // Teleporter - position is already set
+                if (nextCell.getMovableObject() == this) {
+                    this.setPosition(nextCell.getPositionX(),
+                            nextCell.getPositionY());
+                }
+            }
+        }
     }
 
     /**
@@ -94,19 +94,19 @@ public abstract class Enemy extends MovableObject {
      */
     @Override
     public void die(LevelObject object) {
-	if (object instanceof Fire) {
-	    super.die(object);
-	} else if (object instanceof Water) {
-	    super.die(object);
-	}
+        if (object instanceof Fire) {
+            super.die(object);
+        } else if (object instanceof Water) {
+            super.die(object);
+        }
     }
 
     /**
      * Turns the {@link Enemy} around.
      */
     protected void turnAround() {
-	this.setVelocityX(this.getVelocityX() * -1);
-	this.setVelocityY(this.getVelocityY() * -1);
+        this.setVelocityX(this.getVelocityX() * -1);
+        this.setVelocityY(this.getVelocityY() * -1);
     }
 
     /**
@@ -120,16 +120,16 @@ public abstract class Enemy extends MovableObject {
      * @return true if there is an obstacle; otherwise false.
      */
     protected boolean isObstacle(int x, int y) {
-	Cell[][] cells = this.getLevel().getGrid();
+        Cell[][] cells = this.getLevel().getGrid();
 
-	if (cells[x][y] instanceof Wall || cells[x][y] instanceof Water
-		|| cells[x][y] instanceof Fire || cells[x][y] instanceof Goal
-		|| cells[x][y] instanceof Teleporter
-		|| (cells[x][y] instanceof Door
-			&& ((Door) cells[x][y]).isOpen() == false)) {
-	    return true;
+        if (cells[x][y] instanceof Wall || cells[x][y] instanceof Water
+                || cells[x][y] instanceof Fire || cells[x][y] instanceof Goal
+                || cells[x][y] instanceof Teleporter
+                || (cells[x][y] instanceof Door
+                        && ((Door) cells[x][y]).isOpen() == false)) {
+            return true;
 
-	}
-	return false;
+        }
+        return false;
     }
 }

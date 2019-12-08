@@ -19,7 +19,7 @@ public class Flippers extends CollectableItem {
      *            - Path to the Image representing {@link Flippers} in the game.
      */
     public Flippers(Level level, String imagePath) {
-	super(level, Constants.TITLE_FLIPPERS, imagePath);
+        super(level, Constants.TITLE_FLIPPERS, imagePath);
     }
 
     /**
@@ -29,7 +29,7 @@ public class Flippers extends CollectableItem {
      */
     @Override
     public String toString() {
-	return Constants.TYPE_FLIPPERS + Constants.LEVEL_OBJECT_DELIMITER
-		+ this.getImagePath();
+        return Constants.TYPE_FLIPPERS + Constants.LEVEL_OBJECT_DELIMITER
+                + this.getImagePath();
     }
 }

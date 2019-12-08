@@ -16,7 +16,7 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-	MainMenuScene mainMenuStage = new MainMenuScene(primaryStage);
+        MainMenuScene mainMenuStage = new MainMenuScene(primaryStage);
     }
 
     /**
@@ -26,6 +26,6 @@ public class Main extends Application {
      *            These are the launch arguments of the program.
      */
     public static void main(String[] args) {
-	launch(args);
+        launch(args);
     }
 }

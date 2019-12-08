@@ -23,8 +23,8 @@ public class LevelInfo {
      *            - file containing the {@link Level} definition.
      */
     public LevelInfo(int id, File file) {
-	this.id = id;
-	this.file = file;
+        this.id = id;
+        this.file = file;
     }
 
     /**
@@ -33,7 +33,7 @@ public class LevelInfo {
      * @return the level id.
      */
     public int getId() {
-	return this.id;
+        return this.id;
     }
 
     /**
@@ -42,6 +42,6 @@ public class LevelInfo {
      * @return the file containing the {@link Level} definition.
      */
     public File getFile() {
-	return this.file;
+        return this.file;
     }
 }

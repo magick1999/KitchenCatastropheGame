@@ -20,7 +20,7 @@ public class FireBoots extends CollectableItem {
      *            game.
      */
     public FireBoots(Level level, String imagePath) {
-	super(level, Constants.TITLE_FIREBOOTS, imagePath);
+        super(level, Constants.TITLE_FIREBOOTS, imagePath);
     }
 
     /**
@@ -30,7 +30,7 @@ public class FireBoots extends CollectableItem {
      */
     @Override
     public String toString() {
-	return Constants.TYPE_FIRE_BOOTS + Constants.LEVEL_OBJECT_DELIMITER
-		+ this.getImagePath();
+        return Constants.TYPE_FIRE_BOOTS + Constants.LEVEL_OBJECT_DELIMITER
+                + this.getImagePath();
     }
 }

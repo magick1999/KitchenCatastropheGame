@@ -38,32 +38,32 @@ public class LevelSelectorScene {
      * @param primaryStage This is the stage where the scene is displayed.
      */
     public LevelSelectorScene(Stage primaryStage, Profile currentProfile) {
-	FXMLLoader fxmlLoader = new FXMLLoader(getClass()
-		.getResource("/group44/game/layouts/levelSelector.fxml"));
-	this.primaryStage = primaryStage;
-	try {
-	    Parent root = fxmlLoader.load();
-	    // Setting the stage and adding my custom style to it.
-	    root.getStylesheets().add("group44/resources/application.css");
-	    root.setId("root");
-	    Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-	    // Instantiating the controller.
-	    LevelSelectorController tempController = fxmlLoader.getController();
-	    setController(tempController);
-	    Leaderboard.load();
-	    this.maxLevel = Math.min(LevelManager.load().size(),
-		    Leaderboard.getAchievedLevel(currentProfile.getId()) + 1);
-	    currentLevelIndex = maxLevel;
-	    this.currentProfile = currentProfile;
-	    // Adding the listeners for the buttons.
-	    setUpButtons();
-	    primaryStage.setScene(scene);
-	    primaryStage.show();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass()
+                .getResource("/group44/game/layouts/levelSelector.fxml"));
+        this.primaryStage = primaryStage;
+        try {
+            Parent root = fxmlLoader.load();
+            // Setting the stage and adding my custom style to it.
+            root.getStylesheets().add("group44/resources/application.css");
+            root.setId("root");
+            Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+            // Instantiating the controller.
+            LevelSelectorController tempController = fxmlLoader.getController();
+            setController(tempController);
+            Leaderboard.load();
+            this.maxLevel = Math.min(LevelManager.load().size(),
+                    Leaderboard.getAchievedLevel(currentProfile.getId()) + 1);
+            currentLevelIndex = maxLevel;
+            this.currentProfile = currentProfile;
+            // Adding the listeners for the buttons.
+            setUpButtons();
+            primaryStage.setScene(scene);
+            primaryStage.show();
 
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
-	primaryStage.setTitle("Kitchen Catastrophe");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        primaryStage.setTitle("Kitchen Catastrophe");
     }
 
     /**
@@ -73,8 +73,8 @@ public class LevelSelectorScene {
      *            the controller for this class.
      */
     private void setController(
-	    LevelSelectorController levelSelectorController) {
-	this.levelSelectorController = levelSelectorController;
+            LevelSelectorController levelSelectorController) {
+        this.levelSelectorController = levelSelectorController;
     }
 
     /**
@@ -84,23 +84,23 @@ public class LevelSelectorScene {
      *            This is the event from the click on the level button.
      */
     private void setLevelSelect(MouseEvent e) {
-	try {
-	    Level currentLevel;
-	    if (LevelManager.hasUnfinishedLevel(currentLevelIndex,
-		    this.currentProfile.getId())) {
-		currentLevel = LevelManager.resume(currentLevelIndex,
-			this.currentProfile.getId());
-	    } else {
-		currentLevel = LevelManager.load(currentLevelIndex);
-		// currentLevel =
-		// LevelManager.load(LevelManager.load().get(currentLevelIndex
-		// - 1));
-	    }
+        try {
+            Level currentLevel;
+            if (LevelManager.hasUnfinishedLevel(currentLevelIndex,
+                    this.currentProfile.getId())) {
+                currentLevel = LevelManager.resume(currentLevelIndex,
+                        this.currentProfile.getId());
+            } else {
+                currentLevel = LevelManager.load(currentLevelIndex);
+                // currentLevel =
+                // LevelManager.load(LevelManager.load().get(currentLevelIndex
+                // - 1));
+            }
 
-	    new GameScene(primaryStage, currentLevel, currentProfile);
-	} catch (Exception exception) {
-	    exception.printStackTrace();
-	}
+            new GameScene(primaryStage, currentLevel, currentProfile);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
     }
 
     /**
@@ -108,8 +108,8 @@ public class LevelSelectorScene {
      */
     private void loadLevel() {
 
-	levelSelectorController.getPlay()
-		.setOnMouseClicked(this::setLevelSelect);
+        levelSelectorController.getPlay()
+                .setOnMouseClicked(this::setLevelSelect);
     }
 
     /**
@@ -119,52 +119,52 @@ public class LevelSelectorScene {
      *            is the mouse event that triggers this action.
      */
     private void setMenu(MouseEvent e) {
-	new MainMenuScene(primaryStage);
+        new MainMenuScene(primaryStage);
     }
 
     private void setNext(MouseEvent e) {
-	setLevelNum(true);
+        setLevelNum(true);
     }
 
     private void setPrevious(MouseEvent e) {
-	setLevelNum(false);
+        setLevelNum(false);
     }
 
     /**
      * This sets the current level available to play.
      */
     private void setLevelNum(boolean prevNext) {
-	if (prevNext && currentLevelIndex < maxLevel) {
-	    levelSelectorController.getLevelNum()
-		    .setText("Level " + (++currentLevelIndex).toString());
-	    levelSelectorController.getPrevious().setVisible(true);
-	} else {
-	    if (!prevNext && currentLevelIndex > 1) {
-		levelSelectorController.getLevelNum()
-			.setText("Level " + (--currentLevelIndex).toString());// This
-									      // could
-									      // be
-									      // used
-									      // for
-									      // level
-									      // loading.
-		levelSelectorController.getNext().setVisible(true);
-	    }
-	}
-	if (currentLevelIndex == 1) {
-	    levelSelectorController.getPrevious().setVisible(false);
-	} else {
-	    if (currentLevelIndex.equals(maxLevel)) {
-		levelSelectorController.getNext().setVisible(false);
-	    }
-	}
-	Leaderboard.getTopThreeRecords(this.currentLevelIndex);
+        if (prevNext && currentLevelIndex < maxLevel) {
+            levelSelectorController.getLevelNum()
+                    .setText("Level " + (++currentLevelIndex).toString());
+            levelSelectorController.getPrevious().setVisible(true);
+        } else {
+            if (!prevNext && currentLevelIndex > 1) {
+                levelSelectorController.getLevelNum()
+                        .setText("Level " + (--currentLevelIndex).toString());// This
+                                                                              // could
+                                                                              // be
+                                                                              // used
+                                                                              // for
+                                                                              // level
+                                                                              // loading.
+                levelSelectorController.getNext().setVisible(true);
+            }
+        }
+        if (currentLevelIndex == 1) {
+            levelSelectorController.getPrevious().setVisible(false);
+        } else {
+            if (currentLevelIndex.equals(maxLevel)) {
+                levelSelectorController.getNext().setVisible(false);
+            }
+        }
+        Leaderboard.getTopThreeRecords(this.currentLevelIndex);
     }
 
     private void setTopTimes() {
-	Leaderboard.load();
-	levelSelectorController.getLevelTimes()
-		.setItems(Leaderboard.getTopThreeRecords(currentLevelIndex));
+        Leaderboard.load();
+        levelSelectorController.getLevelTimes()
+                .setItems(Leaderboard.getTopThreeRecords(currentLevelIndex));
     }
 
     /**
@@ -173,28 +173,28 @@ public class LevelSelectorScene {
      * current level and max level.
      */
     private void setUpButtons() {
-	levelSelectorController.getNext().setVisible(false);
-	if (maxLevel == 1) {
-	    levelSelectorController.getNext().setVisible(false);
-	} else {
-	    if (maxLevel == LevelManager.load().size()) {
-		levelSelectorController.getLevelNum()
-			.setText("Level " + LevelManager.load().size());
-		levelSelectorController.getNext().setVisible(false);
-	    } else {
-		levelSelectorController.getLevelNum()
-			.setText("Level " + currentLevelIndex);
+        levelSelectorController.getNext().setVisible(false);
+        if (maxLevel == 1) {
+            levelSelectorController.getNext().setVisible(false);
+        } else {
+            if (maxLevel == LevelManager.load().size()) {
+                levelSelectorController.getLevelNum()
+                        .setText("Level " + LevelManager.load().size());
+                levelSelectorController.getNext().setVisible(false);
+            } else {
+                levelSelectorController.getLevelNum()
+                        .setText("Level " + currentLevelIndex);
 
-	    }
-	}
-	loadLevel();
-	setTopTimes();
-	if (currentLevelIndex == 1) {
-	    levelSelectorController.getPrevious().setVisible(false);
-	}
-	levelSelectorController.getNext().setOnMouseClicked(this::setNext);
-	levelSelectorController.getPrevious()
-		.setOnMouseClicked(this::setPrevious);
-	levelSelectorController.getMenu().setOnMouseClicked(this::setMenu);
+            }
+        }
+        loadLevel();
+        setTopTimes();
+        if (currentLevelIndex == 1) {
+            levelSelectorController.getPrevious().setVisible(false);
+        }
+        levelSelectorController.getNext().setOnMouseClicked(this::setNext);
+        levelSelectorController.getPrevious()
+                .setOnMouseClicked(this::setPrevious);
+        levelSelectorController.getMenu().setOnMouseClicked(this::setMenu);
     }
 }

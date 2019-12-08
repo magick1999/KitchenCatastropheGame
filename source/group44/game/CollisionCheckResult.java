@@ -19,7 +19,7 @@ public class CollisionCheckResult {
      *            - {@link CollisionCheckResultType} of the collision.
      */
     public CollisionCheckResult(CollisionCheckResultType type) {
-	this.type = type;
+        this.type = type;
     }
 
     /**
@@ -31,9 +31,9 @@ public class CollisionCheckResult {
      *            - the colliding {@link LevelObject}.
      */
     public CollisionCheckResult(CollisionCheckResultType type,
-	    LevelObject collidingObject) {
-	this(type);
-	this.collidingObject = collidingObject;
+            LevelObject collidingObject) {
+        this(type);
+        this.collidingObject = collidingObject;
     }
 
     /**
@@ -42,7 +42,7 @@ public class CollisionCheckResult {
      * @return true if the object is colliding; false otherwise.
      */
     public Boolean isColliding() {
-	return this.type != CollisionCheckResultType.Successful;
+        return this.type != CollisionCheckResultType.Successful;
     }
 
     /**
@@ -51,7 +51,7 @@ public class CollisionCheckResult {
      * @return Collided object.
      */
     public LevelObject getCollidingObject() {
-	return this.collidingObject;
+        return this.collidingObject;
     }
 
     /**
@@ -60,7 +60,7 @@ public class CollisionCheckResult {
      * @return the {@link CollisionCheckResultType}.
      */
     public CollisionCheckResultType getType() {
-	return this.type;
+        return this.type;
     }
 
     /**
@@ -70,10 +70,10 @@ public class CollisionCheckResult {
      * @version 1.0
      */
     public enum CollisionCheckResultType {
-	Successful,
+        Successful,
 
-	Enemy, Player,
+        Enemy, Player,
 
-	MissingKey, NotEnoughTokens
+        MissingKey, NotEnoughTokens
     }
 }

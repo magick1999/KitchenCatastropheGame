@@ -22,6 +22,6 @@ public class NotEnoughTokensException extends Exception {
      *            retrieval by the {@link #getMessage()} method.
      */
     public NotEnoughTokensException(String message) {
-	super(message);
+        super(message);
     }
 }

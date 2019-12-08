@@ -48,28 +48,28 @@ public class ProfileCreatorScene {
      *            This is the stage where the scene will be displayed.
      */
     public ProfileCreatorScene(Stage primaryStage) {
-	// The FXML file is loaded.
-	FXMLLoader fxmlLoader = new FXMLLoader(getClass()
-		.getResource("/group44/game/layouts/profileCreator.fxml"));
-	this.primaryStage = primaryStage;
-	try {
-	    Parent root = fxmlLoader.load();
-	    // Setting the stage and adding my custom style to it.
-	    root.getStylesheets().add("group44/resources/application.css");
-	    root.setId("root");
-	    Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-	    // Setting the globally available controller.
-	    ProfileCreatorController tempController = fxmlLoader
-		    .getController();
-	    setController(tempController);
-	    // Adding the listeners for the buttons on the scene.
-	    setUpControls();
-	    primaryStage.setScene(scene);
-	    primaryStage.show();
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
-	primaryStage.setTitle("Kitchen Catastrophe");
+        // The FXML file is loaded.
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass()
+                .getResource("/group44/game/layouts/profileCreator.fxml"));
+        this.primaryStage = primaryStage;
+        try {
+            Parent root = fxmlLoader.load();
+            // Setting the stage and adding my custom style to it.
+            root.getStylesheets().add("group44/resources/application.css");
+            root.setId("root");
+            Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+            // Setting the globally available controller.
+            ProfileCreatorController tempController = fxmlLoader
+                    .getController();
+            setController(tempController);
+            // Adding the listeners for the buttons on the scene.
+            setUpControls();
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        primaryStage.setTitle("Kitchen Catastrophe");
     }
 
     /**
@@ -79,31 +79,31 @@ public class ProfileCreatorScene {
      *            the controller for this class.
      */
     private void setController(
-	    ProfileCreatorController profileCreatorController) {
-	this.profileCreatorController = profileCreatorController;
+            ProfileCreatorController profileCreatorController) {
+        this.profileCreatorController = profileCreatorController;
     }
 
     /**
      * This sets the listeners for all the buttons and text input fields.
      */
     private void setUpControls() {
-	nameText = (TextField) profileCreatorController.getCenterVBox()
-		.getChildren().get(1);
-	profileCreatorController.getConfirm()
-		.setOnMouseClicked(this::createProfile);
-	// This creates a listener to check if this is the first time
-	// the user has clicked on the name text input field to
-	// overwrite the hint.
-	nameText.setOnMouseClicked(new EventHandler<MouseEvent>() {
-	    @Override
-	    public void handle(MouseEvent event) {
-		if (firstTimeName)
-		    if (nameText instanceof TextField) {
-			nameText.setText("");
-		    }
-	    }
-	});
-	profileCreatorController.getBack().setOnMouseClicked(this::backToMenu);
+        nameText = (TextField) profileCreatorController.getCenterVBox()
+                .getChildren().get(1);
+        profileCreatorController.getConfirm()
+                .setOnMouseClicked(this::createProfile);
+        // This creates a listener to check if this is the first time
+        // the user has clicked on the name text input field to
+        // overwrite the hint.
+        nameText.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (firstTimeName)
+                    if (nameText instanceof TextField) {
+                        nameText.setText("");
+                    }
+            }
+        });
+        profileCreatorController.getBack().setOnMouseClicked(this::backToMenu);
 
     }
 
@@ -115,41 +115,41 @@ public class ProfileCreatorScene {
      *            username taken, false for blank name.
      */
     private void usernameError(Boolean type) {
-	ButtonType closeAlert = new ButtonType(
-		"Ok master chef, I have chosen my faith!",
-		ButtonBar.ButtonData.OK_DONE);
-	Alert a1 = new Alert(Alert.AlertType.NONE, "default Dialog",
-		closeAlert);
-	a1.setHeight(400);
-	a1.setWidth(500);
-	if (type == true) {
-	    a1.setTitle("Try again!");
-	    a1.setContentText("Your username is already taken. \n"
-		    + "You could choose a different username or fight the owner to death!");
+        ButtonType closeAlert = new ButtonType(
+                "Ok master chef, I have chosen my faith!",
+                ButtonBar.ButtonData.OK_DONE);
+        Alert a1 = new Alert(Alert.AlertType.NONE, "default Dialog",
+                closeAlert);
+        a1.setHeight(400);
+        a1.setWidth(500);
+        if (type == true) {
+            a1.setTitle("Try again!");
+            a1.setContentText("Your username is already taken. \n"
+                    + "You could choose a different username or fight the owner to death!");
 
-	    Optional<ButtonType> result = a1.showAndWait();
-	    if (!result.isPresent()) {
+            Optional<ButtonType> result = a1.showAndWait();
+            if (!result.isPresent()) {
 
-	    } else {
-		if (result.get().equals(closeAlert)) {
-		    nameText.setText("Try something else!");
-		}
-	    }
-	} else {
-	    a1.setTitle("Are you stoopid?!?!");
-	    a1.setContentText("You need to enter a username \n"
-		    + "unless your mom was so uninspired that she had to call you 'blank name'!");
+            } else {
+                if (result.get().equals(closeAlert)) {
+                    nameText.setText("Try something else!");
+                }
+            }
+        } else {
+            a1.setTitle("Are you stoopid?!?!");
+            a1.setContentText("You need to enter a username \n"
+                    + "unless your mom was so uninspired that she had to call you 'blank name'!");
 
-	    Optional<ButtonType> result = a1.showAndWait();
-	    if (!result.isPresent()) {
+            Optional<ButtonType> result = a1.showAndWait();
+            if (!result.isPresent()) {
 
-	    } else {
-		if (result.get().equals(closeAlert)) {
-		    nameText.setText(
-			    "If you're so uninspired better go play that mario game!!!!");
-		}
-	    }
-	}
+            } else {
+                if (result.get().equals(closeAlert)) {
+                    nameText.setText(
+                            "If you're so uninspired better go play that mario game!!!!");
+                }
+            }
+        }
     }
 
     /**
@@ -159,7 +159,7 @@ public class ProfileCreatorScene {
      *            This is the mouse event that triggers this action.
      */
     private void backToMenu(MouseEvent e) {
-	new MainMenuScene(primaryStage);
+        new MainMenuScene(primaryStage);
     }
 
     /**
@@ -170,26 +170,26 @@ public class ProfileCreatorScene {
      *            This is the mouse event that triggers this action.
      */
     private void createProfile(MouseEvent event) {
-	// Create new profile to display in the profile selector
-	// Profile newProfile=new
-	// Profile(nameText.getText(),emailText.getText());
-	// idk how have you thought to add it to a static class or
-	// whatever.
-	if (nameText.getText().equals("")
-		|| nameText.getText()
-			.equals("Enter your desired nickname here.")
-		|| nameText.getText().equals("Try something else!")
-		|| nameText.getText().equals(
-			"If you're so uninspired better go play that mario game!!!!")) {
-	    usernameError(false);
-	} else {
-	    try {
-		ProfileManager.register(nameText.getText());
-		new MainMenuScene(primaryStage);
-	    } catch (UsernameTakenException e) {
-		usernameError(true);
-	    }
-	}
+        // Create new profile to display in the profile selector
+        // Profile newProfile=new
+        // Profile(nameText.getText(),emailText.getText());
+        // idk how have you thought to add it to a static class or
+        // whatever.
+        if (nameText.getText().equals("")
+                || nameText.getText()
+                        .equals("Enter your desired nickname here.")
+                || nameText.getText().equals("Try something else!")
+                || nameText.getText().equals(
+                        "If you're so uninspired better go play that mario game!!!!")) {
+            usernameError(false);
+        } else {
+            try {
+                ProfileManager.register(nameText.getText());
+                new MainMenuScene(primaryStage);
+            } catch (UsernameTakenException e) {
+                usernameError(true);
+            }
+        }
 
     }
 }

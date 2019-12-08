@@ -21,8 +21,8 @@ public class Profile {
      *            - the username
      */
     public Profile(int id, String username) {
-	this.id = id;
-	this.username = username;
+        this.id = id;
+        this.username = username;
     }
 
     /**
@@ -31,7 +31,7 @@ public class Profile {
      * @return the profile id
      */
     public int getId() {
-	return this.id;
+        return this.id;
     }
 
     /**
@@ -40,7 +40,7 @@ public class Profile {
      * @return username of the profile
      */
     public String getUsername() {
-	return this.username;
+        return this.username;
     }
 
     /**
@@ -49,7 +49,7 @@ public class Profile {
      * @return the level id
      */
     public int getAchievedLevel() {
-	return Leaderboard.getAchievedLevel(this.getId());
+        return Leaderboard.getAchievedLevel(this.getId());
     }
 
     /**
@@ -59,6 +59,6 @@ public class Profile {
      */
     @Override
     public String toString() {
-	return this.getId() + "," + this.getUsername();
+        return this.getId() + "," + this.getUsername();
     }
 }

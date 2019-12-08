@@ -25,7 +25,7 @@ public final class Constants {
 
     // Drawing constants
     public static int LEVEL_DISPLAY_SIZE = 7; // Must be odd and greater or
-					      // equal 3
+                                              // equal 3
 
     public static final String LEVEL_OBJECT_DELIMITER = ",";
 

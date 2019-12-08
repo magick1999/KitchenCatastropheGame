@@ -31,7 +31,7 @@ public class LevelManager {
      * @return A list of {@link LevelInfo}
      */
     public static ArrayList<LevelInfo> getLevelInfos() {
-	return LevelManager.levelInfos;
+        return LevelManager.levelInfos;
     }
 
     /**
@@ -40,7 +40,7 @@ public class LevelManager {
      * @return number of levels.
      */
     public static int countAvailableLevels() {
-	return LevelManager.levelInfos.size();
+        return LevelManager.levelInfos.size();
     }
 
     /**
@@ -49,8 +49,8 @@ public class LevelManager {
      * @return array of {@link LevelInfo}s.
      */
     public static ArrayList<LevelInfo> load() {
-	load(Constants.FOLDER_LEVELS);
-	return LevelManager.getLevelInfos();
+        load(Constants.FOLDER_LEVELS);
+        return LevelManager.getLevelInfos();
     }
 
     /**
@@ -60,13 +60,13 @@ public class LevelManager {
      *            - directory containing all {@link Level} files
      */
     private static void load(String directory) {
-	LevelManager.levelInfos.clear();
-	for (File item : LevelManager.getLevelFiles(new File(directory))) {
-	    LevelInfo info = LevelManager.getLevelInfo(item);
-	    if (info != null) {
-		LevelManager.levelInfos.add(info);
-	    }
-	}
+        LevelManager.levelInfos.clear();
+        for (File item : LevelManager.getLevelFiles(new File(directory))) {
+            LevelInfo info = LevelManager.getLevelInfo(item);
+            if (info != null) {
+                LevelManager.levelInfos.add(info);
+            }
+        }
     }
 
     /**
@@ -77,18 +77,18 @@ public class LevelManager {
      * @return the list of {@link Level} files
      */
     private static ArrayList<File> getLevelFiles(File directory) {
-	ArrayList<File> levelFiles = new ArrayList<>();
+        ArrayList<File> levelFiles = new ArrayList<>();
 
-	if (directory.isDirectory()) {
-	    for (File file : directory.listFiles()) {
-		if (file.getName().toLowerCase()
-			.matches(LevelManager.LEVEL_FILE_PATTERN)) {
-		    levelFiles.add(file);
-		}
-	    }
-	}
+        if (directory.isDirectory()) {
+            for (File file : directory.listFiles()) {
+                if (file.getName().toLowerCase()
+                        .matches(LevelManager.LEVEL_FILE_PATTERN)) {
+                    levelFiles.add(file);
+                }
+            }
+        }
 
-	return levelFiles;
+        return levelFiles;
     }
 
     /**
@@ -99,34 +99,34 @@ public class LevelManager {
      * @return the information about the {@link Level}; null if not found
      */
     private static LevelInfo getLevelInfo(File file) {
-	LevelInfo levelInfo = null;
-	Scanner fileScanner = null;
+        LevelInfo levelInfo = null;
+        Scanner fileScanner = null;
 
-	try {
-	    fileScanner = new Scanner(file);
+        try {
+            fileScanner = new Scanner(file);
 
-	    if (fileScanner.hasNextLine()) {
-		String line = fileScanner.nextLine();
+            if (fileScanner.hasNextLine()) {
+                String line = fileScanner.nextLine();
 
-		Scanner lineScanner = new Scanner(line);
-		lineScanner.useDelimiter(",");
-		int id = lineScanner.nextInt();
-		int width = lineScanner.nextInt();
-		int height = lineScanner.nextInt();
-		lineScanner.close();
+                Scanner lineScanner = new Scanner(line);
+                lineScanner.useDelimiter(",");
+                int id = lineScanner.nextInt();
+                int width = lineScanner.nextInt();
+                int height = lineScanner.nextInt();
+                lineScanner.close();
 
-		levelInfo = new LevelInfo(id, file);
-	    }
-	} catch (Exception e) {
-	    System.out.println("LevelManager: Error while loading file ("
-		    + file.getAbsolutePath() + ") with profiles.\n"
-		    + e.getMessage());
-	} finally {
-	    if (fileScanner != null) {
-		fileScanner.close();
-	    }
-	}
-	return levelInfo;
+                levelInfo = new LevelInfo(id, file);
+            }
+        } catch (Exception e) {
+            System.out.println("LevelManager: Error while loading file ("
+                    + file.getAbsolutePath() + ") with profiles.\n"
+                    + e.getMessage());
+        } finally {
+            if (fileScanner != null) {
+                fileScanner.close();
+            }
+        }
+        return levelInfo;
     }
 
     /**
@@ -144,8 +144,8 @@ public class LevelManager {
      *             when level file is not found.
      */
     public static Level load(LevelInfo levelInfo)
-	    throws FileNotFoundException, CollisionException, ParsingException {
-	return LevelLoader.parseLevel(levelInfo);
+            throws FileNotFoundException, CollisionException, ParsingException {
+        return LevelLoader.parseLevel(levelInfo);
     }
 
     /**
@@ -166,14 +166,14 @@ public class LevelManager {
      *
      */
     public static Level load(int levelId) throws FileNotFoundException,
-	    CollisionException, ParsingException, IllegalArgumentException {
-	LevelInfo levelInfo = getLevelInfo(levelId);
-	if (levelInfo == null) {
-	    throw new IllegalArgumentException(
-		    String.format(ERROR_LEVELID_NOT_FOUND, levelId));
-	}
+            CollisionException, ParsingException, IllegalArgumentException {
+        LevelInfo levelInfo = getLevelInfo(levelId);
+        if (levelInfo == null) {
+            throw new IllegalArgumentException(
+                    String.format(ERROR_LEVELID_NOT_FOUND, levelId));
+        }
 
-	return LevelLoader.parseLevel(levelInfo);
+        return LevelLoader.parseLevel(levelInfo);
     }
 
     /**
@@ -184,12 +184,12 @@ public class LevelManager {
      * @return the {@link LevelInfo} for the level with id.
      */
     private static LevelInfo getLevelInfo(int id) {
-	for (LevelInfo levelInfo : levelInfos) {
-	    if (levelInfo.getId() == id) {
-		return levelInfo;
-	    }
-	}
-	return null;
+        for (LevelInfo levelInfo : levelInfos) {
+            if (levelInfo.getId() == id) {
+                return levelInfo;
+            }
+        }
+        return null;
     }
 
     /**
@@ -203,11 +203,11 @@ public class LevelManager {
      *             when saving failed.
      */
     public static void save(Level level, int profileId) throws IOException {
-	LevelSaver.save(level,
-		String.format(
-			Constants.FOLDER_LEVELS
-				+ Constants.FILE_LEVEL_TEMP_PATTERN,
-			level.getId(), profileId));
+        LevelSaver.save(level,
+                String.format(
+                        Constants.FOLDER_LEVELS
+                                + Constants.FILE_LEVEL_TEMP_PATTERN,
+                        level.getId(), profileId));
     }
 
     /**
@@ -227,8 +227,8 @@ public class LevelManager {
      *             when level file is not found.
      */
     public static Level resume(int levelId, int profileId)
-	    throws FileNotFoundException, CollisionException, ParsingException {
-	return LevelLoader.parseLevel(getLevelInfoForFile(levelId, profileId));
+            throws FileNotFoundException, CollisionException, ParsingException {
+        return LevelLoader.parseLevel(getLevelInfoForFile(levelId, profileId));
     }
 
     /**
@@ -240,11 +240,11 @@ public class LevelManager {
      *            - id of the profile.
      */
     public static void deleteTempData(int levelId, int profileId) {
-	LevelInfo info = getLevelInfoForFile(levelId, profileId);
+        LevelInfo info = getLevelInfoForFile(levelId, profileId);
 
-	if (info.getFile().exists()) {
-	    info.getFile().delete();
-	}
+        if (info.getFile().exists()) {
+            info.getFile().delete();
+        }
     }
 
     /**
@@ -257,8 +257,8 @@ public class LevelManager {
      * @return true if there is a level with id saved; otherwise false.
      */
     public static boolean hasUnfinishedLevel(int levelId, int profileId) {
-	LevelInfo info = getLevelInfoForFile(levelId, profileId);
-	return info.getFile().exists();
+        LevelInfo info = getLevelInfoForFile(levelId, profileId);
+        return info.getFile().exists();
     }
 
     /**
@@ -271,8 +271,8 @@ public class LevelManager {
      * @return
      */
     private static LevelInfo getLevelInfoForFile(int levelId, int profileId) {
-	String file = String.format(Constants.FILE_LEVEL_TEMP_PATTERN, levelId,
-		profileId);
-	return new LevelInfo(levelId, new File(Constants.FOLDER_LEVELS + file));
+        String file = String.format(Constants.FILE_LEVEL_TEMP_PATTERN, levelId,
+                profileId);
+        return new LevelInfo(levelId, new File(Constants.FOLDER_LEVELS + file));
     }
 }

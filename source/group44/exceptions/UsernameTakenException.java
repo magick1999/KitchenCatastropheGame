@@ -21,6 +21,6 @@ public class UsernameTakenException extends Exception {
      *            retrieval by the {@link #getMessage()} method.
      */
     public UsernameTakenException(String message) {
-	super(message);
+        super(message);
     }
 }

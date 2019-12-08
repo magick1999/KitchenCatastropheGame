@@ -30,7 +30,7 @@ public class Ground extends StepableCell {
      *            - Path to the Image representing {@link Ground} in the game.
      */
     public Ground(Level level, int positionX, int positionY, String imagePath) {
-	super(level, Constants.TITLE_GROUND, positionX, positionY, imagePath);
+        super(level, Constants.TITLE_GROUND, positionX, positionY, imagePath);
     }
 
     /**
@@ -50,9 +50,9 @@ public class Ground extends StepableCell {
      *            - {@link CollectableItem} placed on the {@link Ground}.
      */
     public Ground(Level level, int positionX, int positionY, String imagePath,
-	    CollectableItem collectableItem) {
-	this(level, positionX, positionY, imagePath);
-	this.collectableItem = collectableItem;
+            CollectableItem collectableItem) {
+        this(level, positionX, positionY, imagePath);
+        this.collectableItem = collectableItem;
     }
 
     /**
@@ -70,9 +70,9 @@ public class Ground extends StepableCell {
      *            - The {@link MovableObject} on the cell.
      */
     public Ground(Level level, int positionX, int positionY, String imagePath,
-	    MovableObject steppedItem) {
-	super(level, Constants.TITLE_GROUND, positionX, positionY, imagePath,
-		steppedItem);
+            MovableObject steppedItem) {
+        super(level, Constants.TITLE_GROUND, positionX, positionY, imagePath,
+                steppedItem);
     }
 
     /**
@@ -81,9 +81,9 @@ public class Ground extends StepableCell {
      * @return {@link CollectableItem} if present; otherwise null.
      */
     public CollectableItem collect() {
-	CollectableItem item = this.collectableItem;
-	this.collectableItem = null;
-	return item;
+        CollectableItem item = this.collectableItem;
+        this.collectableItem = null;
+        return item;
     }
 
     /**
@@ -93,7 +93,7 @@ public class Ground extends StepableCell {
      * @return true if there is {@link CollectableItem}; false otherwise.
      */
     public Boolean hasCollectableItem() {
-	return this.collectableItem != null;
+        return this.collectableItem != null;
     }
 
     /**
@@ -117,12 +117,12 @@ public class Ground extends StepableCell {
      */
     @Override
     public void draw(GraphicsContext gc, double x, double y, double width,
-	    double height) {
-	super.draw(gc, x, y, width, height);
+            double height) {
+        super.draw(gc, x, y, width, height);
 
-	if (this.getMovableObject() == null && this.collectableItem != null) {
-	    this.collectableItem.draw(gc, x, y, width, height);
-	}
+        if (this.getMovableObject() == null && this.collectableItem != null) {
+            this.collectableItem.draw(gc, x, y, width, height);
+        }
     }
 
     /**
@@ -143,18 +143,18 @@ public class Ground extends StepableCell {
      */
     @Override
     public String toString() {
-	StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
 
-	builder.append(String.format(PARSE_PATTERN, Constants.TYPE_GROUND,
-		this.getPositionX(), this.getPositionY(), this.getImagePath()));
+        builder.append(String.format(PARSE_PATTERN, Constants.TYPE_GROUND,
+                this.getPositionX(), this.getPositionY(), this.getImagePath()));
 
-	if (this.getMovableObject() != null) {
-	    builder.append(",");
-	    builder.append(this.getMovableObject().toString());
-	} else if (this.collectableItem != null) {
-	    builder.append(",");
-	    builder.append(this.collectableItem.toString());
-	}
-	return builder.toString();
+        if (this.getMovableObject() != null) {
+            builder.append(",");
+            builder.append(this.getMovableObject().toString());
+        } else if (this.collectableItem != null) {
+            builder.append(",");
+            builder.append(this.collectableItem.toString());
+        }
+        return builder.toString();
     }
 }

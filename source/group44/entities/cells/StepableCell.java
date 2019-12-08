@@ -16,7 +16,7 @@ import javafx.scene.canvas.GraphicsContext;
  */
 public abstract class StepableCell extends Cell {
     private MovableObject movableObject; // MovableObject standing on the
-					 // cell
+                                         // cell
 
     /**
      * Creates a new {@link StepableCell}.
@@ -33,8 +33,8 @@ public abstract class StepableCell extends Cell {
      *            - Image path of the instance.
      */
     public StepableCell(Level level, String title, int positionX, int positionY,
-	    String imagePath) {
-	super(level, title, positionX, positionY, imagePath);
+            String imagePath) {
+        super(level, title, positionX, positionY, imagePath);
     }
 
     /**
@@ -54,10 +54,10 @@ public abstract class StepableCell extends Cell {
      *            - The {@link MovableObject} on the cell.
      */
     public StepableCell(Level level, String title, int positionX, int positionY,
-	    String imagePath, MovableObject steppedItem) {
-	super(level, title, positionX, positionY, imagePath);
+            String imagePath, MovableObject steppedItem) {
+        super(level, title, positionX, positionY, imagePath);
 
-	this.movableObject = steppedItem;
+        this.movableObject = steppedItem;
     }
 
     /**
@@ -70,27 +70,27 @@ public abstract class StepableCell extends Cell {
      *         action result.
      */
     public CollisionCheckResult stepOn(MovableObject object) {
-	if (this.getMovableObject() == null) {
-	    this.setMovableObject(object);
-	    this.onStepped(object);
-	    return new CollisionCheckResult(
-		    CollisionCheckResultType.Successful);
-	} else {
-	    if (this.getMovableObject() instanceof Player) {
-		return new CollisionCheckResult(CollisionCheckResultType.Player,
-			this.getMovableObject());
-	    } else {
-		return new CollisionCheckResult(CollisionCheckResultType.Enemy,
-			this.getMovableObject());
-	    }
-	}
+        if (this.getMovableObject() == null) {
+            this.setMovableObject(object);
+            this.onStepped(object);
+            return new CollisionCheckResult(
+                    CollisionCheckResultType.Successful);
+        } else {
+            if (this.getMovableObject() instanceof Player) {
+                return new CollisionCheckResult(CollisionCheckResultType.Player,
+                        this.getMovableObject());
+            } else {
+                return new CollisionCheckResult(CollisionCheckResultType.Enemy,
+                        this.getMovableObject());
+            }
+        }
     }
 
     /**
      * Removes {@link MovableObject} from the {@link StepableCell}.
      */
     public void stepOff() {
-	this.movableObject = null;
+        this.movableObject = null;
     }
 
     /**
@@ -100,7 +100,7 @@ public abstract class StepableCell extends Cell {
      *         false.
      */
     public Boolean isSteppedOn() {
-	return this.movableObject != null;
+        return this.movableObject != null;
     }
 
     /**
@@ -110,7 +110,7 @@ public abstract class StepableCell extends Cell {
      * @return the {@link MovableObject}.
      */
     public MovableObject getMovableObject() {
-	return this.movableObject;
+        return this.movableObject;
     }
 
     /**
@@ -120,7 +120,7 @@ public abstract class StepableCell extends Cell {
      *            - the new {@link MovableObject}.
      */
     protected void setMovableObject(MovableObject object) {
-	this.movableObject = object;
+        this.movableObject = object;
     }
 
     /**
@@ -152,11 +152,11 @@ public abstract class StepableCell extends Cell {
      */
     @Override
     public void draw(GraphicsContext gc, double x, double y, double width,
-	    double height) {
-	super.draw(gc, x, y, width, height);
+            double height) {
+        super.draw(gc, x, y, width, height);
 
-	if (this.getMovableObject() != null) {
-	    this.getMovableObject().draw(gc, x, y, width, height);
-	}
+        if (this.getMovableObject() != null) {
+            this.getMovableObject().draw(gc, x, y, width, height);
+        }
     }
 }

@@ -17,6 +17,6 @@ public class CollisionException extends Exception {
      *            retrieval by the {@link #getMessage()} method.
      */
     public CollisionException(String message) {
-	super(message);
+        super(message);
     }
 }

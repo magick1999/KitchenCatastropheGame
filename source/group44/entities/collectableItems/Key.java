@@ -21,8 +21,8 @@ public class Key extends CollectableItem {
      *            - Colour type of the {@link Key}.
      */
     public Key(Level level, KeyType type) {
-	super(level, type.getTitle(), type.getImagePath());
-	this.keyType = type;
+        super(level, type.getTitle(), type.getImagePath());
+        this.keyType = type;
     }
 
     /**
@@ -31,7 +31,7 @@ public class Key extends CollectableItem {
      * @return key code represented as {@link Integer}.
      */
     public int getKeyCode() {
-	return this.keyType.getKeyCode();
+        return this.keyType.getKeyCode();
     }
 
     /**
@@ -41,11 +41,11 @@ public class Key extends CollectableItem {
      */
     @Override
     public String toString() {
-	StringBuilder sb = new StringBuilder();
-	sb.append(Constants.TYPE_KEY);
-	sb.append(Constants.LEVEL_OBJECT_DELIMITER);
-	sb.append(this.getKeyCode());
-	return sb.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(Constants.TYPE_KEY);
+        sb.append(Constants.LEVEL_OBJECT_DELIMITER);
+        sb.append(this.getKeyCode());
+        return sb.toString();
     }
 
     /**
@@ -53,46 +53,46 @@ public class Key extends CollectableItem {
      * KeyCode and image path.
      */
     public enum KeyType {
-	RED(1, "Red key", "group44/resources/keys/red.png"), BLUE(2, "Blue key",
-		"group44/resources/keys/blue.png"), GREEN(3, "Green key",
-			"group44/resources/keys/green.png"), GOLD(4, "Gold key",
-				"group44/resources/keys/yellow.png");
+        RED(1, "Red key", "group44/resources/keys/red.png"), BLUE(2, "Blue key",
+                "group44/resources/keys/blue.png"), GREEN(3, "Green key",
+                        "group44/resources/keys/green.png"), GOLD(4, "Gold key",
+                                "group44/resources/keys/yellow.png");
 
-	private int code; // used to unlock the door (binary operation)
-	private String title;
-	private String imagePath;
+        private int code; // used to unlock the door (binary operation)
+        private String title;
+        private String imagePath;
 
-	KeyType(int code, String title, String imagePath) {
-	    this.code = code;
-	    this.title = title;
-	    this.imagePath = imagePath;
-	}
+        KeyType(int code, String title, String imagePath) {
+            this.code = code;
+            this.title = title;
+            this.imagePath = imagePath;
+        }
 
-	/**
-	 * Returns the code of the key.
-	 *
-	 * @return key code represented as {@link Integer}.
-	 */
-	public int getKeyCode() {
-	    return this.code;
-	}
+        /**
+         * Returns the code of the key.
+         *
+         * @return key code represented as {@link Integer}.
+         */
+        public int getKeyCode() {
+            return this.code;
+        }
 
-	/**
-	 * Returns the title (name) of the key.
-	 *
-	 * @return the title.
-	 */
-	public String getTitle() {
-	    return this.title;
-	}
+        /**
+         * Returns the title (name) of the key.
+         *
+         * @return the title.
+         */
+        public String getTitle() {
+            return this.title;
+        }
 
-	/**
-	 * Returns a path to the image of the key.
-	 *
-	 * @return a path represented as {@link String}.
-	 */
-	public String getImagePath() {
-	    return this.imagePath;
-	}
+        /**
+         * Returns a path to the image of the key.
+         *
+         * @return a path represented as {@link String}.
+         */
+        public String getImagePath() {
+            return this.imagePath;
+        }
     }
 }

@@ -14,8 +14,8 @@ public class CellPathInfo {
     private int x; // position X
     private int y; // position Y
     private long cost; // how many steps to that cell; negative number mean
-		       // not
-		       // reacheable
+                       // not
+                       // reacheable
     private CellPathInfo parent;
 
     /**
@@ -25,18 +25,18 @@ public class CellPathInfo {
      *            - the cell which we want to describe.
      */
     public CellPathInfo(Cell cell) {
-	this.x = cell.getPositionX();
-	this.y = cell.getPositionY();
+        this.x = cell.getPositionX();
+        this.y = cell.getPositionY();
 
-	this.reset();
+        this.reset();
     }
 
     /**
      * Sets default cost.
      */
     public void reset() {
-	this.cost = Long.MIN_VALUE;
-	this.parent = null;
+        this.cost = Long.MIN_VALUE;
+        this.parent = null;
     }
 
     /**
@@ -45,7 +45,7 @@ public class CellPathInfo {
      * @return the position X.
      */
     public int getX() {
-	return x;
+        return x;
     }
 
     /**
@@ -54,7 +54,7 @@ public class CellPathInfo {
      * @return the position Y.
      */
     public int getY() {
-	return y;
+        return y;
     }
 
     /**
@@ -65,7 +65,7 @@ public class CellPathInfo {
      *            - the cost.
      */
     public void setCost(long cost) {
-	this.cost = cost;
+        this.cost = cost;
     }
 
     /**
@@ -74,7 +74,7 @@ public class CellPathInfo {
      * @return the cost.
      */
     public long getCost() {
-	return cost;
+        return cost;
     }
 
     /**
@@ -83,7 +83,7 @@ public class CellPathInfo {
      * @return the parent.
      */
     public CellPathInfo getParent() {
-	return parent;
+        return parent;
     }
 
     /**
@@ -94,14 +94,14 @@ public class CellPathInfo {
      * @return true if the parent was accepted; otherwise false.
      */
     public boolean setParent(CellPathInfo newParent) {
-	// NO PARENT SO FAR or BETTER PATH FOUND
-	if ((this.parent == null)
-		|| (newParent.getCost() < this.parent.getCost())) {
-	    this.parent = newParent;
-	    this.setCost(newParent.getCost() + 1);
-	    return true;
-	}
+        // NO PARENT SO FAR or BETTER PATH FOUND
+        if ((this.parent == null)
+                || (newParent.getCost() < this.parent.getCost())) {
+            this.parent = newParent;
+            this.setCost(newParent.getCost() + 1);
+            return true;
+        }
 
-	return false;
+        return false;
     }
 }

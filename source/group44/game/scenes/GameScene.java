@@ -63,37 +63,37 @@ public class GameScene {
      *            represents the window where the stages are displayed
      */
     public GameScene(Stage primaryStage, Level currentLevel,
-	    Profile currentProfile) {
-	this.primaryStage = primaryStage;
-	FXMLLoader fxmlLoader = new FXMLLoader(getClass()
-		.getResource("/group44/game/layouts/MainGameWindow.fxml"));
-	try {
-	    Parent root = fxmlLoader.load();
-	    // Setting the stage and adding my custom style to it.
-	    root.getStylesheets().add("group44/resources/application.css");
-	    root.setId("root");
-	    Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-	    // Loading the controller
-	    MainGameWindowController tempController = fxmlLoader
-		    .getController();
-	    setController(tempController);
-	    this.currentLevel = currentLevel;
-	    // Setting the canvas
-	    setCanvas(myController.getCanvas());
-	    // Adding the key listener to the scene.
-	    scene.addEventFilter(KeyEvent.KEY_PRESSED,
-		    event -> processKeyEvent(event));
-	    // Drawing the game
-	    drawGame();
-	    primaryStage.setScene(scene);
-	    primaryStage.show();
-	    this.currentProfile = currentProfile;
-	    timer.startTimer(myController.getTimeLabel(),
-		    currentLevel.getTime());
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
-	primaryStage.setTitle("Kitchen Catastrophe");
+            Profile currentProfile) {
+        this.primaryStage = primaryStage;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass()
+                .getResource("/group44/game/layouts/MainGameWindow.fxml"));
+        try {
+            Parent root = fxmlLoader.load();
+            // Setting the stage and adding my custom style to it.
+            root.getStylesheets().add("group44/resources/application.css");
+            root.setId("root");
+            Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+            // Loading the controller
+            MainGameWindowController tempController = fxmlLoader
+                    .getController();
+            setController(tempController);
+            this.currentLevel = currentLevel;
+            // Setting the canvas
+            setCanvas(myController.getCanvas());
+            // Adding the key listener to the scene.
+            scene.addEventFilter(KeyEvent.KEY_PRESSED,
+                    event -> processKeyEvent(event));
+            // Drawing the game
+            drawGame();
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            this.currentProfile = currentProfile;
+            timer.startTimer(myController.getTimeLabel(),
+                    currentLevel.getTime());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        primaryStage.setTitle("Kitchen Catastrophe");
     }
 
     /**
@@ -102,11 +102,11 @@ public class GameScene {
      * stopped aswell.
      */
     private void setUpMenu() {
-	this.canMove = false;
-	timer.pauseTimer();
-	myController.getResumeButton().setOnMouseClicked(this::setUpResume);
-	myController.getRestartButton().setOnMouseClicked(this::setUpRestart);
-	myController.getHomeButton().setOnMouseClicked(this::setUpHome);
+        this.canMove = false;
+        timer.pauseTimer();
+        myController.getResumeButton().setOnMouseClicked(this::setUpResume);
+        myController.getRestartButton().setOnMouseClicked(this::setUpRestart);
+        myController.getHomeButton().setOnMouseClicked(this::setUpHome);
     }
 
     /**
@@ -117,10 +117,10 @@ public class GameScene {
      *            This is the event for the click on the resume button.
      */
     private void setUpResume(MouseEvent event) {
-	timer.resumeTimer();
-	myController.getMenuBox()
-		.setVisible(!myController.getMenuBox().isVisible());
-	this.canMove = true;
+        timer.resumeTimer();
+        myController.getMenuBox()
+                .setVisible(!myController.getMenuBox().isVisible());
+        this.canMove = true;
     }
 
     /**
@@ -131,27 +131,27 @@ public class GameScene {
      *            This is the event for the click on the restart button.
      */
     private void setUpRestart(MouseEvent event) {
-	timer.startTimer(myController.getTimeLabel(), 0);
+        timer.startTimer(myController.getTimeLabel(), 0);
 
-	// Delete all temp files
-	LevelManager.deleteTempData(this.currentLevel.getId(),
-		this.currentProfile.getId());
+        // Delete all temp files
+        LevelManager.deleteTempData(this.currentLevel.getId(),
+                this.currentProfile.getId());
 
-	Level newLevel = null;
-	try {
-	    newLevel = LevelManager.load(this.currentLevel.getId()); // TODO:
-								     // @Bogdan
-								     // Mihai
-								     // -
-								     // TESTING
-	} catch (FileNotFoundException e) {
-	    e.printStackTrace();
-	} catch (CollisionException e) {
-	    e.printStackTrace();
-	} catch (ParsingException e) {
-	    e.printStackTrace();
-	}
-	new GameScene(this.primaryStage, newLevel, this.currentProfile);
+        Level newLevel = null;
+        try {
+            newLevel = LevelManager.load(this.currentLevel.getId()); // TODO:
+                                                                     // @Bogdan
+                                                                     // Mihai
+                                                                     // -
+                                                                     // TESTING
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (CollisionException e) {
+            e.printStackTrace();
+        } catch (ParsingException e) {
+            e.printStackTrace();
+        }
+        new GameScene(this.primaryStage, newLevel, this.currentProfile);
     }
 
     /**
@@ -162,19 +162,19 @@ public class GameScene {
      *            This is the event for the click on the restart button.
      */
     private void setUpHome(MouseEvent event) {
-	timer.stopTimer();
-	try {
-	    this.currentLevel.setTime(timer.getCurrentTimeTaken());
-	    LevelManager.save(this.currentLevel, this.currentProfile.getId());
-	} catch (IOException e) {
-	    // TODO: @Bogdan Mihai - REVIEW
-	    Alert alert = new Alert(AlertType.ERROR);
-	    alert.setTitle("Error");
-	    alert.setHeaderText("Saving current progress failed.");
-	    alert.setContentText("Please play the level again.");
-	    alert.showAndWait();
-	}
-	new MainMenuScene(primaryStage);
+        timer.stopTimer();
+        try {
+            this.currentLevel.setTime(timer.getCurrentTimeTaken());
+            LevelManager.save(this.currentLevel, this.currentProfile.getId());
+        } catch (IOException e) {
+            // TODO: @Bogdan Mihai - REVIEW
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Saving current progress failed.");
+            alert.setContentText("Please play the level again.");
+            alert.showAndWait();
+        }
+        new MainMenuScene(primaryStage);
     }
 
     /**
@@ -182,70 +182,70 @@ public class GameScene {
      * and your time.
      */
     private void showTimes(LevelFinishStatus status) {
-	ButtonType levelSelector = new ButtonType("Level Selector",
-		ButtonBar.ButtonData.OK_DONE);
-	ButtonType mainMenu = new ButtonType("Main Menu",
-		ButtonBar.ButtonData.OK_DONE);
-	ButtonType restart = new ButtonType("Try Again",
-		ButtonBar.ButtonData.OK_DONE);
-	Alert a1 = new Alert(AlertType.NONE, "default Dialog", levelSelector,
-		mainMenu, restart);
-	a1.setHeight(400);
-	a1.setWidth(500);
+        ButtonType levelSelector = new ButtonType("Level Selector",
+                ButtonBar.ButtonData.OK_DONE);
+        ButtonType mainMenu = new ButtonType("Main Menu",
+                ButtonBar.ButtonData.OK_DONE);
+        ButtonType restart = new ButtonType("Try Again",
+                ButtonBar.ButtonData.OK_DONE);
+        Alert a1 = new Alert(AlertType.NONE, "default Dialog", levelSelector,
+                mainMenu, restart);
+        a1.setHeight(400);
+        a1.setWidth(500);
 
-	if (status == LevelFinishStatus.GoalReached) {
-	    a1.setTitle("Congrats on finishing the level!");
-	    Leaderboard.addOrUpdate(currentProfile.getId(),
-		    currentLevel.getId(), timer.getCurrentTimeTaken());
-	    ObservableList<Record> top3Records = Leaderboard
-		    .getTopThreeRecords(currentLevel.getId());
+        if (status == LevelFinishStatus.GoalReached) {
+            a1.setTitle("Congrats on finishing the level!");
+            Leaderboard.addOrUpdate(currentProfile.getId(),
+                    currentLevel.getId(), timer.getCurrentTimeTaken());
+            ObservableList<Record> top3Records = Leaderboard
+                    .getTopThreeRecords(currentLevel.getId());
 
-	    // Is in TOP 3?
-	    boolean isInTop3 = Leaderboard.isInTopThreeRecors(
-		    currentProfile.getId(), currentLevel.getId());
+            // Is in TOP 3?
+            boolean isInTop3 = Leaderboard.isInTopThreeRecors(
+                    currentProfile.getId(), currentLevel.getId());
 
-	    StringBuilder builder = new StringBuilder();
-	    for (Record record : top3Records) {
-		builder.append(record.toString() + "\n");
-	    }
+            StringBuilder builder = new StringBuilder();
+            for (Record record : top3Records) {
+                builder.append(record.toString() + "\n");
+            }
 
-	    a1.setContentText("Top times and your time: \n");
-	    if (isInTop3) {
-		a1.setContentText(
-			"Top times and your time: \n" + builder.toString());
-	    } else {
-		a1.setContentText("Top times and your time: \n"
-			+ builder.toString() + Leaderboard.getRecord(
-				currentProfile.getId(), currentLevel.getId()));
-	    } // TODO: Here add the times with append
-	} else {
-	    a1.setTitle("And then I took an arrow to the knee!");
-	    // TODO: Here add the times with append
-	    a1.setContentText(
-		    "Just a suggestion: \n Practice makes it perfect! \n");
-	}
+            a1.setContentText("Top times and your time: \n");
+            if (isInTop3) {
+                a1.setContentText(
+                        "Top times and your time: \n" + builder.toString());
+            } else {
+                a1.setContentText("Top times and your time: \n"
+                        + builder.toString() + Leaderboard.getRecord(
+                                currentProfile.getId(), currentLevel.getId()));
+            } // TODO: Here add the times with append
+        } else {
+            a1.setTitle("And then I took an arrow to the knee!");
+            // TODO: Here add the times with append
+            a1.setContentText(
+                    "Just a suggestion: \n Practice makes it perfect! \n");
+        }
 
-	canMove = false;
-	Optional<ButtonType> result = a1.showAndWait();
-	if (!result.isPresent()) {
+        canMove = false;
+        Optional<ButtonType> result = a1.showAndWait();
+        if (!result.isPresent()) {
 
-	} else {
-	    if (result.get() == levelSelector) {
-		LevelSelectorScene ls = new LevelSelectorScene(primaryStage,
-			this.currentProfile);
-	    } else {
-		if (result.get() == mainMenu) {
-		    MainMenuScene ms = new MainMenuScene(primaryStage);
-		} else {
-		    if (result.get() == restart) {
-			setUpRestart(new MouseEvent(null, 1, 1, 1, 1, null, 1,
-				canMove, canMove, canMove, canMove, canMove,
-				canMove, canMove, canMove, canMove, canMove,
-				null));
-		    }
-		}
-	    }
-	}
+        } else {
+            if (result.get() == levelSelector) {
+                LevelSelectorScene ls = new LevelSelectorScene(primaryStage,
+                        this.currentProfile);
+            } else {
+                if (result.get() == mainMenu) {
+                    MainMenuScene ms = new MainMenuScene(primaryStage);
+                } else {
+                    if (result.get() == restart) {
+                        setUpRestart(new MouseEvent(null, 1, 1, 1, 1, null, 1,
+                                canMove, canMove, canMove, canMove, canMove,
+                                canMove, canMove, canMove, canMove, canMove,
+                                null));
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -256,7 +256,7 @@ public class GameScene {
      *            The current controller.
      */
     private void setController(MainGameWindowController tempController) {
-	myController = tempController;
+        myController = tempController;
     }
 
     /**
@@ -266,21 +266,21 @@ public class GameScene {
      *            The current canvas.
      */
     private void setCanvas(Canvas canvas) {
-	this.canvas = canvas;
+        this.canvas = canvas;
     }
 
     /**
      * This method draws every non movable object onto the screen.
      */
     private void drawGame() {
-	// Get the Graphic Context of the canvas. This is what we draw
-	// on.
-	GraphicsContext gc = canvas.getGraphicsContext2D();
+        // Get the Graphic Context of the canvas. This is what we draw
+        // on.
+        GraphicsContext gc = canvas.getGraphicsContext2D();
 
-	// Clear canvas
-	gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        // Clear canvas
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-	currentLevel.draw(gc);
+        currentLevel.draw(gc);
     }
 
     /**
@@ -289,10 +289,10 @@ public class GameScene {
      * times and the player time will show.
      */
     private void endGame() {
-	timer.pauseTimer();
-	LevelManager.deleteTempData(this.currentLevel.getId(),
-		this.currentProfile.getId());
-	this.showTimes(this.currentLevel.getFinishStatus());
+        timer.pauseTimer();
+        LevelManager.deleteTempData(this.currentLevel.getId(),
+                this.currentProfile.getId());
+        this.showTimes(this.currentLevel.getFinishStatus());
     }
 
     /**
@@ -303,50 +303,50 @@ public class GameScene {
      */
     private void processKeyEvent(KeyEvent event) {
 
-	switch (event.getCode()) {
-	case ESCAPE: {
-	    if (canMove) {
-		canMove = false;
-		timer.pauseTimer();
-		// Escape key was pressed. So show the
-		// menu.
-		myController.getMenuBox()
-			.setVisible(!myController.getMenuBox().isVisible());
-		// Setting up the menu controls.
-		setUpMenu();
-	    } else {
-		timer.resumeTimer();
-		myController.getMenuBox()
-			.setVisible(!myController.getMenuBox().isVisible());
-		canMove = true;
-	    }
+        switch (event.getCode()) {
+        case ESCAPE: {
+            if (canMove) {
+                canMove = false;
+                timer.pauseTimer();
+                // Escape key was pressed. So show the
+                // menu.
+                myController.getMenuBox()
+                        .setVisible(!myController.getMenuBox().isVisible());
+                // Setting up the menu controls.
+                setUpMenu();
+            } else {
+                timer.resumeTimer();
+                myController.getMenuBox()
+                        .setVisible(!myController.getMenuBox().isVisible());
+                canMove = true;
+            }
 
-	    break;
-	}
+            break;
+        }
 
-	// All keys going to the level
-	case UP:
-	case DOWN:
-	case LEFT:
-	case RIGHT:
-	    if (canMove) {
-		this.currentLevel.keyDown(event);
-	    }
-	    break;
+        // All keys going to the level
+        case UP:
+        case DOWN:
+        case LEFT:
+        case RIGHT:
+            if (canMove) {
+                this.currentLevel.keyDown(event);
+            }
+            break;
 
-	default:
-	    // Do nothing
-	    break;
-	}
+        default:
+            // Do nothing
+            break;
+        }
 
-	// Redraw game as the player may have moved.
-	drawGame();
-	// Consume the event. This means we mark it as dealt
-	// with. This stops other GUI nodes (buttons etc) responding to it.
-	event.consume();
+        // Redraw game as the player may have moved.
+        drawGame();
+        // Consume the event. This means we mark it as dealt
+        // with. This stops other GUI nodes (buttons etc) responding to it.
+        event.consume();
 
-	if (this.currentLevel.isFinished()) {
-	    this.endGame();
-	}
+        if (this.currentLevel.isFinished()) {
+            this.endGame();
+        }
     }
 }

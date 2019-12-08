@@ -19,8 +19,8 @@ public class Position {
      *            - the Y coordinate
      */
     public Position(int x, int y) {
-	this.x = x;
-	this.y = y;
+        this.x = x;
+        this.y = y;
     }
 
     /**
@@ -29,7 +29,7 @@ public class Position {
      * @return the X coordinate
      */
     public int getX() {
-	return this.x;
+        return this.x;
     }
 
     /**
@@ -38,6 +38,6 @@ public class Position {
      * @return the Y coordinate
      */
     public int getY() {
-	return this.y;
+        return this.y;
     }
 }
