@@ -1,5 +1,4 @@
 package group44.entities.cells;
-
 import group44.Constants;
 import group44.entities.movableObjects.MovableObject;
 import group44.game.Level;
@@ -45,7 +44,7 @@ public class Water extends StepableCell {
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
-        builder.append(String.format(PARSE_PATTERN, Constants.TYPE_WALL, this.getPositionX(), this.getPositionY(),
+        builder.append(String.format(PARSE_PATTERN, Constants.TYPE_WATER, this.getPositionX(), this.getPositionY(),
                 this.getImagePath()));
 
         return builder.toString();
