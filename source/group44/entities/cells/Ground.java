@@ -144,7 +144,7 @@ public class Ground extends StepableCell {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 
-		builder.append(String.format(PARSE_PATTERN, Constants.TYPE_GROUND, this.getPositionX(), this.getPositionX(),
+		builder.append(String.format(PARSE_PATTERN, Constants.TYPE_GROUND, this.getPositionX(), this.getPositionY(),
 				this.getImagePath()));
 
 		if (this.getMovableObject() != null) {
