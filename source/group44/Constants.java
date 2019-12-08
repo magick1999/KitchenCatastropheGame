@@ -27,6 +27,8 @@ public final class Constants {
 	public static int LEVEL_DISPLAY_SIZE = 7; // Must be odd and greater or
 												// equal 3
 
+	public static final String LEVEL_OBJECT_DELIMITER = ",";
+
 	// Parsing constants
 	public static final String TYPE_WALL = "wall";
 	public static final String TYPE_GROUND = "ground";
@@ -46,4 +48,7 @@ public final class Constants {
 	public static final String TYPE_KEY_DOOR = "keyDoor";
 	public static final String TYPE_TELEPORTER = "teleporter";
 	public static final String TYPE_TELEPORTER_LINK = "teleporterLink";
+
+	// Titles
+	public static final String TITLE_TOKEN = "Token";
 }
