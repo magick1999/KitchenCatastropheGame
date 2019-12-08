@@ -7,9 +7,18 @@
 
 }
 
-.label{
+#motd{
     -fx-font-family: "Helvetica";
+    -fx-font-size: 12pt;
     -fx-font-weight: bold;
+    -fx-position: center;
+}
+
+#title{
+    -fx-underline: true;
+    -fx-font-size: 20pt;
+    -fx-font-family: "Helvetica";
+    -fx-text-fill: green;
 }
 
 .button{
