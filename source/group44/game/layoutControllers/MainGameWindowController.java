@@ -7,7 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
-
+/**
+ * This class does the fxml injection of the widgets from the main game window layout in the code.
+ * It also contains the appropriate getters and setters for the widgets.
+ */
 public class MainGameWindowController {
     @FXML
     private Button homeButton;

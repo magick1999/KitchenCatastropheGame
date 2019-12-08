@@ -6,7 +6,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-
+/**
+ * This class does the fxml injection of the widgets from the MOTD layout in the code.
+ * It also contains the appropriate getters and setters for the widgets.
+ */
 public class MOTDController {
     @FXML
     private Button refresh;
