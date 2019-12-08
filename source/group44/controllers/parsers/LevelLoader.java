@@ -481,7 +481,23 @@ public class LevelLoader {
 		int velocityY = scanner.nextInt();
 		String imagePath = scanner.next();
 
-		return new Player(level, name, positionX, positionY, velocityX, velocityY, imagePath);
+		Player player = new Player(level, name, positionX, positionY, velocityX, velocityY, imagePath);
+
+		while (scanner.hasNext()) {
+			String type = scanner.next();
+
+			if (type.equals(Constants.TYPE_FIRE_BOOTS)) {
+				player.addToInventory(parseFireBootsEntry(level, scanner));
+			} else if (type.equals(Constants.TYPE_FLIPPERS)) {
+				player.addToInventory(parseFlipperEntry(level, scanner));
+			} else if (type.equals(Constants.TYPE_KEY)) {
+				player.addToInventory(parseKeyEntry(level, scanner));
+			} else if (type.equals(Constants.TYPE_TOKEN)) {
+				player.addToInventory(parseTokenEntry(level, scanner));
+			}
+		}
+
+		return player;
 	}
 
 	/**
