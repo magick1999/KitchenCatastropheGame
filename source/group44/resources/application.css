@@ -1,0 +1,83 @@
+#root{
+    -fx-background-image: url("../resources/background.png");
+    -fx-background-size: 800 600;
+    -fx-max-height: 100%;
+    -fx-max-width: 100%;
+    -fx-background-position: center center;
+
+}
+
+#motd{
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 12pt;
+    -fx-font-weight: bold;
+    -fx-position: center;
+}
+
+#title{
+    -fx-underline: true;
+    -fx-font-size: 20pt;
+    -fx-font-family: "Helvetica";
+    -fx-text-fill: lightgreen;
+    -fx-font-weight: bold;
+}
+
+.button{
+    -fx-background-image: url("../resources/Buttons/green_button1.png");
+    -fx-pref-width: 130px;
+    -fx-pref-height: 65px;
+    -fx-background-size: cover;
+    -fx-background-color: transparent;
+    -fx-background-position: center center;
+    -fx-font-family:"Simpsonfont";
+}
+
+.button:hover{
+    -fx-background-image: url("../resources/Buttons/orange_button1.png");
+    -fx-pref-width: 130px;
+    -fx-pref-height: 65px;
+    -fx-background-size: cover;
+    -fx-background-color: transparent;
+    -fx-background-position: center center;
+    -fx-font-family:"Simpsonfont";
+}
+
+.button:pressed{
+    -fx-background-image: url("../resources/Buttons/orange_button1.png");
+    -fx-pref-width: 120px;
+    -fx-pref-height: 65px;
+    -fx-background-size: cover;
+    -fx-background-color: transparent;
+    -fx-background-position: center center;
+    -fx-font-family:"Simpsonfont";
+}
+
+#menuBox{
+    -fx-background-image: url("../resources/menuContainer.png");
+    -fx-background-size: cover;
+    -fx-pref-height: 300;
+    -fx-pref-width: 200;
+}
+
+#logo{
+    -fx-background-image: url("../resources/KitchenCatastrophe.png");
+    -fx-background-size: cover;
+    -fx-width: 100;
+    -fx-height: 100;
+    -fx-pref-height: 300;
+    -fx-pref-width: 200;
+}
+
+#timeTitle{
+    -fx-font-weight: bold;
+    -fx-font-family: "Helvetica";
+}
+
+#timer{
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: black;
+    -fx-border-width: 3;
+    -fx-background-color: lightgreen;
+    -fx-font-family: "Helvetica";
+}
