@@ -14,7 +14,7 @@ import javafx.collections.ObservableList;
 /**
  * Manages, loads, and saves user profiles.
  *
- * @author Tomas Svejnoha.
+ * @author Tomas Svejnoha
  * @version 1.0
  */
 public class ProfileManager {
@@ -55,7 +55,7 @@ public class ProfileManager {
      *
      * @param username
      *            username to find.
-     * 
+     *
      * @return {@link Profile} if match is found; otherwise null.
      */
     public static Profile getProfile(final String username) {
@@ -76,10 +76,10 @@ public class ProfileManager {
      *
      * @param username
      *            username to be used.
-     * 
+     *
      * @throws UsernameTakenException
      *             if the username is already taken.
-     * 
+     *
      * @return the created {@link Profile}.
      */
     public static Profile register(final String username)
@@ -132,7 +132,7 @@ public class ProfileManager {
      *
      * @param username
      *            the username to check.
-     * 
+     *
      * @return true if the username is already taken; otherwise false.
      */
     private static Boolean exists(final String username) {
@@ -204,7 +204,7 @@ public class ProfileManager {
      *
      * @param fileScanner
      *            scanner of the file where the profiles are stored.
-     *            
+     *
      * @return a list of loaded {@link Profile}s.
      */
     private static ArrayList<Profile> load(Scanner fileScanner) {
@@ -226,7 +226,7 @@ public class ProfileManager {
      *
      * @param scanner
      *            - scanner with the serialised profile.
-     *            
+     *
      * @return {@link Profile} created from values in scanner; null if there is
      *         some exception.
      */

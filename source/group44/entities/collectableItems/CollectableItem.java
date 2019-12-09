@@ -6,7 +6,7 @@ import group44.game.Level;
 /**
  * Abstract class for all collectable items in the game.
  *
- * @author Tomas Svejnoha, Amy Mason.
+ * @author Tomas Svejnoha, Amy Mason
  * @version 1.0
  */
 public abstract class CollectableItem extends LevelObject {
@@ -33,8 +33,8 @@ public abstract class CollectableItem extends LevelObject {
      * @param title
      *            Title of the {@link CollectableItem}.
      * @param imagePath
-     *            Path the the Image representing {@link CollectableItem} in
-     *            the game.
+     *            Path the the Image representing {@link CollectableItem} in the
+     *            game.
      */
     public CollectableItem(Level level, String title, String imagePath) {
         super(level, title, 0, 0, imagePath);

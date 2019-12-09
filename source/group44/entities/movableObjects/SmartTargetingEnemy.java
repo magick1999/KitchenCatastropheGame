@@ -11,7 +11,7 @@ import group44.game.Level;
 /**
  * Represents a smart targeting enemy in the game.
  *
- * @author Tomas Svejnoha.
+ * @author Tomas Svejnoha
  * @version 1.0
  */
 public class SmartTargetingEnemy extends Enemy {
@@ -204,7 +204,7 @@ public class SmartTargetingEnemy extends Enemy {
      *            position X of the player.
      * @param targetY
      *            position Y of the player.
-     * 
+     *
      * @return the next cell to step.
      */
     private CellPathInfo nextCellToStep(int targetX, int targetY) {

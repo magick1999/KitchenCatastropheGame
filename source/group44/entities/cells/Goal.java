@@ -8,7 +8,7 @@ import group44.game.LevelFinishStatus;
 /**
  * Represents a Goal in the game.
  *
- * @author Tomas Svejnoha.
+ * @author Tomas Svejnoha
  * @version 1.0
  */
 public class Goal extends StepableCell {

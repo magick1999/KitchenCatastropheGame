@@ -25,11 +25,11 @@ public class Record implements Comparable<Record> {
      * Creates a new istance of {@link Record}.
      *
      * @param profile
-     *            - {@link Profile} linked to the record
+     *            {@link Profile} linked to the record.
      * @param levelId
-     *            - Id of the associated {@link Level}
+     *            Id of the associated {@link Level}.
      * @param time
-     *            - time taken to finish the level
+     *            time taken to finish the level.
      */
     public Record(Profile profile, int levelId, long time) {
         this.profile = profile;
@@ -40,7 +40,7 @@ public class Record implements Comparable<Record> {
     /**
      * Returns the associated {@link Profile}.
      *
-     * @return the associated profile
+     * @return the associated profile.
      */
     public Profile getProfile() {
         return this.profile;
@@ -49,7 +49,7 @@ public class Record implements Comparable<Record> {
     /**
      * Returns Id of the associated {@link Level}.
      *
-     * @return the level id
+     * @return the level id.
      */
     public int getLevelId() {
         return this.levelId;
@@ -58,7 +58,7 @@ public class Record implements Comparable<Record> {
     /**
      * Returns the time taken by the user to finish the {@link Level}.
      *
-     * @return the time taken
+     * @return the time taken.
      */
     public long getTime() {
         return this.time;
@@ -68,7 +68,7 @@ public class Record implements Comparable<Record> {
      * Updates the time taken to finish the {@link Level}.
      *
      * @param time
-     *            - the new time taken
+     *            the new time taken.
      */
     public void setTime(long time) {
         this.time = time;
@@ -78,7 +78,7 @@ public class Record implements Comparable<Record> {
      * Compares {@link Record}s based on the time taken to finish the level.
      *
      * @param o
-     *            - the {@link Record} to compare
+     *            the {@link Record} to compare.
      */
     @Override
     public int compareTo(Record o) {

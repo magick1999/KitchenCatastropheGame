@@ -9,7 +9,7 @@ import group44.game.Position;
  * Represents an {@link Enemy} which is trying to minimise the distance to
  * {@link Player}.
  *
- * @author Tomas Svejnoha.
+ * @author Tomas Svejnoha
  * @version 1.0
  */
 public class DumbTargetingEnemy extends Enemy {
@@ -122,6 +122,7 @@ public class DumbTargetingEnemy extends Enemy {
      *
      * @return the string repsesentation of a Dumb Targeting Enemy.
      */
+    @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
 

@@ -20,9 +20,9 @@ public class LevelInfo {
      * Creates a new instance of {@link LevelInfo}.
      *
      * @param id
-     *            - id of the {@link Level}.
+     *            id of the {@link Level}.
      * @param file
-     *            - file containing the {@link Level} definition.
+     *            file containing the {@link Level} definition.
      */
     public LevelInfo(int id, File file) {
         this.id = id;

@@ -7,7 +7,7 @@ import group44.game.Level;
 /**
  * Represents a water in the game.
  *
- * @author Tomas Svejnoha, Amy Mason.
+ * @author Tomas Svejnoha, Amy Mason
  * @version 1.0
  */
 public class Water extends StepableCell {
@@ -33,8 +33,7 @@ public class Water extends StepableCell {
      * Interacts with {@link MovableObject} which stepped on the cell.
      *
      * @param object
-     *            The {@link MovableObject} which stepped in the
-     *            {@link Water}.
+     *            The {@link MovableObject} which stepped in the {@link Water}.
      */
     @Override
     protected void onStepped(MovableObject object) {

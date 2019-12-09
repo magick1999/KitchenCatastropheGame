@@ -32,6 +32,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
+ * This class displays the scene where the game happens. It sets up the timer,
+ * calls the configuration of the user input, sets up the menu and draws the
+ * game.
  *
  * @author Mihai, Tomas Svejnoha
  * @version 1.0

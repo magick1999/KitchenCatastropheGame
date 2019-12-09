@@ -15,7 +15,7 @@ import group44.game.Level;
 /**
  * Abstract class for all enemies.
  *
- * @author Tomas Svejnoha.
+ * @author Tomas Svejnoha
  * @version 1.0
  */
 public abstract class Enemy extends MovableObject {
@@ -117,7 +117,7 @@ public abstract class Enemy extends MovableObject {
      *            position X.
      * @param y
      *            position Y.
-     *            
+     *
      * @return true if there is an obstacle; otherwise false.
      */
     protected boolean isObstacle(int x, int y) {

@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 /**
  * Super class for all Door classes.
  *
- * @author Tomas Svejnoha.
+ * @author Tomas Svejnoha
  * @version 1.0
  */
 public abstract class Door extends StepableCell {
@@ -57,7 +57,7 @@ public abstract class Door extends StepableCell {
      *
      * @param item
      *            The opening {@link CollectableItem}.
-     * 
+     *
      * @return true if the door was opened; otherwise false.
      */
     public abstract boolean open(CollectableItem item);

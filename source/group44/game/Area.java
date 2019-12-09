@@ -20,13 +20,13 @@ public class Area {
      * Creates a new {@link Area}.
      *
      * @param x1
-     *            - The X of the first coordinate
+     *            The X of the first coordinate
      * @param y1
-     *            - The Y of the first coordinate
+     *            The Y of the first coordinate
      * @param x2
-     *            - The X of the second coordinate
+     *            The X of the second coordinate
      * @param y2
-     *            - The Y of the second coordinate
+     *            The Y of the second coordinate
      */
     public Area(int x1, int y1, int x2, int y2) {
         this.x1 = x1;

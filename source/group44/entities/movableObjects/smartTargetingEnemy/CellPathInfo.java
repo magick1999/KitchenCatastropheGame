@@ -7,7 +7,7 @@ import group44.entities.movableObjects.SmartTargetingEnemy;
  * Holds the information needed about Cells to compute path for the
  * {@link SmartTargetingEnemy}.
  *
- * @author Tomas Svejnoha.
+ * @author Tomas Svejnoha
  * @version 1.0
  */
 public class CellPathInfo {

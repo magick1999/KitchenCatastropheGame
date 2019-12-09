@@ -6,7 +6,7 @@ import group44.game.Level;
 /**
  * Represents a coloured {@link Key} in the game.
  *
- * @author Tomas Svejnoha, Rowan Aldean, Amy Mason.
+ * @author Tomas Svejnoha, Rowan Aldean, Amy Mason
  * @version 1.0
  */
 public class Key extends CollectableItem {

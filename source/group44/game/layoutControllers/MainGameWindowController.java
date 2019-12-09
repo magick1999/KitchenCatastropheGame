@@ -8,6 +8,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * This class does the FXML injection of the widgets from the main game window
+ * layout in the code. It also contains the appropriate getters and setters for
+ * the widgets.
+ *
+ * @author Bogdan
+ */
 public class MainGameWindowController {
     @FXML
     private Button homeButton;

@@ -109,7 +109,7 @@ public class ProfileCreatorScene {
 
     /**
      * This handles all the wrong username inputs.
-     * 
+     *
      * @param type
      *            is a variable that showcases the type of the error, true for
      *            username taken, false for blank name.
@@ -154,7 +154,7 @@ public class ProfileCreatorScene {
 
     /**
      * This method takes the player to the main menu.
-     * 
+     *
      * @param e
      *            This is the mouse event that triggers this action.
      */

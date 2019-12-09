@@ -34,7 +34,7 @@ import group44.models.LevelInfo;
 /**
  * Loads and parses the level file into {@link Level}.
  *
- * @author Tomas Svejnoha, Amy Mason.
+ * @author Tomas Svejnoha, Amy Mason
  * @version 1.0
  */
 public class LevelLoader {

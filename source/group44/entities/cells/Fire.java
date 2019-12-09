@@ -7,7 +7,7 @@ import group44.game.Level;
 /**
  * Represents a fire in a Game.
  *
- * @author Tomas Svejnoha.
+ * @author Tomas Svejnoha
  * @version 1.0
  */
 public class Fire extends StepableCell {

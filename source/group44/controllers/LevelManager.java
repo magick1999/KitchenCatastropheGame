@@ -17,7 +17,7 @@ import group44.models.LevelInfo;
 /**
  * Manages and loads Levels.
  *
- * @author Tomas Svejnoha.
+ * @author Tomas Svejnoha
  * @version 1.0
  */
 public class LevelManager {
@@ -99,7 +99,7 @@ public class LevelManager {
      *
      * @param file
      *            - {@link File} containing the {@link Level} definition.
-     * 
+     *
      * @return the information about the {@link Level}; null if not found.
      */
     private static LevelInfo getLevelInfo(File file) {
@@ -185,7 +185,7 @@ public class LevelManager {
      *
      * @param id
      *            id of a level to load.
-     * 
+     *
      * @return the {@link LevelInfo} for the level with id.
      */
     private static LevelInfo getLevelInfo(int id) {
@@ -204,7 +204,7 @@ public class LevelManager {
      *            level to save.
      * @param profileId
      *            profile id of the user.
-     * 
+     *
      * @throws IOException
      *             when saving failed.
      */

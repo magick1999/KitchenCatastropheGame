@@ -8,7 +8,7 @@ import java.net.URL;
 /**
  * The class for getting the Message of the day.
  *
- * @author Jordan Price, Tomas Svejnoha.
+ * @author Jordan Price, Tomas Svejnoha
  * @version 1.0
  *
  */

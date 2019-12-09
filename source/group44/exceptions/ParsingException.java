@@ -3,7 +3,7 @@ package group44.exceptions;
 /**
  * Exception raised when trying to parse invalid data type.
  *
- * @author Tomas Svejnoha.
+ * @author Tomas Svejnoha
  * @version 1.0
  */
 public class ParsingException extends Exception {

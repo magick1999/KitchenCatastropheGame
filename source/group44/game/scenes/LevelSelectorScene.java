@@ -18,7 +18,7 @@ import javafx.stage.Stage;
  * This class displays the level selection screen and allows the player to
  * select a certain level.
  *
- * @author Mihai, Tomas Svejnoha.
+ * @author Mihai, Tomas Svejnoha
  * @version 1.0
  */
 public class LevelSelectorScene {

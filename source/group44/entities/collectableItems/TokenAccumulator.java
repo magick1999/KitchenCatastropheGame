@@ -6,7 +6,7 @@ import group44.Constants;
 import group44.exceptions.NotEnoughTokensException;
 
 /**
- * Represents an accumulator for {@link Token}s.
+ * Represents an accumulator for {@link Token}s
  *
  * @author Tomas Svejnoha.
  * @version 1.0

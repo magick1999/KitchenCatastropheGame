@@ -10,7 +10,7 @@ import javafx.scene.canvas.GraphicsContext;
 /**
  * Represents a ground in the game.
  *
- * @author Tomas Svejnoha.
+ * @author Tomas Svejnoha
  * @version 1.0
  */
 public class Ground extends StepableCell {

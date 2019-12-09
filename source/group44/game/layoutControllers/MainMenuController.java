@@ -8,9 +8,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
+/**
+ * This class does the FXML injection of the widgets from the main menu layout
+ * in the code. It also contains the appropriate getters and setters for the
+ * widgets.
+ *
+ * @author Bogdan
+ */
 public class MainMenuController {
-    private static final String PROFILES = "source/group44/data/profiles.txt";
-
     @FXML
     private BorderPane root;
     @FXML

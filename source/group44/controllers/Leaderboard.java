@@ -16,7 +16,7 @@ import javafx.collections.ObservableList;
 /**
  * Represents a leaderboard of the game.
  *
- * @author Tomas Svejnoha.
+ * @author Tomas Svejnoha
  * @version 1.0
  */
 public class Leaderboard {
@@ -92,7 +92,7 @@ public class Leaderboard {
      *
      * @param levelId
      *            id of the {@link Level} for which we want the records.
-     * 
+     *
      * @return an observable list of up to 3 top records.
      */
     public static ObservableList<Record> getTopThreeRecords(int levelId) {
@@ -143,7 +143,7 @@ public class Leaderboard {
      *            profile id of the player.
      * @param levelId
      *            id of the level.
-     * 
+     *
      * @return record.
      */
     public static Record getRecord(int profileId, int levelId) {
@@ -161,7 +161,7 @@ public class Leaderboard {
      *
      * @param profileId
      *            profile Id of the user.
-     * 
+     *
      * @return the id of the highest level; 0 if user did not finish any level.
      */
     public static int getAchievedLevel(int profileId) {
@@ -229,7 +229,7 @@ public class Leaderboard {
      *
      * @param fileScanner
      *            scanner of the file where the records are stored
-     * 
+     *
      * @return a list of loaded {@link Record}s.
      */
     private static ArrayList<Record> load(Scanner fileScanner) {
@@ -251,7 +251,7 @@ public class Leaderboard {
      *
      * @param scanner
      *            scanner with the serialised record.
-     * 
+     *
      * @return created {@link Record}; null if associated {@link Profile} was
      *         not found.
      */

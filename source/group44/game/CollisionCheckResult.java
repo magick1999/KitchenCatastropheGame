@@ -18,7 +18,7 @@ public class CollisionCheckResult {
      * Creates a new instance of {@link CollisionCheckResult}.
      *
      * @param type
-     *            - {@link CollisionCheckResultType} of the collision.
+     *            {@link CollisionCheckResultType} of the collision.
      */
     public CollisionCheckResult(CollisionCheckResultType type) {
         this.type = type;
@@ -28,9 +28,9 @@ public class CollisionCheckResult {
      * Creates a new instance of {@link CollisionCheckResult}.
      *
      * @param type
-     *            - {@link CollisionCheckResultType} of the collision.
+     *            {@link CollisionCheckResultType} of the collision.
      * @param collidingObject
-     *            - the colliding {@link LevelObject}.
+     *            the colliding {@link LevelObject}.
      */
     public CollisionCheckResult(CollisionCheckResultType type,
             LevelObject collidingObject) {

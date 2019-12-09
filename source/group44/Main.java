@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 /**
  * This class just redirects the player to the main menu stage.
- * 
+ *
  * @author Mihai
  *
  */
@@ -21,7 +21,7 @@ public class Main extends Application {
 
     /**
      * This method starts the program.
-     * 
+     *
      * @param args
      *            These are the launch arguments of the program.
      */

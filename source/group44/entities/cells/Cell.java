@@ -6,7 +6,7 @@ import group44.game.Level;
 /**
  * Abstract class from which all cells inherit.
  *
- * @author Tomas Svejnoha, Rowan Aldean.
+ * @author Tomas Svejnoha, Rowan Aldean
  * @version 1.0
  */
 public abstract class Cell extends LevelObject {

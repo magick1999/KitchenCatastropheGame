@@ -6,7 +6,7 @@ import group44.game.Level;
 /**
  * Represents a wall in the game. Player can't step on the wall.
  *
- * @author Tomas Svejnoha.
+ * @author Tomas Svejnoha
  * @version 1.0
  */
 public class Wall extends Cell {

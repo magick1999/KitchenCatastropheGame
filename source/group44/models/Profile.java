@@ -18,9 +18,9 @@ public class Profile {
      * Creates a new instance of {@link Profile}.
      *
      * @param id
-     *            - Id of the new profile
+     *            Id of the new profile.
      * @param username
-     *            - the username
+     *            the username.
      */
     public Profile(int id, String username) {
         this.id = id;
@@ -30,7 +30,7 @@ public class Profile {
     /**
      * Returns the {@link Profile} id.
      *
-     * @return the profile id
+     * @return the profile id.
      */
     public int getId() {
         return this.id;
@@ -39,7 +39,7 @@ public class Profile {
     /**
      * Returns the username of the {@link Profile}.
      *
-     * @return username of the profile
+     * @return username of the profile.
      */
     public String getUsername() {
         return this.username;
@@ -48,7 +48,7 @@ public class Profile {
     /**
      * Returns the Id of the level the user achieved.
      *
-     * @return the level id
+     * @return the level id.
      */
     public int getAchievedLevel() {
         return Leaderboard.getAchievedLevel(this.getId());
@@ -57,7 +57,7 @@ public class Profile {
     /**
      * Returns a string representation of the profile.
      *
-     * @return {@link Profile} converted to {@link String}
+     * @return {@link Profile} converted to {@link String}.
      */
     @Override
     public String toString() {

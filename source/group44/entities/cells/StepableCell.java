@@ -11,7 +11,7 @@ import javafx.scene.canvas.GraphicsContext;
 /**
  * An abstract class for cells on which can {@link MovableObject} step.
  *
- * @author Tomas Svejnoha.
+ * @author Tomas Svejnoha
  * @version 1.0
  */
 public abstract class StepableCell extends Cell {
@@ -138,11 +138,11 @@ public abstract class StepableCell extends Cell {
      * @param gc
      *            {@link GraphicsContext} used to draw the object.
      * @param x
-     *            The X coordinate in the {@link GraphicsContext} where to
-     *            draw the {@link LevelObject}.
+     *            The X coordinate in the {@link GraphicsContext} where to draw
+     *            the {@link LevelObject}.
      * @param y
-     *            The Y coordinate in the {@link GraphicsContext} where to
-     *            draw the {@link LevelObject}.
+     *            The Y coordinate in the {@link GraphicsContext} where to draw
+     *            the {@link LevelObject}.
      * @param width
      *            - The width of the {@link LevelObject} in the
      *            {@link GraphicsContext}.

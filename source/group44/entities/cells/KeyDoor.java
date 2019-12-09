@@ -13,7 +13,7 @@ import group44.game.Level;
  * Represents a door for which the player needs a certain coloured key to be
  * able to open the door.
  *
- * @author Amy Mason, Tomas Svejnoha.
+ * @author Amy Mason, Tomas Svejnoha
  * @version 1.0
  */
 public class KeyDoor extends Door {
@@ -62,7 +62,7 @@ public class KeyDoor extends Door {
      *
      * @param item
      *            the Key to use.
-     * 
+     *
      * @return true if the door was opened; otherwise false.
      */
     @Override

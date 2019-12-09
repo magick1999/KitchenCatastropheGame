@@ -9,7 +9,7 @@ import group44.game.Level;
 /**
  * Represents a wall following enemy in the game.
  *
- * @author Tomas Svejnoha.
+ * @author Tomas Svejnoha
  * @version 1.0
  */
 public class WallFollowingEnemy extends Enemy {

@@ -7,6 +7,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * This class does the FXML injection of the widgets from the profile creator
+ * layout in the code. It also contains the appropriate getters and setters for
+ * the widgets.
+ *
+ * @author Bogdan
+ */
 public class ProfileCreatorController {
     @FXML
     private BorderPane root;

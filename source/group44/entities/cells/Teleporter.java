@@ -9,7 +9,7 @@ import group44.game.Level;
  * Represents a teleporter in the game. The {@link Teleporter} will teleport the
  * player to some {@link StepableCell} around the linked {@link Teleporter}.
  *
- * @author Tomas Svejnoha.
+ * @author Tomas Svejnoha
  * @version 1.0
  */
 public class Teleporter extends StepableCell {

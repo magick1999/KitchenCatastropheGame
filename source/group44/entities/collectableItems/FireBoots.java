@@ -6,7 +6,7 @@ import group44.game.Level;
 /**
  * Represents {@link FireBoots} in the game.
  *
- * @author Tomas Svejnoha, Amy Mason.
+ * @author Tomas Svejnoha, Amy Mason
  * @version 1.0
  */
 public class FireBoots extends CollectableItem {

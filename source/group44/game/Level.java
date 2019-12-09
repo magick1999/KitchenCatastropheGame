@@ -46,15 +46,15 @@ public class Level {
      * Creates a new instance of {@link Level}.
      *
      * @param id
-     *            - the Id of the level
+     *            the Id of the level
      * @param gridWidth
-     *            - width of the 2D array
+     *            width of the 2D array
      * @param gridHeight
-     *            - height of the 2D array
+     *            height of the 2D array
      * @param displaySize
-     *            - size of the grid displayed on screen
+     *            size of the grid displayed on screen
      * @param time
-     *            - time taken to play the level
+     *            time taken to play the level
      * @throws IllegalArgumentException
      *             If the display size is less than 3, is not odd, or exceeds a
      *             size of a grid.
@@ -87,7 +87,7 @@ public class Level {
      * Sets the time taken by the player.
      *
      * @param time
-     *            - the time taken.
+     *            the time taken.
      */
     public void setTime(long time) {
         this.time = time;
@@ -156,11 +156,11 @@ public class Level {
      * Adds {@link Cell} in the grid to the specific location.
      *
      * @param x
-     *            - position X of the {@link Cell}
+     *            position X of the {@link Cell}
      * @param y
-     *            - position Y of the {@link Cell}
+     *            position Y of the {@link Cell}
      * @param cell
-     *            - the {@link Cell} to place in the grid
+     *            the {@link Cell} to place in the grid
      * @throws CollisionException
      *             when trying to rewrite existing cell in the grid
      */
@@ -215,7 +215,7 @@ public class Level {
      * Draws the cell in the active game area.
      *
      * @param gc
-     *            - {@link GraphicsContext} to which the game is drawn
+     *            {@link GraphicsContext} to which the game is drawn
      */
     public void draw(GraphicsContext gc) {
         double cellWidth = gc.getCanvas().getWidth() / this.displaySize;
@@ -245,7 +245,7 @@ public class Level {
      * enemies.
      *
      * @param event
-     *            - the {@link KeyEvent}
+     *            the {@link KeyEvent}
      */
     public void keyDown(KeyEvent event) {
         if (this.isFinished == false) {
@@ -311,7 +311,7 @@ public class Level {
      * Finished the current level.
      *
      * @param status
-     *            - level finish status.
+     *            level finish status.
      */
     public void finish(LevelFinishStatus status) {
         System.out.println("Level.finish()");

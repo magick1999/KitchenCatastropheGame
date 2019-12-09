@@ -9,7 +9,7 @@ import group44.game.Level;
 /**
  * Represents a straight walking enemy in the game.
  *
- * @author Tomas Svejnoha.
+ * @author Tomas Svejnoha
  * @version 1.0
  */
 public class StraightWalkingEnemy extends Enemy {
@@ -73,6 +73,7 @@ public class StraightWalkingEnemy extends Enemy {
      *
      * @return the string representation of a Straight Walking Enemy.
      */
+    @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append(Constants.TYPE_STRAIGHT_WALKING_ENEMY);

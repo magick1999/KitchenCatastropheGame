@@ -7,6 +7,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
+/**
+ * This class does the FXML injection of the widgets from the level selector
+ * layout in the code. It also contains the appropriate getters and setters for
+ * the widgets.
+ *
+ * @author Bogdan
+ */
 public class LevelSelectorController {
     @FXML
     private ImageView logo;

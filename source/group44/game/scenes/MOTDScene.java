@@ -16,8 +16,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
- * This class displays the MOTD..
- * 
+ * This class displays the MOTD.
+ *
  * @author Mihai, Jordan
  *
  */
@@ -31,7 +31,7 @@ public class MOTDScene {
      * The constructor for the MOTDScene class. It defines the scene size, it
      * instantiates the controller, it displays the scene and it adds the events
      * listeners.
-     * 
+     *
      * @param primaryStage
      */
     public MOTDScene(Stage primaryStage) {
@@ -58,7 +58,7 @@ public class MOTDScene {
 
     /**
      * Sets the globally available controller.
-     * 
+     *
      * @param motdController
      *            the controller for this class.
      */
@@ -75,7 +75,7 @@ public class MOTDScene {
 
     /**
      * This returns the player to the MainMenuScene.
-     * 
+     *
      * @param event
      */
     private void backToTheMenu(MouseEvent event) {

@@ -18,8 +18,8 @@ import javafx.stage.Stage;
  * This class displays the main menu and handles all the redirecting of the
  * player to the desired scenes. It also allows the player to select the desired
  * profile.
- * 
- * @author Mihai.
+ *
+ * @author Mihai
  * @version 1.0
  */
 public class MainMenuScene {
@@ -33,7 +33,7 @@ public class MainMenuScene {
      * This is the constructor for this class.It instantiates the scene, the
      * respective controller and adds listeners to the buttons. It also displays
      * the scene.
-     * 
+     *
      * @param primaryStage
      *            is the stage where the scene will be displayed.
      */
@@ -65,7 +65,7 @@ public class MainMenuScene {
     /**
      * This method sets the globally available controller to the current
      * controller.
-     * 
+     *
      * @param mainMenuController
      *            The current controller.
      */
@@ -75,7 +75,7 @@ public class MainMenuScene {
 
     /**
      * This method instantiates the LevelSelectorScene class.
-     * 
+     *
      * @param e
      *            The mouse event created by the press on the play button.
      */
@@ -85,7 +85,7 @@ public class MainMenuScene {
 
     /**
      * This method instantiates the ProfileCreatorScene class.
-     * 
+     *
      * @param e
      *            The mouse event created by the press on the new profile
      *            button.
@@ -96,7 +96,7 @@ public class MainMenuScene {
 
     /**
      * This method instantiates the LeaderboardScene class.
-     * 
+     *
      * @param e
      *            The mouse event created by the press on the leaderboard
      *            button.
