@@ -33,6 +33,7 @@ public class MOTDScene {
      * listeners.
      *
      * @param primaryStage
+     *            the stage to use.
      */
     public MOTDScene(Stage primaryStage) {
         FXMLLoader fxmlLoader = new FXMLLoader(
@@ -77,6 +78,7 @@ public class MOTDScene {
      * This returns the player to the MainMenuScene.
      *
      * @param event
+     *            the mouse event.
      */
     private void backToTheMenu(MouseEvent event) {
         new MainMenuScene(primaryStage);
