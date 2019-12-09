@@ -9,7 +9,7 @@ import group44.game.Position;
  * Represents an {@link Enemy} which is trying to minimise the distance to
  * {@link Player}.
  *
- * @author Tomas Svejnoha
+ * @author Tomas Svejnoha.
  * @version 1.0
  */
 public class DumbTargetingEnemy extends Enemy {
@@ -18,17 +18,16 @@ public class DumbTargetingEnemy extends Enemy {
      * Creates a new instance of {@link DumbTargetingEnemy}.
      *
      * @param level
-     *            - the {@link Level} where the {@link DumbTargetingEnemy} is
+     *            the {@link Level} where the {@link DumbTargetingEnemy} is
      *            located.
      * @param name
-     *            - name of the {@link DumbTargetingEnemy}.
+     *            name of the {@link DumbTargetingEnemy}.
      * @param positionX
-     *            - position X in the game.
+     *            position X in the game.
      * @param positionY
-     *            - position Y in the game.
+     *            position Y in the game.
      * @param imagePath
-     *            - path to the Image representing the
-     *            {@link DumbTargetingEnemy}.
+     *            path to the Image representing the {@link DumbTargetingEnemy}.
      */
     public DumbTargetingEnemy(Level level, String name, int positionX,
             int positionY, String imagePath) {
@@ -109,7 +108,7 @@ public class DumbTargetingEnemy extends Enemy {
      * Interacts with the colliding {@link MovableObject}.
      *
      * @param result
-     *            - the {@link CollisionCheckResult} with the collision status.
+     *            the {@link CollisionCheckResult} with the collision status.
      */
     @Override
     protected void onCollided(CollisionCheckResult result) {
@@ -121,7 +120,7 @@ public class DumbTargetingEnemy extends Enemy {
     /**
      * Returns a string representation of a Dumb Targeting Enemy.
      *
-     * @return - the string repsesentation of a Dumb Targeting Enemy.
+     * @return the string repsesentation of a Dumb Targeting Enemy.
      */
     public String toString() {
         StringBuilder builder = new StringBuilder();

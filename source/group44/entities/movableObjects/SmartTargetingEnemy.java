@@ -11,7 +11,7 @@ import group44.game.Level;
 /**
  * Represents a smart targeting enemy in the game.
  *
- * @author Tomas Svejnoha
+ * @author Tomas Svejnoha.
  * @version 1.0
  */
 public class SmartTargetingEnemy extends Enemy {
@@ -24,15 +24,15 @@ public class SmartTargetingEnemy extends Enemy {
      * Creates a new instance of {@link SmartTargetingEnemy}.
      *
      * @param level
-     *            - level where the {@link SmartTargetingEnemy} is located.
+     *            level where the {@link SmartTargetingEnemy} is located.
      * @param title
-     *            - title of the enemy.
+     *            title of the enemy.
      * @param positionX
-     *            - position X in the game.
+     *            position X in the game.
      * @param positionY
-     *            - position Y in the game.
+     *            position Y in the game.
      * @param imagePath
-     *            - path to the image representing the enemy in the game.
+     *            path to the image representing the enemy in the game.
      */
     public SmartTargetingEnemy(Level level, String title, int positionX,
             int positionY, String imagePath) {
@@ -121,9 +121,9 @@ public class SmartTargetingEnemy extends Enemy {
      * Finds the shortest path to the player in the game.
      *
      * @param targetX
-     *            - position X of the player.
+     *            position X of the player.
      * @param targetY
-     *            - position Y of the player.
+     *            position Y of the player.
      * @return true there is a path; otherwise false.
      */
     private boolean calculateCosts(int targetX, int targetY) {
@@ -201,9 +201,10 @@ public class SmartTargetingEnemy extends Enemy {
      * Returns the next cell to step by the the {@link SmartTargetingEnemy}.
      *
      * @param targetX
-     *            - position X of the player.
+     *            position X of the player.
      * @param targetY
-     *            - position Y of the player.
+     *            position Y of the player.
+     * 
      * @return the next cell to step.
      */
     private CellPathInfo nextCellToStep(int targetX, int targetY) {
@@ -247,7 +248,7 @@ public class SmartTargetingEnemy extends Enemy {
      * Method executed when enemy collides with another LevelObject.
      *
      * @param result
-     *            - information about the collision.
+     *            information about the collision.
      */
     @Override
     protected void onCollided(CollisionCheckResult result) {

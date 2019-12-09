@@ -19,8 +19,8 @@ import javafx.stage.Stage;
  * player to the desired scenes. It also allows the player to select the desired
  * profile.
  * 
- * @author Mihai
- *
+ * @author Mihai.
+ * @version 1.0
  */
 public class MainMenuScene {
     // The controller associated with the specific FXML file.

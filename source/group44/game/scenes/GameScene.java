@@ -32,8 +32,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
- * This class displays the scene where the game happens.
- * It sets up the timer, calls the configuration of the user input, sets up the menu and draws the game
+ *
  * @author Mihai, Tomas Svejnoha
  * @version 1.0
  */
@@ -61,7 +60,7 @@ public class GameScene {
      * This is the main method that loads everything required to draw the scene.
      *
      * @param primaryStage
-     *            represents the window where the stages are displayed
+     *            represents the window where the stages are displayed.
      */
     public GameScene(Stage primaryStage, Level currentLevel,
             Profile currentProfile) {

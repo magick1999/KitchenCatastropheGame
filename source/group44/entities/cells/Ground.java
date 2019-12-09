@@ -10,7 +10,7 @@ import javafx.scene.canvas.GraphicsContext;
 /**
  * Represents a ground in the game.
  *
- * @author Tomas Svejnoha
+ * @author Tomas Svejnoha.
  * @version 1.0
  */
 public class Ground extends StepableCell {
@@ -22,13 +22,13 @@ public class Ground extends StepableCell {
      * {@link Level}.
      *
      * @param level
-     *            - The {@link Level} where the {@link Ground} is located.
+     *            The {@link Level} where the {@link Ground} is located.
      * @param positionX
-     *            - Position X of the {@link Ground} in the {@link Level}.
+     *            Position X of the {@link Ground} in the {@link Level}.
      * @param positionY
-     *            - Position X of the {@link Ground} in the {@link Level}.
+     *            Position X of the {@link Ground} in the {@link Level}.
      * @param imagePath
-     *            - Path to the Image representing {@link Ground} in the game.
+     *            Path to the Image representing {@link Ground} in the game.
      */
     public Ground(Level level, int positionX, int positionY, String imagePath) {
         super(level, Constants.TITLE_GROUND, positionX, positionY, imagePath);
@@ -39,16 +39,15 @@ public class Ground extends StepableCell {
      * {@link Level}.
      *
      * @param level
-     *            - The {@link Level} where the {@link Goal} is located.
+     *            The {@link Level} where the {@link Goal} is located.
      * @param positionX
-     *            - Position X of the {@link Ground} in the {@link Level}.
+     *            Position X of the {@link Ground} in the {@link Level}.
      * @param positionY
-     *            - Position Y of the {@link Ground} in the {@link Level}.
+     *            Position Y of the {@link Ground} in the {@link Level}.
      * @param imagePath
-     *            - Path to the Image representing the {@link Ground} in the
-     *            game.
+     *            Path to the Image representing the {@link Ground} in the game.
      * @param collectableItem
-     *            - {@link CollectableItem} placed on the {@link Ground}.
+     *            {@link CollectableItem} placed on the {@link Ground}.
      */
     public Ground(Level level, int positionX, int positionY, String imagePath,
             CollectableItem collectableItem) {
@@ -60,15 +59,15 @@ public class Ground extends StepableCell {
      * Creates a new {@link Ground}.
      *
      * @param level
-     *            - The {@link Level} where the object is located.
+     *            The {@link Level} where the object is located.
      * @param positionX
-     *            - Position X in the game.
+     *            Position X in the game.
      * @param positionY
-     *            - Position Y in the game.
+     *            Position Y in the game.
      * @param imagePath
-     *            - Image path of the instance.
+     *            Image path of the instance.
      * @param steppedItem
-     *            - The {@link MovableObject} on the cell.
+     *            The {@link MovableObject} on the cell.
      */
     public Ground(Level level, int positionX, int positionY, String imagePath,
             MovableObject steppedItem) {
@@ -102,18 +101,18 @@ public class Ground extends StepableCell {
      * {@link CollectableItem} on it in {@link GraphicsContext}.
      *
      * @param gc
-     *            - {@link GraphicsContext} used to draw the object.
+     *            {@link GraphicsContext} used to draw the object.
      * @param x
-     *            - The X coordinate in the {@link GraphicsContext} where to
-     *            draw the {@link LevelObject}.
+     *            The X coordinate in the {@link GraphicsContext} where to draw
+     *            the {@link LevelObject}.
      * @param y
-     *            - The Y coordinate in the {@link GraphicsContext} where to
-     *            draw the {@link LevelObject}.
+     *            The Y coordinate in the {@link GraphicsContext} where to draw
+     *            the {@link LevelObject}.
      * @param width
-     *            - The width of the {@link LevelObject} in the
+     *            The width of the {@link LevelObject} in the
      *            {@link GraphicsContext}.
      * @param height
-     *            - The height of the {@link LevelObject} in the
+     *            The height of the {@link LevelObject} in the
      *            {@link GraphicsContext}.
      */
     @Override
@@ -130,7 +129,7 @@ public class Ground extends StepableCell {
      * Interacts with {@link MovableObject} that stepped on the {@link Ground}.
      *
      * @param object
-     *            - The {@link MovableObject} that stepped on {@link Ground}.
+     *            The {@link MovableObject} that stepped on {@link Ground}.
      */
     @Override
     protected void onStepped(MovableObject object) {

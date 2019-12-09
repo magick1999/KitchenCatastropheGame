@@ -9,7 +9,7 @@ import group44.game.Level;
 /**
  * Represents a wall following enemy in the game.
  *
- * @author Tomas Svejnoha
+ * @author Tomas Svejnoha.
  * @version 1.0
  */
 public class WallFollowingEnemy extends Enemy {
@@ -18,17 +18,17 @@ public class WallFollowingEnemy extends Enemy {
      * Creates a new instance of {@link WallFollowingEnemy}.
      *
      * @param level
-     *            - The {@link Level} where the {@link WallFollowingEnemy} is
+     *            The {@link Level} where the {@link WallFollowingEnemy} is
      *            located.
      * @param name
-     *            - Name of the {@link WallFollowingEnemy}.
+     *            Name of the {@link WallFollowingEnemy}.
      * @param positionX
-     *            - Position X of the {@link WallFollowingEnemy}.
+     *            Position X of the {@link WallFollowingEnemy}.
      * @param positionY
-     *            - Position Y of the {@link WallFollowingEnemy}.
+     *            Position Y of the {@link WallFollowingEnemy}.
      * @param imagePath
-     *            - Path to the Image representing the
-     *            {@link WallFollowingEnemy} on the screen.
+     *            Path to the Image representing the {@link WallFollowingEnemy}
+     *            on the screen.
      */
     public WallFollowingEnemy(Level level, String name, int positionX,
             int positionY, String imagePath) {
@@ -40,7 +40,7 @@ public class WallFollowingEnemy extends Enemy {
      * {@link MovableObject}.
      *
      * @param result
-     *            - the {@link CollisionCheckResult} with the collision status.
+     *            the {@link CollisionCheckResult} with the collision status.
      */
     @Override
     protected void onCollided(CollisionCheckResult result) {

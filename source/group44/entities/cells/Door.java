@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 /**
  * Super class for all Door classes.
  *
- * @author Tomas Svejnoha
+ * @author Tomas Svejnoha.
  * @version 1.0
  */
 public abstract class Door extends StepableCell {
@@ -23,17 +23,17 @@ public abstract class Door extends StepableCell {
      * Creates a new {@link Door}.
      *
      * @param level
-     *            - The {@link Level} where the {@link KeyDoor} is located.
+     *            The {@link Level} where the {@link KeyDoor} is located.
      * @param title
-     *            - Title of the {@link Door}.
+     *            Title of the {@link Door}.
      * @param positionX
-     *            - Position X in the game.
+     *            Position X in the game.
      * @param positionY
-     *            - Position Y in the game.
+     *            Position Y in the game.
      * @param lockedImagePath
-     *            - Path to the Image representing locked door in the game.
+     *            Path to the Image representing locked door in the game.
      * @param unlockedImagePath
-     *            - Path to the Image representing unlocked door in the game.
+     *            Path to the Image representing unlocked door in the game.
      */
     public Door(Level level, String title, int positionX, int positionY,
             String lockedImagePath, String unlockedImagePath) {
@@ -56,7 +56,8 @@ public abstract class Door extends StepableCell {
      * Opens the door.
      *
      * @param item
-     *            - The opening {@link CollectableItem}.
+     *            The opening {@link CollectableItem}.
+     * 
      * @return true if the door was opened; otherwise false.
      */
     public abstract boolean open(CollectableItem item);
@@ -82,7 +83,7 @@ public abstract class Door extends StepableCell {
      * Interacts with {@link MovableObject} that stepped on the {@link Door}.
      *
      * @param object
-     *            - The {@link MovableObject} that stepped on cell.
+     *            The {@link MovableObject} that stepped on cell.
      */
     @Override
     protected void onStepped(MovableObject object) {

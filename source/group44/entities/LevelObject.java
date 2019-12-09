@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 /**
  * Abstract class from which all other classes in the game inherit.
  *
- * @author Tomas Svejnoha
+ * @author Tomas Svejnoha.
  * @version 1.0
  */
 public abstract class LevelObject {
@@ -28,13 +28,13 @@ public abstract class LevelObject {
      * Creates a new {@link LevelObject}.
      *
      * @param level
-     *            - The {@link Level} in which the {@link LevelObject} exists.
+     *            The {@link Level} in which the {@link LevelObject} exists.
      * @param title
-     *            - Title of the object.
+     *            Title of the object.
      * @param positionX
-     *            - Position X in the game.
+     *            Position X in the game.
      * @param positionY
-     *            - Position Y in the game.
+     *            Position Y in the game.
      */
     public LevelObject(Level level, String title, int positionX,
             int positionY) {
@@ -47,15 +47,15 @@ public abstract class LevelObject {
      * Creates a new {@link LevelObject}.
      *
      * @param level
-     *            - The {@link Level} in which the {@link LevelObject} exists.
+     *            The {@link Level} in which the {@link LevelObject} exists.
      * @param title
-     *            - Title of the object.
+     *            Title of the object.
      * @param positionX
-     *            - Position X in the game.
+     *            Position X in the game.
      * @param positionY
-     *            - Position Y in the game.
+     *            Position Y in the game.
      * @param imagePath
-     *            - Image path of the instance.
+     *            Image path of the instance.
      */
     public LevelObject(Level level, String title, int positionX, int positionY,
             String imagePath) {
@@ -77,7 +77,7 @@ public abstract class LevelObject {
      * Sets the title of an object.
      *
      * @param newTitle
-     *            - the title to set.
+     *            the title to set.
      */
     public void setTitle(String newTitle) {
         this.title = newTitle;
@@ -105,7 +105,7 @@ public abstract class LevelObject {
      * Sets an image of the object.
      *
      * @param image
-     *            - the image.
+     *            the image.
      */
     public void setImage(Image image) {
         this.image = image;
@@ -142,9 +142,9 @@ public abstract class LevelObject {
      * Sets object position to x and y.
      *
      * @param x
-     *            - X coordinate.
+     *            X coordinate.
      * @param y
-     *            - Y coordinate.
+     *            Y coordinate.
      */
     public void setPosition(int x, int y) {
         this.positionX = x;
@@ -156,18 +156,18 @@ public abstract class LevelObject {
      * associated.
      *
      * @param gc
-     *            - {@link GraphicsContext} used to draw the object.
+     *            {@link GraphicsContext} used to draw the object.
      * @param x
-     *            - The X coordinate in the {@link GraphicsContext} where to
-     *            draw the {@link LevelObject}.
+     *            The X coordinate in the {@link GraphicsContext} where to draw
+     *            the {@link LevelObject}.
      * @param y
-     *            - The Y coordinate in the {@link GraphicsContext} where to
-     *            draw the {@link LevelObject}.
+     *            The Y coordinate in the {@link GraphicsContext} where to draw
+     *            the {@link LevelObject}.
      * @param width
-     *            - The width of the {@link LevelObject} in the
+     *            The width of the {@link LevelObject} in the
      *            {@link GraphicsContext}.
      * @param height
-     *            - The height of the {@link LevelObject} in the
+     *            The height of the {@link LevelObject} in the
      *            {@link GraphicsContext}.
      */
     public void draw(GraphicsContext gc, double x, double y, double width,

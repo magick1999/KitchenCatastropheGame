@@ -24,20 +24,19 @@ public abstract class MovableObject extends LevelObject {
      * Creates a new {@link MovableObject}.
      *
      * @param level
-     *            - The {@link Level} where the {@link MovableObject} is
-     *            located.
+     *            The {@link Level} where the {@link MovableObject} is located.
      * @param title
-     *            - Title of the object.
+     *            Title of the object.
      * @param positionX
-     *            - Position X in the game.
+     *            Position X in the game.
      * @param positionY
-     *            - Position Y in the game.
+     *            Position Y in the game.
      * @param velocityX
-     *            - Velocity X of the instance.
+     *            Velocity X of the instance.
      * @param velocityY
-     *            - Velocity Y of the instance.
+     *            Velocity Y of the instance.
      * @param imagePath
-     *            - Path to the Image representing {@link MovableObject} in the
+     *            Path to the Image representing {@link MovableObject} in the
      *            game.
      */
     public MovableObject(Level level, String title, int positionX,
@@ -61,7 +60,7 @@ public abstract class MovableObject extends LevelObject {
      * Sets the velocity on the X axis.
      *
      * @param vx
-     *            - velocity X.
+     *            velocity X.
      */
     public void setVelocityX(int vx) {
         this.velocityX = vx;
@@ -80,7 +79,7 @@ public abstract class MovableObject extends LevelObject {
      * Sets the velocity on the Y axis.
      *
      * @param vy
-     *            - velocity Y.
+     *            velocity Y.
      */
     public void setVelocityY(int vy) {
         this.velocityY = vy;
@@ -90,8 +89,7 @@ public abstract class MovableObject extends LevelObject {
      * Kills the {@link MovableObject} and removes it from the grid.
      *
      * @param object
-     *            - {@link LevelObject} trying to kill the
-     *            {@link MovableObject}.
+     *            {@link LevelObject} trying to kill the {@link MovableObject}.
      */
     public void die(LevelObject object) {
         // Remove MovableObject from the grid
@@ -119,9 +117,10 @@ public abstract class MovableObject extends LevelObject {
      * located.
      *
      * @param object
-     *            - the {@link MovableObject}
+     *            the {@link MovableObject}.
+     * 
      * @return if found, the {@link StepableCell} where the object is located,
-     *         otherwise null
+     *         otherwise null.
      */
     protected StepableCell getStepableCellAtMovableObjectPosition(
             MovableObject object) {
@@ -139,11 +138,11 @@ public abstract class MovableObject extends LevelObject {
      * on.
      *
      * @param object
-     *            - The instance of {@link MovableObject}.
+     *            The instance of {@link MovableObject}.
      * @param velocityX
-     *            - velocity X of the object.
+     *            velocity X of the object.
      * @param velocityY
-     *            - velocity Y of the object.
+     *            velocity Y of the object.
      * @return the next {@link StepableCell} the {@link MovableObject} will step
      *         on; null if {@link Wall} or out of range.
      */
@@ -174,7 +173,7 @@ public abstract class MovableObject extends LevelObject {
      * {@link LevelObject}.
      *
      * @param result
-     *            - the {@link CollisionCheckResult} with the collision status.
+     *            the {@link CollisionCheckResult} with the collision status.
      */
     protected abstract void onCollided(CollisionCheckResult result);
 }

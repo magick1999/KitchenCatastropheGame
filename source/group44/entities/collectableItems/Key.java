@@ -6,7 +6,7 @@ import group44.game.Level;
 /**
  * Represents a coloured {@link Key} in the game.
  *
- * @author Tomas Svejnoha, Rowan Aldean, Amy Mason
+ * @author Tomas Svejnoha, Rowan Aldean, Amy Mason.
  * @version 1.0
  */
 public class Key extends CollectableItem {
@@ -17,9 +17,9 @@ public class Key extends CollectableItem {
      * Creates a new instance of {@link Key} of specific colour type.
      *
      * @param level
-     *            - The {@link Level} where the {@link Key} is located.
+     *            The {@link Level} where the {@link Key} is located.
      * @param type
-     *            - Colour type of the {@link Key}.
+     *            Colour type of the {@link Key}.
      */
     public Key(Level level, KeyType type) {
         super(level, type.getTitle(), type.getImagePath());

@@ -39,19 +39,19 @@ public class Player extends MovableObject {
      * specific {@link Level}.
      *
      * @param level
-     *            - The {@link Level} where the {@link Player} is located.
+     *            The {@link Level} where the {@link Player} is located.
      * @param name
-     *            - The name of the {@link Player}.
+     *            The name of the {@link Player}.
      * @param positionX
-     *            - Position X of the {@link Player}.
+     *            Position X of the {@link Player}.
      * @param positionY
-     *            - Position Y of the {@link Player}.
+     *            Position Y of the {@link Player}.
      * @param velocityX
-     *            - Velocity X of the {@link Player}.
+     *            Velocity X of the {@link Player}.
      * @param velocityY
-     *            - Velocity Y of the {@link Player}.
+     *            Velocity Y of the {@link Player}.
      * @param imagePath
-     *            - Path to the Image representing the {@link Player} on the
+     *            Path to the Image representing the {@link Player} on the
      *            screen.
      */
     public Player(Level level, String name, int positionX, int positionY,
@@ -101,7 +101,7 @@ public class Player extends MovableObject {
      * {@link LevelObject}.
      *
      * @param result
-     *            - the {@link CollisionCheckResult}.
+     *            the {@link CollisionCheckResult}.
      */
     @Override
     protected void onCollided(CollisionCheckResult result) {
@@ -130,7 +130,7 @@ public class Player extends MovableObject {
      * Tries to open {@link KeyDoor}.
      *
      * @param result
-     *            - collision result.
+     *            collision result.
      * @return true if the door are open; otherwise false.
      */
     private boolean tryToOpenKeyDoor(CollisionCheckResult result) {
@@ -148,7 +148,7 @@ public class Player extends MovableObject {
      * Returns a key of a specific type if player has it in inventory.
      *
      * @param type
-     *            - type of the key to find.
+     *            type of the key to find.
      * @return the key if found; otherwise null.
      */
     private Key getKey(KeyType type) {
@@ -165,7 +165,7 @@ public class Player extends MovableObject {
      * Tries to open {@link TokenDoor}.
      *
      * @param result
-     *            - collision result.
+     *            collision result.
      * @return true if the door are open; otherwise false.
      */
     private boolean tryToOpenTokenDoor(CollisionCheckResult result) {
@@ -178,7 +178,7 @@ public class Player extends MovableObject {
      * {@link Player} will collect any {@link CollectableItem} on the cell.
      *
      * @param cell
-     *            - {@link StepableCell} the {@link Player} stepped on.
+     *            {@link StepableCell} the {@link Player} stepped on.
      */
     private void onCellStepped(StepableCell cell) {
         if (cell instanceof Ground) {
@@ -203,7 +203,7 @@ public class Player extends MovableObject {
      * {@link Player}. The player will die if he can't protect himself.
      *
      * @param object
-     *            - the {@link LevelObject} trying to kill the {@link Player}.
+     *            the {@link LevelObject} trying to kill the {@link Player}.
      */
     @Override
     public void die(LevelObject object) {
@@ -248,7 +248,7 @@ public class Player extends MovableObject {
      * Sets the velocity of the {@link Player} based on the arrow pressed.
      *
      * @param event
-     *            - the {@link KeyEvent}.
+     *            the {@link KeyEvent}.
      */
     public void keyDown(KeyEvent event) {
         switch (event.getCode()) {
@@ -296,7 +296,7 @@ public class Player extends MovableObject {
      * Adds {@link CollectableItem} to the inventory.
      *
      * @param item
-     *            - the collectable item.
+     *            the collectable item.
      */
     public void addToInventory(CollectableItem item) {
         if (item instanceof TokenAccumulator) {

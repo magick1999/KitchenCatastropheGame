@@ -14,6 +14,7 @@ import javafx.util.Duration;
  * time interpolate is called.
  * 
  * @author Mihai
+ * @version 1.0
  */
 public class SpriteAnimation extends Transition {
     // Random resources loaded to test the animation

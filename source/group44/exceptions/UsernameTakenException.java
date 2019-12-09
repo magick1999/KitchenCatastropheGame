@@ -6,7 +6,7 @@ import group44.models.Profile;
  * Represents an exception raised when trying to register a new {@link Profile}
  * with already existing username.
  *
- * @author Tomas Svejnoha
+ * @author Tomas Svejnoha.
  * @version 1.0
  */
 public class UsernameTakenException extends Exception {

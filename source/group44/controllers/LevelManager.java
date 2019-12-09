@@ -17,7 +17,7 @@ import group44.models.LevelInfo;
 /**
  * Manages and loads Levels.
  *
- * @author Tomas Svejnoha
+ * @author Tomas Svejnoha.
  * @version 1.0
  */
 public class LevelManager {
@@ -31,7 +31,7 @@ public class LevelManager {
     /**
      * Returns information about available levels.
      *
-     * @return A list of {@link LevelInfo}
+     * @return A list of {@link LevelInfo}.
      */
     public static ArrayList<LevelInfo> getLevelInfos() {
         return LevelManager.levelInfos;
@@ -60,7 +60,7 @@ public class LevelManager {
      * Loads metadata about levels in a folder.
      *
      * @param directory
-     *            - directory containing all {@link Level} files
+     *            directory containing all {@link Level} files.
      */
     private static void load(String directory) {
         LevelManager.levelInfos.clear();
@@ -76,8 +76,8 @@ public class LevelManager {
      * Returns a list of files containing definitions of {@link Level}s.
      *
      * @param directory
-     *            - the directory with {@link Level}s
-     * @return the list of {@link Level} files
+     *            the directory with {@link Level}s.
+     * @return the list of {@link Level} files.
      */
     private static ArrayList<File> getLevelFiles(File directory) {
         ArrayList<File> levelFiles = new ArrayList<>();
@@ -99,7 +99,8 @@ public class LevelManager {
      *
      * @param file
      *            - {@link File} containing the {@link Level} definition.
-     * @return the information about the {@link Level}; null if not found
+     * 
+     * @return the information about the {@link Level}; null if not found.
      */
     private static LevelInfo getLevelInfo(File file) {
         LevelInfo levelInfo = null;
@@ -136,7 +137,7 @@ public class LevelManager {
      * Returns a loaded {@link Level}.
      *
      * @param levelInfo
-     *            - information about the {@link Level} to load.
+     *            information about the {@link Level} to load.
      * @return the loaded {@link Level}.
      *
      * @throws CollisionException
@@ -155,7 +156,7 @@ public class LevelManager {
      * Returns a loaded {@link Level}.
      *
      * @param levelId
-     *            - id of the level to load.
+     *            id of the level to load.
      * @return the loaded {@link Level}.
      *
      * @throws CollisionException
@@ -183,7 +184,8 @@ public class LevelManager {
      * Looks for a level with id in the loaded levels.
      *
      * @param id
-     *            - id of a level to load.
+     *            id of a level to load.
+     * 
      * @return the {@link LevelInfo} for the level with id.
      */
     private static LevelInfo getLevelInfo(int id) {
@@ -199,9 +201,10 @@ public class LevelManager {
      * Saves the current state of the level.
      *
      * @param level
-     *            - level to save.
+     *            level to save.
      * @param profileId
-     *            - profile id of the user.
+     *            profile id of the user.
+     * 
      * @throws IOException
      *             when saving failed.
      */
@@ -217,9 +220,9 @@ public class LevelManager {
      * Loads the saved level.
      *
      * @param levelId
-     *            - id of the level to load.
+     *            id of the level to load.
      * @param profileId
-     *            - id of the user who saved the game.
+     *            id of the user who saved the game.
      * @return the loaded {@link Level}.
      *
      * @throws ParsingException
@@ -238,9 +241,9 @@ public class LevelManager {
      * Deletes saved level for profile id.
      *
      * @param levelId
-     *            - id of the level.
+     *            id of the level.
      * @param profileId
-     *            - id of the profile.
+     *            id of the profile.
      */
     public static void deleteTempData(int levelId, int profileId) {
         LevelInfo info = getLevelInfoForFile(levelId, profileId);
@@ -254,9 +257,9 @@ public class LevelManager {
      * Indicates whether the player has an unfinished level with id.
      *
      * @param levelId
-     *            - id of the level.
+     *            id of the level.
      * @param profileId
-     *            - id of the profile.
+     *            id of the profile.
      * @return true if there is a level with id saved; otherwise false.
      */
     public static boolean hasUnfinishedLevel(int levelId, int profileId) {
@@ -268,9 +271,9 @@ public class LevelManager {
      * Returns a {@link LevelInfo} for level.
      *
      * @param levelId
-     *            - id of the level we want to load.
+     *            id of the level we want to load.
      * @param profileId
-     *            - id of the profile for which we want to load.
+     *            id of the profile for which we want to load.
      * @return {@link LevelInfo} about the level.
      */
     private static LevelInfo getLevelInfoForFile(int levelId, int profileId) {

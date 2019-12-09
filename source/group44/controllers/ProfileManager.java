@@ -14,7 +14,7 @@ import javafx.collections.ObservableList;
 /**
  * Manages, loads, and saves user profiles.
  *
- * @author Tomas Svejnoha
+ * @author Tomas Svejnoha.
  * @version 1.0
  */
 public class ProfileManager {
@@ -35,7 +35,7 @@ public class ProfileManager {
      * Returns a {@link Profile} with id.
      *
      * @param id
-     *            - id to find.
+     *            id to find.
      * @return {@link Profile} if match was found; otherwise null.
      */
     public static Profile getProfile(final int id) {
@@ -54,7 +54,8 @@ public class ProfileManager {
      * Returns a {@link Profile} with username.
      *
      * @param username
-     *            - username to find.
+     *            username to find.
+     * 
      * @return {@link Profile} if match is found; otherwise null.
      */
     public static Profile getProfile(final String username) {
@@ -74,9 +75,11 @@ public class ProfileManager {
      * already taken. The achieved level id for the new profile is 0.
      *
      * @param username
-     *            - username to be used.
+     *            username to be used.
+     * 
      * @throws UsernameTakenException
      *             if the username is already taken.
+     * 
      * @return the created {@link Profile}.
      */
     public static Profile register(final String username)
@@ -98,7 +101,7 @@ public class ProfileManager {
      * Deletes a profile by id.
      *
      * @param profileId
-     *            - if of profile to delete.
+     *            if of profile to delete.
      */
     public static void delete(final int profileId) {
         Profile profile = getProfile(profileId);
@@ -113,7 +116,7 @@ public class ProfileManager {
      * Deletes a profile by username.
      *
      * @param username
-     *            - username of profile to delete.
+     *            username of profile to delete.
      */
     public static void delete(final String username) {
         Profile profile = getProfile(username);
@@ -128,8 +131,9 @@ public class ProfileManager {
      * Check if a {@link Profile} with username already exists.
      *
      * @param username
-     *            - the username to check
-     * @return true if the username is already taken; otherwise false
+     *            the username to check.
+     * 
+     * @return true if the username is already taken; otherwise false.
      */
     private static Boolean exists(final String username) {
         for (Profile profile : ProfileManager.profiles) {
@@ -143,7 +147,7 @@ public class ProfileManager {
     /**
      * Returns the maximum id in the known profiles.
      *
-     * @return the maximum id
+     * @return the maximum id.
      */
     private static int getMaxId() {
         int maxId = 0;
@@ -172,7 +176,7 @@ public class ProfileManager {
      * Loads profiles from specified file.
      *
      * @param path
-     *            - path where the file with profiles is located
+     *            path where the file with profiles is located.
      */
     private static void load(final String path) {
         ArrayList<Profile> loadedProfiles = null;
@@ -199,8 +203,9 @@ public class ProfileManager {
      * Loads stored profiles.
      *
      * @param fileScanner
-     *            - scanner of the file where the profiles are stored
-     * @return a list of loaded {@link Profile}s
+     *            scanner of the file where the profiles are stored.
+     *            
+     * @return a list of loaded {@link Profile}s.
      */
     private static ArrayList<Profile> load(Scanner fileScanner) {
         ArrayList<Profile> loadedProfiles = new ArrayList<>();
@@ -220,9 +225,10 @@ public class ProfileManager {
      * Creates a new {@link Profile} from the scanner.
      *
      * @param scanner
-     *            - scanner with the serialised profile
+     *            - scanner with the serialised profile.
+     *            
      * @return {@link Profile} created from values in scanner; null if there is
-     *         some exception
+     *         some exception.
      */
     private static Profile parseProfile(Scanner scanner) {
         Profile newProfile = null;
@@ -251,7 +257,7 @@ public class ProfileManager {
      * Saves managed profiles.
      *
      * @param path
-     *            - path to the file where to store the profiles
+     *            path to the file where to store the profiles.
      */
     private static void save(final String path) {
         File file = new File(path);
@@ -273,7 +279,7 @@ public class ProfileManager {
      * Saves profiles using provided writer.
      *
      * @param writer
-     *            - {@link PrintWriter} to use when saving profiles
+     *            {@link PrintWriter} to use when saving profiles.
      */
     private static void save(PrintWriter writer) {
         for (Profile profile : ProfileManager.profiles) {

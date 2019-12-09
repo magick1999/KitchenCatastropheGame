@@ -15,7 +15,7 @@ import group44.game.Level;
 /**
  * Abstract class for all enemies.
  *
- * @author Tomas Svejnoha
+ * @author Tomas Svejnoha.
  * @version 1.0
  */
 public abstract class Enemy extends MovableObject {
@@ -24,19 +24,19 @@ public abstract class Enemy extends MovableObject {
      * Creates a new Enemy in a {@link Level} at position and velocity.
      *
      * @param level
-     *            - The {@link Level} where the {@link Enemy} is located.
+     *            The {@link Level} where the {@link Enemy} is located.
      * @param title
-     *            - The name of the {@link Enemy}.
+     *            The name of the {@link Enemy}.
      * @param positionX
-     *            - Position X of the {@link Enemy}.
+     *            Position X of the {@link Enemy}.
      * @param positionY
-     *            - Position Y of the {@link Enemy}.
+     *            Position Y of the {@link Enemy}.
      * @param velocityX
-     *            - Velocity X of the {@link Enemy}.
+     *            Velocity X of the {@link Enemy}.
      * @param velocityY
-     *            - Velocity Y of the {@link Enemy}.
+     *            Velocity Y of the {@link Enemy}.
      * @param imagePath
-     *            - Path to the Image representing the {@link Enemy} on the
+     *            Path to the Image representing the {@link Enemy} on the
      *            screen.
      */
     public Enemy(Level level, String title, int positionX, int positionY,
@@ -90,7 +90,7 @@ public abstract class Enemy extends MovableObject {
      * {@link Enemy}. The enemy will die if he can't protect himself.
      *
      * @param object
-     *            - the {@link LevelObject} trying to kill the {@link Player}.
+     *            the {@link LevelObject} trying to kill the {@link Player}.
      */
     @Override
     public void die(LevelObject object) {
@@ -114,9 +114,10 @@ public abstract class Enemy extends MovableObject {
      * can't step on.
      *
      * @param x
-     *            - position X.
+     *            position X.
      * @param y
-     *            - position Y.
+     *            position Y.
+     *            
      * @return true if there is an obstacle; otherwise false.
      */
     protected boolean isObstacle(int x, int y) {

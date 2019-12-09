@@ -11,7 +11,7 @@ import javafx.scene.canvas.GraphicsContext;
 /**
  * An abstract class for cells on which can {@link MovableObject} step.
  *
- * @author Tomas Svejnoha
+ * @author Tomas Svejnoha.
  * @version 1.0
  */
 public abstract class StepableCell extends Cell {
@@ -22,15 +22,15 @@ public abstract class StepableCell extends Cell {
      * Creates a new {@link StepableCell}.
      *
      * @param level
-     *            - The {@link Level} where the object is located.
+     *            The {@link Level} where the object is located.
      * @param title
-     *            - Title of the object.
+     *            Title of the object.
      * @param positionX
-     *            - Position X in the game.
+     *            Position X in the game.
      * @param positionY
-     *            - Position Y in the game.
+     *            Position Y in the game.
      * @param imagePath
-     *            - Image path of the instance.
+     *            Image path of the instance.
      */
     public StepableCell(Level level, String title, int positionX, int positionY,
             String imagePath) {
@@ -41,17 +41,17 @@ public abstract class StepableCell extends Cell {
      * Creates a new {@link StepableCell}.
      *
      * @param level
-     *            - The {@link Level} where the object is located.
+     *            The {@link Level} where the object is located.
      * @param title
-     *            - Title of the object.
+     *            Title of the object.
      * @param positionX
-     *            - Position X in the game.
+     *            Position X in the game.
      * @param positionY
-     *            - Position Y in the game.
+     *            Position Y in the game.
      * @param imagePath
-     *            - Image path of the instance.
+     *            Image path of the instance.
      * @param steppedItem
-     *            - The {@link MovableObject} on the cell.
+     *            The {@link MovableObject} on the cell.
      */
     public StepableCell(Level level, String title, int positionX, int positionY,
             String imagePath, MovableObject steppedItem) {
@@ -64,7 +64,7 @@ public abstract class StepableCell extends Cell {
      * Places {@link MovableObject} on the {@link StepableCell}.
      *
      * @param object
-     *            - {@link MovableObject} that steps on the cell.
+     *            {@link MovableObject} that steps on the cell.
      *
      * @return the {@link CollisionCheckResult} with information about the
      *         action result.
@@ -117,7 +117,7 @@ public abstract class StepableCell extends Cell {
      * Sets the {@link MovableObject} on the cell.
      *
      * @param object
-     *            - the new {@link MovableObject}.
+     *            the new {@link MovableObject}.
      */
     protected void setMovableObject(MovableObject object) {
         this.movableObject = object;
@@ -127,7 +127,7 @@ public abstract class StepableCell extends Cell {
      * Interacts with {@link MovableObject} that stepped on the cell.
      *
      * @param object
-     *            - The {@link MovableObject} that stepped on cell.
+     *            The {@link MovableObject} that stepped on cell.
      */
     protected abstract void onStepped(MovableObject object);
 
@@ -136,12 +136,12 @@ public abstract class StepableCell extends Cell {
      * {@link GraphicsContext}.
      *
      * @param gc
-     *            - {@link GraphicsContext} used to draw the object.
+     *            {@link GraphicsContext} used to draw the object.
      * @param x
-     *            - The X coordinate in the {@link GraphicsContext} where to
+     *            The X coordinate in the {@link GraphicsContext} where to
      *            draw the {@link LevelObject}.
      * @param y
-     *            - The Y coordinate in the {@link GraphicsContext} where to
+     *            The Y coordinate in the {@link GraphicsContext} where to
      *            draw the {@link LevelObject}.
      * @param width
      *            - The width of the {@link LevelObject} in the

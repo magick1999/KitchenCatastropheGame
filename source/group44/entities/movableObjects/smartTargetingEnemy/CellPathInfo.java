@@ -7,7 +7,7 @@ import group44.entities.movableObjects.SmartTargetingEnemy;
  * Holds the information needed about Cells to compute path for the
  * {@link SmartTargetingEnemy}.
  *
- * @author Tomas Svejnoha
+ * @author Tomas Svejnoha.
  * @version 1.0
  */
 public class CellPathInfo {
@@ -24,7 +24,7 @@ public class CellPathInfo {
      * Creates a new instance of {@link CellPathInfo}.
      *
      * @param cell
-     *            - the cell which we want to describe.
+     *            the cell which we want to describe.
      */
     public CellPathInfo(Cell cell) {
         this.x = cell.getPositionX();
@@ -64,7 +64,7 @@ public class CellPathInfo {
      * JUST for the FIRST cell.
      *
      * @param cost
-     *            - the cost.
+     *            the cost.
      */
     public void setCost(long cost) {
         this.cost = cost;
@@ -92,7 +92,7 @@ public class CellPathInfo {
      * Sets parent if the path is better.
      *
      * @param newParent
-     *            - the possible new parent.
+     *            the possible new parent.
      * @return true if the parent was accepted; otherwise false.
      */
     public boolean setParent(CellPathInfo newParent) {

@@ -13,7 +13,7 @@ import group44.game.Level;
  * Represents a door for which the player needs a certain coloured key to be
  * able to open the door.
  *
- * @author Amy Mason, Tomas Svejnoha
+ * @author Amy Mason, Tomas Svejnoha.
  * @version 1.0
  */
 public class KeyDoor extends Door {
@@ -25,19 +25,19 @@ public class KeyDoor extends Door {
      * unlocking {@link KeyType}.
      *
      * @param level
-     *            - The {@link Level} where the {@link KeyDoor} is located.
+     *            The {@link Level} where the {@link KeyDoor} is located.
      * @param title
-     *            - Title of the {@link Door}.
+     *            Title of the {@link Door}.
      * @param positionX
-     *            - Position X in the game.
+     *            Position X in the game.
      * @param positionY
-     *            - Position Y in the game.
+     *            Position Y in the game.
      * @param lockedImagePath
-     *            - Path to the Image representing locked door in the game.
+     *            Path to the Image representing locked door in the game.
      * @param unlockedImagePath
-     *            - Path to the Image representing unlocked door in the game.
+     *            Path to the Image representing unlocked door in the game.
      * @param unlockingKey
-     *            - key used to unlock the door.
+     *            Key used to unlock the door.
      */
     public KeyDoor(Level level, String title, int positionX, int positionY,
             String lockedImagePath, String unlockedImagePath,
@@ -61,7 +61,8 @@ public class KeyDoor extends Door {
      * Opens the door if the right Key is used.
      *
      * @param item
-     *            - the Key to use.
+     *            the Key to use.
+     * 
      * @return true if the door was opened; otherwise false.
      */
     @Override
@@ -80,7 +81,7 @@ public class KeyDoor extends Door {
      * {@link CollisionCheckResult}.
      *
      * @param object
-     *            - {@link MovableObject} that steps on the cell.
+     *            {@link MovableObject} that steps on the cell.
      *
      * @return a result of the step action in the {@link CollisionCheckResult}.
      */

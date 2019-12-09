@@ -7,7 +7,7 @@ import group44.entities.collectableItems.Token;
  * Represents an exception raised when trying to open {@link TokenDoor} without
  * having enough {@link Token}s.
  *
- * @author Tomas Svejnoha
+ * @author Tomas Svejnoha.
  * @version 1.0
  */
 public class NotEnoughTokensException extends Exception {

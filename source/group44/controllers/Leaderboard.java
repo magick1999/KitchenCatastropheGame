@@ -16,7 +16,7 @@ import javafx.collections.ObservableList;
 /**
  * Represents a leaderboard of the game.
  *
- * @author Tomas Svejnoha
+ * @author Tomas Svejnoha.
  * @version 1.0
  */
 public class Leaderboard {
@@ -34,7 +34,7 @@ public class Leaderboard {
     /**
      * Returns an {@link ObservableList} of records.
      *
-     * @return profiles
+     * @return profiles.
      */
     public static ObservableList<Record> getAllRecords() {
         return Leaderboard.records;
@@ -45,11 +45,11 @@ public class Leaderboard {
      * better.
      *
      * @param profileId
-     *            - Id of the profile.
+     *            Id of the profile.
      * @param levelId
-     *            - Id of the {@link Level} the user finished.
+     *            Id of the {@link Level} the user finished.
      * @param time
-     *            - time taken to finish the {@link Level}.
+     *            time taken to finish the {@link Level}.
      */
     public static void addOrUpdate(int profileId, int levelId, long time) {
         Leaderboard.addOrUpdate(ProfileManager.getProfile(profileId), levelId,
@@ -61,11 +61,11 @@ public class Leaderboard {
      * better.
      *
      * @param profile
-     *            - {@link Profile} of the user
+     *            {@link Profile} of the user.
      * @param levelId
-     *            - Id of the {@link Level} the user finished
+     *            Id of the {@link Level} the user finished.
      * @param time
-     *            - time taken to finish the {@link Level}
+     *            time taken to finish the {@link Level}.
      */
     private static void addOrUpdate(Profile profile, int levelId, long time) {
         Record record = null;
@@ -91,7 +91,8 @@ public class Leaderboard {
      * Returns up to 3 top records for the level.
      *
      * @param levelId
-     *            - id of the {@link Level} for which we want the records.
+     *            id of the {@link Level} for which we want the records.
+     * 
      * @return an observable list of up to 3 top records.
      */
     public static ObservableList<Record> getTopThreeRecords(int levelId) {
@@ -121,9 +122,9 @@ public class Leaderboard {
      * Indicates whether the used scored in top 3 for a specific level.
      *
      * @param profileId
-     *            - the profile id.
+     *            the profile id.
      * @param levelId
-     *            - the level id.
+     *            the level id.
      * @return true if user is in top 3; otherwise false.
      */
     public static boolean isInTopThreeRecors(int profileId, int levelId) {
@@ -139,10 +140,11 @@ public class Leaderboard {
      * Returns a record for player in a level.
      *
      * @param profileId
-     *            - profile id of the player.
+     *            profile id of the player.
      * @param levelId
-     *            - id of the level.
-     * @return
+     *            id of the level.
+     * 
+     * @return record.
      */
     public static Record getRecord(int profileId, int levelId) {
         for (Record record : Leaderboard.records) {
@@ -158,7 +160,8 @@ public class Leaderboard {
      * Returns an id the highest {@link Level} achieved by user.
      *
      * @param profileId
-     *            - profile Id of the user.
+     *            profile Id of the user.
+     * 
      * @return the id of the highest level; 0 if user did not finish any level.
      */
     public static int getAchievedLevel(int profileId) {
@@ -197,7 +200,7 @@ public class Leaderboard {
      * Loads records from the file.
      *
      * @param path
-     *            - path to a file with records
+     *            path to a file with records.
      */
     private static void load(String path) {
         ArrayList<Record> loadedRecords = null;
@@ -225,8 +228,9 @@ public class Leaderboard {
      * Loads stored records.
      *
      * @param fileScanner
-     *            - scanner of the file where the records are stored
-     * @return a list of loaded {@link Record}s
+     *            scanner of the file where the records are stored
+     * 
+     * @return a list of loaded {@link Record}s.
      */
     private static ArrayList<Record> load(Scanner fileScanner) {
         ArrayList<Record> loadedRecords = new ArrayList<>();
@@ -246,9 +250,10 @@ public class Leaderboard {
      * Creates a new {@link Record} from the Scanner.
      *
      * @param scanner
-     *            - scanner with the serialised record
+     *            scanner with the serialised record.
+     * 
      * @return created {@link Record}; null if associated {@link Profile} was
-     *         not found
+     *         not found.
      */
     private static Record parseRecord(Scanner scanner) {
         Record record = null;
@@ -284,7 +289,7 @@ public class Leaderboard {
      * Saves all records in the {@link Leaderboard}.
      *
      * @param path
-     *            - path to the file where to store the profiles
+     *            path to the file where to store the profiles.
      */
     private static void save(String path) {
         File file = new File(path);
@@ -306,7 +311,7 @@ public class Leaderboard {
      * Saves records using provided writer.
      *
      * @param writer
-     *            - {@link PrintWriter} to use when saving r cords
+     *            {@link PrintWriter} to use when saving r cords.
      */
     private static void save(PrintWriter writer) {
         for (Record record : Leaderboard.records) {
@@ -318,9 +323,9 @@ public class Leaderboard {
      * Returns a serialised record.
      *
      * @param record
-     *            - record to serialise
+     *            record to serialise.
      *
-     * @return a string representation of a record
+     * @return a string representation of a record.
      */
     private static String serialiseRecord(Record record) {
         return record.getProfile().getId() + "," + record.getLevelId() + ","

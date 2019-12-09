@@ -10,7 +10,7 @@ import group44.game.Level;
 /**
  * Parses and saves the level into specified file.
  *
- * @author Tomas Svejnoha
+ * @author Tomas Svejnoha.
  * @version 1.0
  */
 public final class LevelSaver {
@@ -25,9 +25,9 @@ public final class LevelSaver {
      * Saves the level into file.
      *
      * @param level
-     *            - the level to save.
+     *            the level to save.
      * @param path
-     *            - path to the file.
+     *            path to the file.
      * @throws IOException
      *             when something goes terribly wrong.
      */
