@@ -64,6 +64,10 @@ public class GameScene {
      *
      * @param primaryStage
      *            represents the window where the stages are displayed.
+     * @param currentLevel
+     *            current level the user is playing.
+     * @param currentProfile
+     *            the current user profile to use.
      */
     public GameScene(Stage primaryStage, Level currentLevel,
             Profile currentProfile) {

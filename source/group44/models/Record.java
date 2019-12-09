@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 import group44.controllers.Leaderboard;
+import group44.game.Level;
 
 /**
  * Represents a Record in the {@link Leaderboard}.
